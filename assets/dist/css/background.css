@@ -1,0 +1,65 @@
+.build {
+    background: url(../../../assets/image/background_image/build.jpg) fixed center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    
+}
+
+.build1 {
+    background: url(../../../assets/image/background_image/build1.jpg) fixed center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    
+}
+
+.build2 {
+    background: url(../../../assets/image/background_image/build2.jpg) fixed center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    
+}
+
+.chair {
+    background: url(../../../assets/image/background_image/chair.jpg) fixed center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    
+}
+
+.coins {
+    background: url(../../../assets/image/background_image/coinsAsset.png) fixed center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    
+}
+
+.donate_coins {
+    background: url(../../../assets/image/background_image/donate_coins.png) fixed center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    
+}
+
+.img-donate-coins{
+    position: absolute;
+    right: 0;
+    /* top: -90px; */
+    width: 100px;
+    min-width: 100px;
+}
+
+.white-bg {
+    /* background: #eff2f6; */
+    background: #c1c1c1!important;
+}
+
+.rose-bg {
+   background: #e6bbbb!important;
+}
+
+.blue-bg {
+  background-image: linear-gradient(to right, #4facfe 0%, #96daae9e 100%) !important;
+}
+.pink-bg {
+  background-image: linear-gradient(to right, #4f3fa5b3 0%, #bb49d09e 100%) !important;
+}

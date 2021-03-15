@@ -1,0 +1,29 @@
+RewriteEngine On
+# Handle Authorization Header
+#RewriteBase /
+
+#RewriteCond %{HTTP} !=on
+#RewriteCond %{HTTP_HOST} ^www\irangiro\.com$
+#RewriteRule .* https://irangiro.com%{REQUEST_URI} [R=301,L]
+
+#RewriteCond %{HTTP} =on
+#RewriteCond %{HTTP_HOST} ^www\irangiro\.com$
+#RewriteRule .* https://irangiro.com%{REQUEST_URI} [R=301,L]
+
+# Redirect Trailing Slashes If Not A Folder...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^(.*)$ $1.php [NC,L]
+RewriteRule ^([0-9a-zA-Z_-]+).(home)/?$ index.php?username=$1 [NC,L,QSA]
+RewriteRule ^([0-9a-zA-Z_-]+)/?$ profile.php?username=$1 [NC,L,QSA]
+RewriteRule ^([0-9a-zA-Z_-]+).(following|followers|posts|album|album_crop)/?$ $2.php?username=$1 [NC,L,QSA]
+RewriteRule ^([0-9a-zA-Z_-]+).(jobs|unemployment|sale|fundraising|crowfund|blog|jobs0|events|movies|sports|news|entertainment|rwandaPhotos|Tembera|hotelbooking|house|car|food|domestic|school|members_earning|career_profession|motel|icyamunara|gurisha)/?$ $2.php?username=$1 [NC,L,QSA]
+RewriteRule ^([0-9a-zA-Z_-]+).(hashtag)/?$ $2.php?hashtag=$1 [NC,L,QSA]
+RewriteRule ^([0-9a-zA-Z_-]+).([0-9a-zA-Z_-]+).(hashtag)/?$ $3.php?hashtag=$1&f=$2 [NC,L,QSA]
+RewriteRule ^i.notifications/?$ notifications.php [NC,L,QSA]
+RewriteRule ^i.email/?$ email.php [NC,L,QSA]
+
+php_value upload_max_filesize 40M
+php_value post_max_size 42M
