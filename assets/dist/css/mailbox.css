@@ -147,7 +147,7 @@
 
 .mailbox-attachment-icon.has-img>img {
     max-width: 100%;
-    height: auto;
+    height: 150px;
 }
 .list-unstyled,
 .chart-legend,

@@ -119,6 +119,12 @@ if (!empty($_POST['donation_payment'])) {
                     </button>
                     <strong>The text is too long !!!</strong> </div>');
 		}
+
+        if (!empty($donation_payment) && !empty($tweetimages) ) {
+            $equal=  '=';
+        }else {
+            $equal='';
+        }
 		preg_match_all("/#+([a-zA-Z0-9_]+)/i",$status, $hashtag);
 		
 	 $tweet_id= $users->creates('tweets',array(
@@ -127,7 +133,10 @@ if (!empty($_POST['donation_payment'])) {
                         'tweetBy' => $user_id, 
                         'photo_Title_main'=> $photo_Titleo,
                         'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
-                        'tweet_image' => $tweetimages.'='.$donation_payment, 
+                        'tweet_image' => $tweetimages, 
+                        // 'tweet_image' => $tweetimages.$equal.$donation_payment, 
+                        'donation_payment' => $donation_payment, 
+                        'tweet_image_size' => $tweetSize, 
                         'posted_on' => date('Y-m-d H-i-s')
                     ));
 

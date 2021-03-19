@@ -74,24 +74,10 @@ class Comment extends Post_like
         $rows= $result->fetch_assoc();
 
         if(!empty($rows['tweet_image'])){
-            $expodefile = explode("=",$rows['tweet_image']);
-            $fileActualExt= array();
-            for ($i=0; $i < count($expodefile); ++$i) { 
-                $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-            }
-            $allower_ext = array('jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf' , 'doc' , 'ppt','docx', 'xlsx','xls','ocx','lsx'); // valid extensions
-            if (array_diff($fileActualExt,$allower_ext) == false) {
-                $expode = explode("=",$rows['tweet_image']);
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                for ($i=0; $i < count($expode); ++$i) { 
-                      unlink($uploadDir.$expode[$i]);
-                }
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp4') {
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                      unlink($uploadDir.$rows['tweet_image']);
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp3') {
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                      unlink($uploadDir.$rows['tweet_image']);
+            $expode = explode("=",$rows['tweet_image']);
+            $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
+            for ($i=0; $i < count($expode); ++$i) { 
+                    unlink($uploadDir.$expode[$i]);
             }
         }
 
@@ -132,24 +118,10 @@ class Comment extends Post_like
         $rows= $result->fetch_assoc();
 
         if(!empty($rows['tweet_image'])){
-            $expodefile = explode("=",$rows['tweet_image']);
-            $fileActualExt= array();
-            for ($i=0; $i < count($expodefile); ++$i) { 
-                $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-            }
-            $allower_ext = array('jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf' , 'doc' , 'ppt','docx', 'xlsx','xls','ocx','lsx'); // valid extensions
-            if (array_diff($fileActualExt,$allower_ext) == false) {
-                $expode = explode("=",$rows['tweet_image']);
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                for ($i=0; $i < count($expode); ++$i) { 
-                      unlink($uploadDir.$expode[$i]);
-                }
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp4') {
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                      unlink($uploadDir.$rows['tweet_image']);
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp3') {
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                      unlink($uploadDir.$rows['tweet_image']);
+            $expode = explode("=",$rows['tweet_image']);
+            $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
+            for ($i=0; $i < count($expode); ++$i) { 
+                    unlink($uploadDir.$expode[$i]);
             }
         }
 
@@ -185,32 +157,18 @@ class Comment extends Post_like
                         LEFT JOIN trends R ON R. target = T. tweet_id 
                         WHERE T. tweet_id = '{$tweet_id}' and T. retweet_by = '{$user_id}' ";
 
-        $query1="SELECT * FROM tweets WHERE tweet_id = $tweet_id and retweet_by = $user_id ";
+        // $query1="SELECT * FROM tweets WHERE tweet_id = $tweet_id and retweet_by = $user_id ";
 
-        $result= $mysqli->query($query1);
-        $rows= $result->fetch_assoc();
+        // $result= $mysqli->query($query1);
+        // $rows= $result->fetch_assoc();
 
-        if(!empty($rows['tweet_image'])){
-            $expodefile = explode("=",$rows['tweet_image']);
-            $fileActualExt= array();
-            for ($i=0; $i < count($expodefile); ++$i) { 
-                $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-            }
-            $allower_ext = array('jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf' , 'doc' , 'ppt','docx', 'xlsx','xls','ocx','lsx'); // valid extensions
-            if (array_diff($fileActualExt,$allower_ext) == false) {
-                $expode = explode("=",$rows['tweet_image']);
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                for ($i=0; $i < count($expode); ++$i) { 
-                      unlink($uploadDir.$expode[$i]);
-                }
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp4') {
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                      unlink($uploadDir.$rows['tweet_image']);
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp3') {
-                $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
-                      unlink($uploadDir.$rows['tweet_image']);
-            }
-        }
+        // if(!empty($rows['tweet_image'])){
+        //     $expode = explode("=",$rows['tweet_image']);
+        //     $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
+        //     for ($i=0; $i < count($expode); ++$i) { 
+        //             unlink($uploadDir.$expode[$i]);
+        //     }
+        // }
 
         $query= $mysqli->query($query);
         // var_dump("ERROR: Could not able to execute $query.".mysqli_error($mysqli));

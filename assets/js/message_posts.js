@@ -74,7 +74,7 @@ $(document).ready(function (e) {
                 }, 4000);
                 $('#file').val('');
                 return false;
-            } else {
+            }else{
                 $.ajax({
                     url: "core/ajax_db/message_posts",
                     method: "POST",
@@ -102,7 +102,7 @@ $(document).ready(function (e) {
                         }, 1000);
                         setInterval(function () {
                             location.reload();
-                        }, 1100);
+                        }, 2400);
                     }, error: function (response) {
                         $("#response-posts").html(response).fadeIn();
                         setInterval(function () {

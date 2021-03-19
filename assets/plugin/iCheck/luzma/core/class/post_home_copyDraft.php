@@ -62,471 +62,458 @@ class Posts_copyDraft extends  Home {
 
                                     <div class="card retweetcolor t-show-popup more" data-tweet="<?php echo $tweet["tweet_id"];?>">
                                       <div class="card-body ">
-                                          <?php 
-                                              $filename = $tweet['tweet_image'];
-                                              $expodefile = explode("=",$tweet['tweet_image']);
-                                              $fileActualExt= array();
-                                              for ($i=0; $i < count($expodefile); ++$i) { 
-                                                  $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-                                              }
+                                      <?php 
+                                        $filename = $tweet['tweet_image'];
+                                        $expodefile = explode("=",$tweet['tweet_image']);
+                                        $fileActualExt= array();
+                                        for ($i=0; $i < count($expodefile); ++$i) { 
+                                            $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
+                                        }
 
-                                               $allower_ext = array('jpeg','peg','jpg', 'png', 'gif', 'bmp', 'pdf' , 'ocx' , 'lsx', 'ppt','docx','xlsx'); // valid extensions
-                                    if (array_diff($fileActualExt,$allower_ext) == false) {
-                                     			$expode = explode("=",$tweet['tweet_image']); 
-                                                $count = count($expode); 
+                                        $allower_ext = array('jpeg','peg','jpg', 'png', 'gif', 'bmp', 'pdf' , 'ocx','lsx', 'ppt','docx','xlsx'); // valid extensions
+                                if (array_diff($fileActualExt,$allower_ext) == false) {
+                                        $expode = explode("=",$tweet['tweet_image']); 
+                                        $count = count($expode); 
+                                        $docx= array('jpg','jpeg','peg','png','gif','pdf');
+                                        $pdf= array('jpg','jpeg','peg','png','gif');
+                                        $image= array('pdf','doc','ocx','lsx'); ?>
+                                        
+                                        <?php if(array_diff($fileActualExt,$image)) { ?>
 
-                                 $docx= array('jpg','jpeg','peg','png','gif','pdf');
-                                 $pdf= array('jpg','jpeg','peg','png','gif');
-                                 $image= array('pdf','doc','ocx','lsx'); ?>
-
-                                <?php if(array_diff($fileActualExt,$image)) { ?>
-
-                                          <div class="row">
-                                              <div class="col-6 ">
-
-                                               <?php if ($count === 1) { ?>
-                                                    <div class="row mb-1">
-                                                           <?php $expode = explode("=",$tweet['tweet_image']); ?>
-                                                       <div class="col-12">
-                                                           <img class="img-fluid"
-                                                               src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0] ;?>"
-                                                               alt="Photo">
-                                                       </div>
-                                                    </div>
-
-                                               <?php }else if($count == 2 || $count > 2){ ?>
-                                                     <div class="row mb-2">
-                                                           <?php 
-                                                             $expode = explode("=",$tweet['tweet_image']);
-                                                             $splice= array_splice($expode,0,2);
-                                                             for ($i=0; $i < count($splice); ++$i) { 
-                                                             ?>
-                                                       <div class="col-6">
-                                                           <img class="img-fluid mb-2"
-                                                               src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$splice[$i] ;?>"
-                                                               alt="Photo">
-                                                       </div>
-                                                           <?php } ?>
-                                                    </div>
-                                                    <div class="row">
-                                                       <div class="col-12">
-                                                              <span class="btn btn-primary btn-sm float-right" >View More photo  <i class="fa fa-picture-o"></i> >>></span>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.row -->
-                                               <?php } ?>
-                                                </div> <!-- col -->
-
-                                                <div class="col-6">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                              <div class="user-block">
-                                                                  <div class="user-blockImgBorder">
-                                                                   <div class="user-blockImg">
-                                                                         <?php if (!empty($tweet['profile_img'])) {?>
-                                                                         <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                                         <?php  }else{ ?>
-                                                                           <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                                         <?php } ?>
-                                                                   </div>
-                                                                   </div>
-                                                                  <span class="username">
-                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                                      <!-- //Jonathan Burke Jr. -->
-                                                                  </span>
-                                                                    <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
-                                                              </div>
-                                                        </div> <!-- col -->
-
-                                                        <div class="col-12" style="clear:both">
-                                     		    	          <!-- TEXT -->
-                                                            <!-- TEXT -->
-                                                            <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
-
-                                                            <div id="link_" class="show-read-more">
-                                                            <?php 
-
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                                $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                                                echo $this->getTweetLink($tweetstatus);
-                                                                }else{
-                                                                echo $this->getTweetLink($tweet['status']);
-                                                                }  
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                    $tweettext = substr($tweet['status'], 0, 200);
-                                                                    $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                                    echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                                                }  
-                                                                ?>
-                                                                
-                                                                 <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-                                                            </div>
-                                                        </div><!-- col -->
-                                                        
-                                                    </div><!-- row -->
-                                                </div><!-- col -->
-                                           </div><!-- row -->
-
-                                         <?php  }else if(array_diff($fileActualExt,$docx)) { ?>
-
-                                                  
+                                        <div class="row">
+                                        <div class="col-md-6 col-sm-12">
                                                 <div class="row">
-                                            <?php $expode = explode("=",$tweet['tweet_image']);
-                                             $size_kb = explode("=",$tweet['tweet_image_size']);
-                                                  $splice= array_splice($expode,0,2);
-                                                  for ($i=0; $i < count($splice); ++$i) { ?>
-
-                                                    <div class="col-md-6 ">
-                                                        <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-                                                        <div class="mailbox-attachment-info main-active">
-                                                            <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                                                <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
-                                                            <span class="mailbox-attachment-size">
-                                                                 <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                                                 <!-- 1,245 KB -->
-                                                                <a href="#" class="btn btn-default btn-sm float-right"><i
-                                                                        class="fa fa-cloud-download"></i></a>
-                                                            </span>
-                                                        </div>
-                                                    </div><!-- col -->
-
-                                                     <?php } ?>
-                                                 <div class="col-6">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                                <div class="user-block">
-                                                                    <div class="user-blockImgBorder">
-                                                                    <div class="user-blockImg">
-                                                                            <?php if (!empty($tweet['profile_img'])) {?>
-                                                                            <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                                            <?php  }else{ ?>
-                                                                            <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                                            <?php } ?>
-                                                                    </div>
-                                                                    </div>
-                                                                    <span class="username">
-                                                                        <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                                        <!-- //Jonathan Burke Jr. -->
-                                                                    </span>
-                                                                    <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                                    <div class="col-12">
+                                                            <div class="user-block">
+                                                                <div class="user-blockImgBorder">
+                                                                <div class="user-blockImg">
+                                                                    <?php if (!empty($tweet['profile_img'])) {?>
+                                                                    <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                                    <?php  }else{ ?>
+                                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                                    <?php } ?>
                                                                 </div>
-                                                        </div> <!-- col -->
-
-                                                        <div class="col-12" style="clear:both">
-                                                                <!-- TEXT -->
-                                                            <!-- TEXT -->
-                                                            <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
-
-                                                            <div id="link_" class="show-read-more">
-                                                            <?php 
-
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                                $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                                                echo $this->getTweetLink($tweetstatus);
-                                                                }else{
-                                                                echo $this->getTweetLink($tweet['status']);
-                                                                }  
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                    $tweettext = substr($tweet['status'], 0, 200);
-                                                                    $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                                    echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                                                }  
-                                                                ?>
-                                                                  <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-                                                            </div>
-                                                        </div><!-- col -->
-                                                        
-                                                    </div><!-- row -->
-                                                </div><!-- col -->
-
-                                            </div><!-- row -->
-
-                                    <?php }else if(array_diff($fileActualExt,$pdf)) { ?>
-
-                                                <div class="row">
-
-                                                <?php $expode = explode("=",$tweet['tweet_image']);
-                                                 $size_kb = explode("=",$tweet['tweet_image_size']);
-                                                  $splice= array_splice($expode,0,2);
-                                                  for ($i=0; $i < count($splice); ++$i) { ?>
-
-                                                    <div class="col-md-6 ">
-                                                        <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-                                                        <div class="mailbox-attachment-info main-active">
-                                                            <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                                                <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
-                                                            <span class="mailbox-attachment-size">
-                                                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                                                <!-- 1,245 KB -->
-                                                                <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
-                                                            </span>
-                                                        </div>
-                                                    </div><!-- col -->
-                                                  <?php } ?>
-                                                 <div class="col-6">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                                <div class="user-block">
-                                                                    <div class="user-blockImgBorder">
-                                                                    <div class="user-blockImg">
-                                                                            <?php if (!empty($tweet['profile_img'])) {?>
-                                                                            <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                                            <?php  }else{ ?>
-                                                                            <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                                            <?php } ?>
-                                                                    </div>
-                                                                    </div>
-                                                                    <span class="username">
-                                                                        <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                                        <!-- //Jonathan Burke Jr. -->
-                                                                    </span>
-                                                                    <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
                                                                 </div>
-                                                        </div> <!-- col -->
-
-                                                        <div class="col-12" style="clear:both">
-                                                             <!-- TEXT -->
-                                                            <!-- TEXT -->
-                                                            <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
-
-                                                            <div id="link_" class="show-read-more">
-                                                            <?php 
-
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                                $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                                                echo $this->getTweetLink($tweetstatus);
-                                                                }else{
-                                                                echo $this->getTweetLink($tweet['status']);
-                                                                }  
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                    $tweettext = substr($tweet['status'], 0, 200);
-                                                                    $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                                    echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                                                }  
-                                                                ?>
-                                                                  <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-
+                                                                <span class="username">
+                                                                <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                    <!-- //Jonathan Burke Jr. -->
+                                                                </span>
+                                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
                                                             </div>
-                                                        </div><!-- col -->
-                                                        
-                                                    </div><!-- row -->
-                                                </div><!-- col -->
+                                                    </div> <!-- col -->
 
-                                            </div><!-- row -->
-                                            <?php } ?>
+                                                    <div class="col-12" style="clear:both">
+                                                            <!-- STATUS -->
+                                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                                        <div id="link_" class="show-read-more">
+                                                        <?php 
 
-                                            <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp4') { ?>
-                                                <div class="row">
-                                                    <div class="col-6 ">
-                                                        <video  controls preload="auto" width="100%" height="110px">
-                                                            <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$tweet['tweet_image'] ;?>" type="video/mp4"> 
-                                                            <!-- <source src="video/boatride.webm" type="video/webm">  -->
-                                                                <!-- fallback content here -->
-                                                        </video>
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                            $tweettext = substr($tweet['status'], 0, 200);
+                                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            echo $this->getTweetLink($tweetstatus);
+                                                            }else{
+                                                            echo $this->getTweetLink($tweet['status']);
+                                                            }  
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                                            }  
+                                                        ?>
+                                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                        </div>
                                                     </div><!-- col -->
                                                     
-                                                <div class="col-6">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                              <div class="user-block">
-                                                                   <div class="user-blockImgBorder">
-                                                                   <div class="user-blockImg">
-                                                                         <?php if (!empty($tweet['profile_img'])) {?>
-                                                                         <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                                         <?php  }else{ ?>
-                                                                           <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                                         <?php } ?>
-                                                                   </div>
-                                                                   </div>
-                                                                  <span class="username">
-                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                                      <!-- //Jonathan Burke Jr. -->
-                                                                  </span>
-                                                                    <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
-                                                              </div>
-                                                        </div> <!-- col -->
-
-                                                        <div class="col-12" style="clear:both">
-                                                            <!-- TEXT -->
-                                                            <!-- TEXT -->
-                                                            <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
-
-                                                            <div id="link_" class="show-read-more">
-                                                            <?php 
-
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                                $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                                                echo $this->getTweetLink($tweetstatus);
-                                                                }else{
-                                                                echo $this->getTweetLink($tweet['status']);
-                                                                }  
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                    $tweettext = substr($tweet['status'], 0, 200);
-                                                                    $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                                    echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                                                }  
-                                                                ?>
-                                                                  <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-
-                                                            </div>
-                                                        </div><!-- col -->
-                                                        
-                                                    </div><!-- row -->
-                                                </div><!-- col -->
-
                                                 </div><!-- row -->
-                                              <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'webm'){ ?>
+                                            </div><!-- col -->
+
+                                            <div class="col-md-6 col-sm-12">
+
+                                            <?php if ($count === 1) { ?>
+                                                <div class="row mb-1">
+                                                        <?php $expode = explode("=",$tweet['tweet_image']); ?>
+                                                    <div class="col-12">
+                                                        <img class="img-fluid"
+                                                            src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0] ;?>"
+                                                            alt="Photo">
+                                                    </div>
+                                                </div>
+
+                                            <?php }else if($count == 2 || $count > 2){ ?>
+                                                <div class="row mb-2">
+                                                        <?php 
+                                                        $expode = explode("=",$tweet['tweet_image']);
+                                                        $splice= array_splice($expode,0,2);
+                                                        for ($i=0; $i < count($splice); ++$i) { 
+                                                        ?>
+                                                    <div class="col-6">
+                                                        <img class="img-fluid mb-2"
+                                                            src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$splice[$i] ;?>"
+                                                            alt="Photo">
+                                                    </div>
+                                                        <?php } ?>
+                                                </div>
                                                 <div class="row">
-                                                    <div class="col-6 ">
-                                                         <video controls preload="auto" width="100%" height="360">
-                                                             <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$tweet['tweet_image'] ;?>" type="video/webm"> 
-                                                             <!-- <source src="video/boatride.webm" type="video/webm">  -->
-                                                                 <!-- fallback content herehere -->
-                                                         </video>      
-                                                     </div><!-- col -->
+                                                    <div class="col-12">
+                                                            <span class="btn btn-primary btn-sm float-right" >View More photo  <i class="fa fa-picture-o"></i> >>></span>
+                                                    </div>
+                                                </div>
+                                                <!-- /.row -->
+                                            <?php } ?>
+                                            </div> <!-- col -->
 
-                                                 <div class="col-6">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                              <div class="user-block">
-                                                                   <div class="user-blockImgBorder">
-                                                                   <div class="user-blockImg">
-                                                                         <?php if (!empty($tweet['profile_img'])) {?>
-                                                                         <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                                         <?php  }else{ ?>
-                                                                           <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                                         <?php } ?>
-                                                                   </div>
-                                                                   </div>
-                                                                  <span class="username">
-                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                                      <!-- //Jonathan Burke Jr. -->
-                                                                  </span>
-                                                                    <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
-                                                              </div>
-                                                        </div> <!-- col -->
+                                            
+                                        </div><!-- row -->
 
-                                                        <div class="col-12" style="clear:both">
-                                     		    	         
-                                                                <!-- TEXT -->
-                                                            <!-- TEXT -->
-                                                            <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                        <?php  }else if(array_diff($fileActualExt,$docx)) { ?>
 
-                                                            <div id="link_" class="show-read-more">
-                                                            <?php 
-
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                                $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                                                echo $this->getTweetLink($tweetstatus);
-                                                                }else{
-                                                                echo $this->getTweetLink($tweet['status']);
-                                                                }  
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                    $tweettext = substr($tweet['status'], 0, 200);
-                                                                    $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                                    echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                                                }  
-                                                                ?>
-                                                                  <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-
-                                                            </div>
-                                                        </div><!-- col -->
-                                                        
-                                                    </div><!-- row -->
-                                                </div><!-- col -->
-
-                                                </div><!-- row -->
-
-                                              <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp3'){ ?>
+                                                
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
                                                 <div class="row">
-                                                     <div class="col-6 ">
-                                                          <audio controls>
-                                                              <source src="50-Cent-Baby-By-Me-ft-Ne-Yo-128K-MP3.mp3" type="audio/mp3">
-                                                                  <!-- fallback content here -->
-                                                          </audio>
-                                                       </div><!-- col -->
-
-                                                 <div class="col-6">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                              <div class="user-block">
-                                                                  <div class="user-blockImgBorder">
-                                                                   <div class="user-blockImg">
-                                                                         <?php if (!empty($tweet['profile_img'])) {?>
-                                                                         <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                                         <?php  }else{ ?>
-                                                                           <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                                         <?php } ?>
-                                                                   </div>
-                                                                   </div>
-                                                                  <span class="username">
-                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                                      <!-- //Jonathan Burke Jr. -->
-                                                                  </span>
-                                                                    <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
-                                                              </div>
-                                                        </div> <!-- col -->
-
-                                                        <div class="col-12" style="clear:both">
-                                     		    	         
-                                                            <!-- TEXT -->
-                                                            <!-- TEXT -->
-                                                            <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
-
-                                                            <div id="link_" class="show-read-more">
-                                                            <?php 
-
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                                $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                                                echo $this->getTweetLink($tweetstatus);
-                                                                }else{
-                                                                echo $this->getTweetLink($tweet['status']);
-                                                                }  
-                                                                if (strlen($tweet['status']) > 200) {
-                                                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                                    $tweettext = substr($tweet['status'], 0, 200);
-                                                                    $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                                    echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                                                }  
-                                                                ?>
-                                                                  <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-
+                                                    <div class="col-12">
+                                                            <div class="user-block">
+                                                                <div class="user-blockImgBorder">
+                                                                <div class="user-blockImg">
+                                                                        <?php if (!empty($tweet['profile_img'])) {?>
+                                                                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                                        <?php  }else{ ?>
+                                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                                        <?php } ?>
+                                                                </div>
+                                                                </div>
+                                                                <span class="username">
+                                                                    <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                    <!-- //Jonathan Burke Jr. -->
+                                                                </span>
+                                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
                                                             </div>
-                                                        </div><!-- col -->
-                                                        
-                                                    </div><!-- row -->
+                                                    </div> <!-- col -->
+
+                                                    <div class="col-12" style="clear:both">
+                                                            <!-- STATUS -->
+                                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                                        <div id="link_" class="show-read-more">
+                                                        <?php 
+
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                            $tweettext = substr($tweet['status'], 0, 200);
+                                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            echo $this->getTweetLink($tweetstatus);
+                                                            }else{
+                                                            echo $this->getTweetLink($tweet['status']);
+                                                            }  
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                                            }  
+                                                        ?>
+                                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                        </div>
+                                                    </div><!-- col -->
+                                                    
+                                                </div><!-- row -->
+                                            </div><!-- col -->
+
+                                        <?php $expode = explode("=",$tweet['tweet_image']);
+                                            $size_kb = explode("=",$tweet['tweet_image_size']);
+                                                $splice= array_splice($expode,0,2);
+                                                for ($i=0; $i < count($splice); ++$i) { ?>
+
+                                                <div class="col-md-6 col-sm-12">
+                                                    <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                                                    <div class="mailbox-attachment-info main-active">
+                                                        <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                                            <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
+                                                        <span class="mailbox-attachment-size">
+                                                        <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
+                                                            <!-- 1,245 KB -->
+                                                            <a href="#" class="btn btn-default btn-sm float-right"><i
+                                                                    class="fa fa-cloud-download"></i></a>
+                                                        </span>
+                                                    </div>
                                                 </div><!-- col -->
 
+                                                <?php } ?>
+                                            
+
+                                        </div><!-- row -->
+
+                                        <?php }else if(array_diff($fileActualExt,$pdf)) { ?>
+
+                                            <div class="row">
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                            <div class="user-block">
+                                                                <div class="user-blockImgBorder">
+                                                                <div class="user-blockImg">
+                                                                        <?php if (!empty($tweet['profile_img'])) {?>
+                                                                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                                        <?php  }else{ ?>
+                                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                                        <?php } ?>
+                                                                </div>
+                                                                </div>
+                                                                <span class="username">
+                                                                    <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                    <!-- //Jonathan Burke Jr. -->
+                                                                </span>
+                                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                                            </div>
+                                                    </div> <!-- col -->
+
+                                                    <div class="col-12" style="clear:both">
+                                                                <!-- STATUS -->
+                                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                                        <div id="link_" class="show-read-more">
+                                                        <?php 
+
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                            $tweettext = substr($tweet['status'], 0, 200);
+                                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            echo $this->getTweetLink($tweetstatus);
+                                                            }else{
+                                                            echo $this->getTweetLink($tweet['status']);
+                                                            }  
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                                            }  
+                                                        ?>
+                                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                        </div>
+                                                    </div><!-- col -->
+                                                    
                                                 </div><!-- row -->
-                                              <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'ogg'){ ?>
+                                            </div><!-- col -->
+
+                                            <?php $expode = explode("=",$tweet['tweet_image']);
+                                                $splice= array_splice($expode,0,2);
+                                                for ($i=0; $i < count($splice); ++$i) { ?>
+
+                                                <div class="col-md-6 col-sm-12">
+                                                    <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+                                                    <div class="mailbox-attachment-info main-active">
+                                                        <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                                            <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
+                                                        <span class="mailbox-attachment-size">
+                                                            1,245 KB
+                                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                                        </span>
+                                                    </div>
+                                                </div><!-- col -->
+                                                <?php } ?>
+                                            
+
+                                        </div><!-- row -->
+                                        <?php } ?>
+
+                                        <?php   }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp4') { ?>
+                                            <div class="row">
+                                                <div class="col-6 ">
+                                                    <?php $expode = explode("=",$tweet['tweet_image']); ?>
+
+                                                    <video  controls preload="auto" width="100%" height="110px">
+                                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0];?>" type="video/mp4"> 
+                                                        <!-- <source src="video/boatride.webm" type="video/webm">  -->
+                                                            <!-- fallback content here -->
+                                                    </video>
+                                                </div><!-- col -->
+                                                
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="user-block">
+                                                            <div class="user-blockImgBorder">
+                                                            <div class="user-blockImg">
+                                                                    <?php if (!empty($tweet['profile_img'])) {?>
+                                                                    <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                                    <?php  }else{ ?>
+                                                                    <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                                    <?php } ?>
+                                                            </div>
+                                                            </div>
+                                                            <span class="username">
+                                                                <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                <!-- //Jonathan Burke Jr. -->
+                                                            </span>
+                                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                                        </div>
+                                                    </div> <!-- col -->
+
+                                                    <div class="col-12" style="clear:both">
+                                                        <!-- STATUS -->
+                                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                                        <div id="link_" class="show-read-more">
+                                                        <?php 
+
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                            $tweettext = substr($tweet['status'], 0, 200);
+                                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            echo $this->getTweetLink($tweetstatus);
+                                                            }else{
+                                                            echo $this->getTweetLink($tweet['status']);
+                                                            }  
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                                            }  
+                                                        ?>
+                                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                        </div>
+                                                    </div><!-- col -->
+                                                    
+                                                </div><!-- row -->
+                                            </div><!-- col -->
+
+                                            </div><!-- row -->
+                                        <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'webm'){ ?>
+                                            <div class="row">
+                                                <div class="col-6 ">
+                                                    <?php $expode = explode("=",$tweet['tweet_image']); ?>
+
+                                                    <video  controls preload="auto" width="100%" height="360px">
+                                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0];?>" type="video/webm"> 
+                                                            <!-- fallback content herehere -->
+                                                    </video>      
+                                                </div><!-- col -->
+
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="user-block">
+                                                            <div class="user-blockImgBorder">
+                                                            <div class="user-blockImg">
+                                                                    <?php if (!empty($tweet['profile_img'])) {?>
+                                                                    <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                                    <?php  }else{ ?>
+                                                                    <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                                    <?php } ?>
+                                                            </div>
+                                                            </div>
+                                                            <span class="username">
+                                                                <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                <!-- //Jonathan Burke Jr. -->
+                                                            </span>
+                                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                                        </div>
+                                                    </div> <!-- col -->
+
+                                                    <div class="col-12" style="clear:both">
+                                                        <!-- STATUS -->
+                                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                                        <div id="link_" class="show-read-more">
+                                                        <?php 
+
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                            $tweettext = substr($tweet['status'], 0, 200);
+                                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            echo $this->getTweetLink($tweetstatus);
+                                                            }else{
+                                                            echo $this->getTweetLink($tweet['status']);
+                                                            }  
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                                            }  
+                                                        ?>
+                                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                        </div>
+                                                    </div><!-- col -->
+                                                    
+                                                </div><!-- row -->
+                                            </div><!-- col -->
+
+                                            </div><!-- row -->
+                                        <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp3'){ ?>
+                                            <div class="row">
+                                                <div class="col-6 ">
                                                     <audio controls>
-                                                         <source src="audio/heavymetal.ogg" type="audio/ogg"> 
-                                                             <!-- fallback content here -->
-                                                     </audio>
-                                              <?php }else { ?>
+                                                        <source src="50-Cent-Baby-By-Me-ft-Ne-Yo-128K-MP3.mp3" type="audio/mp3">
+                                                            <!-- fallback content here -->
+                                                    </audio>
+                                                </div><!-- col -->
+
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="user-block">
+                                                            <div class="user-blockImgBorder">
+                                                            <div class="user-blockImg">
+                                                                    <?php if (!empty($tweet['profile_img'])) {?>
+                                                                    <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                                    <?php  }else{ ?>
+                                                                    <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                                    <?php } ?>
+                                                            </div>
+                                                            </div>
+                                                            <span class="username">
+                                                                <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                <!-- //Jonathan Burke Jr. -->
+                                                            </span>
+                                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                                        </div>
+                                                    </div> <!-- col -->
+
+                                                    <div class="col-12" style="clear:both">
+                                                        <!-- STATUS -->
+                                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                                        <div id="link_" class="show-read-more">
+                                                        <?php 
+
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                            $tweettext = substr($tweet['status'], 0, 200);
+                                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            echo $this->getTweetLink($tweetstatus);
+                                                            }else{
+                                                            echo $this->getTweetLink($tweet['status']);
+                                                            }  
+                                                            if (strlen($tweet['status']) > 200) {
+                                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                                            }  
+                                                        ?>
+                                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                        </div>
+                                                    </div><!-- col -->
+                                                    
+                                                </div><!-- row -->
+                                            </div><!-- col -->
+
+                                            </div><!-- row -->
+                                        <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'ogg'){ ?>
+                                                <audio controls>
+                                                    <source src="audio/heavymetal.ogg" type="audio/ogg"> 
+                                                        <!-- fallback content here -->
+                                                </audio>
+                                        <?php }else { ?>
+
                                                     <div class="row">
                                                        <div class="col-12">
 
@@ -605,8 +592,10 @@ class Posts_copyDraft extends  Home {
                                            <?php if($user_id != $tweet['user_id']) { ?> 
                                                 <ul><li>
                                                     <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
-                                                    <ul><li><?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id']); ?></li></ul>
-                                                    <!-- <ul><li>< ?php echo Follow::coins_recharge($tweet['user_id'],$user_id); ?></li></ul> -->
+                                                    <!-- <ul><li>< ?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id']); ?></li></ul> -->
+                                                    <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
+                                                    <?php $user_key =(!empty($_SESSION['key']))? $_SESSION['key']: '1' ;?> 
+                                                    <ul><li><?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id'],$user_key,$username,$tweet['tweet_id']); ?></li></ul>
                                                     </li>
                                                 </ul>
                                                 <?php }else{ ?>
@@ -633,31 +622,56 @@ class Posts_copyDraft extends  Home {
                                         }else{
                                         echo $this->getTweetLink($tweet['status']);
                                         }  
-                                    ?>
 
-                                    <!-- TEXT -->
-                                    <!-- TEXT -->
+                                    
+                                        $expodefile = explode("=",$tweet['tweet_image']);
+                                        $title= $tweet["photo_Title"];
+                                        $photo_title=  explode("=",$title);
+                                        $fileActualExt= array();
+                                        for ($i=0; $i < count($expodefile); ++$i) { 
+                                            $fileActualExt[]= strtolower(substr($expodefile[$i],strrpos($expodefile[$i],'.')+1));
+                                        }
 
-                                    <?php 
-                                    $expodefile = explode("=",$tweet['tweet_image']);
-                                    $title= $tweet["photo_Title"];
-                                    $photo_title=  explode("=",$title);
-                                    $fileActualExt= array();
-                                    for ($i=0; $i < count($expodefile); ++$i) { 
-                                        $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-                                    }
+                                        
+                                        $expode = $expodefile;
+                                        $file_size = $tweet['tweet_image_size'];
+                                        $file_sizes = explode("=",$file_size);
+                                        $count = count($expodefile);
 
-                                    $allower_ext = array('jpeg','peg','jpg', 'png', 'gif', 'bmp', 'pdf' , 'doc' , 'ppt','docx','ocx','xlsx','lsx'); // valid extensions
-                                if (array_diff($fileActualExt,$allower_ext) == false) {
-                                    // if (!empty($tweet['tweet_image'])) {
-                                        $expode = explode("=",$tweet['tweet_image']);
-                                        $count = count($expode); ?>
-                             <?php 
-                                 $docx= array('jpg','jpeg','peg','png','gif','pdf');
-                                 $pdf= array('jpg','jpeg','peg','png','gif');
-                                 $image= array('pdf','doc','ocx','lsx'); ?>
+                                        $image= array('jpg','jpeg','png','gif');
+                                        $pdf= array('pdf');
+                                        $coins= array('coins');
+                                        $docx= array('doc','docx','lsx');
+                                        $mp3= array('mp3','ogg');
+                                        $mp4= array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
+                                        $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4);
 
-                                 <?php if(array_diff($fileActualExt,$image)) { 
+
+                                if (array_diff($fileActualExt,$allower_ext) == false) { 
+                                        # code...
+                                            
+                                        $fileActualExt_image =array_intersect($fileActualExt,$image);
+                                        $count_image =count(array_intersect($fileActualExt_image,$image));
+                                        $filePathinfo_image=array();
+                                        
+                                        $fileActualExt_pdf =array_intersect($fileActualExt,$pdf);
+                                        $count_pdf =count(array_intersect($fileActualExt_pdf,$pdf));
+                                        $filePathinfo_pdf=array();
+
+                                        $fileActualExt_docx =array_intersect($fileActualExt,$docx);
+                                        $count_docx =count(array_intersect($fileActualExt_docx,$docx));
+                                        
+                                        $fileActualExt_coins =array_intersect($fileActualExt,$coins);
+                                        $count_coins =count(array_intersect($fileActualExt_docx,$coins));
+
+                                        $fileActualExt_mp4 =array_intersect($fileActualExt,$mp4);
+                                        $count_mp4 =count(array_intersect($fileActualExt_docx,$mp4));
+
+                                        $fileActualExt_mp3 =array_intersect($fileActualExt,$mp3);
+                                        $count_mp3 =count(array_intersect($fileActualExt_docx,$mp3));
+                                    
+                              
+                                 if(!empty($fileActualExt_image)) { 
 
                                     if ($count === 1) { ?>
 
@@ -758,7 +772,7 @@ class Posts_copyDraft extends  Home {
                                        
                                     <?php } 
 
-                                    }else if(array_diff($fileActualExt,$docx)) { 
+                                    }else if(!empty($fileActualExt_docx)) { 
 
                                     //Columns must be a factor of 12 (1,2,3,4,6,12)
                                     $rowCount = 0;
@@ -952,7 +966,7 @@ class Posts_copyDraft extends  Home {
                                             break;
                                     }
                                     
-                                    }else if(array_diff($fileActualExt,$pdf)) { 
+                                    }else if(!empty($fileActualExt_pdf)) { 
 
                                     //Columns must be a factor of 12 (1,2,3,4,6,12)
                                     $rowCount = 0;
@@ -1140,9 +1154,7 @@ class Posts_copyDraft extends  Home {
                                             break;
                                     }
                                     
-                                } ?>
-                                     
-                                <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp4') { ?>
+                                }else if(!empty($fileActualExt_mp4)) { ?>
                                     <div class="row mb-2" >
                                     <div class="col-12" >
                                     <video controls preload="auto" width="100px"  height="auto" >
@@ -1162,16 +1174,7 @@ class Posts_copyDraft extends  Home {
                                     </video>
                                     </div>
                                     </div>
-                              <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'webm'){ ?>
-                                 <div class="row mb-2">
-                                    <div class="col-12">
-                                    <video  controls preload="auto" width="100%" height="auto">
-                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$tweet['tweet_image'] ;?>" type="video/webm"> 
-                                            <!-- fallback content herehere -->
-                                    </video>
-                                     </div>
-                                    </div>
-                              <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp3'){ ?>
+                              <?php }else if(!empty($fileActualExt_mp3)){ ?>
                                 <div class="row mb-2">
                                     <div class="col-12">
                                     <audio controls>
@@ -1180,12 +1183,25 @@ class Posts_copyDraft extends  Home {
                                      </audio>
                                       </div>
                                     </div>
-                              <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'ogg'){ ?>
-                                    <audio controls>
-                                         <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$tweet['tweet_image'] ;?>" type="audio/ogg"> 
-                                             <!-- fallback content here -->
-                                     </audio>
-                              <?php } ?>
+                              <?php }else if(!empty($fileActualExt_coins)){ ?>
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
+                                        <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                                    </div>
+                                </div>
+                              <?php } 
+
+                            if(!empty($tweet['donation_payment'])){ ?>
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
+                                        <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                                    </div>
+                                </div>
+                                <?php } 
+                            
+                            } ?>
 
                               <?php 
                                 if (strlen($tweet['status']) > 200) {

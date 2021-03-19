@@ -45,7 +45,7 @@ $user = $home->userData($_SESSION['key']);
                             </div>
                             <div class="form-group">
                                 <select class="custom-select" name="donation_payment" id="donation_payment">
-                                    <option selected>Select one</option>
+                                    <option value="">Select one</option>
                                     <option value="donation_coins.coins">coins payment</option>
                                     <option value="donation_card.card">Mtn & Visa paymant</option>
                                 </select>
@@ -56,7 +56,7 @@ $user = $home->userData($_SESSION['key']);
                         <div class="message-footer text-muted">
                             <div class="t-fo-left">
                                 <ul>
-                                    <input type="file" name="files[]" id="file" multiple  onChange="displayImage(this)">
+                                    <input type="file" name="files[]" id="file" accept="image/*" multiple  onChange="displayImage(this)">
                                       <?php if(isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
 
                                     <li><label for="file"><i class="fa fa-camera"

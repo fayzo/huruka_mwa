@@ -484,25 +484,10 @@ class School extends Home {
 
         if(!empty($rows['photo_'])){
             $photo=$rows['photo_'].'='.$rows['other_photo_'];
-            // .'='.$rows['video_'].'='.$rows['youtube_']
-            $expodefile = explode("=",$photo);
-            $fileActualExt= array();
-            for ($i=0; $i < count($expodefile); ++$i) { 
-                $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-            }
-            $allower_ext = array('jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf' , 'doc' , 'ppt'); // valid extensions
-            if (array_diff($fileActualExt,$allower_ext) == false) {
-                $expode = explode("=",$photo);
-                $uploadDir = DOCUMENT_ROOT.'/uploads/school/';
-                for ($i=0; $i < count($expode); ++$i) { 
-                      unlink($uploadDir.$expode[$i]);
-                }
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp4') {
-                $uploadDir = DOCUMENT_ROOT.'/uploads/school/';
-                      unlink($uploadDir.$photo);
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp3') {
-                $uploadDir = DOCUMENT_ROOT.'/uploads/school/';
-                      unlink($uploadDir.$photo);
+            $expode = explode("=",$photo);
+            $uploadDir = DOCUMENT_ROOT.'/uploads/school/';
+            for ($i=0; $i < count($expode); ++$i) { 
+                    unlink($uploadDir.$expode[$i]);
             }
         }
 

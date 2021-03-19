@@ -59,7 +59,7 @@ $(document).ready(function () {
                             $("#response-PostMessage").fadeOut();
                         }, 800);
                         setInterval(function () {
-                            // location.reload();
+                            location.reload();
                         }, 1100);
                     }, error: function (response) {
                         $("#response-PostMessage").html(response);
@@ -111,7 +111,7 @@ $(document).ready(function () {
                             $("#response-PostMessage").fadeOut();
                         }, 1000);
                         setInterval(function () {
-                            // location.reload();
+                            location.reload();
                         }, 1100);
                     }, error: function (response) {
                         $("#response-PostMessage").html(response).fadeIn();

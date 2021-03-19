@@ -330,7 +330,8 @@ class Follow extends Home
 
     }
 
-    static public function tooltipProfile($whoTofollow,$user_id,$follow_id)
+    // static public function tooltipProfile($whoTofollow,$user_id,$follow_id)
+    static public function tooltipProfile($whoTofollow,$user_id,$follow_id,$user_key_coins,$username_keycoins,$tweet_id)
     {
         $mysqli= self::$databases;
         $sql="SELECT * FROM users WHERE user_id = '{$follow_id}' ";
@@ -371,23 +372,7 @@ class Follow extends Home
                             </div><!-- info body name end-->
                         </div><!-- info in body end-->
                         <div class="info-in-footer">
-                                <div class="col-md-12 mb-2">
-                                    <label for="exampleFormControlInput1">Send Reward <i class="fas fa-coins text-warning"></i> Coins to <?php echo $user['username'] ;?></label>
-                                    <div class="form-group">
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Select Coins</option>
-                                        <option>35 coins    =>    500 Frw</option>
-                                        <option>70 coins    =>    1,000 Frw</option>
-                                        <option>350 coins   =>    5,000 Frw </option>
-                                        <option>1400 coins  =>    21,000 Frw </option>
-                                        <option>3500 coins  =>    54,000 Frw </option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Comment to <?php echo $user['username'] ;?>">
-                                    </div>
-                                    <input type="button" name="reward" id="reward" value="Send Reward" class="btn btn-primary btn-lg btn-block">
-                                </div><!-- col -->
+                        <?php echo self::coins_recharge_tweet($user['user_id'],$user_key_coins,$username_keycoins,$user['username'],$tweet_id); ?>
                                 
                             <div class="number-wrapper">
                                 <div class="num-box">
@@ -504,7 +489,7 @@ class Follow extends Home
                     <input type="text" class="form-control comment_coins" name="comment_coins" id="comment_coins<?php echo $tweet_id;?>" placeholder="Comment to <?php echo $username ;?>" style="background:none">
                 </div>
                 <span class="response_coins"></span>
-                <button type="button" name="reward_coins" <?php echo (!empty($_SESSION['key']))?'id="reward_coins" data-tweet_id="'.$tweet_id.'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >Send Reward</button>
+                <input type="button" name="reward_coins" value="Send Reward" <?php echo (!empty($_SESSION['key']))?'id="reward_coins" data-tweet_id="'.$tweet_id.'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
             </form>
             </div><!-- col -->
         </div><!-- row -->

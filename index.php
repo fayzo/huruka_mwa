@@ -52,9 +52,13 @@
 
                   <div class="message-footer text-muted mb-2">
                     <div class="t-fo-left">
-
+                          <!-- accept="image/*" 
+                          accept=".png,.jpg,.jpeg"
+                          accept="audio/*| video/* |image/* | MIME_type"
+                          accept="audio/*,video/*,image/*"
+                          accept="image/png, image/jpg, image/jepg, image/gif" -->
                       <ul>
-                        <input type="file" name="files[]" id="file" multiple="" onChange="displayImage(this)">
+                        <input type="file" name="files[]" id="file" accept="image/*" onChange="displayImage(this)" multiple >
                         <?php if(isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
                         <li><label for="file"><i class="fa fa-camera" aria-hidden="true"></i></label>
                           <span class="tweet-error">
@@ -90,7 +94,7 @@
             <!-- Box Comment -->
               <div class="card  borders-tops card-profile card1">
                   <div class="card-body message-color">
-                    <?php echo $posts_home->tweets($user_id,15); ?>
+                    <?php echo $posts_home->tweets($user_id,15); ?> 
                     <!-- Post -->
                   </div>
               </div>
@@ -103,7 +107,9 @@
 
           <div class="col-md-3 d-none d-md-block">
             <!-- whoTofollow: user whoTofollow style 1 -->
-            <?php echo $follow->whoTofollow($user_id,$user_id) ;?>
+            <?php if (isset($_SESSION['key'])){
+                    echo  $follow->whoTofollow($user_id,$user_id);
+                 } ?>
 
             <div class="sticky-top" style="top: 52px;z-index:1000;">
                <?php echo $home->options(); ?>

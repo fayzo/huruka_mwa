@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2021 at 08:12 PM
+-- Generation Time: Mar 16, 2021 at 07:27 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -64,14 +64,15 @@ CREATE TABLE `apply_job` (
   `email0` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address0` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `degree` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `field` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uploadfilecv` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uploadfilecertificates` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uploadfilecv` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uploadfilecertificates` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cv_file_size` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `certificates_file_size` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `addition_information` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id0` int(11) NOT NULL,
   `job_id0` int(11) NOT NULL,
   `business_id0` int(11) NOT NULL,
+  `email_sent_to_` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_sent_for` int(11) NOT NULL,
   `email_sent_to` int(11) NOT NULL,
   `email_status` int(11) NOT NULL,
@@ -84,17 +85,9 @@ CREATE TABLE `apply_job` (
 -- Dumping data for table `apply_job`
 --
 
-INSERT INTO `apply_job` (`cv_id`, `firstname0`, `middlename0`, `lastname0`, `email0`, `address0`, `telephone`, `degree`, `field`, `uploadfilecv`, `uploadfilecertificates`, `addition_information`, `user_id0`, `job_id0`, `business_id0`, `email_sent_for`, `email_sent_to`, `email_status`, `subject_composer`, `type_of_email`, `created_on0`) VALUES
-(2, 'fa', 'fa', 'fa', 'shema@yahoo.com', 'kg 6 avenue st', '0787384312', 'diploma', 'account', '2019_26inte.docx', '2019_70proj.doc', 'amakuru', 61, 33, 61, 61, 61, 1, '', '', '2019-10-20 12:43:13'),
-(14, '', '', '', 'hemafaysal@gmail.com', '', '', '', '', '2019_36inte.docx', '', 'ndaho', 61, 0, 61, 61, 64, 1, 'amakuru yawe', 'sent', '2019-10-21 12:29:01'),
-(15, '', '', '', 'hemafaysal@gmail.com', '', '', '', '', '2019_25inte.docx', '', 'ndaho', 61, 0, 61, 61, 64, 1, 'amakuru yawe', 'sent', '2019-10-21 12:31:57'),
-(16, 'claude', 'muhire', 'claudine', 'claude@vmail.com', 'kigali', '07785778', 'certificate', 'finace', '2021_18cove.docx', '2021_61cove.pdf', 'am hard', 5, 72, 1, 5, 1, 1, '', 'inbox', '2021-01-19 18:27:34'),
-(17, '', '', '', 'claude@yahoo.com', '', '', '', '', 'no file', '', 'uraho', 1, 0, 1, 1, 5, 0, 'amakuru', 'send', '2021-01-19 18:24:00'),
-(18, '', '', '', 'claude@yahoo.com', '', '', '', '', 'no file', '', 'uraho', 1, 0, 1, 1, 5, 0, 'amakuru', 'draft', '2021-01-19 18:24:24'),
-(19, '', '', '', 'irangiroltd@gmail.com', '', '', '', '', '2021_54cove.pdf', '', 'turaburanye', 5, 0, 5, 5, 1, 1, 'uraho', '', '2021-01-19 18:06:17'),
-(20, '', '', '', 'claude@yahoo.com', '', '', '', '', '2021_15cove.pdf', '', 'ubuzeho', 1, 0, 1, 1, 5, 0, 'uraho', '', '2021-01-19 18:23:07'),
-(21, '', '', '', 'claude@yahoo.com', '', '', '', '', '2021_131905.jpg', '', 'ndaho', 1, 0, 1, 1, 5, 0, 'uraho', '', '2021-02-02 20:50:24'),
-(22, '', '', '', 'claude@yahoo.com', '', '', '', '', '2021_83abou.jpg', '', 'uraho', 1, 0, 1, 1, 5, 0, 'amakureu', 'inbox', '2021-02-02 20:25:21');
+INSERT INTO `apply_job` (`cv_id`, `firstname0`, `middlename0`, `lastname0`, `email0`, `address0`, `telephone`, `uploadfilecv`, `uploadfilecertificates`, `cv_file_size`, `certificates_file_size`, `addition_information`, `user_id0`, `job_id0`, `business_id0`, `email_sent_to_`, `email_sent_for`, `email_sent_to`, `email_status`, `subject_composer`, `type_of_email`, `created_on0`) VALUES
+(16, '', '', '', 'claude@yahoo.com', '', '', 'no file', '', '', '', '&lt;p&gt;umeze bon&lt;/p&gt;', 1, 0, 1, 'irangiroltd@gmail.com', 1, 0, 0, 'uraho', 'inbox', '2021-03-12 11:45:06'),
+(17, '', '', '', 'claude@yahoo.com', '', '', 'no file', '', '', '', '&lt;p&gt;umeze bon&lt;/p&gt;', 1, 0, 1, 'irangiroltd@gmail.com', 1, 0, 0, 'uraho', 'sent', '2021-03-12 11:45:06');
 
 -- --------------------------------------------------------
 
@@ -3150,7 +3143,8 @@ INSERT INTO `follow` (`follow_id`, `sender`, `receiver`, `follow_on`) VALUES
 (22, 4, 5, '2021-02-18 11:08:03'),
 (23, 0, 5, '2021-02-18 10:22:41'),
 (26, 1, 5, '2021-02-18 10:21:36'),
-(27, 1, 3, '2021-02-18 10:21:37');
+(27, 1, 3, '2021-02-18 10:21:37'),
+(28, 3, 1, '2021-03-15 23:29:23');
 
 -- --------------------------------------------------------
 
@@ -3343,6 +3337,7 @@ CREATE TABLE `jobs` (
   `deadline` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `website` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_on` datetime NOT NULL,
+  `total_view_post` int(11) NOT NULL,
   `turn` char(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `location` char(10) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3351,9 +3346,9 @@ CREATE TABLE `jobs` (
 -- Dumping data for table `jobs`
 --
 
-INSERT INTO `jobs` (`job_id`, `job_title`, `job_user_`, `job_summary`, `responsibilities_duties`, `qualifications_skills`, `business_id`, `conditions`, `categories_jobs`, `deadline`, `website`, `created_on`, `turn`, `location`) VALUES
-(71, 'Accountant', 'SME', '&lt;p&gt;Job Title:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Title:&lt;/p&gt;\n\n&lt;p&gt;Make your job titles specific. Targeted job titles are more effective than generic ones, so be precise by including key phrases that accurately describe the role. Avoid internal lingo that may confuse the job seeker. Stick to standard experience levels like &amp;ldquo;Senior&amp;rdquo; rather than &amp;ldquo;VI&amp;rdquo; or other terms people are less likely to look for.&lt;/p&gt;\n\n&lt;p&gt;Examples of Data Analyst job titles&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Data Analyst&lt;/li&gt;\n	&lt;li&gt;Senior Data Analyst&lt;/li&gt;\n	&lt;li&gt;Clinical Data Analyst&lt;/li&gt;\n	&lt;li&gt;Data Analyst (Part-Time)&lt;/li&gt;\n	&lt;li&gt;Quantitative Analyst&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Job Summary:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Job Summary:&lt;/p&gt;\n\n&lt;p&gt;Open with a strong, attention-grabbing summary. Your summary should provide an overview of your company and expectations for the position. Hook your reader with details about what makes your company unique. Your job description is an introduction to your company and your employer brand. Include details about your company culture to sum up why a candidate would love to work for you. Include an exact job location. Provide an exact job location to optimize your job posting so it appears higher in job search results.&lt;/p&gt;\n\n&lt;p&gt;Example of a Data Analyst job summary.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Our growing technology firm is looking for an experienced Data Analyst who is able to turn project requirements into custom-formatted data reports. The ideal candidate for this position is able to do complete life cycle data generation and outline critical information for each Project Manager. We also need someone who is able to analyze business procedures and recommend specific types of data that can be used to improve upon them.&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Responsibilities and Duties:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Responsibilities:&lt;/p&gt;\n\n&lt;p&gt;Outline the core responsibilities of the position. Make sure your list of responsibilities is detailed but concise. Also emphasize the duties that may be unique to your organization. For example, if you are hiring for an &amp;ldquo;Event Management&amp;rdquo; role and the position requires social media expertise to promote events, include this detail to ensure candidates understand the requirements and can determine if they&amp;rsquo;re qualified. Highlight the day-to-day activities of the position. This will help candidates understand the work environment and the activities they will be exposed to on a daily basis. This level of detail will help the candidate determine if the role and company are a right fit, helping you attract the best candidates for your position. Specify how the position fits into the organization. Indicate who the job reports to and how the person will function within your organization, helping candidates see the bigger picture and understand how the role impacts the business.&lt;/p&gt;\n\n&lt;p&gt;Examples of Data Analyst responsibilities.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Use statistical methods to analyze data and generate useful business reports&lt;/li&gt;\n	&lt;li&gt;Work with management team to create a prioritized list of needs for each business segment&lt;/li&gt;\n	&lt;li&gt;Identify and recommend new ways to save money by streamlining business processes&lt;/li&gt;\n	&lt;li&gt;Use data to create models that depict trends in the customer base and the consumer population as a whole&lt;/li&gt;\n	&lt;li&gt;Work with departmental managers to outline the specific data needs for each business method analysis project&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Qualifications and Skills:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Qualifications and Skills:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Data Analyst skills.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Terms and conditions:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Terms and conditions:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Terms and conditions.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Deadline to submit:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Deadline to submit:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Deadline to submit.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Apply to website:&lt;/p&gt;\n\n&lt;p&gt;irangiro.com&lt;/p&gt;', '', '', 1, '', 'Featured', '2020-12-27', 'irangiro.com', '2020-12-15 08:20:13', 'off', 'RW'),
-(72, 'purchased chair and material for office', 'individual', '&lt;p&gt;Job Title:&lt;/p&gt;\n\n&lt;p&gt;Examples of Accountant job titles&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Accountant&lt;/li&gt;\n	&lt;li&gt;Entry-level Accountant/Bookkeeper&lt;/li&gt;\n	&lt;li&gt;Accounts Payable Specialist&lt;/li&gt;\n	&lt;li&gt;Payroll and Collections Accountant&lt;/li&gt;\n	&lt;li&gt;Senior Staff Accountant&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Job Summary:&lt;/p&gt;\n\n&lt;p&gt;Example of an Accountant job summary.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;We&amp;rsquo;re looking for an organized and driven Staff Accountant to join our growing team at our company. The Staff Accountant position will work closely with our other accountants and operations personnel and handle day-to-day bookkeeping. We&amp;rsquo;re an energetic company and are looking for a passionate individual to join our organization and revitalize our record keeping and bring more organization to our day to day financials.&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Responsibilities and Duties:&lt;/p&gt;\n\n&lt;p&gt;Examples of an Accountant Responsibilities.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Perform monthly, quarterly and annual accounting activities including reconciliations of bank and credit card accounts, coordination and completion of annual audits, and reviewing financial reports/support as necessary&lt;/li&gt;\n	&lt;li&gt;Analyze and report on financial status including income statement variances, communicating financial results to management, budget preparation and analysis&lt;/li&gt;\n	&lt;li&gt;Improve systems and procedures and initiate corrective actions&lt;/li&gt;\n	&lt;li&gt;Oversee taxes and abide by federal regulations&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Qualifications and Skills:&lt;/p&gt;\n\n&lt;p&gt;Examples of an Accountant skills.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;2+ years accounting experience&lt;/li&gt;\n	&lt;li&gt;Expertise with QuickBooks&lt;/li&gt;\n	&lt;li&gt;Extensive knowledge of US GAAP&lt;/li&gt;\n	&lt;li&gt;Advanced computer skills in MS Office, accounting software and databases&lt;/li&gt;\n	&lt;li&gt;Excellent organizational, problem-solving, project management and communication skills&lt;/li&gt;\n	&lt;li&gt;Additional experience in Audit and International accounting&lt;/li&gt;\n	&lt;li&gt;Experience with SaaS companies&lt;/li&gt;\n	&lt;li&gt;CPA certification&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Terms and conditions:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Terms and conditions:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Terms and conditions.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Deadline to submit:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Deadline to submit:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Deadline to submit.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Apply to website:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Apply to website:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Apply to website.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;', '', '', 1, '', 'Tenders', '2021-02-26', '', '2021-01-19 18:22:50', 'on', 'RW');
+INSERT INTO `jobs` (`job_id`, `job_title`, `job_user_`, `job_summary`, `responsibilities_duties`, `qualifications_skills`, `business_id`, `conditions`, `categories_jobs`, `deadline`, `website`, `created_on`, `total_view_post`, `turn`, `location`) VALUES
+(71, 'Accountant', 'SME', '&lt;p&gt;Job Title:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Title:&lt;/p&gt;\n\n&lt;p&gt;Make your job titles specific. Targeted job titles are more effective than generic ones, so be precise by including key phrases that accurately describe the role. Avoid internal lingo that may confuse the job seeker. Stick to standard experience levels like &amp;ldquo;Senior&amp;rdquo; rather than &amp;ldquo;VI&amp;rdquo; or other terms people are less likely to look for.&lt;/p&gt;\n\n&lt;p&gt;Examples of Data Analyst job titles&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Data Analyst&lt;/li&gt;\n	&lt;li&gt;Senior Data Analyst&lt;/li&gt;\n	&lt;li&gt;Clinical Data Analyst&lt;/li&gt;\n	&lt;li&gt;Data Analyst (Part-Time)&lt;/li&gt;\n	&lt;li&gt;Quantitative Analyst&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Job Summary:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Job Summary:&lt;/p&gt;\n\n&lt;p&gt;Open with a strong, attention-grabbing summary. Your summary should provide an overview of your company and expectations for the position. Hook your reader with details about what makes your company unique. Your job description is an introduction to your company and your employer brand. Include details about your company culture to sum up why a candidate would love to work for you. Include an exact job location. Provide an exact job location to optimize your job posting so it appears higher in job search results.&lt;/p&gt;\n\n&lt;p&gt;Example of a Data Analyst job summary.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Our growing technology firm is looking for an experienced Data Analyst who is able to turn project requirements into custom-formatted data reports. The ideal candidate for this position is able to do complete life cycle data generation and outline critical information for each Project Manager. We also need someone who is able to analyze business procedures and recommend specific types of data that can be used to improve upon them.&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Responsibilities and Duties:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Responsibilities:&lt;/p&gt;\n\n&lt;p&gt;Outline the core responsibilities of the position. Make sure your list of responsibilities is detailed but concise. Also emphasize the duties that may be unique to your organization. For example, if you are hiring for an &amp;ldquo;Event Management&amp;rdquo; role and the position requires social media expertise to promote events, include this detail to ensure candidates understand the requirements and can determine if they&amp;rsquo;re qualified. Highlight the day-to-day activities of the position. This will help candidates understand the work environment and the activities they will be exposed to on a daily basis. This level of detail will help the candidate determine if the role and company are a right fit, helping you attract the best candidates for your position. Specify how the position fits into the organization. Indicate who the job reports to and how the person will function within your organization, helping candidates see the bigger picture and understand how the role impacts the business.&lt;/p&gt;\n\n&lt;p&gt;Examples of Data Analyst responsibilities.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Use statistical methods to analyze data and generate useful business reports&lt;/li&gt;\n	&lt;li&gt;Work with management team to create a prioritized list of needs for each business segment&lt;/li&gt;\n	&lt;li&gt;Identify and recommend new ways to save money by streamlining business processes&lt;/li&gt;\n	&lt;li&gt;Use data to create models that depict trends in the customer base and the consumer population as a whole&lt;/li&gt;\n	&lt;li&gt;Work with departmental managers to outline the specific data needs for each business method analysis project&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Qualifications and Skills:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Qualifications and Skills:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Data Analyst skills.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Terms and conditions:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Terms and conditions:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Terms and conditions.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Deadline to submit:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Deadline to submit:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Deadline to submit.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Apply to website:&lt;/p&gt;\n\n&lt;p&gt;irangiro.com&lt;/p&gt;', '', '', 1, '', 'Featured', '2020-12-27', 'irangiro.com', '2020-12-15 08:20:13', 0, 'off', 'RW'),
+(72, 'purchased chair and material for officexxxxx', 'individual', '&lt;p&gt;Job Title:&lt;/p&gt;\n\n&lt;p&gt;Examples of Accountant job titles&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Accountant&lt;/li&gt;\n	&lt;li&gt;Entry-level Accountant/Bookkeeper&lt;/li&gt;\n	&lt;li&gt;Accounts Payable Specialist&lt;/li&gt;\n	&lt;li&gt;Payroll and Collections Accountant&lt;/li&gt;\n	&lt;li&gt;Senior Staff Accountant&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Job Summary:&lt;/p&gt;\n\n&lt;p&gt;Example of an Accountant job summary.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;We&amp;rsquo;re looking for an organized and driven Staff Accountant to join our growing team at our company. The Staff Accountant position will work closely with our other accountants and operations personnel and handle day-to-day bookkeeping. We&amp;rsquo;re an energetic company and are looking for a passionate individual to join our organization and revitalize our record keeping and bring more organization to our day to day financials.&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Responsibilities and Duties:&lt;/p&gt;\n\n&lt;p&gt;Examples of an Accountant Responsibilities.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Perform monthly, quarterly and annual accounting activities including reconciliations of bank and credit card accounts, coordination and completion of annual audits, and reviewing financial reports/support as necessary&lt;/li&gt;\n	&lt;li&gt;Analyze and report on financial status including income statement variances, communicating financial results to management, budget preparation and analysis&lt;/li&gt;\n	&lt;li&gt;Improve systems and procedures and initiate corrective actions&lt;/li&gt;\n	&lt;li&gt;Oversee taxes and abide by federal regulations&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Qualifications and Skills:&lt;/p&gt;\n\n&lt;p&gt;Examples of an Accountant skills.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;2+ years accounting experience&lt;/li&gt;\n	&lt;li&gt;Expertise with QuickBooks&lt;/li&gt;\n	&lt;li&gt;Extensive knowledge of US GAAP&lt;/li&gt;\n	&lt;li&gt;Advanced computer skills in MS Office, accounting software and databases&lt;/li&gt;\n	&lt;li&gt;Excellent organizational, problem-solving, project management and communication skills&lt;/li&gt;\n	&lt;li&gt;Additional experience in Audit and International accounting&lt;/li&gt;\n	&lt;li&gt;Experience with SaaS companies&lt;/li&gt;\n	&lt;li&gt;CPA certification&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Terms and conditions:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Terms and conditions:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Terms and conditions.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Deadline to submit:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Deadline to submit:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Deadline to submit.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;hr /&gt;\n&lt;p&gt;Apply to website:&lt;/p&gt;\n\n&lt;p&gt;Explaination of Apply to website:&lt;/p&gt;\n\n&lt;p&gt;Include a list of hard and soft skills. Of course, the job description should specify education, previous job experience, certifications and technical skills required for the role. You may also include soft skills, like communication and problem solving, as well as personality traits that you envision for a successful hire. Keep your list concise. While you may be tempted to list out every requirement you envision for your ideal hire, including too many qualifications and skills could dissuade potential candidates.&lt;/p&gt;\n\n&lt;p&gt;Examples of Apply to website.&lt;/p&gt;\n\n&lt;ul&gt;\n	&lt;li&gt;Bachelor&amp;rsquo;s Degree in Mathematics or Computer Engineering&lt;/li&gt;\n	&lt;li&gt;2+ years&amp;rsquo; Data mining experience&lt;/li&gt;\n	&lt;li&gt;3+ years in a data analyst role&lt;/li&gt;\n	&lt;li&gt;Ability to collaborate effectively and work as part of a team&lt;/li&gt;\n	&lt;li&gt;Strong attention to detail&lt;/li&gt;\n&lt;/ul&gt;', '', '', 1, '', 'Tenders', '2021-02-26', '', '2021-01-19 18:22:50', 79, 'on', 'RW');
 
 -- --------------------------------------------------------
 
@@ -3420,6 +3415,15 @@ CREATE TABLE `notification` (
   `time` datetime NOT NULL,
   `status` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`notification_id`, `notification_for`, `notification_from`, `target`, `type`, `time`, `status`) VALUES
+(5, 1, 3, 1, 'follow', '2021-03-15 23:29:23', 1),
+(8, 5, 1, 96, 'retweet', '2021-03-16 18:56:12', 1),
+(9, 5, 1, 116, 'retweet', '2021-03-16 18:39:20', 0);
 
 -- --------------------------------------------------------
 
@@ -4054,6 +4058,32 @@ INSERT INTO `sectors` (`sectorcode`, `namesector`, `districtcode`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transaction_coins`
+--
+
+CREATE TABLE `transaction_coins` (
+  `coins_id` int(11) NOT NULL,
+  `username_coins_from` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username_coins_to` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id_coins_to` int(11) NOT NULL,
+  `user_id_coins_from` int(11) NOT NULL,
+  `amount_coins` float(10,2) NOT NULL,
+  `amount_francs` float(10,2) NOT NULL,
+  `comment_coins` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `datetime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaction_coins`
+--
+
+INSERT INTO `transaction_coins` (`coins_id`, `username_coins_from`, `username_coins_to`, `user_id_coins_to`, `user_id_coins_from`, `amount_coins`, `amount_francs`, `comment_coins`, `datetime`) VALUES
+(32, 'irangiro', 'Tips', 2, 1, 35.00, 500.00, 'xs', '2021-03-13 11:38:02'),
+(33, 'irangiro', 'irangiro', 1, 1, 0.00, 0.00, '', '2021-03-13 11:30:14');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `trash`
 --
 
@@ -4066,14 +4096,15 @@ CREATE TABLE `trash` (
   `email0` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address0` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `degree` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `field` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `uploadfilecv` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `uploadfilecertificates` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cv_file_size` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `certificates_file_size` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `addition_information` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id0` int(11) NOT NULL,
   `job_id0` int(11) NOT NULL,
   `business_id0` int(11) NOT NULL,
+  `email_sent_to_` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_sent_for` int(11) NOT NULL,
   `email_sent_to` int(11) NOT NULL,
   `subject_composer` int(11) NOT NULL,
@@ -4082,13 +4113,6 @@ CREATE TABLE `trash` (
   `created_on0` datetime NOT NULL,
   `deadline0` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `trash`
---
-
-INSERT INTO `trash` (`trash_id`, `cv_id`, `firstname0`, `middlename0`, `lastname0`, `email0`, `address0`, `telephone`, `degree`, `field`, `uploadfilecv`, `uploadfilecertificates`, `addition_information`, `user_id0`, `job_id0`, `business_id0`, `email_sent_for`, `email_sent_to`, `subject_composer`, `type_of_email`, `email_status`, `created_on0`, `deadline0`) VALUES
-(1, 16, 'claude', 'muhire', 'claudine', 'claude@vmail.com', 'kigali', '07785778', 'certificate', 'finace', '2021_18cove.docx', '2021_61cove.pdf', 'am hard', 5, 72, 1, 5, 1, 0, 0, 0, '2021-01-19 18:27:34', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -4108,11 +4132,7 @@ CREATE TABLE `trends` (
 --
 
 INSERT INTO `trends` (`trend_id`, `hashtag`, `target`, `created_on`) VALUES
-(17, 'Rwot', '95', '2021-02-20 14:26:12'),
-(18, 'Rwot', '96', '2021-03-08 13:06:45'),
-(24, 'kigali', '102', '2021-03-09 20:28:07'),
-(25, 'kigali', '103', '2021-03-09 20:28:17'),
-(26, 'Rwot', '104', '2021-03-09 20:30:56');
+(18, 'Rwot', '96', '2021-03-08 13:06:45');
 
 -- --------------------------------------------------------
 
@@ -4129,28 +4149,30 @@ CREATE TABLE `tweets` (
   `tweetBy` int(11) NOT NULL,
   `retweet_id` int(11) NOT NULL,
   `retweet_by` int(11) NOT NULL,
-  `tweet_image` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tweet_image_size` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `donation_payment` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tweet_image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tweet_image_size` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `likes_counts` int(11) NOT NULL,
   `retweet_counts` int(11) NOT NULL,
   `posted_on` datetime NOT NULL,
-  `retweet_Msg` varchar(140) COLLATE utf8mb4_unicode_ci NOT NULL
+  `retweet_Msg` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tweets`
 --
 
-INSERT INTO `tweets` (`tweet_id`, `status`, `title_name`, `photo_Title_main`, `photo_Title`, `tweetBy`, `retweet_id`, `retweet_by`, `tweet_image`, `tweet_image_size`, `likes_counts`, `retweet_counts`, `posted_on`, `retweet_Msg`) VALUES
-(55, 'nice work', '', '', '', 4, 54, 1, '', '', 0, 1, '2020-12-18 04:44:02', 'nice'),
-(67, 'Globally, ICT remains to be the fastest growing economic sector and the export of ICT-enabled services would be an invaluable contributor to the national economy development. The ICT Hub status will enable the country to: â€¢ Generate direct and indirect job opportunities for thousands of educated Rwandan youth and increase national economic productivity. This can be achieved not only through inbred innovations with global application but also through offshoring arrangements with consumers of ICT services from other countries and continents. An expansion of opportunities in this space also means an expansion of employment opportunities. â€¢ Stimulate the economy and significantly grow the contribution of the Information Technology enabled Services (ITeS) to the national economy by attracting and partnering with global organizations and institutions to develop solutions addressing the socio-economic challenges in education, health, agriculture, fintech and e-government services', 'Why become an ICT Hub?', '', '', 5, 0, 0, '', '', 0, 0, '2021-02-06 13:54:26', ''),
-(87, '@irangiro uraho', '', '', '', 2, 85, 1, '', '', 1, 1, '2021-02-18 10:51:25', 'gud'),
-(93, 'Is always feeling a deep sadness a sign of depression?', '', '', '', 6, 0, 0, '', '', 72, 0, '2020-12-20 23:53:59', ''),
-(95, '#Rwot Twabazaniye Social media izajya ibafasha mugushaka amakuru ariyo yose mu mubumbe umwe', '', '', '', 1, 0, 0, '', '', 0, 0, '2021-02-20 14:26:12', ''),
-(96, '#Rwot namwe nibyo mubona nda', '', '', '', 5, 0, 0, '', '', 0, 0, '2021-03-08 13:06:45', ''),
-(102, '#kigali muraho', '', '', '', 1, 0, 0, '', '', 0, 0, '2021-03-09 20:28:07', ''),
-(103, '#kigali aho', '', '', '', 1, 0, 0, '', '', 0, 0, '2021-03-09 20:28:17', ''),
-(104, '#Rwot muraho', '', '', '', 1, 0, 0, '', '', 0, 0, '2021-03-09 20:30:56', '');
+INSERT INTO `tweets` (`tweet_id`, `status`, `title_name`, `photo_Title_main`, `photo_Title`, `tweetBy`, `retweet_id`, `retweet_by`, `donation_payment`, `tweet_image`, `tweet_image_size`, `likes_counts`, `retweet_counts`, `posted_on`, `retweet_Msg`) VALUES
+(55, 'nice work', '', '', '', 4, 54, 1, '', '', '', 0, 1, '2020-12-18 04:44:02', 'nice'),
+(67, 'Globally, ICT remains to be the fastest growing economic sector and the export of ICT-enabled services would be an invaluable contributor to the national economy development. The ICT Hub status will enable the country to: â€¢ Generate direct and indirect job opportunities for thousands of educated Rwandan youth and increase national economic productivity. This can be achieved not only through inbred innovations with global application but also through offshoring arrangements with consumers of ICT services from other countries and continents. An expansion of opportunities in this space also means an expansion of employment opportunities. â€¢ Stimulate the economy and significantly grow the contribution of the Information Technology enabled Services (ITeS) to the national economy by attracting and partnering with global organizations and institutions to develop solutions addressing the socio-economic challenges in education, health, agriculture, fintech and e-government services', 'Why become an ICT Hub?', '', '', 5, 0, 0, '', '', '', 0, 0, '2021-02-06 13:54:26', ''),
+(87, '@irangiro uraho', '', '', '', 2, 85, 1, '', '', '', 1, 1, '2021-02-18 10:51:25', 'gud'),
+(93, 'Is always feeling a deep sadness a sign of depression?', '', '', '', 6, 0, 0, '', '', '', 72, 0, '2020-12-20 23:53:59', ''),
+(96, '#Rwot namwe nibyo mubona nda', '', '', '', 5, 0, 0, '', '', '', 0, 1, '2021-03-08 13:06:45', ''),
+(105, '#Rwot muraho', '', '', '', 1, 104, 5, '', '', '', 0, 1, '2021-03-11 02:00:48', 'nice'),
+(114, '#Rwot namwe nibyo mubona nda', '', '', '', 5, 96, 1, '', '', '', 0, 1, '2021-03-16 18:56:11', 'nibyo tubona ibintu byarakaze'),
+(115, '', '', '', 'ninziza=nice irakora====', 5, 0, 0, '', '0_airpods_wireless_charging_case_pdp_us_1jpg_4202021_53.jpeg=0_wireless-charging-case-for-airpods_4202021_54.jpeg', '10423=8485', 0, 0, '2021-03-16 18:58:01', ''),
+(116, '&lt;p&gt;abanyarwanda bo hanze&lt;/p&gt;', 'ITERAMBERE', '', 'pochets airpods=airpods====', 5, 0, 0, 'donation_coins.coins', '0_wireless-charging-case-for-airpods_4202021_57.jpeg=0airpods-pro_3602021_93.jpeg', '8485=8051', 0, 1, '2021-03-16 19:21:17', ''),
+(117, '&lt;p&gt;abanyarwanda bo hanze&lt;/p&gt;', 'ITERAMBERE', '', 'pochets airpods=airpods====', 5, 116, 1, 'donation_coins.coins', '0_wireless-charging-case-for-airpods_4202021_57.jpeg=0airpods-pro_3602021_93.jpeg', '8485=8051', 0, 1, '2021-03-16 18:39:20', 'ubufasha bukwiye');
 
 -- --------------------------------------------------------
 
@@ -4166,6 +4188,8 @@ CREATE TABLE `users` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount_coins` int(11) NOT NULL,
+  `amount_francs` float(10,2) NOT NULL,
   `chat` char(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `job_user` char(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `career` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4220,17 +4244,17 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `username`, `email`, `password`, `gender`, `chat`, `job_user`, `career`, `country`, `date_birth`, `date_registry`, `last_login`, `last_profile_edit`, `counts_login`, `forgotUsernameCounts`, `forgotUsernameCountsTimesHeCreates`, `forgotUsernameCountsTimesHeCreatespassword`, `profile_img`, `profile_img_crop`, `cover_img`, `background`, `language`, `color`, `education`, `diploma`, `skills`, `location`, `hobbys`, `followers`, `following`, `approval`, `countViewin_profile`, `company_education`, `type_of_business`, `address`, `size_of_people`, `companyname`, `overview`, `history`, `team`, `legal_structure`, `location_facilities`, `mission_statement`, `website`, `unemployment`, `categories_fields`, `phone`, `about`, `years`, `field`, `age`, `status_career`, `course`) VALUES
-(1, 'irangiro', 'social', 'irangiro', 'irangiroltd@gmail.com', 'fafa', 'Male', 'on', 'SME', 'Professional', 'RW', '1999-08-03', '2020-12-06', '2021-03-09 20:02:53', '2020-12-10 04:18:36', 132, 0, 0, 0, '116vect.png', '', '529port.jpg', 'chair', '', 'skin-black-light', 'lyccee', 'Certificate', 'design', 'kigali', 'foot', 4, 2, 'on', 137, 'Public', 'builder', 'KG 513 st', '50', 'irangiro', 'it is a good company', 'yaangiye cyera', 'ifite abantu benshi', 'ibyo dukora', 'mu mujyi', 'tukomeza gukora', 'irangiro.com', 'no', 'management', '0786577676', '&lt;p&gt;Keffiyeh blog actually fashion axe vegan, irony biodiesel. Cold-pressed hoodie chillwave put a bird on it aesthetic, bitters brunch meggings vegan iPhone. Dreamcatcher vegan scenester mlkshk. Ethical master cleanse Bushwick, occupy Thundercats banjo cliche ennui farm-to-table mlkshk fanny pack gluten-free. Marfa butcher vegan quinoa, bicycle rights disrupt tofu scenester chillwave 3 wolf moon asymmetrical taxidermy pour-over. Quinoa tote bag fashion axe, Godard disrupt migas church-key tofu blog locavore. Thundercats cronut polaroid Neutra tousled, meh food truck selfies narwhal American Apparel.&lt;/p&gt;', 2, 'management', '26', 'Single', 'finance,management,computer,science'),
-(2, 'Tips', 'Mindseet', 'Tips', 'admin@irangiro.com', 'fafa', 'Male', 'off', '', '', 'RW', '1999-08-03', '2020-12-07', '2021-03-07 09:25:19', '0000-00-00 00:00:00', 20, 0, 0, 0, '784port.jpg', '', '153img6.jpg', '', '', '', '', '', '', '', '', 0, 3, 'off', 24, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-(3, 'jean', 'jean', 'jean', 'jean@gmail.com', 'jean', 'Male', 'off', '', '', 'RW', '2002-04-04', '2020-12-18', '2021-03-07 13:32:42', '0000-00-00 00:00:00', 4, 0, 0, 0, '471fayz.jpg', '', '306defa.png', '', '', '', '', '', '', '', '', 2, 0, 'off', 4, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-(4, 'muhire', 'muhire', 'muhire', 'muhire@gmail.com', 'muhire', 'Male', 'off', 'SME', '', 'RW', '2001-05-04', '2020-12-18', '2021-03-07 09:25:48', '0000-00-00 00:00:00', 12, 0, 0, 0, '3896459.jpg', '', '', '', '', '', '', '', '', '', '', 1, 3, 'off', 30, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-(5, 'claude', 'claude', 'claude', 'claude@yahoo.com', 'claude', 'Male', 'off', '', '', 'RW', '1996-05-06', '2020-12-19', '2021-03-09 20:26:11', '0000-00-00 00:00:00', 22, 0, 0, 0, '', '', '', '', '', 'skin-purple-light', '', '', '', '', '', 2, 3, 'on', 76, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-(6, 'Vanessa', 'Ezra', 'Abewe', 'vanessabewe@gmail.com', '1234567890', 'Female', 'on', '', '', 'RW', '1994-03-15', '2020-12-18', '2020-12-18 02:51:52', '0000-00-00 00:00:00', 1, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 2, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-(7, 'uwimana', 'jeannette', 'jeanette', 'jeanetterw353@gmail.com', 'jeanette', 'Female', 'off', '', '', 'RW', '1994-05-13', '2020-12-18', '2020-12-19 11:44:11', '0000-00-00 00:00:00', 2, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-(8, 'mugire', 'claude', 'claude', 'claudeerwa@gmail.com', 'claude', 'Male', 'on', '', '', 'RW', '1997-03-02', '2020-12-18', '2021-03-09 20:26:11', '0000-00-00 00:00:00', 7, 0, 0, 0, '665images.jpg', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-(9, 'muyomba', 'salim', 'salim', 'salimSrw@gmail.com', 'salim', 'Male', 'off', '', '', 'RW', '1990-04-02', '2020-12-18', '2020-12-21 02:00:52', '0000-00-00 00:00:00', 9, 0, 0, 0, '6225ba2.jpg', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 4, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-(10, 'uwimana', 'gentille', 'gentille', 'gentilledf@gmail.com', 'gentille', 'Female', 'off', '', '', 'RW', '2000-04-04', '2020-12-18', '2020-12-19 11:48:29', '0000-00-00 00:00:00', 2, 0, 0, 0, '332hair.jpg', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 6, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '');
+INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `username`, `email`, `password`, `gender`, `amount_coins`, `amount_francs`, `chat`, `job_user`, `career`, `country`, `date_birth`, `date_registry`, `last_login`, `last_profile_edit`, `counts_login`, `forgotUsernameCounts`, `forgotUsernameCountsTimesHeCreates`, `forgotUsernameCountsTimesHeCreatespassword`, `profile_img`, `profile_img_crop`, `cover_img`, `background`, `language`, `color`, `education`, `diploma`, `skills`, `location`, `hobbys`, `followers`, `following`, `approval`, `countViewin_profile`, `company_education`, `type_of_business`, `address`, `size_of_people`, `companyname`, `overview`, `history`, `team`, `legal_structure`, `location_facilities`, `mission_statement`, `website`, `unemployment`, `categories_fields`, `phone`, `about`, `years`, `field`, `age`, `status_career`, `course`) VALUES
+(1, 'irangiro', 'social', 'irangiro', 'irangiroltd@gmail.com', 'fafa', 'Male', 35, 500.00, 'off', 'SME', 'Professional', 'RW', '1999-08-03', '2020-12-06', '2021-03-16 19:27:15', '2020-12-10 04:18:36', 158, 0, 0, 0, '116vect.png', '', '529port.jpg', 'chair', '', 'skin-blue', 'lyccee', 'Certificate', 'design', 'kigali', 'foot', 5, 2, 'on', 144, 'Public', 'builder', 'KG 513 st', '50', 'irangiro', 'it is a good company', 'yaangiye cyera', 'ifite abantu benshi', 'ibyo dukora', 'mu mujyi', 'tukomeza gukora', 'irangiro.com', 'no', 'management', '0786577676', '&lt;p&gt;Keffiyeh blog actually fashion axe vegan, irony biodiesel. Cold-pressed hoodie chillwave put a bird on it aesthetic, bitters brunch meggings vegan iPhone. Dreamcatcher vegan scenester mlkshk. Ethical master cleanse Bushwick, occupy Thundercats banjo cliche ennui farm-to-table mlkshk fanny pack gluten-free. Marfa butcher vegan quinoa, bicycle rights disrupt tofu scenester chillwave 3 wolf moon asymmetrical taxidermy pour-over. Quinoa tote bag fashion axe, Godard disrupt migas church-key tofu blog locavore. Thundercats cronut polaroid Neutra tousled, meh food truck selfies narwhal American Apparel.&lt;/p&gt;', 2, 'management', '26', 'Single', 'finance,management,computer,science'),
+(2, 'Tips', 'Mindseet', 'Tips', 'admin@irangiro.com', 'fafa', 'Male', 1750, 25000.00, 'off', '', '', 'RW', '1999-08-03', '2020-12-07', '2021-03-07 09:25:19', '0000-00-00 00:00:00', 20, 0, 0, 0, '784port.jpg', '', '153img6.jpg', '', '', '', '', '', '', '', '', 0, 3, 'off', 69, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
+(3, 'jean', 'jean', 'jean', 'jean@gmail.com', 'jean', 'Male', 0, 0.00, 'off', '', '', 'RW', '2002-04-04', '2020-12-18', '2021-03-15 23:29:02', '0000-00-00 00:00:00', 5, 0, 0, 0, '471fayz.jpg', '', '306defa.png', '', '', '', '', '', '', '', '', 2, 1, 'off', 5, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
+(4, 'muhire', 'muhire', 'muhire', 'muhire@gmail.com', 'muhire', 'Male', 0, 0.00, 'off', 'SME', '', 'RW', '2001-05-04', '2020-12-18', '2021-03-07 09:25:48', '0000-00-00 00:00:00', 12, 0, 0, 0, '3896459.jpg', '', '', '', '', '', '', '', '', '', '', 1, 3, 'off', 31, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
+(5, 'claude', 'claude', 'claude', 'claude@yahoo.com', 'claude', 'Male', 0, 0.00, 'off', '', '', 'RW', '1996-05-06', '2020-12-19', '2021-03-16 18:56:31', '0000-00-00 00:00:00', 36, 0, 0, 0, '', '', '', '', '', 'skin-purple-light', '', '', '', '', '', 2, 3, 'on', 86, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
+(6, 'Vanessa', 'Ezra', 'Abewe', 'vanessabewe@gmail.com', '1234567890', 'Female', 0, 0.00, 'on', '', '', 'RW', '1994-03-15', '2020-12-18', '2020-12-18 02:51:52', '0000-00-00 00:00:00', 1, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 9, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
+(7, 'uwimana', 'jeannette', 'jeanette', 'jeanetterw353@gmail.com', 'jeanette', 'Female', 0, 0.00, 'off', '', '', 'RW', '1994-05-13', '2020-12-18', '2020-12-19 11:44:11', '0000-00-00 00:00:00', 2, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 4, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
+(8, 'mugire', 'claude', 'claude', 'claudeerwa@gmail.com', 'claude', 'Male', 0, 0.00, 'on', '', '', 'RW', '1997-03-02', '2020-12-18', '2021-03-16 18:56:31', '0000-00-00 00:00:00', 21, 0, 0, 0, '665images.jpg', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
+(9, 'muyomba', 'salim', 'salim', 'salimSrw@gmail.com', 'salim', 'Male', 0, 0.00, 'off', '', '', 'RW', '1990-04-02', '2020-12-18', '2020-12-21 02:00:52', '0000-00-00 00:00:00', 9, 0, 0, 0, '6225ba2.jpg', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 8, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
+(10, 'uwimana', 'gentille', 'gentille', 'gentilledf@gmail.com', 'gentille', 'Female', 0, 0.00, 'off', '', '', 'RW', '2000-04-04', '2020-12-18', '2020-12-19 11:48:29', '0000-00-00 00:00:00', 2, 0, 0, 0, '332hair.jpg', '', '', '', '', '', '', '', '', '', '', 0, 0, '', 6, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -17001,6 +17025,12 @@ ALTER TABLE `sectors`
   ADD UNIQUE KEY `sectorcode` (`sectorcode`);
 
 --
+-- Indexes for table `transaction_coins`
+--
+ALTER TABLE `transaction_coins`
+  ADD PRIMARY KEY (`coins_id`);
+
+--
 -- Indexes for table `trash`
 --
 ALTER TABLE `trash`
@@ -17044,7 +17074,7 @@ ALTER TABLE `album`
 -- AUTO_INCREMENT for table `apply_job`
 --
 ALTER TABLE `apply_job`
-  MODIFY `cv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `cv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `car`
@@ -17104,7 +17134,7 @@ ALTER TABLE `crowfund_donation`
 -- AUTO_INCREMENT for table `follow`
 --
 ALTER TABLE `follow`
-  MODIFY `follow_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `follow_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `fundraising`
@@ -17164,7 +17194,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notification_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `notification_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `post_comment`
@@ -17203,10 +17233,16 @@ ALTER TABLE `school`
   MODIFY `school_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `transaction_coins`
+--
+ALTER TABLE `transaction_coins`
+  MODIFY `coins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
 -- AUTO_INCREMENT for table `trash`
 --
 ALTER TABLE `trash`
-  MODIFY `trash_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `trash_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `trends`
@@ -17218,7 +17254,7 @@ ALTER TABLE `trends`
 -- AUTO_INCREMENT for table `tweets`
 --
 ALTER TABLE `tweets`
-  MODIFY `tweet_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `tweet_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `users`

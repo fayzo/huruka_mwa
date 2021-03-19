@@ -64,62 +64,51 @@ class Posts_home extends Home {
 
                 <div class="card retweetcolor t-show-popup more" data-tweet="<?php echo $tweet["tweet_id"];?>">
                   <div class="card-body">
-
-                    <?php 
-                          $filename = $tweet['tweet_image'];
-                          $expodefile = explode("=",$tweet['tweet_image']);
-                          $fileActualExt= array();
-                          for ($i=0; $i < count($expodefile); ++$i) { 
-                              $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-                          }
-
-                           $allower_ext = array('jpeg','peg','jpg', 'png', 'gif', 'bmp', 'pdf' , 'ocx','lsx', 'ppt','docx','xlsx'); // valid extensions
-                if (array_diff($fileActualExt,$allower_ext) == false) {
-                             $expode = explode("=",$tweet['tweet_image']); 
-                            $count = count($expode); 
-             $docx= array('jpg','jpeg','peg','png','gif','pdf');
-             $pdf= array('jpg','jpeg','peg','png','gif');
-             $image= array('pdf','doc','ocx','lsx'); ?>
+  
+                <!-- TEXT -->
+                <!-- TEXT -->
+                <?php 
+                
+                if (!empty($tweet['donation_payment'])) {
+                    if (!empty($donation_payment) && !empty($tweet['tweet_image']) ) {
+                        $equal.=  '=';
+                    }
+                    $donation_payment= $equal.$users->test_input($tweet['donation_payment']);
+                }else {
+                    $donation_payment='';
+                }
             
-             <?php if(array_diff($fileActualExt,$image)) { ?>
+                $expodefile = explode("=",$tweet['tweet_image'].$donation_payment);
+                $title= $tweet["photo_Title"];
+                $photo_title=  explode("=",$title);
+                $fileActualExt= array();
+                for ($i=0; $i < count($expodefile); ++$i) { 
+                     $fileActualExt[]= strtolower(substr($expodefile[$i],strrpos($expodefile[$i],'.')+1));
+                }
+
+             
+                    $image= array('jpg','jpeg','png','gif');
+                    $pdf= array('pdf');
+                    $coins= array('coins');
+                    $docx= array('doc','docx','lsx');
+                    $mp3= array('mp3','ogg');
+                    $mp4= array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
+                    $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4);
+    
+                    $expode = $expodefile;
+                    $file_size = $tweet['tweet_image_size'];
+                    $file_sizes = explode("=",$file_size);
+                    $count = count($expodefile);
+
+                    if (array_diff($fileActualExt,$allower_ext) == false) { ?>
+                      <?php  
+                      for ($i=0; $i < 1; ++$i) { 
+            
+                    if(in_array(pathinfo($expode[$i])['extension'],$image)) { ?>
 
                       <div class="row">
-                          <div class="col-6 ">
 
-                           <?php if ($count === 1) { ?>
-                                <div class="row mb-1">
-                                       <?php $expode = explode("=",$tweet['tweet_image']); ?>
-                                   <div class="col-12">
-                                       <img class="img-fluid"
-                                           src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0] ;?>"
-                                           alt="Photo">
-                                   </div>
-                                </div>
-
-                           <?php }else if($count == 2 || $count > 2){ ?>
-                                 <div class="row mb-2">
-                                       <?php 
-                                         $expode = explode("=",$tweet['tweet_image']);
-                                         $splice= array_splice($expode,0,2);
-                                         for ($i=0; $i < count($splice); ++$i) { 
-                                         ?>
-                                   <div class="col-6">
-                                       <img class="img-fluid mb-2"
-                                           src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$splice[$i] ;?>"
-                                           alt="Photo">
-                                   </div>
-                                       <?php } ?>
-                                </div>
-                                <div class="row">
-                                   <div class="col-12">
-                                          <span class="btn btn-primary btn-sm float-right" >View More photo  <i class="fa fa-picture-o"></i> >>></span>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                           <?php } ?>
-                            </div> <!-- col -->
-
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="row">
                                     <div class="col-12">
                                           <div class="user-block">
@@ -168,170 +157,181 @@ class Posts_home extends Home {
                                     
                                 </div><!-- row -->
                             </div><!-- col -->
+
+
+                            <div class="col-sm-12 col-md-6">
+                                <span class="mailbox-attachment-icon has-img"><img 
+                                   src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($expode[$i])['basename'] ;?>" ></span>
+                               
+                                <div class="mailbox-attachment-info main-active">
+                                    <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($expode[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                   <?php  echo pathinfo($expode[$i])['basename'] ;?>
+                                   <!-- || Sep2014-report.pdf -->
+                                   </a>
+                                    <span class="mailbox-attachment-size">
+                                       <?php echo $this->formatSizeUnits($file_sizes[$i]) ;?>
+                                        <!-- 1,245 KB -->
+                                        <a href="#" class="btn btn-default btn-sm float-right"><i
+                                                class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </div> <!-- col -->
                        </div><!-- row -->
 
-                     <?php  }else if(array_diff($fileActualExt,$docx)) { ?>
+                    <?php } 
+                    
+                    if(in_array(pathinfo($expode[$i])['extension'],$pdf)) { ?>
 
-                              
-                            <div class="row">
-                        <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                              $splice= array_splice($expode,0,2);
-                              for ($i=0; $i < count($splice); ++$i) { ?>
+                      <div class="row">
+                            
+                            <div class="col-sm-12 col-md-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                          <div class="user-block">
+                                              <div class="user-blockImgBorder">
+                                               <div class="user-blockImg">
+                                                     <?php if (!empty($tweet['profile_img'])) {?>
+                                                     <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                     <?php  }else{ ?>
+                                                       <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                     <?php } ?>
+                                               </div>
+                                               </div>
+                                              <span class="username">
+                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                  <!-- //Jonathan Burke Jr. -->
+                                              </span>
+                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                          </div>
+                                    </div> <!-- col -->
 
-                                <div class="col-md-6 ">
-                                    <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                                    <div class="col-12" style="clear:both">
+                                           <!-- STATUS -->
+                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                        <div id="link_" class="show-read-more">
+                                        <?php 
+
+                                            if (strlen($tweet['status']) > 200) {
+                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                            $tweettext = substr($tweet['status'], 0, 200);
+                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                            echo $this->getTweetLink($tweetstatus);
+                                            }else{
+                                            echo $this->getTweetLink($tweet['status']);
+                                            }  
+                                            if (strlen($tweet['status']) > 200) {
+                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                            }  
+                                        ?>
+                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                        </div>
+                                    </div><!-- col -->
+                                    
+                                </div><!-- row -->
+                            </div><!-- col -->
+
+                            <div class="col-sm-12 col-md-6">
+                                    <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
                                     <div class="mailbox-attachment-info main-active">
-                                        <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                            <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
+                                        <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($expode[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                            <?php  echo pathinfo($expode[$i])['basename'] ;?>
+                                             <!-- || Sep2014-report.pdf -->
+                                           </a>
                                         <span class="mailbox-attachment-size">
-                                        <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
+                                        <?php echo $this->formatSizeUnits($file_sizes[$i]) ;?>
+                                            <!-- 1,245 KB -->
+                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                        </span>
+                                    </div>
+                            </div> <!-- col -->
+
+                       </div><!-- row -->
+
+                       <?php }
+                       
+                       if(in_array(pathinfo($expode[$i])['extension'],$docx)) { ?>
+
+                      <div class="row">
+                            
+                            <div class="col-sm-12 col-md-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                          <div class="user-block">
+                                              <div class="user-blockImgBorder">
+                                               <div class="user-blockImg">
+                                                     <?php if (!empty($tweet['profile_img'])) {?>
+                                                     <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                     <?php  }else{ ?>
+                                                       <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                     <?php } ?>
+                                               </div>
+                                               </div>
+                                              <span class="username">
+                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                  <!-- //Jonathan Burke Jr. -->
+                                              </span>
+                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                          </div>
+                                    </div> <!-- col -->
+
+                                    <div class="col-12" style="clear:both">
+                                           <!-- STATUS -->
+                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                        <div id="link_" class="show-read-more">
+                                        <?php 
+
+                                            if (strlen($tweet['status']) > 200) {
+                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                            $tweettext = substr($tweet['status'], 0, 200);
+                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                            echo $this->getTweetLink($tweetstatus);
+                                            }else{
+                                            echo $this->getTweetLink($tweet['status']);
+                                            }  
+                                            if (strlen($tweet['status']) > 200) {
+                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                            }  
+                                        ?>
+                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                        </div>
+                                    </div><!-- col -->
+                                    
+                                </div><!-- row -->
+                            </div><!-- col -->
+
+                            <div class="col-sm-12 col-md-6">
+                                     <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                                     <div class="mailbox-attachment-info main-active">
+                                        <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($expode[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                           <?php  echo pathinfo($expode[$i])['basename'] ;?>
+                                           <!-- ||Sep2014-report.pdf -->
+                                       </a>
+                                        <span class="mailbox-attachment-size">
+                                            <?php echo $this->formatSizeUnits($file_sizes[$i]) ;?>
                                             <!-- 1,245 KB -->
                                             <a href="#" class="btn btn-default btn-sm float-right"><i
                                                     class="fa fa-cloud-download"></i></a>
                                         </span>
                                     </div>
-                                </div><!-- col -->
+                            </div> <!-- col -->
 
-                                 <?php } ?>
-                             <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                            <div class="user-block">
-                                                <div class="user-blockImgBorder">
-                                                <div class="user-blockImg">
-                                                        <?php if (!empty($tweet['profile_img'])) {?>
-                                                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                        <?php  }else{ ?>
-                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                        <?php } ?>
-                                                </div>
-                                                </div>
-                                                <span class="username">
-                                                    <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                    <!-- //Jonathan Burke Jr. -->
-                                                </span>
-                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
-                                            </div>
-                                    </div> <!-- col -->
+                       </div><!-- row -->
 
-                                    <div class="col-12" style="clear:both">
-                                             <!-- STATUS -->
-                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
-                                        <div id="link_" class="show-read-more">
-                                        <?php 
+                        <?php }
 
-                                            if (strlen($tweet['status']) > 200) {
-                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                            $tweettext = substr($tweet['status'], 0, 200);
-                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                            echo $this->getTweetLink($tweetstatus);
-                                            }else{
-                                            echo $this->getTweetLink($tweet['status']);
-                                            }  
-                                            if (strlen($tweet['status']) > 200) {
-                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                            }  
-                                        ?>
-                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-                                        </div>
-                                    </div><!-- col -->
-                                    
-                                </div><!-- row -->
-                            </div><!-- col -->
-
-                        </div><!-- row -->
-
-                <?php }else if(array_diff($fileActualExt,$pdf)) { ?>
-
+                        if(in_array(pathinfo($expode[$i])['extension'],$mp4)) { ?>
+                        
                             <div class="row">
-
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                              $splice= array_splice($expode,0,2);
-                              for ($i=0; $i < count($splice); ++$i) { ?>
-
-                                <div class="col-md-6 ">
-                                    <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-                                    <div class="mailbox-attachment-info main-active">
-                                        <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                            <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
-                                        <span class="mailbox-attachment-size">
-                                            1,245 KB
-                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
-                                        </span>
-                                    </div>
-                                </div><!-- col -->
-                              <?php } ?>
-                             <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                            <div class="user-block">
-                                                <div class="user-blockImgBorder">
-                                                <div class="user-blockImg">
-                                                        <?php if (!empty($tweet['profile_img'])) {?>
-                                                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                        <?php  }else{ ?>
-                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                        <?php } ?>
-                                                </div>
-                                                </div>
-                                                <span class="username">
-                                                    <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                    <!-- //Jonathan Burke Jr. -->
-                                                </span>
-                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
-                                            </div>
-                                    </div> <!-- col -->
-
-                                    <div class="col-12" style="clear:both">
-                                              <!-- STATUS -->
-                                        <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
-                                        <div id="link_" class="show-read-more">
-                                        <?php 
-
-                                            if (strlen($tweet['status']) > 200) {
-                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                            $tweettext = substr($tweet['status'], 0, 200);
-                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                            echo $this->getTweetLink($tweetstatus);
-                                            }else{
-                                            echo $this->getTweetLink($tweet['status']);
-                                            }  
-                                            if (strlen($tweet['status']) > 200) {
-                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                            }  
-                                        ?>
-                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-                                        </div>
-                                    </div><!-- col -->
-                                    
-                                </div><!-- row -->
-                            </div><!-- col -->
-
-                        </div><!-- row -->
-                        <?php } ?>
-
-                        <?php   }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp4') { ?>
-                            <div class="row">
-                                <div class="col-6 ">
-                                    <?php $expode = explode("=",$tweet['tweet_image']); ?>
-
-                                    <video  controls preload="auto" width="100%" height="110px">
-                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0];?>" type="video/mp4"> 
-                                        <!-- <source src="video/boatride.webm" type="video/webm">  -->
-                                            <!-- fallback content here -->
-                                    </video>
-                                </div><!-- col -->
                                 
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="row">
                                     <div class="col-12">
                                           <div class="user-block">
@@ -381,79 +381,20 @@ class Posts_home extends Home {
                                 </div><!-- row -->
                             </div><!-- col -->
 
-                            </div><!-- row -->
-                          <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'webm'){ ?>
-                            <div class="row">
-                                <div class="col-6 ">
-                                     <?php $expode = explode("=",$tweet['tweet_image']); ?>
-
-                                     <video  controls preload="auto" width="100%" height="360px">
-                                         <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0];?>" type="video/webm"> 
-                                             <!-- fallback content herehere -->
-                                     </video>      
-                                 </div><!-- col -->
-
-                             <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                          <div class="user-block">
-                                               <div class="user-blockImgBorder">
-                                               <div class="user-blockImg">
-                                                     <?php if (!empty($tweet['profile_img'])) {?>
-                                                     <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                                     <?php  }else{ ?>
-                                                       <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                                     <?php } ?>
-                                               </div>
-                                               </div>
-                                              <span class="username">
-                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                  <!-- //Jonathan Burke Jr. -->
-                                              </span>
-                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
-                                          </div>
-                                    </div> <!-- col -->
-
-                                    <div class="col-12" style="clear:both">
-                                          <!-- STATUS -->
-                                          <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
-                                        <div id="link_" class="show-read-more">
-                                        <?php 
-
-                                            if (strlen($tweet['status']) > 200) {
-                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                            $tweettext = substr($tweet['status'], 0, 200);
-                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                            echo $this->getTweetLink($tweetstatus);
-                                            }else{
-                                            echo $this->getTweetLink($tweet['status']);
-                                            }  
-                                            if (strlen($tweet['status']) > 200) {
-                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                                $tweettext = substr($tweet['status'], 0, 200);
-                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
-                                            }  
-                                        ?>
-                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-                                        </div>
-                                    </div><!-- col -->
-                                    
-                                </div><!-- row -->
+                            <div class="col-sm-12 col-md-6">
+                                    <video controls preload="auto" width="100px"  height="auto" >
+                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($expode[$i])['basename']; ?>" type="video/<?php echo pathinfo($expode[$i])['extension']; ?>"> 
+                                    </video>
                             </div><!-- col -->
 
                             </div><!-- row -->
-                          <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp3'){ ?>
-                            <div class="row">
-                                 <div class="col-6 ">
-                                      <audio controls>
-                                          <source src="50-Cent-Baby-By-Me-ft-Ne-Yo-128K-MP3.mp3" type="audio/mp3">
-                                              <!-- fallback content here -->
-                                      </audio>
-                                   </div><!-- col -->
+                          <?php }
 
-                             <div class="col-6">
+                        if(in_array(pathinfo($expode[$i])['extension'],$mp3)) { ?>
+
+                            <div class="row">
+
+                             <div class="col-sm-12 col-md-6">
                                 <div class="row">
                                     <div class="col-12">
                                           <div class="user-block">
@@ -503,13 +444,79 @@ class Posts_home extends Home {
                                 </div><!-- row -->
                             </div><!-- col -->
 
+                                <div class="col-sm-12 col-md-6">
+                                    <audio controls>
+                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($expode[$i])['basename']; ?>" type="audio/<?php echo pathinfo($expode[$i])['extension']; ?>"> 
+                                            <!-- fallback content here -->
+                                    </audio>
+                                </div><!-- col -->
+
                             </div><!-- row -->
-                          <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'ogg'){ ?>
-                                <audio controls>
-                                     <source src="audio/heavymetal.ogg" type="audio/ogg"> 
-                                         <!-- fallback content here -->
-                                 </audio>
-                        <?php }else { ?>
+                          <?php } 
+
+                        if(in_array(pathinfo($expode[$i])['extension'],$coins)) { ?>
+                            <div class="row">
+                               
+                             <div class="col-sm-12 col-md-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                          <div class="user-block">
+                                              <div class="user-blockImgBorder">
+                                               <div class="user-blockImg">
+                                                     <?php if (!empty($tweet['profile_img'])) {?>
+                                                     <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                     <?php  }else{ ?>
+                                                       <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                     <?php } ?>
+                                               </div>
+                                               </div>
+                                              <span class="username">
+                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                  <!-- //Jonathan Burke Jr. -->
+                                              </span>
+                                                <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                          </div>
+                                    </div> <!-- col -->
+
+                                    <div class="col-12" style="clear:both">
+                                          <!-- STATUS -->
+                                          <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                        <div id="link_" class="show-read-more">
+                                        <?php 
+
+                                            if (strlen($tweet['status']) > 200) {
+                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                            $tweettext = substr($tweet['status'], 0, 200);
+                                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                            <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                            echo $this->getTweetLink($tweetstatus);
+                                            }else{
+                                            echo $this->getTweetLink($tweet['status']);
+                                            }  
+                                            if (strlen($tweet['status']) > 200) {
+                                                // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                $tweettext = substr($tweet['status'], 0, 200);
+                                                $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                            }  
+                                        ?>
+                                        <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                        </div>
+                                    </div><!-- col -->
+                                    
+                                </div><!-- row -->
+                            </div><!-- col -->
+
+                            <div class="col-sm-12 col-md-6">
+                                <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
+                                <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                            </div><!-- col -->
+
+
+                            </div><!-- row -->
+                        <?php }  ?>
+
+                        <?php } }else { ?>
                                 <div class="row">
                                    <div class="col-12">
 
@@ -611,558 +618,502 @@ class Posts_home extends Home {
                 <!-- TEXT -->
                 <!-- TEXT -->
                 <?php 
-                $expodefile = explode("=",$tweet['tweet_image']);
-                $title= $tweet["photo_Title"];
-                $photo_title=  explode("=",$title);
-                $fileActualExt= array();
-                for ($i=0; $i < count($expodefile); ++$i) { 
-                     $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
+                //  if ($tweet['tweet_image'] == true) {
+
+            $image= array('jpg','jpeg','png','gif');
+            $pdf= array('pdf');
+            $coins= array('coins');
+            $docx= array('doc','docx','lsx');
+            $mp3= array('mp3','ogg');
+            $mp4= array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
+            $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4);
+
+            if (!empty($tweet['donation_payment'])) {
+                if (!empty($donation_payment) && !empty($tweet['tweet_image']) ) {
+                    $equal.=  '=';
                 }
-                $allower_ext = array('jpeg','peg','jpg', 'png', 'gif', 'bmp', 'pdf' , 'doc' , 'ppt','ocx','lsx'); // valid extensions
+                $donation_payment= $equal.$users->test_input($tweet['donation_payment']);
+            }else {
+                $donation_payment='';
+            }
             
-            if (array_diff($fileActualExt,$allower_ext) == false) {
-                    $expode = explode("=",$tweet['tweet_image']);
-                    $count = count($expode); ?>
+            $expode = explode("=",$tweet['tweet_image'].$donation_payment);
+            $fileActualExt= array();
+            for ($i=0; $i < count($expode); ++$i) { 
+                    $fileActualExt[]= strtolower(substr($expode[$i],strrpos($expode[$i],'.')+1));
+            }
+            $title= $tweet["photo_Title"];
+            $photo_title=  explode("=",$title);
+            $file_size = $tweet['tweet_image_size'];
+            $file_sizes = explode("=",$file_size);
+            $count = count($expode);
 
-            <?php 
-             $docx= array('jpg','jpeg','peg','png','gif','pdf');
-             $pdf= array('jpg','jpeg','peg','png','gif');
-             $image= array('pdf','doc','ocx','lsx'); ?>
+            // var_dump($expode,$count);
+            // sort() to arrange key in order
 
-            <?php if(array_diff($fileActualExt,$image)) { 
+            if (array_diff($fileActualExt,$allower_ext) == false) { 
 
-                if ($count === 1) { ?>
+             // foreach ($expodefile as $file_image) {
+            //     # code...
+            //     $filePathinfo = pathinfo($file_image);
 
-                 <div class="row mb-1">
-                        <?php $expode = explode("=",$tweet['tweet_image']); ?>
+            //     if (in_array($filePathinfo['extension'],$fileActualExt_image)) {
+            //         # code...
+            //         $filePathinfo_image[]= $filePathinfo['basename'];
+            //     }
+
+            // }
+            // $matches1= preg_grep('~.(jpeg|jpg|png)$~',$expodefile);
+            // var_dump($filePathinfo_image,'=>>>',$new_array_image);
+
+            $new_array_image= array_filter($expode,
+            function ($element){
+                $path_extension = array('jpg','jpeg','png','gif');
+                list($name,$extension) = explode('.',$element);
+
+                if (in_array($extension,$path_extension)) {
+                    # code...
+                    return $element;
+                }
+            });
+            
+            if(!empty($new_array_image)) {
+
+                $count_image = count($new_array_image);
+
+                if ($count_image === 1) { ?>
+
+                 <div class="row mb-2">
                     <div class="col-12 more">
-                        <img class="img-fluid imagePopup"
-                            src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0] ;?>"
-                            alt="Photo"  data-tweet="<?php echo $tweet["tweet_id"] ;?>">
-                        
-                            <div><i><?php echo $photo_title[0]; ?></i></div>
+                        <?php foreach ($new_array_image as $key => $value) { ?>
+                        <div class="col-6">
+                            <img class="img-fluid mb-2 imagePopup"
+                                src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_image[$key])['basename'];?>"
+                                alt="Photo"  data-tweet="<?php echo $tweet["tweet_id"] ;?>">
+                            <div><i><?php echo $photo_title[$key]; ?></i></div>
+                        </div>
+                        <?php } ?>
                     
                     </div>
                  </div>
 
                 <?php
-                 }else if($count === 2){?>
+                 }else if($count_image === 2){?>
                     <div class="row mb-2 more">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                              $splice= array_splice($expode,0,2);
-                              for ($i=0; $i < count($splice); ++$i) { 
-                              ?>
+                            <?php foreach ($new_array_image as $key => $value) { ?>
                         <div class="col-6">
                             <img class="img-fluid mb-2 imagePopup"
-                                src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$splice[$i] ;?>"
+                                src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_image[$key])['basename'];?>"
                                 alt="Photo"  data-tweet="<?php echo $tweet["tweet_id"] ;?>">
-
-                            <div><i><?php echo $photo_title[$i]; ?></i></div>
-
+                            <div><i><?php echo $photo_title[$key]; ?></i></div>
                         </div>
                             <?php }?>
                     </div>
 
-                <?php }else if($count === 3 || $count > 3){?>
+                <?php }else if($count_image >= 3){?>
                  <div class="row mb-2 more">
-                        <?php $expode = explode("=",$tweet['tweet_image']);
-                          $splice= array_splice($expode,0,1);
-                          ?>
-                    <div class="col-6">
-                        <img class="img-fluid mb-2 imagePopup"
-                            src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$splice[0] ;?>"
-                            alt="Photo"  data-tweet="<?php echo $tweet["tweet_id"] ;?>">
-
-                            <div><i><?php echo $photo_title[0]; ?></i></div>
-
-                    </div>
-                    <!-- /.col -->
-
-                    <div class="col-6">
-                        <div class="row mb-2 more">
-                                <?php 
-                                $expode = explode("=",$tweet['tweet_image']);
-                                // var_dump($expode);
-                                $splice= array_splice($expode,1,2);
-                                // var_dump($splice);
-                                 for ($i=0; $i < count($splice); ++$i) { ?>
+                        <?php $count=0;
+                        foreach ($new_array_image as $key => $value) { 
+                            if($count === 0 ){ ?>
                             <div class="col-6">
                                 <img class="img-fluid mb-2 imagePopup"
-                                    src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$splice[$i] ;?>"
+                                    src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_image[$key])['basename'];?>"
                                     alt="Photo"  data-tweet="<?php echo $tweet["tweet_id"] ;?>">
-
-                                 <div><i><?php echo $photo_title[$i]; ?></i></div>
-
+                                <div><i><?php echo $photo_title[$key]; ?></i></div>
                             </div>
-                                <?php }?>
-
-                        </div>
-                        <!-- /.row -->
-                        <div class="row more">
-                                <?php 
-                                $expode = explode("=",$tweet['tweet_image']);
-                                $splice= array_splice($expode,3,2);
-                                 for ($i=0; $i < count($splice); ++$i) { ?>
+                        <?php } 
+                            ++$count;
+                            if ($count === 1) {echo '<div class="col-6"><div class="row">';} 
+                            if($count <= 4 ){ ?>
                             <div class="col-6">
                                 <img class="img-fluid mb-2 imagePopup"
-                                    src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$splice[$i] ;?>"
+                                    src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_image[$key])['basename'];?>"
                                     alt="Photo"  data-tweet="<?php echo $tweet["tweet_id"] ;?>">
-                                
-                                <div><i><?php echo $photo_title[$i]; ?></i></div>
-
+                                <!-- <div><i>< ?php echo $photo_title[$key]; ?></i></div> -->
                             </div>
-                                <?php }?>
-
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.col -->
+                        <?php } 
+                        
+                    } echo '</div></div>'; ?>
+                       
                 </div>
-                <!-- /.row -->
-              
                  <!-- /.row -->
                 <div class="row">
                    <div class="col-12">
-                       <span class="btn btn-primary btn-sm float-right imageViewPopup more"  data-tweet="<?php echo $tweet["tweet_id"] ;?>" >View More photo <i class="fa fa-picture-o"></i>  >>></span>
+                       <span class="btn btn-primary btn-sm float-right  t-show-popup more" data-tweet="<?php echo $tweet["tweet_id"];?>" >View More photo <i class="fa fa-picture-o"></i>  >>></span>
                     </div>
                 </div>
                 <!-- /.row -->
                    
-                <?php } 
+                <?php } }
 
-                }else if(array_diff($fileActualExt,$docx)) { 
+            $new_array_pdf= array_filter($expode,
+            function ($element){
+                $path_extension = array('pdf');
+                list($name,$extension) = explode('.',$element);
 
-                //Columns must be a factor of 12 (1,2,3,4,6,12)
-                $rowCount = 0;
-                switch ($count) {
-                    case 1:
-                           $numOfCols = 1; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                                $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                    <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i
-                                            class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    } ?>
-                    </div> 
-                    <?php 
-                    break;
-                case 2:
-                        # code...
-                           $numOfCols = 2; ?>
-
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                                $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i
-                                            class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    }
-                    ?>
-                    </div> <?php
-                        break;
-                    case 3:
-                        # code...
-                           $numOfCols = 3; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i
-                                            class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    }
-                    ?>
-                    </div> <?php
-                        break;
-                    case 4:
-                        # code...
-                           $numOfCols = 2; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i
-                                            class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    }
-                    ?>
-                    </div> <?php
-                        break; 
-                    case 5:
-                        # code...
-                           $numOfCols = 3; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i
-                                            class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    } ?>
-                    </div> 
-                     
-                    <?php
-                        break; 
-                    case 6:
-                        # code...
-                           $numOfCols = 3; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo $numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- ||Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i
-                                            class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    } ?>
-                    </div> 
-                    <div class="row">
-                        <div class="col-12">
-                            <span class="btn btn-primary btn-sm float-right imageViewPopup more"  data-tweet="<?php echo $tweet["tweet_id"] ;?>" >View More photo <i class="fa fa-picture-o"></i>  >>></span>
-                        </div>
-                    </div>
-                <!-- /.row -->
-                    <?php
-                        break;
+                if (in_array($extension,$path_extension)) {
+                    # code...
+                    return $element;
                 }
-                
-                }else if(array_diff($fileActualExt,$pdf)) { 
+            });
 
-                //Columns must be a factor of 12 (1,2,3,4,6,12)
-                $rowCount = 0;
-                switch ($count) {
-                    case 1:
-                           $numOfCols = 1; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                            <style>
-                            .pdfobject-container { width:100%; height: 30rem; border: 1rem solid rgba(0,0,0,.1); }
-                            </style>
-                            <!-- <object data="< ?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" type="application/pdf" class="pdfobject-container">
-                            <p>Alternative text - include a link <a href="< ?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>">to the PDF!</a></p>
-                            </object> -->
-                            <!-- <embed src="< ?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" type="application/pdf" width= "500" height= "375"> -->
-                            <!-- <div id="< ?php echo str_replace(".","_", "example1".pathinfo($splice[$i])['basename']) ;?>" class="pdfobject-container"></div>
-                            
-                            <script src="< ?php echo BASE_URL_LINK ;?>dist/js/jquery.min.js"></script>
-                            <script src="< ?php echo BASE_URL_LINK ;?>dist/js/pdfobject.js"></script> 
-                            <script> PDFObject.embed("< ?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>", "< ?php  echo str_replace(".","_", "#example1".pathinfo($splice[$i])['basename']) ;?>");</script> -->
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    } ?>
-                    </div> 
-                    <?php 
-                    break;
-                case 2:
-                        # code...
-                           $numOfCols = 2; ?>
+            if(!empty($new_array_pdf)) {
 
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
+                $count_pdf = count($new_array_pdf);
+
+                if ($count_pdf === 1) { ?>
+
+                 <div class="row mb-2">
+                    <div class="col-12 more">
+                        <?php foreach ($new_array_pdf as $key => $value) { ?>
                             <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
                             <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
+                                <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_pdf[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                    <?php  echo pathinfo($new_array_pdf[$key])['basename'] ;?>
+                                        <!-- || Sep2014-report.pdf -->
+                                    </a>
                                 <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
+                                <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
                                     <!-- 1,245 KB -->
                                     <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
                                 </span>
                             </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    }
-                    ?>
-                    </div> <?php
-                        break;
-                    case 3:
-                        # code...
-                           $numOfCols = 3; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    }
-                    ?>
-                    </div> <?php
-                        break;
-                    case 4:
-                        # code...
-                           $numOfCols = 2; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    }
-                    ?>
-                    </div> <?php
-                        break; 
-                    case 5:
-                        # code...
-                           $numOfCols = 3; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo 12/$numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    } ?>
-                    </div> 
-                     
-                    <?php
-                        break; 
-                    case 6:
-                        # code...
-                           $numOfCols = 3; ?>
-                           <div class="row">
-                            <?php $expode = explode("=",$tweet['tweet_image']);
-                            $size_kb = explode("=",$tweet['tweet_image_size']);
-                            // $splice= array_splice($expode,0,2);
-                            $splice= $expode;
-                            for ($i=0; $i < count($splice); ++$i) { 
-                            ?>
-                        <div class="col-md-<?php echo $numOfCols; ?>">
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-                            <div class="mailbox-attachment-info main-active">
-                                <a href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($splice[$i])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
-                                    <?php  echo pathinfo($splice[$i])['basename'] ;?></a><!-- || Sep2014-report.pdf -->
-                                <span class="mailbox-attachment-size">
-                                <?php echo  $this->formatSizeUnits($size_kb[$i]); ?>
-                                    <!-- 1,245 KB -->
-                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </div><!-- col -->
-                    <?php
-                        $rowCount++;
-                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                    } ?>
-                    </div> 
-                    <div class="row">
-                        <div class="col-12">
-                            <span class="btn btn-primary btn-sm float-right imageViewPopup more"  data-tweet="<?php echo $tweet["tweet_id"] ;?>" >View More photo <i class="fa fa-picture-o"></i>  >>></span>
-                        </div>
+                        <?php }?>
+                    
                     </div>
-                <!-- /.row -->
-                    <?php
-                        break;
-                }
-                
-            } ?>
-                 
-            <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp4') { ?>
-
-                <div class="row mb-2" >
-                <div class="col-12" >
-                    <?php $expode = explode("=",$tweet['tweet_image']); ?>
-                    <!-- poster="< ?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0] ;?>" -->
-                <video controls preload="auto" width="100%" height="auto">
-                    <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$expode[0];?>" type="video/mp4"> 
-                    <!-- <source src="video/boatride.webm" type="video/webm">  -->
-                        <!-- fallback content here -->
-                </video>
-                </div>
-                </div>
-          <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'webm'){ ?>
-             <div class="row mb-2">
-                <div class="col-12">
-                <video controls preload="auto" width="100%" height="auto">
-                    <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$tweet['tweet_image'] ;?>" type="video/webm"> 
-                        <!-- fallback content herehere -->
-                </video>
                  </div>
+
+                <?php
+                 }else if($count_pdf === 2){?>
+                    <div class="row mb-2 more">
+                            <?php foreach ($new_array_pdf as $key => $value) { ?>
+                        <div class="col-6">
+                            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+                            <div class="mailbox-attachment-info main-active">
+                                <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_pdf[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                    <?php  echo pathinfo($new_array_pdf[$key])['basename'] ;?>
+                                        <!-- || Sep2014-report.pdf -->
+                                    </a>
+                                <span class="mailbox-attachment-size">
+                                <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                    <!-- 1,245 KB -->
+                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                            <?php }?>
+                    </div>
+
+                <?php }else if($count_pdf >= 3){ ?>
+                 <div class="row mb-2 more">
+                        <?php $count=0;
+                        foreach ($new_array_pdf as $key => $value) { 
+                            if($count == 0 ){ ?>
+                            <div class="col-md-6 col-sm-12">
+                                <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+                                <div class="mailbox-attachment-info main-active">
+                                    <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_pdf[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                        <?php  echo pathinfo($new_array_pdf[$key])['basename'] ;?>
+                                            <!-- || Sep2014-report.pdf -->
+                                        </a>
+                                    <span class="mailbox-attachment-size">
+                                    <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                        <!-- 1,245 KB -->
+                                        <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php } 
+                            ++$count;
+                            if ($count == 1) {echo '<div class="col-md-6 col-sm-12"><div class="row">';} 
+                            if($count <= 4 ){ ?>
+                            <div class="col-md-6 col-sm-6">
+                                <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+                                <div class="mailbox-attachment-info main-active">
+                                    <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_pdf[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                        <?php  echo pathinfo($new_array_pdf[$key])['basename'] ;?>
+                                            <!-- || Sep2014-report.pdf -->
+                                        </a>
+                                    <span class="mailbox-attachment-size">
+                                    <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                        <!-- 1,245 KB -->
+                                        <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php } 
+                    } echo '</div></div>'; ?>
+                       
                 </div>
-          <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'mp3'){ ?>
-            <div class="row mb-2">
-                <div class="col-12">
-                <audio controls>
-                     <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$tweet['tweet_image'] ;?>" type="audio/mp3">
-                         <!-- fallback content here -->
-                 </audio>
-                  </div>
+                 <!-- /.row -->
+                <div class="row">
+                   <div class="col-12">
+                       <span class="btn btn-primary btn-sm float-right  t-show-popup more" data-tweet="<?php echo $tweet["tweet_id"];?>" >View More photo <i class="fa fa-picture-o"></i>  >>></span>
+                    </div>
                 </div>
-          <?php }else if(array_diff($fileActualExt,$allower_ext)[0] == 'ogg'){ ?>
-                <audio controls>
-                     <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$tweet['tweet_image'] ;?>" type="audio/ogg"> 
-                         <!-- fallback content here -->
-                 </audio>
-          <?php }?>
+                <!-- /.row -->
+                   
+                <?php } }
+
+            $new_array_docx= array_filter($expode,
+            function ($element){
+                $path_extension =array('doc','docx','lsx');
+                list($name,$extension) = explode('.',$element);
+
+                if (in_array($extension,$path_extension)) {
+                    # code...
+                    return $element;
+                }
+            });
+
+            // sort() to arrange key in order
+
+            if(!empty($new_array_docx)) {
+
+                $count_docx = count($new_array_docx);
+
+                if ($count_docx === 1) { ?>
+
+                 <div class="row mb-2">
+                    <div class="col-12 more">
+                        <?php foreach ($new_array_docx as $key => $value) { ?>
+                            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                            <div class="mailbox-attachment-info main-active">
+                                <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_docx[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                    <?php  echo pathinfo($new_array_docx[$key])['basename'] ;?>
+                                        <!-- || Sep2014-report.pdf -->
+                                    </a>
+                                <span class="mailbox-attachment-size">
+                                <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                    <!-- 1,245 KB -->
+                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                </span>
+                            </div>
+                        <?php }?>
+                    
+                    </div>
+                 </div>
+
+                <?php
+                 }else if($count_docx === 2){?>
+                    <div class="row mb-2 more">
+                            <?php foreach ($new_array_docx as $key => $value) { ?>
+                        <div class="col-6">
+                            <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                            <div class="mailbox-attachment-info main-active">
+                                <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_docx[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                    <?php  echo pathinfo($new_array_docx[$key])['basename'] ;?>
+                                        <!-- || Sep2014-report.pdf -->
+                                    </a>
+                                <span class="mailbox-attachment-size">
+                                <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                    <!-- 1,245 KB -->
+                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                            <?php }?>
+                    </div>
+
+                <?php }else if($count_docx >= 3){ ?>
+                 <div class="row mb-2 more">
+                        <?php $count=0;
+                        foreach ($new_array_docx as $key => $value) { 
+                            if($count == 0 ){ ?>
+                            <div class="col-md-6 col-sm-12">
+                                <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                                <div class="mailbox-attachment-info main-active">
+                                    <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_docx[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                        <?php  echo pathinfo($new_array_docx[$key])['basename'] ;?>
+                                            <!-- || Sep2014-report.pdf -->
+                                        </a>
+                                    <span class="mailbox-attachment-size">
+                                    <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                        <!-- 1,245 KB -->
+                                        <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php } 
+                            ++$count;
+                            if ($count == 1) {echo '<div class="col-md-6 col-sm-12"><div class="row">';} 
+                            if($count <= 4 ){ ?>
+                            <div class="col-md-6 col-sm-6">
+                                <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
+                                <div class="mailbox-attachment-info main-active">
+                                    <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_docx[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                        <?php  echo pathinfo($new_array_docx[$key])['basename'] ;?>
+                                            <!-- || Sep2014-report.pdf -->
+                                        </a>
+                                    <span class="mailbox-attachment-size">
+                                    <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                        <!-- 1,245 KB -->
+                                        <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php } 
+                    } echo '</div></div>'; ?>
+                       
+                </div>
+                 <!-- /.row -->
+                <div class="row">
+                   <div class="col-12">
+                       <span class="btn btn-primary btn-sm float-right  t-show-popup more" data-tweet="<?php echo $tweet["tweet_id"];?>" >View More photo <i class="fa fa-picture-o"></i>  >>></span>
+                    </div>
+                </div>
+                <!-- /.row -->
+                   
+                <?php } }
+
+            $new_array_mp4= array_filter($expode,
+            function ($element){
+                $path_extension = array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
+
+                list($name,$extension) = explode('.',$element);
+
+                if (in_array($extension,$path_extension)) {
+                    # code...
+                    return $element;
+                }
+            });
+
+            if(!empty($new_array_mp4)) {
+
+                $count_mp4 = count($new_array_mp4);
+
+                if ($count_mp4 === 1) { ?>
+
+                 <div class="row mb-2">
+                        <?php foreach ($new_array_mp4 as $key => $value) { ?>
+                        <div class="col-12">
+
+                            <video controls preload="auto" width="100px"  height="auto" >
+                                <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_mp4[$key])['basename']; ?>" type="video/<?php echo pathinfo($new_array_mp4[$key])['extension']; ?>"> 
+                            </video>
+                        </div>
+                        <div class="col-12">
+
+                            <div class="mailbox-attachment-info main-active">
+                                <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_mp4[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                    <?php  echo pathinfo($new_array_mp4[$key])['basename'] ;?>
+                                        <!-- || Sep2014-report.pdf -->
+                                    </a>
+                                <span class="mailbox-attachment-size">
+                                <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                    <!-- 1,245 KB -->
+                                    <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <?php } ?>
+                 </div>
+
+                <?php
+                 }else if($count_mp4 === 2){?>
+                    <div class="row mb-2 more">
+                            <?php foreach ($new_array_mp4 as $key => $value) { ?>
+                                <div class="col-12">
+                                    <video controls preload="auto" width="100px"  height="auto" >
+                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_mp4[$key])['basename']; ?>" type="video/<?php echo pathinfo($new_array_mp4[$key])['extension']; ?>"> 
+                                    </video>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mailbox-attachment-info main-active">
+                                        <a target="_blank" href="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_mp4[$key])['basename'] ;?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                            <?php  echo pathinfo($new_array_mp4[$key])['basename'] ;?>
+                                                <!-- || Sep2014-report.pdf -->
+                                            </a>
+                                        <span class="mailbox-attachment-size">
+                                        <?php echo $this->formatSizeUnits($file_sizes[$key]) ;?>
+                                            <!-- 1,245 KB -->
+                                            <a href="#" class="btn btn-default btn-sm float-right"><i class="fa fa-cloud-download"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                    </div>
+
+            <?php  }  }
+
+            $new_array_mp3= array_filter($expode,
+            function ($element){
+                $path_extension = array('mp3','ogg');
+
+                list($name,$extension) = explode('.',$element);
+
+                if (in_array($extension,$path_extension)) {
+                    # code...
+                    return $element;
+                }
+            });
+
+            if(!empty($new_array_mp3)) {
+
+                $count_mp3 = count($new_array_mp3);
+
+                if ($count_mp3 === 1) { ?>
+
+                 <div class="row mb-2">
+                    <div class="col-12 more">
+                        <?php foreach ($new_array_mp3 as $key => $value) { ?>
+                                    <audio controls>
+                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_mp3[$key])['basename']; ?>" type="audio/<?php echo pathinfo($new_array_mp3[$key])['extension']; ?>"> 
+                                            <!-- fallback content here -->
+                                    </audio>
+                        <?php } ?>
+                    
+                    </div>
+                 </div>
+
+                <?php
+                 }else if($count_mp4 === 2){?>
+                    <div class="row mb-2 more">
+                        <div class="col-12 more">
+
+                            <?php foreach ($new_array_mp4 as $key => $value) { ?>
+                                    <audio controls>
+                                        <source src="<?php echo BASE_URL_PUBLIC."uploads/posts/".pathinfo($new_array_mp3[$key])['basename']; ?>" type="audio/<?php echo pathinfo($new_array_mp3[$key])['extension']; ?>"> 
+                                            <!-- fallback content here -->
+                                    </audio>
+                            <?php } ?>
+                         </div>
+                    </div>
+
+            <?php  }  }
+
+            $new_array_coins= array_filter($expode,
+            function ($element){
+                $path_extension = array('coins');
+
+                list($name,$extension) = explode('.',$element);
+
+                if (in_array($extension,$path_extension)) {
+                    # code...
+                    return $element;
+                }
+            });
+
+            if(!empty($new_array_coins)) {
+
+                $count_coins = count($new_array_coins);
+
+                if ($count_coins === 1) { ?>
+
+                 <div class="row mb-2">
+                    <div class="col-12 more">
+                        <?php foreach ($new_array_coins as $key => $value) { ?>
+                                <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
+                                <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                        <?php } ?>
+                    
+                    </div>
+                 </div>
+
+                <?php } }
+            
+                 } ?>
 
                 <?php 
                 if (strlen($tweet['status']) > 200) {
