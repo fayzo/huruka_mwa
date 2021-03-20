@@ -23,7 +23,7 @@
 
                                 <input type="hidden" name="edit_cover" id="edit_cover"
                                     value="<?php echo $_SESSION['key'];?>" style="display:none" />
-                                <input type="file" name="cover_picture" id="cover_fileInput" style="display:none" />
+                                <input type="file"  accept="image/*" name="cover_picture" id="cover_fileInput" style="display:none" />
                             </form>
                             <iframe id="cover_uploadTarget" name="cover_uploadTarget" src="#"
                                 style="width:0;height:0;border:0px solid black;"></iframe>
@@ -55,7 +55,7 @@
 
                                 <input type="hidden" name="edit_profile" id="edit_profile"
                                     value="<?php echo $_SESSION['key'];?>" style="display:none" />
-                                <input type="file" name="picture" id="fileInput" style="display:none" />
+                                <input type="file"  accept="image/*" name="picture" id="fileInput" style="display:none" />
                             </form>
 
                             <iframe id="uploadTarget" name="uploadTarget" src="#"
@@ -307,7 +307,7 @@
                     <!-- Box Comment -->
                     <div class="card borders-tops card-profile card1">
                         <div class="card-body">
-                              <?php echo $home->getUserTweet($user_id,$user_id) ;?>
+                              <?php echo $Home_GetUsers->getUserTweet($user_id,$user_id) ;?>
                         </div>
                         <!-- /.card-body -->
                     </div>

@@ -47,7 +47,7 @@
                         <!-- Box Comment -->
                         <div class="card card-profile card1">
                             <div class="card-body">
-                                    <?php echo $home->getUserTweet($profileData['user_id'],$user_id) ;?>
+                                    <?php echo $Home_GetUsers->getUserTweet($profileData['user_id'],$user_id) ;?>
                             </div>
                             <!-- /.card-body -->
                         </div>

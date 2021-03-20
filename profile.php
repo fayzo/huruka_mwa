@@ -170,7 +170,7 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                         <!-- Box Comment -->
                         <div class="card card-profile card1">
                             <div class="card-body">
-                                    <?php echo $home->getUserTweet($profileData['user_id'],$user_id) ;?>
+                                    <?php echo $Home_GetUsers->getUserTweet($profileData['user_id'],$user_id) ;?>
                             </div>
                             <!-- /.card-body -->
                         </div>

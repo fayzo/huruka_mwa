@@ -8,6 +8,7 @@ $(document).ready(function () {
         $('#file').attr('id', 'files');
         $('.progress').removeClass().addClass('progress-xss');
 
+
         $.ajax({
             url: 'core/ajax_db/popupPostForm',
             method: 'POST',
@@ -15,6 +16,8 @@ $(document).ready(function () {
             data: {
             }, success: function (response) {
                 $(".popupTweet").html(response);
+                CKEDITOR.replace('editor1')
+
                 $(".closeTweetPopup").click(function () {
                     $('.status-remove').removeClass().addClass('status');
                     $('.hash-remove').removeClass().addClass('hash-box');
@@ -29,6 +32,8 @@ $(document).ready(function () {
     });
 
     $(document).on('submit', "#popupForm", function (e) {
+        CKEDITOR.replace('editor1')
+        
         for(instance in CKEDITOR.instances){
             CKEDITOR.instances[instance].updateElement();
         }

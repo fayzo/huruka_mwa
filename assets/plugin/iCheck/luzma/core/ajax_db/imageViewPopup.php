@@ -15,15 +15,51 @@ if (isset($_POST['showpimage']) && !empty($_POST['showpimage'])) {
     $getid="";
     $tweet= $home->getPopupTweet($user_id,$tweet_id,$getid); 
 
-$filename = $tweet['tweet_image'];
-$expodefile = explode("=",$tweet['tweet_image']);
-$fileActualExt= array();
-for ($i=0; $i < count($expodefile); ++$i) { 
-$fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-}
+  // ***************************
+    // ***************************
+    // ***************************
+    // ***************************
+    $expodefile = explode("=",$tweet['tweet_image']);
+    $title= $tweet["photo_Title"];
+    $photo_title=  explode("=",$title);
+    $fileActualExt= array();
+    for ($i=0; $i < count($expodefile); ++$i) { 
+        $fileActualExt[]= strtolower(substr($expodefile[$i],strrpos($expodefile[$i],'.')+1));
+    }
 
-$allower_ext = array('jpeg','peg','jpg', 'png', 'gif'); // valid extensions
-if (array_diff($fileActualExt,$allower_ext) == false) { ?>
+    $expode = $expodefile;
+    $file_size = $tweet['tweet_image_size'];
+    $file_sizes = explode("=",$file_size);
+    // $count = count($expodefile);
+
+    $image= array('jpg','jpeg','png','gif');
+    $pdf= array('pdf');
+    $coins= array('coins');
+    $docx= array('doc','docx','lsx');
+    $mp3= array('mp3','ogg');
+    $mp4= array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
+    $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4);
+
+
+if (array_diff($fileActualExt,$allower_ext) == false) { 
+    # code...
+        
+    $fileActualExt_image =array_intersect($fileActualExt,$image);
+    $count_image =count(array_intersect($fileActualExt_image,$image));
+    $filePathinfo_image=array();
+    
+if(!empty($fileActualExt_image)) { 
+    foreach ($expodefile as $file_image) {
+        # code...
+        $filePathinfo = pathinfo($file_image);
+
+        if (in_array($filePathinfo['extension'],$fileActualExt_image)) {
+            # code...
+            $filePathinfo_image[]= $filePathinfo['basename'];
+        }
+    }
+    
+    ?>
 
     <div class="img-popup">
       <div class="wrap6" id="disabler">
@@ -43,7 +79,8 @@ if (array_diff($fileActualExt,$allower_ext) == false) { ?>
                         <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="<?php echo BASE_URL_LINK;?>image/img/spin.svg" />
                     </div>
                      <div data-u="slides" style="cursor:default;position:relative;top:0px;left:240px;width:720px;height:480px;overflow:hidden;">
-                         <?php $expode = explode("=",$tweet['tweet_image']);
+                         <?php 
+                                $expode = $filePathinfo_image;
                               $splice= array_splice($expode,0,10);
                               for ($i=0; $i < count($splice); ++$i) { 
                                   ?>
@@ -95,6 +132,7 @@ if (array_diff($fileActualExt,$allower_ext) == false) { ?>
     </div><!-- img-popup ends-->
 
 <?php }
+    }
 }
 ?>
 

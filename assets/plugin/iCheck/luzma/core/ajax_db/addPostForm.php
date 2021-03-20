@@ -134,7 +134,7 @@ if (!empty($_POST['donation_payment'])) {
                         'photo_Title_main'=> $photo_Titleo,
                         'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
                         'tweet_image' => $tweetimages, 
-                        // 'tweet_image' => $tweetimages.$equal.$donation_payment, 
+                        'tweet_image' => $tweetimages.$equal.$donation_payment, 
                         'donation_payment' => $donation_payment, 
                         'tweet_image_size' => $tweetSize, 
                         'posted_on' => date('Y-m-d H-i-s')

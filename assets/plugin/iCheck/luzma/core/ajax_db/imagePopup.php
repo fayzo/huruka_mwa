@@ -17,17 +17,52 @@ if (isset($_POST['showpimage']) && !empty($_POST['showpimage'])) {
     $tweet_likes= $home->likes($user_id,$tweet_id);
     $Retweet= $home->checkRetweet($tweet_id, $user_id);
     $user= $home->userData($tweet_id);
+    // ***************************
+    // ***************************
+    // ***************************
+    // ***************************
+    $expodefile = explode("=",$tweet['tweet_image']);
+    $title= $tweet["photo_Title"];
+    $photo_title=  explode("=",$title);
+    $fileActualExt= array();
+    for ($i=0; $i < count($expodefile); ++$i) { 
+        $fileActualExt[]= strtolower(substr($expodefile[$i],strrpos($expodefile[$i],'.')+1));
+    }
 
-$filename = $tweet['tweet_image'];
-$expodefile = explode("=",$tweet['tweet_image']);
-$fileActualExt= array();
-for ($i=0; $i < count($expodefile); ++$i) { 
-$fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-}
+    $expode = $expodefile;
+    $file_size = $tweet['tweet_image_size'];
+    $file_sizes = explode("=",$file_size);
+    // $count = count($expodefile);
 
-$allower_ext = array('jpeg','peg','jpg', 'png', 'gif'); // valid extensions
-if (array_diff($fileActualExt,$allower_ext) == false) { ?>
+    $image= array('jpg','jpeg','png','gif');
+    $pdf= array('pdf');
+    $coins= array('coins');
+    $docx= array('doc','docx','lsx');
+    $mp3= array('mp3','ogg');
+    $mp4= array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
+    $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4);
 
+
+if (array_diff($fileActualExt,$allower_ext) == false) { 
+    # code...
+        
+    $fileActualExt_image =array_intersect($fileActualExt,$image);
+    $count_image =count(array_intersect($fileActualExt_image,$image));
+    $filePathinfo_image=array();
+    
+if(!empty($fileActualExt_image)) { 
+    foreach ($expodefile as $file_image) {
+        # code...
+        $filePathinfo = pathinfo($file_image);
+
+        if (in_array($filePathinfo['extension'],$fileActualExt_image)) {
+            # code...
+            $filePathinfo_image[]= $filePathinfo['basename'];
+        }
+    }
+    
+    ?>
+ 
     <div class="img-popup">
       <div class="wrap6"  id="disabler">
         <div class="wrap6Pophide" onclick="togglePopup( )"></div>
@@ -48,7 +83,8 @@ if (array_diff($fileActualExt,$allower_ext) == false) { ?>
                           <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="<?php echo BASE_URL_LINK;?>image/img/spin.svg" />
                       </div>
                       <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;"> <!--width:980px height: 380 -->
-                            <?php $expode = explode("=",$tweet['tweet_image']);
+                            <?php 
+                                $expode = $filePathinfo_image;
                               $splice= array_splice($expode,0,10);
                               for ($i=0; $i < count($splice); ++$i) { 
                                   ?>
@@ -100,9 +136,9 @@ if (array_diff($fileActualExt,$allower_ext) == false) { ?>
                               </div>
                             </div>
                             <span class="username">
-                                <a style="float:left;padding-right:3px;" href="<?php echo PROFILE ;?>"><?php echo $tweet['firstname']." ".$tweet['lastname'] ;?></a>
+                                <a style="float:left;padding-right:3px;" href="<?php echo PROFILE ;?>"><?php echo $tweet['username'] ;?></a>
                                 <!-- //Jonathan Burke Jr. -->
-                                <span class="description">Shared publicly - 7:30 PM today</span>
+                                <span class="description">Shared publicly - <?php echo $tweet['posted_on'] ;?></span>
                             </span>
                             <span class="description">
                                 <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
@@ -194,6 +230,7 @@ if (array_diff($fileActualExt,$allower_ext) == false) { ?>
     </div><!-- img-popup ends-->
 
 <?php }
+    }
 }
 ?>
 

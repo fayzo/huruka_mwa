@@ -24,6 +24,7 @@ $(document).ready(function () {
     jobspostsFetchOn(0, 50);
 
     $(document).on('click', '#addposts', function (e) {
+
         for(instance in CKEDITOR.instances){
             CKEDITOR.instances[instance].updateElement();
         }
@@ -82,6 +83,7 @@ $(document).ready(function () {
 
 
 function PostsEdits(rowID, businessID, type) {
+    CKEDITOR.replace('editor4')
     for(instance in CKEDITOR.instances){
         CKEDITOR.instances[instance].updateElement();
     }
@@ -116,10 +118,10 @@ function PostsEdits(rowID, businessID, type) {
                 $("#businessID_posts").val(businessID);
                 $(".job-title").val(response.job_title);
                 // $(".job-summary").val(response.job_summary);
-                CKEDITOR.instances.editor2.setData(response.job_summary,function(){
+                CKEDITOR.instances.editor4.setData(response.job_summary,function(){
                     this.checkDirty();
                 });
-                CKEDITOR.instances.editor2.updateElement();
+                CKEDITOR.instances.editor4.updateElement();
 
                 // $(".responsibilities-duties").val(decodeHtmlEntities(response.responsibilities_duties).replace(/(<([^>]+)>)/ig, ""));
                 // $(".qualifications-skills").val(decodeHtmlEntities(response.qualifications_skills).replace(/(<([^>]+)>)/ig, ""));
@@ -136,6 +138,7 @@ function PostsEdits(rowID, businessID, type) {
 }
 
 function ajax_requestsPosts(key) {
+    CKEDITOR.replace('editor4')
     for(instance in CKEDITOR.instances){
         CKEDITOR.instances[instance].updateElement();
     }
@@ -148,7 +151,7 @@ function ajax_requestsPosts(key) {
     var deadline= $(".deadline");
     var website = $(".website");
     var categories_jobs = $("#categories_jobs");
-    var editor2 = CKEDITOR.instances.editor2.getData();
+    var editor4 = CKEDITOR.instances.editor4.getData();
 
     if (isEmpty(categories_jobs) && isEmpty(job_title) && isEmpty(job_summary) &&
         isEmpty(conditions) && isEmpty(deadline)) {
@@ -165,7 +168,7 @@ function ajax_requestsPosts(key) {
                 rowID: id.val(),
                 categories_jobs: categories_jobs.val(),
                 businessID: businessID.val(),
-                editor2: editor2,
+                editor2: editor4,
 
             }, 
             beforeSubmit: function(){

@@ -832,7 +832,7 @@ class GetUsers extends Home
                                           </button></li>
                                         
 
-                                         <?php if (isset($_SESSION['key']) && $tweet["tweetBy"] == $user_idSession){ ?>
+                                         <?php if (isset($_SESSION['key']) && $tweet["retweet_by"] == 0 && $tweet["tweetBy"] == $user_idSession){ ?>
                                             <li  class=" list-inline-item">
                                                 <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
                                                     <li>

@@ -163,7 +163,7 @@ if (isset($_POST['school_view']) && !empty($_POST['school_view'])) {
                           <div class="form-group">
                                <div class="btn btn-defaults btn-file" >
                                    <i class="fa fa-paperclip"></i> Attachment
-                                   <input type="file" onChange="displayImage0(this)" name="photo[]" id="photo" multiple>
+                                   <input type="file" onChange="displayImage0(this)"  accept="image/*" name="photo[]" id="photo" multiple>
                                 </div>
                                 <span>Upload one photo of proof</span><br>
                                 <span class="progress progress-hidex mt-1">
@@ -178,7 +178,7 @@ if (isset($_POST['school_view']) && !empty($_POST['school_view'])) {
                              <div class="form-group">
                                <div class="btn btn-defaults btn-file" >
                                    <i class="fa fa-paperclip"></i> Attachment
-                                   <input type="file" onChange="displayImage(this)" name="otherphoto[]" id="other-photo"  multiple>
+                                   <input type="file" onChange="displayImage(this)"  accept="image/*" name="otherphoto[]" id="other-photo"  multiple>
                                </div>
                                <span>Other photo</span>
                                <small class="help-block">(e.g show us many photo.) </small><br>

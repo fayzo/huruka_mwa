@@ -59,7 +59,24 @@ class Trending extends Home
     public function getTweetsTrendbyhastag($hashtag)
     {
        $mysqli= $this->database;
-       $query= "SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. status LIKE '%#". $hashtag ."%' OR T. retweet_Msg LIKE '%#". $hashtag ."%' ORDER BY T. posted_on DESC";
+      //  $query= "SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. status LIKE '%#". $hashtag ."%' OR T. retweet_Msg LIKE '%#". $hashtag ."%' ORDER BY T. posted_on DESC";
+       $query= "SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. status LIKE '%#". $hashtag ."%' AND  T. retweet_by = 0 ORDER BY T. posted_on DESC";
+       $result= $mysqli->query($query);
+      //   var_dump('ERROR: Could not able to execute '. $result.mysqli_error($mysqli));
+       $tweets_hashtag = array();
+       while ($row = $result->fetch_assoc()) {
+            /* TABLE OF tweety */
+         $tweets_hashtag[] = $row;
+      }
+       return $tweets_hashtag;
+
+    } 
+    
+    public function getTweetsTrendbyhastag_not_empty($hashtag)
+    {
+       $mysqli= $this->database;
+      //  $query= "SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. status LIKE '%#". $hashtag ."%' AND T. tweet_image != '' OR T. retweet_Msg LIKE '%#". $hashtag ."%' AND T. tweet_image != '' ORDER BY T. posted_on DESC";
+       $query= "SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. status LIKE '%#". $hashtag ."%' AND T. tweet_image != '' AND  T. retweet_by = 0 ORDER BY T. posted_on DESC";
        $result= $mysqli->query($query);
       //   var_dump('ERROR: Could not able to execute '. $result.mysqli_error($mysqli));
        $tweets_hashtag = array();

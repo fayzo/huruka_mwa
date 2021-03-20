@@ -275,7 +275,9 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
                             $(".login-popup").hide();
                         }, 1500);
                         setInterval(() => {
-                            location.reload();
+                            window.location.href= '';
+                            // window.location.reload();
+                            // location.reload();
                         }, 2000);
                     } else if (response.indexOf('Fail') >= 0) {
                             $(".login-popup").hide();

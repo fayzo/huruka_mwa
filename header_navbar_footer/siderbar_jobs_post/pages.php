@@ -20,9 +20,11 @@
     <hr>
 
     <h6 class="card-title font-weight-bold">Company overview: </h6>
-    <div class="The-company-overview0"></div>
+    <div class="The-company-overview0">
+        <?php echo htmlspecialchars_decode($user['overview']); ?>
+    </div>
     <hr>
-
+<!-- 
     <h6 class="card-title font-weight-bold">Company history: </h6>
     <div class="company-history0"></div>
     <hr>
@@ -41,10 +43,13 @@
 
     <h6 class="card-title font-weight-bold">Mission statement: </h6>
     <div class="mission-statement0"></div>
-    <hr>
+    <hr> -->
 
     <h6 class="card-title font-weight-bold">website: </h6>
-    <div class="website0"></div>
+    <div class="website0">
+    <?php echo htmlspecialchars_decode($user['website']); ?>
+    
+    </div>
     <hr>
 <?php }else{ ?>
 
@@ -52,10 +57,6 @@
     <h6 class="card-title">The Logo company </h6>
           <label for="">Examples of Logo represent the company</label>
           <ul class="list-inline" style="list-style-type:none">
-             <li class="list-inline-item" ><img src="<?php echo BASE_URL_LINK.'image/flag/iconfinder_Flag_of_Burundi_96181.png' ;?>" width="40px" height="40px" alt="logo" ></li>
-             <li class="list-inline-item" ><img src="<?php echo BASE_URL_LINK.'image/flag/iconfinder_Flag_of_Burundi_96181.png' ;?>" width="40px" height="40px" alt="logo" ></li>
-             <li class="list-inline-item" ><img src="<?php echo BASE_URL_LINK.'image/flag/iconfinder_Flag_of_Burundi_96181.png' ;?>" width="40px" height="40px" alt="logo" ></li>
-             <li class="list-inline-item" ><img src="<?php echo BASE_URL_LINK.'image/flag/iconfinder_Flag_of_Burundi_96181.png' ;?>" width="40px" height="40px" alt="logo" ></li>
              <li class="list-inline-item" ><img src="<?php echo BASE_URL_LINK.'image/flag/iconfinder_Flag_of_Burundi_96181.png' ;?>" width="40px" height="40px" alt="logo" ></li>
           </ul>
     </div>
@@ -130,7 +131,7 @@
 
                             <input type="hidden" name="edit_profileLogo" id="edit_profileLogo"
                                 value="<?php echo $_SESSION['key'];?>" style="display:none" />
-                            <input type="file" name="pictureLogo" id="fileInputLogo" style="display:none" />
+                            <input type="file" accept="image/*" name="pictureLogo" id="fileInputLogo" style="display:none" />
                         </form>
 
                         <iframe id="uploadTarget" name="uploadTarget" src="#"
@@ -161,17 +162,17 @@
                 <input type="hidden" id="id_business" value="0">
                 <div class="form-group">
                   <h4><i> The company name:</h4></i> 
-                  <textarea class="form-control" id="The-company-name" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder=" The company name. " ></textarea>
+                  <input class="form-control" id="The-company-name" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" placeholder=" The company name. " >
                 </div>
                 <hr>
 
                 <div class="form-group">
                   <h4><i> The company overview:</h4></i> 
-                  <textarea class="form-control "  id="The-company-overview" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder=" This is where you’ll briefly sum everything up. " ></textarea>
+                  <textarea class="form-control "  id="editor3" name="editor3" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder=" This is where you’ll briefly sum everything up. " ></textarea>
                 </div>
                 <hr>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <h4><i> Company history:</h4></i> 
                   <textarea class="form-control"  id="company-history" rows="4" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" placeholder=" Provide the back story, including date of founding, and who was involved. " ></textarea>
                 </div>
@@ -199,7 +200,7 @@
                   <h4><i>Mission statement:</h4></i>
                   <textarea class="form-control" id="mission-statement" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder="A concise statement of the guiding principles of your company. " ></textarea>
                 </div>
-                <hr>
+                <hr> -->
 
                 <div class="form-group">
                   <h4><i>Website If you've :</h4></i>
@@ -215,16 +216,17 @@
                 <input type="hidden" id="id_business" value="0">
                 <div class="form-group">
                   <h4><i> The company name:</h4></i> 
-                  <textarea class="form-control textarea" id="The-company-name" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder=" The company name. " ></textarea>
+                  <input class="form-control textarea" id="The-company-name" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" placeholder=" The company name. " >
                 </div>
                 <hr>
 
                 <div class="form-group">
                   <h4><i> The company overview:</h4></i> 
-                  <textarea class="form-control textarea"  id="The-company-overview" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder=" This is where you’ll briefly sum everything up. " ></textarea>
+                  <textarea class="form-control textarea"  id="editor3" name="editor3"  style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder=" This is where you’ll briefly sum everything up. " ></textarea>
                 </div>
                 <hr>
-
+                <!-- The-company-overview -->
+<!-- 
                 <div class="form-group">
                   <h4><i> Company history:</h4></i> 
                   <textarea class="form-control textarea"  id="company-history" rows="4" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" placeholder=" Provide the back story, including date of founding, and who was involved. " ></textarea>
@@ -253,7 +255,7 @@
                   <h4><i>Mission statement:</h4></i>
                   <textarea class="form-control textarea" id="mission-statement" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder="A concise statement of the guiding principles of your company. " ></textarea>
                 </div>
-                <hr>
+                <hr> -->
 
                 <div class="form-group">
                   <h4><i>Website If you've :</h4></i>

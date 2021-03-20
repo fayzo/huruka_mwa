@@ -278,7 +278,8 @@ if (isset($_POST['login_id']) && !empty($_POST['login_id'])) {
                             $(".login-popup").hide();
                         }, 1500);
                         setInterval(() => {
-                            location.reload();
+                            // location.reload();
+                            window.location.href= '';
                         }, 2000);
                     } else {
                         isEmptys0(password);

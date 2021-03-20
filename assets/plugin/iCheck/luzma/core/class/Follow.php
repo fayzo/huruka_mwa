@@ -416,7 +416,7 @@ class Follow extends Home
         $query= $mysqli->query($sql);
         $user= $query->fetch_assoc(); ?>
 
-         <div  class="container">
+         <div  class="container retweetcolor p-4 shadow-sm border">
          <div  class="row">
             <div class="col-md-12">
             <form method="post" class="form-coins">
@@ -457,7 +457,7 @@ class Follow extends Home
         $query= $mysqli->query($sql);
         $user= $query->fetch_assoc(); ?>
 
-         <div  class="container">
+         <div  class="container retweetcolor p-4 shadow-sm border">
             <div class="">
                 <img class="img-donate-coins" src="<?php echo BASE_URL_LINK; ?>image/background_image/donate_coins.png">
             </div>

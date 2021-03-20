@@ -77,7 +77,15 @@ if (isset($_POST['showpopretweet']) && !empty($_POST['showpopretweet'])) {
                                                 }else{
                                                 echo $home->getTweetLink($retweet['status']);
                                                 }  
+                                                
+                                             if (strlen($retweet['status']) > 200) {
+                                                // $tweetstatus = substr($retweet['status'],0, strpos($retweet['status'], ' ', 200)).'
+                                                $tweettext = substr($retweet['status'], 0, 200);
+                                                $tweetstatus = substr($retweet['status'], strrpos($tweettext, ' '));
+                                                echo '<span style="display: none;" class="more-text view-more-text'.$retweet["tweet_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
+                                            }  
                                             ?>
+                                            </div>
 
                                             <!-- TEXT -->
                                             <!-- TEXT -->
@@ -244,15 +252,7 @@ if (isset($_POST['showpopretweet']) && !empty($_POST['showpopretweet'])) {
                                                     </div>
                                                 <?php } ?>
 
-                                            <?php 
-                                            if (strlen($retweet['status']) > 200) {
-                                                // $tweetstatus = substr($retweet['status'],0, strpos($retweet['status'], ' ', 200)).'
-                                                $tweettext = substr($retweet['status'], 0, 200);
-                                                $tweetstatus = substr($retweet['status'], strrpos($tweettext, ' '));
-                                                echo '<span style="display: none;" class="more-text view-more-text'.$retweet["tweet_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
-                                            }  
-                                            ?>
-                                            </div>
+                                           
                                 </div>
                 		   </div> <!-- retweet-popup-comment-wrap -->
                 		</div> <!-- card-body -->

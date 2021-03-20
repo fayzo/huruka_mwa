@@ -194,7 +194,7 @@
                                </div>
                                <div class="form-group">
                                    <label for="Job Summary">Job Summary</label>
-                                   <textarea class="form-control job-summary" id="editor2" rows="4"  placeholder="job summary"></textarea>
+                                   <textarea class="form-control job-summary" id="editor4" rows="4"  placeholder="job summary"></textarea>
                                </div>
                                <!-- <div class="form-group">
                                    <label for="email">Responsibilities and Duties</label>

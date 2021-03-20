@@ -324,7 +324,7 @@ public function links(){ ?>
                             <div class="info-body-name">
                                 <div class="in-b-name">
                                     <div><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a></div> <!-- Nina Mcintire -->
-                                    <span><small><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['career'] ;?></a></small></span>
+                                    <span><small><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo (!empty($user['career']))? $user['career']: 'Member';?></a></small></span>
                                 </div><!-- in b name end-->
                             </div><!-- info body name end-->
                         </div><!-- info in body end-->

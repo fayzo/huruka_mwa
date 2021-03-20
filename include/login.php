@@ -268,7 +268,7 @@ if(isset($_POST['key'])){
                     console.log(response);
                     if (response.indexOf('SUCCESS') >= 0) {
                         setInterval(() => {
-                            window.location = '../';
+                            window.location = '../index';
                         }, 1000);
                     } else if (response.indexOf('Fail') >= 0) {
                         setInterval(() => {

@@ -117,7 +117,7 @@ class Comment extends Post_like
         $result= $mysqli->query($query1);
         $rows= $result->fetch_assoc();
 
-        if(!empty($rows['tweet_image'])){
+        if(!empty($rows['tweet_image']) && $rows['tweet_image'] != 'donation_coins.coins'){
             $expode = explode("=",$rows['tweet_image']);
             $uploadDir = DOCUMENT_ROOT.'/uploads/posts/';
             for ($i=0; $i < count($expode); ++$i) { 

@@ -12,7 +12,7 @@ class Posts_home extends Home {
         // $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id LEFT JOIN blog B ON B. tweet_blog_by = U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' AND B. blog_post = 'posted' OR T. tweetBy= U. user_id AND T. retweet_by != $user_id AND B. blog_post= 'posted' AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit ";
         // $sql="SELECT * FROM tweets T LEFT JOIN users U ON (T. retweet_by = U. user_id OR T. tweetBy= U. user_id) WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR T. retweet_by != $user_id ORDER BY T. tweet_id DESC LIMIT $limit";
         // $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR T. tweetBy= U. user_id AND T. retweet_by != $user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit";
-        $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit";
+        $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR  T. retweet_by = $user_id AND T. retweet_id !='0' OR T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit";
         $query= $mysqli->query($sql);
         $tweets=array();
         while ($row= $query->fetch_assoc()) {
@@ -67,17 +67,17 @@ class Posts_home extends Home {
                 <!-- TEXT -->
                 <!-- TEXT -->
                 <?php 
-                    if (!empty($tweet['donation_payment'])) {
-                        $equal = '';
-                        if (!empty($donation_payment) && !empty($tweet['tweet_image']) ) {
-                            $equal.=  '=';
-                        }
-                        $donation_payment= $equal.$users->test_input($tweet['donation_payment']);
-                    }else {
-                        $donation_payment='';
-                    }
-    
-                $expodefile = explode("=",$tweet['tweet_image'].$donation_payment);
+                    // if (!empty($tweet['donation_payment'])) {
+                    //     $equal = '';
+                    //     if (!empty($donation_payment) && !empty($tweet['tweet_image']) ) {
+                    //         $equal.=  '=';
+                    //     }
+                    //     $donation_payment= $equal.$users->test_input($tweet['donation_payment']);
+                    // }else {
+                    //     $donation_payment='';
+                    // }
+                    // $expodefile = explode("=",$tweet['tweet_image'].$donation_payment);
+                $expodefile = explode("=",$tweet['tweet_image']);
                 $title= $tweet["photo_Title"];
                 $photo_title=  explode("=",$title);
                 $fileActualExt= array();
@@ -623,18 +623,19 @@ class Posts_home extends Home {
                 <!-- TEXT -->
                 <!-- TEXT -->
                 <?php 
-                //  if ($tweet['tweet_image'] == true) {
 
-                if (!empty($tweet['donation_payment'])) {
-                    if (!empty($donation_payment) && !empty($tweet['tweet_image']) ) {
-                        $equal.=  '=';
-                    }
-                    $donation_payment= $equal.$users->test_input($tweet['donation_payment']);
-                }else {
-                    $donation_payment='';
-                }
+                // if (!empty($tweet['donation_payment'])) {
+                //     $equal = '';
+                //     if (!empty($donation_payment) && !empty($tweet['tweet_image']) ) {
+                //         $equal.=  '=';
+                //     }
+                //     $donation_payment= $equal.$users->test_input($tweet['donation_payment']);
+                // }else {
+                //     $donation_payment='';
+                // }
 
-                $expodefile = explode("=",$tweet['tweet_image'].$donation_payment);
+                // $expodefile = explode("=",$tweet['tweet_image'].$donation_payment);
+                $expodefile = explode("=",$tweet['tweet_image']);
                 $title= $tweet["photo_Title"];
                 $photo_title=  explode("=",$title);
                 $fileActualExt= array();
@@ -844,7 +845,7 @@ class Posts_home extends Home {
                       </button></li>
                     
 
-                     <?php if (isset($_SESSION['key']) && $tweet["tweetBy"] == $user_id){ ?>
+                     <?php if (isset($_SESSION['key']) && $tweet["retweet_by"] == 0  && $tweet["tweetBy"] == $user_id){ ?>
                         <li  class=" list-inline-item">
                             <ul class="deleteButt text-sm" style="list-style-type: none; margin:0px;" >
                                 <li>
