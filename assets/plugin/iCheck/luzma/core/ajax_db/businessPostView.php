@@ -57,9 +57,29 @@ if (isset($_POST['job_id']) && !empty($_POST['job_id'])) {
                                       <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                     <?php } ?>
                               </div>
-                               <span><?php echo $user['companyname']; ?></span>
-                               <h5>Company Overview</h5>
-                               <span><?php echo $user['overview']; ?></span>
+                               <span><strong><?php echo $user['companyname']; ?></strong></span>
+                               <div>Company Overview</div>
+                               <span>
+                               <div id="link_" class="show-read-more">
+                                    <?php 
+                                      if (strlen($user['overview']) > 200) {
+                                        // $tweetstatus = substr($user['overview'],0, strpos($user['overview'], ' ', 200)).'
+                                        $tweettext = substr($user['overview'], 0, 200);
+                                        $tweetstatus = substr($user['overview'], 0, 200).'
+                                        <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$user['job_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                        echo $home->getTweetLink($tweetstatus);
+
+                                        $tweettext = substr($user['overview'], 0, 200);
+                                        $tweetstatus = substr($user['overview'], 200,strlen($user['overview']));
+                                        echo '<span style="display: none;" class="more-text view-more-text'.$user["job_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
+                                        }else{
+                                        echo $home->getTweetLink($user['overview']);
+                                        }  
+            
+                                    ?>
+                                </div>
+                                <div>website: <a href="<?php echo $user['website'] ;?>" target="_blank"><?php echo $user['website'] ;?></a></div>
+                              </span>
                            </div>
                       </div>
                       <?php } ?>
@@ -73,7 +93,7 @@ if (isset($_POST['job_id']) && !empty($_POST['job_id'])) {
                            <hr>
                       
                             <h4 class="card-title">Deadline to submit: </h4>
-                           <div><?php echo $user['deadline'] ;?></div>
+                           <div><?php echo date("M j, Y",strtotime($user['deadline'])) ;?></div>
                           <hr>
                           
                           <?php if (!empty($user['website'])) { ?>
@@ -120,7 +140,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
                             id="<?php echo strtolower($jobs['location']) ;?>" title="us"></i>
                    </span><br>
                    <span>Shared public -<?php echo $home->timeAgo($jobs['created_on']); ?></span><br>
-                   <span>Deadline to submit - <?php echo htmlspecialchars($jobs['deadline']); ?></span>
+                   <span>Deadline to submit - <?php echo date("M j, Y",strtotime($jobs['deadline'])); ?></span>
                </div>
              </div>
              </div>

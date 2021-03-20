@@ -15,70 +15,80 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
         </span>
         <div class="img-popup-wrap">
         	<div class="img-popup-body">
+        <form method="post" id="email-composer-new" enctype="multipart/form-data" >
 
          <div class="card">
              <div class="card-header text-center">
                  <h5 class="card-title"><i class="fa fa-pencil"></i> Compose New Message</h5>
              </div>
              <div class="card-body">
+                <!-- <input type="hidden" id="user_id" name="user_id" value="< ?php echo $user_id ;?>"> -->
+                <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['key'];?>">
+
                  <div class="form-group">
-                     <input class="form-control" value="<?php echo $user['email']; ?>" placeholder="To: <?php echo $user['email']; ?>" readonly>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">TO:</span>
+                        </div>
+                        <input class="form-control emailcomposer search-email-composer" name="emailcomposer"  value="<?php echo $user['email']; ?>" placeholder="To: <?php echo $user['email']; ?>" readonly>
+                    </div>
+                 </div>
+
+                 <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">From:</span>
+                        </div>
+                        <input class="form-control emailcomposerFROM " name="emailcomposerFROM"  value="<?php echo $_SESSION['email']; ?>" placeholder="From: <?php echo $_SESSION['email']; ?>" readonly>
+                    </div>
+                 </div>
+
+                 <div class="form-group">
+                     <input class="form-control subjectcomposer" name="subjectcomposer" placeholder="Subject:">
                  </div>
                  <div class="form-group">
-                     <input class="form-control" placeholder="Subject:">
-                 </div>
-                 <div class="form-group">
-                     <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                      <h1><u>Heading Of Message</u></h1>
-                      <h4>Subheading</h4>
-                      <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
-                        was born and I will give you a complete account of the system, and expound the actual teachings
-                        of the great explorer of the truth, the master-builder of human happiness. No one rejects,
-                        dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know
-                        how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again
-                        is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain,
-                        but because occasionally circumstances occur in which toil and pain can procure him some great
-                        pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise,
-                        except to obtain some advantage from it? But who has any right to find fault with a man who
-                        chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that
-                        produces no resultant pleasure? On the other hand, we denounce with righteous indignation and
-                        dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so
-                        blinded by desire, that they cannot foresee</p>
-                      <ul>
-                        <li>List item one</li>
-                        <li>List item two</li>
-                        <li>List item three</li>
-                        <li>List item four</li>
-                      </ul>
-                      <p>Thank you,</p>
-                      <p>John Doe</p>
+                     <textarea name="textcomposer" class="form-control textcomposer" id="editor2" style="height: 300px">
                     </textarea>
                  </div>
                  <div class="form-group">
                      <div class="btn btn-defaults btn-file">
                          <i class="fa fa-paperclip"></i> Attachment
-                         <input type="file" name="attachment">
+                         <input type="file" id="filecomposer" onChange="displayImageNameSize0(this)" name="file[]" multiple>
                      </div>
                      <small class="help-block">Max. 32MB</small>
                  </div> 
+                 <div class="row">
+                    <div class="col-6" id="add-photo1">
+                    </div>
+                </div>
              </div>
              <!-- /.card-body -->
              <div class="card-footer">
+                <span id="responseSubmit"></span>
+
                  <div class="float-right">
-                     <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button>
-                     <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                     <!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button> -->
+                     <button type="submit" class="btn btn-primary email-composer-new1" name="send" id="sendx" value="send"><i class="fa fa-envelope-o"></i> Send</button>
                  </div>
                  <button type="reset" class="btn btn-default" data-dismiss="card"><i class="fa fa-times"></i>
                      Discard</button>
                  <button class="btn btn-secondary" data-dismiss="card">Close</button>
              </div>
          </div>
+        </form>
 
           </div><!-- img-popup-body -->
         </div><!-- user-show-popup-box -->
     </div> <!-- Wrp4 -->
 </div> <!-- apply-popup" -->
-
+<script>
+    $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('editor2')
+    //bootstrap WYSIHTML5 - text edito
+    });
+</script>
 <?php } 
 
 

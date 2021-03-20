@@ -83,7 +83,7 @@ $(document).ready(function () {
             if (textarea != '' && filecomposer == '') {
 
                     $.ajax({
-                        url: "core/ajax_db/email_notification.php",
+                        url: "core/ajax_db/email_notification",
                         method: "POST",
                         data: {
                             key: 'textarea',
@@ -128,7 +128,7 @@ $(document).ready(function () {
                 // new FormData(this),
                 
                 $.ajax({
-                    url: 'core/ajax_db/email_notification.php',
+                    url: 'core/ajax_db/email_notification',
                     method: "POST",
                     data: FormDatas.serializefiles(),
                     contentType: false,

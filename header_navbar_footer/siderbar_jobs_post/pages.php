@@ -56,9 +56,6 @@
 <div class="text-center font-weight-bold">
     <h6 class="card-title">The Logo company </h6>
           <label for="">Examples of Logo represent the company</label>
-          <ul class="list-inline" style="list-style-type:none">
-             <li class="list-inline-item" ><img src="<?php echo BASE_URL_LINK.'image/flag/iconfinder_Flag_of_Burundi_96181.png' ;?>" width="40px" height="40px" alt="logo" ></li>
-          </ul>
     </div>
     <hr>
 
@@ -277,3 +274,77 @@
       </div>
     </div>
 
+
+
+
+         <div id="examplePages" class="modal fade">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h4><i> SME</i> </h4>
+                      <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                      <div class="modal-body">
+                          <div class="text-center font-weight-bold">
+                          <h6 class="card-title">The Logo company </h6>
+                                <label for="">Examples of Logo represent the company</label>
+                          </div>
+                          <hr>
+
+                          <h6 class="card-title font-weight-bold">Company overview: </h6>
+                            <label for="">Examples of where you’ll briefly sum everything up. </label>
+                                <ul style="list-style-type:none">
+                                  <li>This is where you’ll briefly sum everything up. </li>
+                                </ul>
+                          <hr>
+
+                            <h6 class="card-title font-weight-bold">Company history: </h6>
+                            <label for="">Examples of Company history. </label>
+                                <ul style="list-style-type:dot">
+                                  <li>Provide the back story, including date of founding, and who was involved. </li>
+                                </ul>
+                          <hr>
+
+                            <h6 class="card-title font-weight-bold">Management team: </h6>
+                            <label for="">Examples of Details about who runs the company, and other key roles. </label>
+                                <ul style="list-style-type:dot">
+                                  <li>Details about who runs the company, and other key roles.</li>
+                                </ul>
+                          <hr>
+
+                            <h6 class="card-title font-weight-bold">Legal structure and ownership: </h6>
+                            <label for="">Examples of Legal structure and ownership. </label>
+                                <ul style="list-style-type:dot">
+                                  <li>How you’ve decided to structure your company, and who owns what percentage of it.</li>
+                                </ul>
+                          <hr>
+
+                            <h6 class="card-title font-weight-bold">Locations and facilities: </h6>
+                            <label for="">Examples of Details on your workspaces or plans to acquire them. </label>
+                                <ul style="list-style-type:dot">
+                                  <li>Kigali, Rwanda.</li>
+                                  <li>KG 666 St street.</li>
+                                  <li>PO BOX 242 KIGALI.</li>
+                                </ul>
+                          <hr>
+
+                            <h6 class="card-title font-weight-bold">Mission statement: </h6>
+                            <label for="">Examples of Mission statement </label>
+                                <ul style="list-style-type:dot">
+                                  <li>A concise statement of the guiding principles of your company.</li>
+                                </ul>
+                          <hr>
+                            <h6 class="card-title font-weight-bold">Website: </h6>
+                            <label for="">provide website link if any</label>
+                                <ul style="list-style-type:dot">
+                                  <li>http://irangiro.com.</li>
+                                </ul>
+                          <hr>
+
+                       </div><!-- THiS IS A MODAL body -->
+                       <div class="modal-footer">
+                         <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       </div>
+                    </div><!-- THiS IS A MODAL CONTENT -->
+                  </div><!-- THiS IS A MODAL DIALOG -->
+               </div><!-- THiS IS A MODAL FADE -->

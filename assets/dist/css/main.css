@@ -1,3 +1,15 @@
+.card {
+  border-radius: 5px !important;
+}
+.card-header {
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+}
+.message-color {
+  /* background-color: #4c52440e; */
+  /* background-color: #fff !important; */
+  color: #999;
+}
 .skin-rose .main-active {
     background-color: #da0e6c;
     color: #ffffff;
@@ -295,12 +307,6 @@ border: 1px solid #635b5f61 !important;
 }
 
 
-.border-bottom-0,
-.message-color {
-    background-color: #fff !important;
-    color: #999;
-    
-}
 .post {
     border-bottom: 1px solid #adb5bd;
     margin-bottom: 15px;

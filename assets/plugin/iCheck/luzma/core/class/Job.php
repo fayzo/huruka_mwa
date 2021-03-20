@@ -51,7 +51,7 @@ class Job extends Home {
                    <span class="description"><?php echo $this->htmlspecialcharss($jobs['companyname']); ?> || <i class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?> h4 mb-0"
                             id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></i></span>
                    <span class="description">Shared public - <?php echo $this->timeAgo($jobs['created_on']); ?></span>
-                   <span class="description">Deadline -  <?php echo $this->htmlspecialcharss($jobs['deadline']); ?></span>
+                   <span class="description">Deadline -  <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></span>
                </div>
                <hr class="main-active" style="width:100%">
             </div>
@@ -103,7 +103,7 @@ class Job extends Home {
                    <!-- <span class="description">< ?php echo $this->htmlspecialcharss($jobs['companyname']); ?> || <i class="flag-icon flag-icon-<?php echo strtolower($jobs['location']) ;?> h4 mb-0"
                             id="< ?php echo strtolower( $jobs['location']) ;?>" title="us"></i></span> -->
                    <span class="description">Publish - <?php echo $this->timeAgo($jobs['created_on']); ?></span>
-                   <span class="description">Deadline -  <?php echo $this->htmlspecialcharss($jobs['deadline']); ?></span>
+                   <span class="description">Deadline -  <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></span>
                </div>
             </div>
             <hr >
@@ -187,7 +187,7 @@ class Job extends Home {
                         <i style="font-size:12px" class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?> h4 mb-0"
                                 id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></i><br>
                     <span>Shared public - <?php echo $this->timeAgo($jobs['created_on']); ?></span><br>
-                    <span>Deadline - <?php echo $this->htmlspecialcharss($jobs['deadline']); ?></span>
+                    <span>Deadline - <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></span>
             </div> <!-- user-block -->
             </div> <!-- col-12 -->
             <hr class="bg-info mt-0 mb-1" style="width:95%;">
@@ -300,7 +300,7 @@ class Job extends Home {
                         <i class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?> h4 mb-0"
                                 id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></i><br>
                     <span>Shared public - <?php echo $this->timeAgo($jobs['created_on']); ?></span><br>
-                    <span>Deadline - <?php echo $this->htmlspecialcharss($jobs['deadline']); ?></span>
+                    <span>Deadline - <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></span>
             </div> <!-- user-block -->
             </div> <!-- col-12 -->
             <hr class="bg-info mt-0 mb-1" style="width:95%;">
@@ -411,7 +411,7 @@ class Job extends Home {
                 </div>
                 <div class="px-3 clear-float">
                     <div class="description">Shared public - <?php echo $this->timeAgo($jobs['created_on']); ?></div>
-                    <div class="description">Deadline -  <?php echo $this->htmlspecialcharss($jobs['deadline']); ?></div>
+                    <div class="description">Deadline -  <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></div>
                     </div>
                 </div>
 
