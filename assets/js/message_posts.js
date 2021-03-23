@@ -27,8 +27,8 @@ $(document).ready(function (e) {
     $('#post_form').submit(function (event) {
         event.preventDefault();
         var id = $('#id_posts').val();
-        var image_name = $('#file').val();
         var textarea = $('#status').val();
+        var image_name = $('#file').val();
 
         if (image_name == '') {
         

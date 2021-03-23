@@ -193,12 +193,12 @@
 .skin-Black .borders-tops:hover{
   background: #272323f5;
 }
-.borders-tops:hover{
+/* .borders-tops:hover{
   background: #f6f6f6;
 }
 .borders-bottoms:hover{
   background: #f6f6f6;
-}
+} */
 .skin-Black .borders-tops {
     border-top: 3px solid#272323f5;
 }
@@ -604,10 +604,6 @@ video{
   user-select: none;
   cursor: pointer;
 }
-.borders-tops:hover {
-  background: #f6f6f6;
-}
-
 
 .nav-scroller {
   position: relative;

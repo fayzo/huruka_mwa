@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     $(document).on('click', '.addPostBtn', function () {
+
         $('.status').removeClass().addClass('status-remove');
         $('.hash-box').removeClass().addClass('hash-remove');
         $('#count').attr('id', 'count-remove');
@@ -16,7 +17,7 @@ $(document).ready(function () {
             data: {
             }, success: function (response) {
                 $(".popupTweet").html(response);
-                CKEDITOR.replace('editor1')
+                CKEDITOR.replace('editor5') // THIS IS FOR MESSAGE
 
                 $(".closeTweetPopup").click(function () {
                     $('.status-remove').removeClass().addClass('status');
@@ -32,7 +33,6 @@ $(document).ready(function () {
     });
 
     $(document).on('submit', "#popupForm", function (e) {
-        CKEDITOR.replace('editor1')
         
         for(instance in CKEDITOR.instances){
             CKEDITOR.instances[instance].updateElement();
@@ -43,7 +43,7 @@ $(document).ready(function () {
         var title_name = $('#title_name').val();
         var donation_payment = $('#donation_payment').val();
         // var textarea = $('.status').val();
-        var textarea = CKEDITOR.instances.editor1.getData();
+        var textarea = CKEDITOR.instances.editor5.getData();
 
          if (image_name == '') {
 

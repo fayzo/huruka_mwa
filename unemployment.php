@@ -64,9 +64,10 @@
             <!-- /.col -->
 <?php }else{ ?>
     <div class="col-md-3 mb-3 d-none d-md-block">
-          <?php echo $home->jobsfetch() ;?>
+          <?php echo $job->jobsfetch() ;?>
     </div>
 <?php } ?>
+
             <div class="col-md-6">
                 <div class="row">
 

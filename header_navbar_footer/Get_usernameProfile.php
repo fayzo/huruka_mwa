@@ -17,7 +17,7 @@ if (isset($_GET['username']) == true && empty($_GET['username']) == false) {
         $carV= $car->carData($_SESSION['key']);
         $icyamunaraV= $icyamunara->icyamunaraData($_SESSION['key']);
 
-		$notific= $notification->getNotificationCount($user_id);
+		$notific= $notification->getNotificationCount($user_id,$_SESSION['email']);
 		$notification->notificationsView($user_id);
 	}else{
         $user_id= $profileData['user_id'];
@@ -55,7 +55,7 @@ else{
             // $eventV= $home->eventsData($_SESSION['key']);
             // $blogV= $home->blogData($_SESSION['key']);
 
-            $notific= $notification->getNotificationCount($user_id);
+            $notific= $notification->getNotificationCount($user_id,$_SESSION['email']);
             $notification->notificationsView($user_id);
 
             if(empty($_SESSION["cart_item"])) {

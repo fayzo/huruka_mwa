@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
     $("#addPostsjobs").on('click', function () {
+        CKEDITOR.replace('editor1')
         $("#addPostjobs").modal('show');
         $(".view-body").fadeOut();
         // $("#posts").attr('value', 'save').attr('onclick', "ajax_requestsPosts('create')").fadeIn();
@@ -103,9 +104,6 @@ function PostsEdits(rowID, businessID, type) {
                 $("#businessID_id0").val(businessID);
                 $(".job-title0").html(response.job_title);
                 $(".job-summary0").html(response.job_summary);
-                // $(".responsibilities-duties0").html(response.responsibilities_duties);
-                // $(".qualifications-skills0").html(response.qualifications_skills);
-                // $(".terms-conditions0").html(response.conditions);
                 $(".categories_jobs0").html(response.categories_jobs);
                 $(".deadlin0e").html(response.deadline);
                 $(".website0").html(response.website);
@@ -123,9 +121,6 @@ function PostsEdits(rowID, businessID, type) {
                 });
                 CKEDITOR.instances.editor4.updateElement();
 
-                // $(".responsibilities-duties").val(decodeHtmlEntities(response.responsibilities_duties).replace(/(<([^>]+)>)/ig, ""));
-                // $(".qualifications-skills").val(decodeHtmlEntities(response.qualifications_skills).replace(/(<([^>]+)>)/ig, ""));
-                // $(".terms-conditions").val(decodeHtmlEntities(response.conditions).replace(/(<([^>]+)>)/ig, ""));
                 $(".categories_jobsx").html(response.categories_jobs);
                 $(".deadline").val(response.deadline);
                 $(".website").val(response.website);

@@ -7,7 +7,7 @@
       <?php } ?>
         <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="tab" href="#list-Add_Post" role="tab" aria-controls="list-profile">Posts Jobs</a>
         <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="tab" href="#list-messages" role="tab" aria-controls="list-messages">Inbox Messages</a>
-        <a class="list-group-item list-group-item-action hidden-xs" id="list-profile-list" data-toggle="tab" href="#list-profile" role="tab" aria-controls="list-profile">Social Profile</a>
+        <a class="list-group-item list-group-item-action hidden-xs" id="list-profile-list" data-toggle="tab" href="#list-profile" role="tab" aria-controls="list-profile">About SME</a>
         <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="tab" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
         <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="tab" href="#list-Logout" role="tab" aria-controls="list-settings">Logout</a>
       </div>

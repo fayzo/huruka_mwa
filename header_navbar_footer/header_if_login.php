@@ -19,7 +19,7 @@ if ($users->loggedin() == false) {
     // $blogV= $home->blogData($_SESSION['key']);
     
     $user_id= $_SESSION['key'];
-    $notific= $notification->getNotificationCount($user_id);
+    $notific= $notification->getNotificationCount($user_id,$_SESSION['email']);
     $notification->notificationsView($user_id);
 
     if(empty($_SESSION["cart_item"])) {

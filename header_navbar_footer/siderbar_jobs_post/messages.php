@@ -6,7 +6,8 @@
          <div class="row">
              <div class="col-md-3 mb-3" >
                <div class="sticky-top"  style="top: 52px;">
-                 <a href="#compose.php" data-toggle="modal" data-target="#myModalComposer" class="btn main-active mb-3"
+                 <!-- <a href="#compose.php" data-toggle="modal" id="myModalComposermessage" data-target="#myModalComposer" class="btn main-active mb-3" -->
+                 <a href="#compose.php" data-toggle="modal" id="myModalComposermessage" class="btn main-active mb-3"
                      style="width:100%"><i class="fa fa-pencil"></i> Compose</a>
 
                  <div class="card">
@@ -35,7 +36,7 @@
                                  <a class="list-group-item list-group-item-action" id="list-Trash-list"
                                      data-toggle="tab" href="#list-Trash" role="tab" aria-controls="list-profile"> <i
                                          class="fa fa-trash-o"></i> Trash
-                                         <span class="badge badge-primary float-right"><?php echo $job->count_trash_job($user_id); ?></span></a>
+                                         <span class="badge badge-primary float-right"><?php echo $job->count_trash_job($_SESSION['email']); ?></span></a>
                                          </a>
                              </div>
                          </div>
@@ -95,13 +96,23 @@
                       <div class="search-result">			
                       </div>
                  </div>
+
+                 <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">From:</span>
+                        </div>
+                        <input class="form-control emailcomposerFROM " name="emailcomposerFROM"  value="<?php echo $_SESSION['email']; ?>" placeholder="From: <?php echo $_SESSION['email']; ?>" readonly>
+                    </div>
+                 </div>
+
                  <div class="form-group emailsendto" id="myDiv-search-email-composer">
                  </div>
                  <div class="form-group">
                      <input class="form-control subjectcomposer" name="subjectcomposer" placeholder="Subject:">
                  </div>
                  <div class="form-group">
-                     <textarea id="editor1" name="textcomposer" class="form-control textcomposer" style="height: 300px"></textarea>
+                     <textarea id="editor2" name="textcomposer" class="form-control textcomposer" style="height: 300px"></textarea>
                  </div>
                  <div class="form-group">
                      <div class="btn btn-defaults btn-file">
@@ -117,14 +128,13 @@
              </div>
              <!-- /.card-body -->
              <div class="modal-footer">
-                <span id="responseSubmit"></span>
-
+                <div id="responseSubmit"></div>
                  <div class="float-right">
                      <!-- <button type="button" class="btn btn-default email-composer-daft1" name="draft" value="draft"><i class="fa fa-pencil"></i> Draft</button> -->
                      <button type="button" class="btn btn-primary email-composer-new1" name="send" id="sendx" value="send"><i class="fa fa-envelope-o"></i> Send</button>
                  </div>
-                 <button type="reset" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>
-                     Discard</button>
+                 <!-- <button type="reset" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>
+                     Discard</button> -->
                  <button class="btn btn-secondary" data-dismiss="modal">Close</button>
              </div>
          </form>
@@ -305,7 +315,7 @@
                              </li>
                              <li>
                                  <span class="mailbox-attachment-icon has-img"><img
-                                         src="<?php echo BASE_URL_LINK ;?>image/img/photo1.png" alt="Attachment"></span>
+                                         src="" alt="Attachment"></span>
 
                                  <div class="mailbox-attachment-info">
                                      <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i>
@@ -319,7 +329,7 @@
                              </li>
                              <li>
                                  <span class="mailbox-attachment-icon has-img"><img
-                                         src="<?php echo BASE_URL_LINK ;?>image/img/photo2.png" alt="Attachment"></span>
+                                         src="" alt="Attachment"></span>
 
                                  <div class="mailbox-attachment-info">
                                      <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i>

@@ -268,7 +268,8 @@ if(isset($_POST['key'])){
                     console.log(response);
                     if (response.indexOf('SUCCESS') >= 0) {
                         setInterval(() => {
-                            window.location = '../index';
+                            window.location = '../';
+                            // window.location.href= '/';
                         }, 1000);
                     } else if (response.indexOf('Fail') >= 0) {
                         setInterval(() => {

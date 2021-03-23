@@ -370,6 +370,43 @@ if(file.type == "application/pdf"){
 
 // UPLOAD CV AND JOB TO ONE WHO WANT TO APPLY 
 
+function displayImageNameSizecv(e) {
+  var file = e.files[0];
+  console.log(e.files);
+  console.log(file.type );
+
+  for (var i = 0; i < e.files.length; i++) {
+    var myDiv = document.getElementById("add-photo00");
+    var selectList = document.createElement("div");
+    var photo = "add-photoo";
+    selectList.id = photo + [i];
+    selectList.className = "col-sm-12 mt-2";
+    myDiv.appendChild(selectList);
+  }
+
+  function setupReader0(files, y) {
+    if (files) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $('#add-photoo'+ y +'').html(
+            '<div class="form-group mt-3"><i class="fa fa-paperclip"></i> File:' + files.name + 
+            '</div>'+
+            '<div class="form-group mt-3"> Size:' + formatSizeUnits(files.size)+
+            '</div>'
+          );
+      };
+      reader.readAsDataURL(files, "UTF-8");
+      // reader.readAsText(file, "UTF-8");
+    }
+  }
+
+  for (var y = 0; y < e.files.length; y++) {
+    setupReader0(e.files[y], y);
+  }
+
+}
+
+
 function displayImageNameSize(e) {
   var file = e.files[0];
   console.log(e.files);
@@ -403,7 +440,6 @@ function displayImageNameSize(e) {
   for (var y = 0; y < e.files.length; y++) {
     setupReader0(e.files[y], y);
   }
-
 
 }
 

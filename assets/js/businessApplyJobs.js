@@ -36,7 +36,7 @@ $(document).ready(function () {
         var email = $('#email');
         var telephone = $('#telephone');
         var address = $('#address');
-        // var additioninformation = $('.additioninformation');
+        var subject = $('.subjectcomposer');
         var uploadcv = $('#upload-cv');
         var uploadcertificates = $('#upload-certificates');
         var editor1 = CKEDITOR.instances.editor1.getData();
@@ -44,7 +44,7 @@ $(document).ready(function () {
         var extensions = $('#upload-cv').val().split('.').pop().toLowerCase();
         var extensions0 = $('#upload-certificates').val().split('.').pop().toLowerCase();
         
-        if (isEmpty(firstname) && isEmpty(lastnam) && isEmpty(email) && isEmpty(address) &&
+        if (isEmpty(firstname) && isEmpty(lastnam) && isEmpty(email) && isEmpty(address) && isEmpty(subject) &&
         isEmpty(telephone) && isEmpty(uploadcv) && isEmpty(uploadcertificates)) {
 
             if (jQuery.inArray(extensions, ['gif', 'png', 'jpg', 'mp4', 'mp3', 'jpeg', 'bmp', 'pdf', 'doc', 'ppt', 'docx', 'xlsx', 'xls', 'zip']) == -1) {

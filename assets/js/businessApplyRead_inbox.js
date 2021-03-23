@@ -19,7 +19,40 @@ $(document).ready(function () {
                             $("#responseSubmitdelete").fadeOut();
                         }, 2000);
                         setInterval(function () {
-                            // location.reload();
+                            location.reload();
+                        }, 2400);
+                    }, error: function (response) {
+                        $("#responseSubmitdelete").html(response).fadeIn();
+                        setInterval(function () {
+                            $("#responseSubmitdelete").fadeOut();
+                        }, 3000);
+                    }
+                });
+         
+    });
+
+    $(document).on('click', '.deleteformSent',function (e) {
+        e.preventDefault();
+        var deletes = $(this).data('delete');
+        var cvid = $(this).data('cvid');
+        var id_radom = $(this).data('id_radom');
+
+                $.ajax({
+                    url: 'core/ajax_db/businessApplyViewSent',
+                    method: 'POST',
+                    dataType: 'text',
+                    data:{
+                        deleteSent: deletes,
+                        cvid: cvid,
+                        id_radom: id_radom,
+                   },
+                    success: function (response) {
+                        $("#responseSubmitdelete").html(response).fadeIn();
+                        setInterval(function () {
+                            $("#responseSubmitdelete").fadeOut();
+                        }, 2000);
+                        setInterval(function () {
+                            location.reload();
                         }, 2400);
                     }, error: function (response) {
                         $("#responseSubmitdelete").html(response).fadeIn();
@@ -35,6 +68,7 @@ $(document).ready(function () {
         e.preventDefault();
         var deletes = $(this).data('delete');
         var trashid = $(this).data('trashid');
+        var id_radom = $(this).data('id_radom');
 
                 $.ajax({
                     url: 'core/ajax_db/businessApplyViewTrash',
@@ -44,6 +78,7 @@ $(document).ready(function () {
                     data: {
                         delete: deletes,
                         trashid: trashid,
+                        id_radom: id_radom,
                     },
                     success: function (response) {
                         $("#responseSubmitdelete").html(response).fadeIn();
@@ -51,7 +86,7 @@ $(document).ready(function () {
                             $("#responseSubmitdelete").fadeOut();
                         }, 2000);
                         setInterval(function () {
-                            // location.reload();
+                            location.reload();
                         }, 2400);
                     }, error: function (response) {
                         $("#responseSubmitdelete").html(response).fadeIn();
@@ -77,7 +112,7 @@ $(document).ready(function () {
                     $("#responseSubmitalldelete").fadeOut();
                 }, 2000);
                 setInterval(function () {
-                    // location.reload();
+                    location.reload();
                 }, 2400);
             }, error: function (response) {
                 $("#responseSubmitalldelete").html(response).fadeIn();
@@ -103,7 +138,7 @@ $(document).ready(function () {
                     $("#responseSubmitalldeleteSent").fadeOut();
                 }, 2000);
                 setInterval(function () {
-                    // location.reload();
+                    location.reload();
                 }, 2400);
             }, error: function (response) {
                 $("#responseSubmitalldeleteSent").html(response).fadeIn();
@@ -129,7 +164,7 @@ $(document).ready(function () {
                             $("#responseSubmitalldeleteTrash").fadeOut();
                         }, 2000);
                         setInterval(function () {
-                            // location.reload();
+                            location.reload();
                         }, 2400);
                     }, error: function (response) {
                         $("#responseSubmitalldeleteTrash").html(response).fadeIn();
@@ -162,7 +197,7 @@ $(document).ready(function () {
                             $("#responseSubmitdelete").fadeOut();
                         }, 2000);
                         setInterval(function () {
-                            // location.reload();
+                            location.reload();
                         }, 2400);
                         console.log(response);
                     }, error: function (response) {

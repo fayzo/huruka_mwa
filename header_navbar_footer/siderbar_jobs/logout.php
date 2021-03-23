@@ -26,7 +26,7 @@
 
                 </div>
                 <div class="logout">
-                    <h5 class="user-username-follow"><?php echo $user['firstname']." ".$user['lastname'] ;?></h5>
+                    <h5 class="user-username-follow"><?php echo $user['username'] ;?></h5>
                     <h5 class="user-username-follow"><small><?php echo $user['career'] ;?></small></h5>
                     <button  type="button" class="btn btn-md main-active "><a class="text-white" href="<?php echo LOGOUT ;?>">Logout</a></button>
                 </div>

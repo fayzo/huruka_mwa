@@ -56,7 +56,7 @@
                                      <tr>
                                          <td>check</td>
                                          <td>star</td>
-                                         <td>Name</td>
+                                         <td>Email</td>
                                          <td>Message</td>
                                          <td>File</td>
                                          <td>Time Apply</td>

@@ -61,21 +61,21 @@
                 <div class="card">
                     <div class="card-header borders-tops p-2">
                         <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#activity"
-                                    data-toggle="tab">Activity</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">About Me</a>
+                            <!-- <li class="nav-item"><a class="nav-link active" href="#activity"
+                                    data-toggle="tab">Activity</a></li> -->
+                            <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">About Me</a>
                             </li>
                         </ul>
                     </div><!-- /.card-header -->
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="active tab-pane" id="activity">
+                            <!-- <div class="active tab-pane" id="activity"> -->
                                 <!-- /.post -->
-                                <?php echo $Home_GetUsers->getUserTweet($user['user_id'],$user_id) ;?>
-                            </div>
+                                <!-- < ?php echo $Home_GetUsers->getUserTweet($user['user_id'],$user_id) ;?> -->
+                            <!-- </div> -->
                             <!-- /.tab-pane -->
 
-                            <div class="tab-pane" id="settings">
+                            <div class="active tab-pane" id="settings">
                               <span id="responsesCOMP"></span>
                                 <form class="form-horizontal" >
                                     <input type="hidden" class="form-control" value="<?php echo $user['user_id'];?>" id="company_id" style="display:none">
@@ -180,7 +180,7 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <!-- whoTofollow: user whoTofollow style 1 -->
-                        <?php $follow->whoTofollow($user_id,$user['user_id'])?>
+                        <!-- < ?php $follow->whoTofollow($user_id,$user['user_id'])?> -->
                     </div>
                     <!-- /. col -->
 

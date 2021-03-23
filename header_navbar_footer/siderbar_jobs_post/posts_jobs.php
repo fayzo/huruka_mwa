@@ -196,18 +196,6 @@
                                    <label for="Job Summary">Job Summary</label>
                                    <textarea class="form-control job-summary" id="editor4" rows="4"  placeholder="job summary"></textarea>
                                </div>
-                               <!-- <div class="form-group">
-                                   <label for="email">Responsibilities and Duties</label>
-                                   <textarea class="form-control responsibilities-duties" id="editor2"  rows="4" placeholder="Responsibilities Duties"></textarea>
-                               </div>
-                               <div class="form-group">
-                                   <label for="Pages Body">Qualifications and Skills</label>
-                                   <textarea class="form-control qualifications-skills" id="editor3" placeholder="Qualifications and Skills"  rows="4"></textarea>
-                               </div>
-                               <div class="form-group">
-                                   <label for="Pages Body">Terms and conditions</label>
-                                   <textarea class="form-control terms-conditions" id="editor4" placeholder="Qualifications and Skills"  rows="4"></textarea>
-                               </div> -->
                                <div class="form-group">
                                     <label for="Pages Body">Deadline to submit</label>
                                     <input type="date" class="form-control deadline" placeholder="Deadline to submit">
@@ -240,17 +228,6 @@
                              <p class="job-summary0"> Example of an Accountant job summary. </p>
                            <hr>
                       
-                             <!-- <h4>Responsibilities and Duties: </h4>
-                             <p class="responsibilities-duties0">Examples of an Accountant Responsibilities. </p>
-                           <hr>
-                      
-                           <h4 >Qualifications and Skills: </h4>
-                           <p class="qualifications-skills0" >Examples of an Accountant skills. </p>
-                         <hr>
-                            <h4 class="card-title">Terms and conditions: </h4>
-                            <p class="card-title terms-conditions0">Explaination of Terms and conditions: </p>
-                          <hr> -->
-                  
                             <h4 class="card-title">Deadline to submit: </h4>
                             <p class="card-title deadlin0e">Explaination of Deadline to submit: </p>
                           <hr>
@@ -307,22 +284,6 @@
                                    <textarea id="editor1" name="editor1" class="job-summary1" rows="10" cols="80">
                                     </textarea>
                                </div>
-                               <!-- <div class="form-group">
-                                   <label for="Job Summary">Job Summary</label>
-                                   <textarea class="form-control textarea  job-summary1" id="editor7"  rows="4"  placeholder="job summary"></textarea>
-                               </div> -->
-                               <!-- <div class="form-group">
-                                   <label for="email">Responsibilities and Duties</label>
-                                   <textarea class="form-control textarea  responsibilities-duties1" id="editor8"  rows="4" placeholder="Responsibilities Duties"></textarea>
-                               </div>
-                               <div class="form-group">
-                                   <label for="Pages Body">Qualifications and Skills</label>
-                                   <textarea class="form-control textarea  qualifications-skills1" id="editor9" placeholder="Qualifications and Skills"  rows="4"></textarea>
-                               </div>
-                               <div class="form-group">
-                                   <label for="Pages Body">Terms and conditions</label>
-                                   <textarea class="form-control textarea terms-conditions1" id="editor10" placeholder="Qualifications and Skills"  rows="4"></textarea>
-                               </div> -->
                                <div class="form-group">
                                    <label for="Pages Body">Deadline to submit</label>
                                     <input type="date" name="deadline1" class="form-control deadline1" placeholder="Deadline to submit">

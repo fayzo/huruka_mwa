@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $("#myModalComposermessage").on('click', function () {
+        $("#myModalComposer").modal('show');
+        CKEDITOR.replace('editor2')
+    });
 
     $(document).on('click', '#email-dropdown-menu', function () {
         var email_notificationDrpdown = 1;
@@ -17,52 +21,6 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('keyup', '.search-email-composerxxxx__', function () {
-        // $('.message-recent').hide();
-        var searching = $(this).val();
-        $.ajax({
-            url: 'core/ajax_db/email_notification.php',
-            method: 'POST',
-            dataType: 'text',
-            data: {
-                search: searching,
-            }, success: function (response) {
-                var json = JSON.parse(response);
-                $(".emailsendto").html(json.form);
-                var myObj = json.email;
-                var myDiv = document.getElementById("myDiv-search-email-composer");
-                //Create and append select list
-                var selectList = document.createElement("select");
-                selectList.id = "emialTo";
-                selectList.name = "emialTo";
-                selectList.className = "custom-select d-block w-100 emialTo";
-                myDiv.appendChild(selectList);
-
-                var ordered = {};
-                Object.keys(myObj).sort().forEach(function (key) {
-                    ordered[key] = myObj[key];
-                });
-                // var ordered =Object.keys(myObj);
-                // ordered.sort().forEach(function(key) {
-                //     ordered[key] = myObj[key];
-                // });
-
-                for (var x in ordered) {
-                    var option = document.createElement("option");
-                    option.value = ordered[x];
-                    option.text = x;
-                    selectList.appendChild(option);
-                }
-
-                $(".emialTo").click(function () {
-                    $('.search-email-composer').val($('option').val());
-                    $("#myDiv-search-email-composer").hide();
-                });
-                // $(".search-email-composer").val(json.email);
-                console.log(response);
-            }
-        });
-    });
 
     $(document).on('click', '.email-composer-new1', function (e) {
         for(instance in CKEDITOR.instances){
@@ -74,7 +32,7 @@ $(document).ready(function () {
         var emailcomposer = $('.emailcomposer');
         var subjectcomposer = $('.subjectcomposer');
         // var textcomposer = $('.textcomposer');
-        var editor1 = CKEDITOR.instances.editor1.getData();
+        var editor2 = CKEDITOR.instances.editor2.getData();
          
         if (isEmpty(emailcomposer) && isEmpty(subjectcomposer) ) {
             var filecomposer = $('#filecomposer').val();
@@ -90,7 +48,7 @@ $(document).ready(function () {
                             user_id: user_id.val(),
                             emailcomposer :emailcomposer.val(),
                             subjectcomposer: subjectcomposer.val(),
-                            textcomposer: editor1,
+                            textcomposer: editor2,
                         },
                         success: function (response) {
                             $("#responseSubmit").html(response).fadeIn();
@@ -98,7 +56,7 @@ $(document).ready(function () {
                                 $("#responseSubmit").fadeOut();
                             }, 2000);
                             setInterval(function () {
-                                // location.reload();
+                                location.reload();
                             }, 2400);
                         }, error: function (response) {
                             $("#responseSubmit").html(response).fadeIn();
@@ -173,6 +131,53 @@ $(document).ready(function () {
             }
             }
         }
+    });
+
+    $(document).on('keyup', '.search-email-composerxxxx__', function () {
+        // $('.message-recent').hide();
+        var searching = $(this).val();
+        $.ajax({
+            url: 'core/ajax_db/email_notification.php',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                search: searching,
+            }, success: function (response) {
+                var json = JSON.parse(response);
+                $(".emailsendto").html(json.form);
+                var myObj = json.email;
+                var myDiv = document.getElementById("myDiv-search-email-composer");
+                //Create and append select list
+                var selectList = document.createElement("select");
+                selectList.id = "emialTo";
+                selectList.name = "emialTo";
+                selectList.className = "custom-select d-block w-100 emialTo";
+                myDiv.appendChild(selectList);
+
+                var ordered = {};
+                Object.keys(myObj).sort().forEach(function (key) {
+                    ordered[key] = myObj[key];
+                });
+                // var ordered =Object.keys(myObj);
+                // ordered.sort().forEach(function(key) {
+                //     ordered[key] = myObj[key];
+                // });
+
+                for (var x in ordered) {
+                    var option = document.createElement("option");
+                    option.value = ordered[x];
+                    option.text = x;
+                    selectList.appendChild(option);
+                }
+
+                $(".emialTo").click(function () {
+                    $('.search-email-composer').val($('option').val());
+                    $("#myDiv-search-email-composer").hide();
+                });
+                // $(".search-email-composer").val(json.email);
+                console.log(response);
+            }
+        });
     });
 
 });

@@ -140,7 +140,7 @@
             </ul>
             </li>
 
-         <?php if (isset($_SESSION['job_user'])){ ?>
+         <?php if (isset($_SESSION['job_user']) || $notific['total_email_user_id'] > 0){ ?>
 
              <!-- Email: style can be found in dropdown.less -->
           <li class="dropdown email-menu messages-menu">

@@ -17,7 +17,7 @@ if (isset($_GET['hashtag']) && !empty($_GET['hashtag'])) {
     $icyamunaraV= $icyamunara->icyamunaraData($_SESSION['key']);
 
     $user= $home->userData($user_id);
-    $notific= $notification->getNotificationCount($user_id);
+    $notific= $notification->getNotificationCount($user_id,$_SESSION['email']);
     $notification->notificationsView($user_id);
 }
 ?>

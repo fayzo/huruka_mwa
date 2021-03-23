@@ -24,26 +24,6 @@
         <?php echo htmlspecialchars_decode($user['overview']); ?>
     </div>
     <hr>
-<!-- 
-    <h6 class="card-title font-weight-bold">Company history: </h6>
-    <div class="company-history0"></div>
-    <hr>
-
-    <h6 class="card-title font-weight-bold">Management team: </h6>
-      <div class="management-team0"></div>
-    <hr>
-
-    <h6 class="card-title font-weight-bold">Legal structure and ownership: </h6>
-    <div class="legal-structure0"></div>
-    <hr>
-
-    <h6 class="card-title font-weight-bold">Locations and facilities: </h6>
-    <div class="location-place0"></div>
-    <hr>
-
-    <h6 class="card-title font-weight-bold">Mission statement: </h6>
-    <div class="mission-statement0"></div>
-    <hr> -->
 
     <h6 class="card-title font-weight-bold">website: </h6>
     <div class="website0">
@@ -169,36 +149,6 @@
                 </div>
                 <hr>
 
-                <!-- <div class="form-group">
-                  <h4><i> Company history:</h4></i> 
-                  <textarea class="form-control"  id="company-history" rows="4" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" placeholder=" Provide the back story, including date of founding, and who was involved. " ></textarea>
-                </div>
-                <hr>
-
-                <div class="form-group">
-                  <h4><i> Management team:</h4></i> 
-                  <textarea class="form-control"  id="management-team" style=" font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"  rows="4" placeholder="Details about who runs the company, and other key roles. " ></textarea>
-                </div>
-                <hr>
-        
-                <div class="form-group">
-                  <h4><i> Legal structure and ownership:</h4></i> 
-                  <textarea class="form-control"  id="legal-structure" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder="How you’ve decided to structure your company, and who owns what percentage of it. " ></textarea>
-                </div>
-                <hr>
-
-                <div class="form-group">
-                  <h4><i> Location and facilities:</h4></i> 
-                  <textarea class="form-control" id="location-place" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder="Details on your workspaces or plans to acquire them. " ></textarea>
-                </div>
-                <hr>
-
-                <div class="form-group">
-                  <h4><i>Mission statement:</h4></i>
-                  <textarea class="form-control" id="mission-statement" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder="A concise statement of the guiding principles of your company. " ></textarea>
-                </div>
-                <hr> -->
-
                 <div class="form-group">
                   <h4><i>Website If you've :</h4></i>
                   <input type="text" class="form-control" id="website" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" placeholder="https://www.mywebsie.com"
@@ -222,37 +172,6 @@
                   <textarea class="form-control textarea"  id="editor3" name="editor3"  style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder=" This is where you’ll briefly sum everything up. " ></textarea>
                 </div>
                 <hr>
-                <!-- The-company-overview -->
-<!-- 
-                <div class="form-group">
-                  <h4><i> Company history:</h4></i> 
-                  <textarea class="form-control textarea"  id="company-history" rows="4" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" placeholder=" Provide the back story, including date of founding, and who was involved. " ></textarea>
-                </div>
-                <hr>
-
-                <div class="form-group">
-                  <h4><i> Management team:</h4></i> 
-                  <textarea class="form-control textarea"  id="management-team" style=" font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"  rows="4" placeholder="Details about who runs the company, and other key roles. " ></textarea>
-                </div>
-                <hr>
-        
-                <div class="form-group">
-                  <h4><i> Legal structure and ownership:</h4></i> 
-                  <textarea class="form-control textarea"  id="legal-structure" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder="How you’ve decided to structure your company, and who owns what percentage of it. " ></textarea>
-                </div>
-                <hr>
-
-                <div class="form-group">
-                  <h4><i> Location and facilities:</h4></i> 
-                  <textarea class="form-control textarea" id="location-place" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder="Details on your workspaces or plans to acquire them. " ></textarea>
-                </div>
-                <hr>
-
-                <div class="form-group">
-                  <h4><i>Mission statement:</h4></i>
-                  <textarea class="form-control textarea" id="mission-statement" style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" rows="4" placeholder="A concise statement of the guiding principles of your company. " ></textarea>
-                </div>
-                <hr> -->
 
                 <div class="form-group">
                   <h4><i>Website If you've :</h4></i>

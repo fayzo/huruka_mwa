@@ -12,6 +12,7 @@ $(document).ready(function () {
                 user_id: user_id,
             }, success: function (response) {
                 $(".popupTweet").html(response);
+                CKEDITOR.replace('editor2') // for email message
                 $(".close-imagePopup").click(function () {
                     $(".user-popup").hide();
                 });
@@ -82,6 +83,8 @@ $(document).ready(function () {
     // THIS IS FOR UNEMPLOYMENT & PROFESSIONAL
 
     $(document).on('click', '#addposts_career', function (e) {
+        CKEDITOR.replace('editor1')
+        
         for(instance in CKEDITOR.instances){
             CKEDITOR.instances[instance].updateElement();
         }
@@ -141,9 +144,11 @@ $(document).ready(function () {
 
 
 function unemploymentEdits(user_id) {
+
     for(instance in CKEDITOR.instances){
         CKEDITOR.instances[instance].updateElement();
     }
+
     $.ajax({
         url: 'core/ajax_db/unemployment_profile',
         method: 'POST',
@@ -152,6 +157,8 @@ function unemploymentEdits(user_id) {
             key: 'edit',
             rowID: user_id
         }, success: function (response) {
+                CKEDITOR.replace('editor1')
+
                 $(".edit-body").fadeIn();
                 $("#Career").val(response.career);
                 $("#years").val(response.years);
@@ -176,6 +183,7 @@ function unemploymentEdits(user_id) {
 
 
 function ajax_requestsPostsUnemploy(key) {
+
     for(instance in CKEDITOR.instances){
         CKEDITOR.instances[instance].updateElement();
     }

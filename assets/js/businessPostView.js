@@ -85,15 +85,34 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('click', '.sent-view', function () {
+        // e.stopPropagation();
+        var cv_id = $(this).data('cv_id');
+        $.ajax({
+            url: 'core/ajax_db/businessApplyViewSent',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                cv_id: cv_id,
+            }, success: function (response) {
+                $(".popupTweet").html(response);
+                $(".close-imagePopup").click(function () {
+                    $(".inbox-popup").hide();
+                });
+                // console.log(response);
+            }
+        });
+    });
+
     $(document).on('click', '.trash-view', function () {
         // e.stopPropagation();
-        var trash_id = $(this).data('trash_id');
+        var cv_id = $(this).data('cv_id');
         $.ajax({
             url: 'core/ajax_db/businessApplyViewTrash',
             method: 'POST',
             dataType: 'text',
             data: {
-                trash_id: trash_id,
+                cv_id: cv_id,
             }, success: function (response) {
                 $(".popupTweet").html(response);
                 $(".close-imagePopup").click(function () {

@@ -12,7 +12,8 @@ if ($users->jobloggedin() == 'SME' && $users->loggedin() == true) {
     $icyamunaraV= $icyamunara->icyamunaraData($_SESSION['key']);
 
     $user_id= $_SESSION['key'];
-    $notific= $notification->getNotificationCount($user_id);
+    $notific= $notification->getNotificationCount($user_id,$_SESSION['email']);
+
     $notification->notificationsView($user_id);
 }else {
     header('location: jobs.php');
