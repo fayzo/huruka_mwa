@@ -17,7 +17,7 @@ $mail->SMTPOptions = array(
 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
 $mail->Username = 'irangiroltd@gmail.com';                 // SMTP username
-$mail->Password = $mail->passme();                         // SMTP password
+$mail->Password = '';                         // SMTP password$mail->passme()
 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                                    // TCP port to connect to
 // $mail->SMTPOptions = array(
@@ -29,7 +29,7 @@ $mail->Port = 587;                                    // TCP port to connect to
 // $mail->Host = 'iragiro.com';  // Specify main and backup SMTP servers
 // $mail->SMTPAuth = true;                               // Enable SMTP authentication
 // $mail->Username = 'admin@iragiro.com';                 // SMTP username
-// $mail->Password = '';                         // SMTP passwordrwanda1234@zd
+// $mail->Password = '';                         // SMTP passwordrwanda1234@zdcx
 // $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
 // $mail->Port = 465;    // TCP port to connect to 465 or 587
 
