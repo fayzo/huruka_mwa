@@ -67,7 +67,7 @@ $(document).ready(function (e) {
             }
         }else {
             var extensions = $('#file').val().split('.').pop().toLowerCase();
-            if (jQuery.inArray(extensions, ['gif', 'png', 'jpg', 'mp4', 'mp3', 'jpeg', 'bmp', 'pdf', 'doc', 'ppt', 'docx', 'xlsx', 'xls', 'zip']) == -1) {
+            if (jQuery.inArray(extensions, ['gif', 'png', 'jpg', 'mp4', 'mp3', 'jpeg', 'bmp', 'pdf','m4a', 'doc', 'ppt', 'docx', 'xlsx', 'xls', 'zip']) == -1) {
                 $("#response-posts").html('Invalid Image File').fadeIn();
                 setInterval(function () {
                     $("#response-posts").fadeOut();

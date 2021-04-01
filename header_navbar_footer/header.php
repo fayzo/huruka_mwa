@@ -959,7 +959,7 @@ if (isset($_SESSION['key']) && $result === '' ){ ?>
   <!-- <body class="hold-transition skin-blue fixed sidebar-collapse sidebar-mini "> -->
   <!-- Site wrapper skin-blue -->
 <?php }else if (isset($_SESSION['key']) && $self === 'profile.php' || isset($_SESSION['key']) && $self === 'hashtag.php' || 
- isset($_SESSION['key']) && $self === 'balance.php'){ ?>
+ isset($_SESSION['key']) && $self === 'balance.php' || isset($_SESSION['key']) && $self ==='profileEdit.php'){ ?>
   
   <!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
   <body class="hold-transition fixed sidebar-mini-expand-feature sidebar-mini <?php echo (!empty($user['color']))? $user['color'] :'skin-blue'; ?>">

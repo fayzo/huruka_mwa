@@ -11,10 +11,11 @@
           <div class="col-md-3 mb-3 d-none d-md-block">
 
           <?php if (isset($_SESSION['key'])){
-                    echo $home->userProfile($user_id);
-                 } ?>
+                  echo $home->userProfile($user_id);
 
-            <?php echo $trending->trends(); ?>
+                  echo $trending->trends();
+            } ?>
+            
             <!-- Profile Image -->
             
             <div class="sticky-top" style="top: 52px;z-index:1000;">
@@ -70,7 +71,7 @@
 
                     </div>
                     <div class="t-fo-right">
-                      <span id="count">1000</span>
+                      <span id="count">10000</span>
                       <input <?php echo (isset($_SESSION['key']))?'type="submit"':'type="button" id="login-please" data-login="1"';?> class="btn main-active" name="tweet" value="Post">
                     </div>
                     <!--  progress-xs -->

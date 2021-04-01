@@ -6,7 +6,7 @@ if (isset($_SESSION['key'])) {
     exit();
 }
 
-if (isset($_SESSION['keys']) && isset($_SESSION['username']) && isset($_SESSION['email'])) {
+if (isset($_SESSION['key']) && isset($_SESSION['username']) && isset($_SESSION['email'])) {
     header('location: '.LOCKSCREEN_LOGIN.'');
     exit();
 }
@@ -62,7 +62,7 @@ if(isset($_POST['key'])){
                         <span>&times;</span>
                     </button>
                     <strong>Email invalid format</strong> </div>');
-    }else if (strlen($username) > 10) {
+    }else if (strlen($username) > 20) {
          exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
@@ -98,7 +98,7 @@ if(isset($_POST['key'])){
             'date_birth' => $date_birth,
             'date_registry' => $date_registry, 
             'last_login' => $datetime, 
-            'color' => 'black', 
+            'color' => '', 
             'approval' => 'off', 
       ));
 

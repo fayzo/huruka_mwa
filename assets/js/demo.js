@@ -42,6 +42,7 @@ $(function () {
         'skin-purple-light',
         'skin-green-light',
         'skin-Black',
+        'skin-Dark',
         'skin-rose',
         'skin-purple-green'
     ]
@@ -353,6 +354,14 @@ $(function () {
                 + '</a>'
                 + '<p class="text-center no-margin" style="font-size: 12px">Black</p>')
     $skinsList.append($skinBlack)
+    var $skinDark =
+        $('<li />', {style: 'float:left; width: 33.33333%; padding: 5px;'})
+            .append('<a href="javascript:void(0)" onclick="colors(\'skin-Dark\')" data-skin="skin-Dark" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">'
+                + '<div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-Dark"></span><span class="bg-Dark" style="display:block; width: 80%; float: left; height: 7px;"></span></div>'
+                + '<div><span style="display:block; width: 20%; float: left; height: 20px; background: #000000"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>'
+                + '</a>'
+                + '<p class="text-center no-margin" style="font-size: 12px">Darkiness</p>')
+    $skinsList.append($skinDark)
     var $skinRose =
         $('<li />', {style: 'float:left; width: 33.33333%; padding: 5px;'})
             .append('<a href="javascript:void(0)" onclick="colors(\'skin-rose\')" data-skin="skin-rose" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">'

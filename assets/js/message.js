@@ -90,7 +90,7 @@ $(document).ready(function() {
                                     scrolldown();
                             }
                             $('#chat').on('scroll',function () {
-                                  if ($(this).scrollTop() < this.scrollHeight - $(this).height()) {
+                                  if ($(this).scrollTop() < $(this).height()) {
                                       autoscroll=false;
                                   }else{
                                       autoscroll=true;
@@ -119,9 +119,9 @@ $(document).ready(function() {
                          scrolldown();
                      }
                      $('#chat').on('scroll', function () {
-                         if ($(this).scrollTop() < this.scrollHeight - $(this).height()) {
+                         if ($(this).scrollTop() < $(this).height()) {
                              autoscroll = false;
-                         } else {
+                        } else {
                              autoscroll = true;
                          }
                          // console.log(response);
@@ -138,7 +138,11 @@ $(document).ready(function() {
         getmessages();
         autoscroll=true;
          scrolldown = function () {
+             var scrollBottom = $(window).scrollTop() + $(window).height();
              $('#chat').scrollTop($('#chat').scrollHeight);
+            //  $('#chat').scrollTop(scrollBottom);
+            //  console.log(scrollBottom,$(this).scrollTop(),$(this).height());
+
          };
 
         $(document).on('click','.back-messages',function () {

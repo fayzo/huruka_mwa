@@ -1,7 +1,7 @@
 <?php 
 include "../core/init.php";
 
-if (isset($_SESSION['keys']) && isset($_SESSION['username']) && $_SESSION['profile_img']) {
+if (!isset($_SESSION['keycreate'])) {
     header('location: '.LOCKSCREEN_LOGIN.'');
     exit();
 }
@@ -34,6 +34,7 @@ if(isset($_POST['key'])){
                     </button>
                     <strong>Password Must eqaul to verification</strong> </div>');
     }else{
+
         $user_createPassword_id= $users->updates('users',array( 
             'user_id' => $user_id,
             'password' => $password),$user_id);
@@ -206,10 +207,14 @@ if(isset($_POST['key'])){
 
 <body>
     <div class="container" id="container">
-        <h1 class="mb-3">Menya.com</h1>
+        <h1 class="mb-3">irangiro</h1>
         <div id="response"></div>
         <div class="lockscreen-image">
-            <img src="<?php echo BASE_URL_LINK ;?>image/img/user1-128x128.jpg" alt="User Image">
+            <?php if(!empty($_SESSION['profile_img'])){ ?>
+                <img src="<?php echo BASE_URL_LINK."image/users_profile_cover/".$_SESSION['profile_img'] ;?>" alt="User Image">
+            <?php }else{ ?>
+                <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL; ?>" alt="User Image">
+            <?php } ?>
         </div>
         <div class="form-container">
         <h4><?php echo $_SESSION['username'] ;?></h4>
@@ -233,8 +238,14 @@ if(isset($_POST['key'])){
                         placeholder="verify password" />
                 </div>
                 <div style="margin-top:7px;">
-                    <button class="blackbutton" type="button"><a href="<?php echo LOGOUT ;?>">Cancel</a></button>
-                    <button class="redbutton" onclick="current('password')" type="button">submit</button>
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="blackbutton" type="button"><a href="<?php echo LOGOUT ;?>">Cancel</a></button>
+                        </div>
+                        <div class="col-6">
+                            <button class="redbutton" onclick="current('password')" type="button">submit</button>
+                        </div>
+                    </div>
                 </div>
             </form>
             <!-- </div> -->

@@ -1,0 +1,152 @@
+/*
+ * Skin: Dark
+ * ----------
+ */
+.skin-Dark .main-header .navbar {
+  background-color: #000000;
+}
+.skin-Dark .main-header .navbar .nav > li > a {
+  color: #c3bebe;
+}
+.skin-Dark .main-header .navbar .nav > li > a:hover,
+.skin-Dark .main-header .navbar .nav > li > a:active,
+.skin-Dark .main-header .navbar .nav > li > a:focus,
+.skin-Dark .main-header .navbar .nav .open > a,
+.skin-Dark .main-header .navbar .nav .open > a:hover,
+.skin-Dark .main-header .navbar .nav .open > a:focus,
+.skin-Dark .main-header .navbar .nav > .active > a {
+  background: rgba(0, 0, 0, 0.1);
+  color: #f6f6f6;
+}
+.skin-Dark .main-header .navbar .sidebar-toggle {
+  color: #c3bebe;
+}
+.skin-Dark .main-header .navbar .sidebar-toggle:hover {
+  color: #f6f6f6;
+  background: rgba(0, 0, 0, 0.1);
+}
+.skin-Dark .main-header .navbar .sidebar-toggle {
+  color: #c3bebe;
+}
+.skin-Dark .main-header .navbar .sidebar-toggle:hover {
+  background-color: #367fa9;
+}
+@media (max-width: 767px) {
+  .skin-Dark .main-header .navbar .dropdown-menu li.divider {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .skin-Dark .main-header .navbar .dropdown-menu li a {
+    color: #c3bebe;
+  }
+  .skin-Dark .main-header .navbar .dropdown-menu li a:hover {
+    background: #272323f5;
+  }
+}
+.skin-Dark .main-header .logo {
+  background-color: #000000;
+  color: #c3bebe;
+  border-bottom: 0 solid transparent;
+}
+.skin-Dark .main-header .logo:hover {
+  background-color:#272323f5;
+}
+.skin-Dark .main-header li.user-header {
+  background-color: #272323f5;
+}
+.skin-Dark .content-header {
+  background: transparent;
+}
+.skin-Dark .wrapper,
+.skin-Dark .main-sidebar,
+.skin-Dark .left-side {
+  background-color: #222d32;
+}
+.skin-Dark .user-panel > .info,
+.skin-Dark .user-panel > .info > a {
+  color: #c3bebe;
+}
+.skin-Dark .sidebar-menu > li.header {
+  color: #4b646f;
+  background: #1a2226;
+}
+.skin-Dark .sidebar-menu > li > a {
+  border-left: 3px solid transparent;
+}
+.skin-Dark .sidebar-menu > li:hover > a,
+.skin-Dark .sidebar-menu > li.active > a,
+.skin-Dark .sidebar-menu > li.menu-open > a {
+  color: #c3bebe;
+  background: #1e282c;
+}
+.skin-Dark .sidebar-menu > li.active > a {
+  border-left-color: #000000;
+}
+.skin-Dark .sidebar-menu > li > .treeview-menu {
+  margin: 0 1px;
+  background: #2c3b41;
+}
+.skin-Dark .sidebar a {
+  color: #b8c7ce;
+}
+.skin-Dark .sidebar a:hover {
+  text-decoration: none;
+}
+.skin-Dark .sidebar-menu .treeview-menu > li > a {
+  color: #8aa4af;
+}
+.skin-Dark .sidebar-menu .treeview-menu > li.active > a,
+.skin-Dark .sidebar-menu .treeview-menu > li > a:hover {
+  color: #c3bebe;
+}
+.skin-Dark .sidebar-form {
+  border-radius: 3px;
+  border: 1px solid #374850;
+  margin: 10px 10px;
+}
+.skin-Dark .sidebar-form input[type="text"],
+.skin-Dark .sidebar-form .btn {
+  box-shadow: none;
+  background-color: #374850;
+  border: 1px solid transparent;
+  height: 35px;
+}
+.skin-Dark .sidebar-form input[type="text"] {
+  color: #666;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 2px;
+}
+.skin-Dark .sidebar-form input[type="text"]:focus,
+.skin-Dark .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
+  background-color: #c3bebe;
+  color: #666;
+}
+.skin-Dark .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
+  border-left-color: #c3bebe;
+}
+.skin-Dark .sidebar-form .btn {
+  color: #999;
+  border-top-left-radius: 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 0;
+}
+.skin-Dark.layout-top-nav .main-header > .logo {
+  background-color: #3c8dbc;
+  color: #c3bebe;
+  border-bottom: 0 solid transparent;
+}
+.skin-Dark.layout-top-nav .main-header > .logo:hover {
+  background-color: #272323;
+}
+
+.skin-Dark .main-header .navbar .sidebar-toggle,
+.skin-Dark .main-header .navbar .sidebar-toggle_ {
+  color:  #c3bebe;
+}
+.skin-Dark .main-header .navbar .sidebar-toggle:hover,
+.skin-Dark .main-header .navbar .sidebar-toggle_:hover {
+  color: #f6f6f6;
+  background: rgba(0, 0, 0, 0.1);
+}

@@ -3225,6 +3225,7 @@ nav.tabs>li>a {
   color: #000;
   background-color: #b5bbc8 !important;
 }
+.bg-Dark,
 .bg-black-active {
   background-color: #000000 !important;
 }

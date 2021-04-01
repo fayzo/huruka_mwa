@@ -7,9 +7,12 @@ if (!isset($_SESSION['keys'])) {
 }
 
 if (isset($_POST['key']) == 'lockscreen') {
-    
+
+    $users->forgotUsernameCountsTodelete('users',
+    array('forgotUsernameCounts' => 'forgotUsernameCounts +1', ),$_SESSION['keys']);
+
     $password = $users->test_input($_POST['password']);
-    $sql= $db->query("SELECT user_id ,username,approval,chat FROM users WHERE user_id= $_SESSION[keys] AND password='{$password}' ");
+    $sql= $db->query("SELECT user_id ,username,approval,chat,email FROM users WHERE user_id= $_SESSION[keys] AND password='{$password}' ");
     $row= $sql->fetch_assoc();
 
     if ($sql->num_rows > 0) {
@@ -20,6 +23,7 @@ if (isset($_POST['key']) == 'lockscreen') {
         $_SESSION['key'] = $row['user_id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['approval'] = $row['approval'];
+        $_SESSION['email'] = $row['email'];
         $_SESSION['chat'] = $row['chat'];
         exit ('<div class="alert alert-success alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
@@ -33,10 +37,9 @@ if (isset($_POST['key']) == 'lockscreen') {
                     </button>
                     <strong>Please Try Again ...!!!</strong> </div>');
     }
-    $users->forgotUsernameCountsTodelete('users',
-          array('forgotUsernameCounts' => 'forgotUsernameCounts +1', ),$_SESSION['keys']);
-  } 
 
+} 
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -218,11 +221,11 @@ if (isset($_POST['key']) == 'lockscreen') {
 
 <body id=white>
     <div class="container" id="container">
-        <h1 class="mb-3">Irangiro</h1>
+        <h1 class="mb-3">irangiro</h1>
         <div id="response"></div>
 
         <div class="form-container">
-            <h4><?php echo $_SESSION['username'] ;?></h4>
+            <h4><?php echo $_SESSION['username']; ?></h4>
             <!-- START LOCK SCREEN ITEM -->
             <div class="lockscreen-item">
                 <!-- lockscreen image -->
@@ -245,7 +248,7 @@ if (isset($_POST['key']) == 'lockscreen') {
                 <p id="errors"></p>
                 <!-- <p id="response"></p> -->
                 <div class="help-block text-center">
-                    Enter your password
+                    <a class="alink" href="<?php echo FORGET_PASSPOWRD ;?>"> Enter your password or Forgot your password?</a>
                 </div>
                 <div class="help-block text-center">
                     or

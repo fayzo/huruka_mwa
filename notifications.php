@@ -33,7 +33,7 @@
 
             <div class="col-md-6">
                 <div class="cards">
-                    <div class="card-header borders-tops text-center p-2 message-color">
+                    <div class="card-header borders-tops text-center p-2 message-color bg-light">
                         <h3><i> Notification</i></h3>
                     </div><!-- /.card-header -->
                     <div class="card-body mb-2">

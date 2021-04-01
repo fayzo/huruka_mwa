@@ -3,83 +3,76 @@ include "../core/init.php";
 
 if (isset($_SESSION['keycreate'])) {
     // header('location: '.CREATE_PASSPOWRD.'');
+    $email_hash= md5($_SESSION['email_hash']);
+
+    $users->updates('users',array( 
+        'user_id' => $_SESSION['keycreate'],
+        'email_hash' => $email_hash),$_SESSION['keycreate']);
+
+    $email= $_SESSION['email'];
+    // $email_verified= "https://".$_SERVER['HTTP_HOST']."/email_verified?token=$email_hash";
+    $email_verified= "http://localhost/irangiro_social_site/email_verified?token=$email_hash";
+
+    require '../email_verified_thank.php';
+    
     // exit();
+    
+    exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                    <button class="close" data-dismiss="alert" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <strong>CHECK YOUR EMAIL ACCOUNT </strong> </div>');
+
 }
 
 if(isset($_POST['key'])){
 
- if ($_POST['key'] == 'password') {
+ if ($_POST['key'] == 'email') {
     
-     $firstname =  $users->test_input($_POST['firstname']);
-     $lastname =  $users->test_input($_POST['lastname']);
-     $username =  $users->test_input($_POST['username']);
-     $email =  $users->test_input($_POST['email']);
+    $email =  $users->test_input($_POST['email']);
 
-    if(!preg_match("/^[a-zA-Z ]*$/", $firstname)){
-        exit('<div class="alert alert-danger alert-dismissible fade show text-center">
-                    <button class="close" data-dismiss="alert" type="button">
-                        <span>&times;</span>
-                    </button>
-                    <strong>Only letters and white space allowed</strong> </div>');
-    }else if(!preg_match("/^[a-zA-Z ]*$/", $lastname)){
-        exit('<div class="alert alert-danger alert-dismissible fade show text-center">
-                    <button class="close" data-dismiss="alert" type="button">
-                        <span>&times;</span>
-                    </button>
-                    <strong>Only letters and white space allowed</strong> </div>');
-    }else if (strlen($username) > 10) {
+    if (strpos($email,'@') == false && strlen($email) > 20) {
          exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
                     </button>
                     <strong>Username must be between 6-10 character</strong> </div>');
-    }else if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+    }else if (strpos($email,'@') !== false && !filter_var($email,FILTER_VALIDATE_EMAIL)) {
             exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
                     </button>
                     <strong>Invalid email</strong> </div>');
     }else {
-    //   $users->update('users',array(
-    //          'firstname' => $firstname, 
-    //          'lastname' => $lastname, 
-    //          'username' => $username, 
-    //          'email' => $email, 
-    //      ),$user_id);
 
-    //  $user_id= $users->selects('users', array('user_id'),
-    //   array(
-    //  'firstname' => $firstname, 
-    //  'lastname' => $lastname, 
-    //  'username' => $username, 
-    //  'email' => $email, 
-    // ));
+        $user_id=$users->forgotUsername('users', array(
+            'user_id' => $email, 
+            'username' => $email, 
+            'email' => $email, 
+        ),array(
+            'username' => $email, 
+            'email' => $email, 
+        ));
 
-    $users->forgotpassword('users', array('user_id'),
-      array(
-     'firstname' => $firstname, 
-     'lastname' => $lastname, 
-     'username' => $username, 
-     'email' => $email, 
-    ));
+        $users->forgotUsernameCountsTimesHeCreates('users',
+            array('forgotUsernameCountsTimesHeCreates' => 'forgotUsernameCountsTimesHeCreates  + 1'
+            ),$user_id);
 
-    $user_id=$users->forgotUsername('users', array('user_id'),
-      array(
-     'firstname' => $firstname, 
-     'lastname' => $lastname, 
-     'username' => $username, 
-     'email' => $email, 
-    ));
-
-    $users->forgotUsernameCountsTimesHeCreates('users',
-          array('forgotUsernameCountsTimesHeCreates' => 'forgotUsernameCountsTimesHeCreates  + 1'
+        $users->forgotUsernameCountsTo3Update('users',array(
+            'forgotUsernameCounts' => 'forgotUsernameCounts + 1'
         ),$user_id);
 
-    $users->forgotUsernameCountsTo3Update('users',array(
-           'forgotUsernameCounts' => 'forgotUsernameCounts + 1'
-       ),$user_id);
+        $users->user_id($user_id);
 
-    $users->user_id($user_id);
+        $users->UserEmailNotExit('users', array(
+            'username' => $email, 
+            'email' => $email, 
+        ),array(
+        'username' => $email, 
+        'email' => $email, 
+        ));
+
+
     }
 
   }
@@ -231,7 +224,7 @@ if(isset($_POST['key'])){
 
 <body>
     <div class="container" id="container">
-        <h1>Irangiro</h1>
+        <h1>irangiro</h1>
         <div id="response"></div>
         <div class="form-container">
             <form action="post">
@@ -242,39 +235,20 @@ if(isset($_POST['key'])){
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div> -->
                 <div class="row">
-                    <div class="col-md-6">
-                        <input type="text" id="firstname" placeholder="Firstname" />
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" id="lastname" placeholder="Lastname" />
-                    </div>
-                </div>
 
-                <!-- <label for="country">Country</label> -->
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
-                            </div>
-                            <input type="text" name="username" id="username" class="form-control"
-                                placeholder="Username" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3">@</span>
                             </div>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Email" />
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Username Or Email" />
                         </div>
                     </div>
 
                 </div>
                 <div style="margin-top:7px;">
                     <button class="blackbutton" type="button"><a href="<?php echo LOGIN ;?>">Cancel</a></button>
-                    <button class="redbutton" id="submit" onclick="forgot('password')" type="button">submit</button>
+                    <button class="redbutton" id="submit" onclick="forgot('email')" type="button">submit</button>
                 </div>
             </form>
             <!-- </div> -->
@@ -285,12 +259,9 @@ if(isset($_POST['key'])){
         <script src="<?php echo BASE_URL_LINK ;?>dist/js/bootstrap.min.js"></script>
         <script>
         function forgot(key) {
-            var firstname = $("#firstname");
-            var lastname = $("#lastname");
-            var username = $("#username");
             var email = $("#email");
             //   use 1 or second method to validaton
-            if (isEmpty(firstname) && isEmpty(lastname) && isEmpty(username) && isEmpty(email)) {
+            if (isEmpty(email)) {
                 //    alert("complete register");
                 $.ajax({
                     url: "forgotpassword.php",
@@ -298,21 +269,18 @@ if(isset($_POST['key'])){
                     dataType: "text",
                     data: {
                         key: key,
-                        firstname: firstname.val(),
-                        lastname: lastname.val(),
-                        username: username.val(),
                         email: email.val(),
                     },
                     success: function(response) {
                         $("#response").html(response);
                         console.log(response);
                         if (response.indexOf('SUCCESS') >= 0) {
-                            setInterval(() => {
-                                window.location = 'createpassword.php';
-                            }, 1000);
+                            // setInterval(() => {
+                            //     // window.location = 'createpassword';
+                            // }, 1000);
+                                location.reload();
                         }else {
-                            isEmptys(firstname) || isEmptys(lastname) ||
-                                isEmptys(username) || isEmptys(email)
+                            isEmptys(email)
                         }
                     }
                 });
