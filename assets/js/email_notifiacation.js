@@ -4,6 +4,62 @@ $(document).ready(function () {
         CKEDITOR.replace('editor2')
     });
 
+    $(document).on('click','#FriendRequest-dropdown-menu',function () {
+        var FriendRequest=1;
+
+        $.ajax({
+                    url: 'core/ajax_db/messages',
+                    method: 'POST',
+                    dataType: 'text',
+                    data: {
+                        showFriendRequest: FriendRequest,
+                    }, success: function (response) {
+                        $("#FriendRequest-menu-view").html(response);
+                        // console.log(response);
+                    }
+                });
+    });
+
+    $(document).on('click','.confirm_friendrequest',function () {
+        var following = $(this).data('follow');
+        var user_id = $(this).data('profile');
+
+        $.ajax({
+                    url: 'core/ajax_db/messages',
+                    method: 'POST',
+                    dataType: 'text',
+                    data: {
+                        confirm_friendrequest: 'confirm_friendrequest',
+                        following_id: following,
+                        user_id: user_id,
+                    }, success: function (response) {
+                        $("#friendrequest_respone").html(response);
+                        $(".friendrequest_id"+user_id).remove();
+                        // console.log(response);
+                    }
+                });
+    });
+
+    $(document).on('click','.delete_friendrequest',function () {
+        var following = $(this).data('follow');
+        var user_id = $(this).data('profile');
+
+        $.ajax({
+                    url: 'core/ajax_db/messages',
+                    method: 'POST',
+                    dataType: 'text',
+                    data: {
+                        delete_friendrequest: 'delete_friendrequest',
+                        following_id: following,
+                        user_id: user_id,
+                    }, success: function (response) {
+                        $("#friendrequest_respone").html(response);
+                        $(".friendrequest_id"+user_id).remove();
+                        // console.log(response);
+                    }
+                });
+    });
+
     $(document).on('click', '#email-dropdown-menu', function () {
         var email_notificationDrpdown = 1;
 

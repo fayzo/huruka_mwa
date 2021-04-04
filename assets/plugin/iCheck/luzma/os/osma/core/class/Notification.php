@@ -8,7 +8,7 @@ class Notification extends Home
     public function getNotificationCount($user_id,$email)
     {
        $mysqli= $this->database;
-       $query="SELECT COUNT(message_id) AS totalmessage, (SELECT COUNT(notification_id) FROM notification WHERE notification_for = $user_id AND status ='0') AS totalnotification , (SELECT COUNT(cv_id) FROM email_apply_job WHERE email_sent_to = '$email' AND email_status=0 AND type_of_email = 'inbox') AS total_email,(SELECT COUNT(cv_id) FROM email_apply_job WHERE email_sent_to= '$email' AND type_of_email = 'inbox' ) AS total_email_user_id,(SELECT COUNT(job_id) FROM jobs WHERE turn = 'on' and deadline > CURDATE()) AS total_jobs  FROM message WHERE message_to= $user_id AND status= '0' ";
+       $query="SELECT COUNT(message_id) AS totalmessage, (SELECT COUNT(notification_id) FROM notification WHERE notification_for = $user_id AND status ='0') AS totalnotification , (SELECT COUNT(cv_id) FROM email_apply_job WHERE email_sent_to = '$email' AND email_status=0 AND type_of_email = 'inbox') AS total_email,(SELECT COUNT(cv_id) FROM email_apply_job WHERE email_sent_to= '$email' AND type_of_email = 'inbox' ) AS total_email_user_id,(SELECT COUNT(job_id) FROM jobs WHERE turn = 'on' and deadline > CURDATE()) AS total_jobs, (SELECT COUNT(follow_id) FROM follow WHERE receiver = $user_id and status_request = 0) AS total_FriendRequest  FROM message WHERE message_to= $user_id AND status= '0' ";
        $result=$mysqli->query($query);
        $data=array();
        while ($row = $result->fetch_assoc()) {

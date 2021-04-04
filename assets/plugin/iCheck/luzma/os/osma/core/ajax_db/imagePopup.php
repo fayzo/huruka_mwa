@@ -138,7 +138,7 @@ if(!empty($fileActualExt_image)) {
                             <span class="username">
                                 <a style="float:left;padding-right:3px;" href="<?php echo PROFILE ;?>"><?php echo $tweet['username'] ;?></a>
                                 <!-- //Jonathan Burke Jr. -->
-                                <span class="description">Shared publicly - <?php echo $tweet['posted_on'] ;?></span>
+                                <span class="description">Shared publicly - <?php echo $home->timeAgo($tweet['posted_on']) ;?></span>
                             </span>
                             <span class="description">
                                 <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>

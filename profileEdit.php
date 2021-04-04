@@ -159,9 +159,9 @@
                     <?php } ?>
                     </div>
 
-                    <h3 class="profile-username text-center"><?php echo $user['firstname']." ".$user['lastname'] ;?></h3>
+                    <h3 class="profile-username text-center"><?php echo $user['username'] ;?></h3>
 
-                    <p class="text-muted text-center"><?php echo $user['career'] ;?></p>
+                    <p class="text-muted text-center"><?php echo $user['workname'] ;?></p>
 
                     <hr>
                     <form method="post">
@@ -191,14 +191,14 @@
                                     <span id="response"></span>
                             </div>
 
-                            <label for="specialize">Career :</label>
+                            <label for="specialize">Headline<span style="color:red">*</span>:</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon2"><i class="fa fa-star"></i>
                                     </span>
                                 </div>
                                 <input type="text" class="form-control" name="career" id="career"
-                                    aria-describedby="helpId" value="<?php echo $user['career']; ?>"  placeholder="Specialize">
+                                    aria-describedby="helpId" value="<?php echo $user['workname']; ?>"  placeholder="Specialize">
                                     <span id="response"></span>
                                 </div>
                             </div>

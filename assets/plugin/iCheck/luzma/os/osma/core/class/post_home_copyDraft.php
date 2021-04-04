@@ -83,9 +83,10 @@ class Posts_copyDraft extends Follow {
                                         $pdf= array('pdf');
                                         $coins= array('coins');
                                         $docx= array('doc','docx','lsx');
+                                        $donate= array('donate');
                                         $mp3= array('mp3','m4a','ogg');
                                         $mp4= array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
-                                        $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4);
+                                        $allower_ext= array_merge($image,$pdf,$coins,$donate,$docx,$mp3,$mp4);
 
 
                                 if (array_diff($fileActualExt,$allower_ext) == false) { 
@@ -105,6 +106,9 @@ class Posts_copyDraft extends Follow {
                                    
                                         $fileActualExt_coins =array_intersect($fileActualExt,$coins);
                                         $count_coins =count(array_intersect($fileActualExt_coins,$coins));
+
+                                        $fileActualExt_donate =array_intersect($fileActualExt,$donate);
+                                        $count_donate =count(array_intersect($fileActualExt_donate,$donate));
 
                                         $fileActualExt_mp4 =array_intersect($fileActualExt,$mp4);
                                         $count_mp4 =count(array_intersect($fileActualExt_mp4,$mp4));
@@ -631,6 +635,66 @@ class Posts_copyDraft extends Follow {
                                                     </div><!-- col -->
 
                                                 </div><!-- row -->
+                                            <?php }else if(!empty($fileActualExt_donate)){ 
+                                                
+                                                ?>
+                                                <div class="row">
+
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="user-block">
+                                                                    <div class="user-blockImgBorder">
+                                                                    <div class="user-blockImg">
+                                                                            <?php if (!empty($tweet['profile_img'])) {?>
+                                                                            <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                                                            <?php  }else{ ?>
+                                                                            <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                                                            <?php } ?>
+                                                                    </div>
+                                                                    </div>
+                                                                    <span class="username">
+                                                                        <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                        <!-- //Jonathan Burke Jr. -->
+                                                                    </span>
+                                                                        <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
+                                                                </div>
+                                                            </div> <!-- col -->
+
+                                                            <div class="col-12" style="clear:both">
+                                                                <!-- STATUS -->
+                                                                <div class="title-name-black"><?php echo $tweet['title_name']; ?></div>
+                                                                <div id="link_" class="show-read-more">
+                                                                <?php 
+
+                                                                    if (strlen($tweet['status']) > 200) {
+                                                                        // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                                    $tweettext = substr($tweet['status'], 0, 200);
+                                                                    $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                                                    <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                                    echo $this->getTweetLink($tweetstatus);
+                                                                    }else{
+                                                                    echo $this->getTweetLink($tweet['status']);
+                                                                    }  
+                                                                    if (strlen($tweet['status']) > 200) {
+                                                                        // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                                                        $tweettext = substr($tweet['status'], 0, 200);
+                                                                        $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                                                                        echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
+                                                                    }  
+                                                                ?>
+                                                                <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                                </div>
+                                                            </div><!-- col -->
+                                                            
+                                                        </div><!-- row -->
+                                                    </div><!-- col -->
+
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
+                                                        <?php echo Follow::donate_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet); ?>
+                                                    </div><!-- col -->
+                                                </div><!-- row -->
                                             <?php } ?>
 
                                         <?php }else { ?>
@@ -772,10 +836,11 @@ class Posts_copyDraft extends Follow {
                                         $image= array('jpg','jpeg','png','gif');
                                         $pdf= array('pdf');
                                         $coins= array('coins');
+                                        $donate= array('donate');
                                         $docx= array('doc','docx','lsx');
                                         $mp3= array('mp3','m4a','ogg');
                                         $mp4= array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
-                                        $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4);
+                                        $allower_ext= array_merge($image,$pdf,$coins,$donate,$docx,$mp3,$mp4);
 
 
                                 if (array_diff($fileActualExt,$allower_ext) == false) { 
@@ -795,6 +860,9 @@ class Posts_copyDraft extends Follow {
                                           
                                         $fileActualExt_coins =array_intersect($fileActualExt,$coins);
                                         $count_coins =count(array_intersect($fileActualExt_coins,$coins));
+
+                                        $fileActualExt_donate =array_intersect($fileActualExt,$donate);
+                                        $count_donate =count(array_intersect($fileActualExt_donate,$donate));
 
                                         $fileActualExt_mp4 =array_intersect($fileActualExt,$mp4);
                                         $count_mp4 =count(array_intersect($fileActualExt_mp4,$mp4));
@@ -1479,6 +1547,30 @@ class Posts_copyDraft extends Follow {
                                         <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
                                     </div>
                                 </div>
+                                <?php } 
+
+                                if(!empty($fileActualExt_donate)){ 
+                                    
+                                    $expodefile = explode("=",$tweet['tweet_image']);
+
+                                    foreach ($expodefile as $file_image) {
+                                        # code...
+                                        $filePathinfo = pathinfo($file_image);
+
+                                        if (in_array($filePathinfo['extension'],$fileActualExt_coins)) {
+                                            # code...
+                                            $filePathinfo_coins[]= $filePathinfo['basename'];
+                                        }
+                                    } 
+                                    
+                                    ?>
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
+                                        <?php echo Follow::donate_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet); ?>
+                                    </div><!-- col -->
+                                </div><!-- row -->
+
                                 <?php } 
                             
                             } ?>

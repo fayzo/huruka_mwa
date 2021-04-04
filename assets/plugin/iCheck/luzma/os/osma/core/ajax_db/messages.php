@@ -2,6 +2,21 @@
 include('../init.php');
 $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpath($_SERVER['SCRIPT_FILENAME']));
 
+if (isset($_POST['confirm_friendrequest']) && !empty($_POST['confirm_friendrequest'])) {
+    $user_id= $_SESSION['key'];
+	$home->updateReal("follow",array('status_request' => 1),
+	array( 
+	'sender' => $_POST['following_id'] ,
+	'receiver' => $_POST['user_id']
+	));
+}
+
+if (isset($_POST['delete_friendrequest']) && !empty($_POST['delete_friendrequest'])) {
+    $user_id= $_SESSION['key'];
+	$home->delete_("notification",array('type' => 'follow','notification_from' => $_POST['following_id'],'notification_for' => $_POST['user_id']));
+	$home->delete_("follow",array('sender' => $_POST['following_id'] ,'receiver' => $_POST['user_id']));
+}
+
 if (isset($_POST['deleteMessage']) && !empty($_POST['deleteMessage'])) {
     $user_id= $_SESSION['key'];
 	$message_id= $users->test_input($_POST['deleteMessage']);
@@ -463,6 +478,46 @@ if (isset($_POST['showJobs1']) && !empty($_POST['showJobs1'])) {
 				</li> <!-- end message -->
 
 		<?php  } ?>
+
+<?php }
+
+if (isset($_POST['showFriendRequest']) && !empty($_POST['showFriendRequest'])) {
+	echo '<li><span id="friendrequest_respone"></span></li>';
+	
+	$user_id= $_SESSION['key'];
+    // $tweet_id= $_POST['showMessage'];
+	$mysqli= $db;
+	$query= $mysqli->query("SELECT * FROM  users U Left JOIN  follow F ON F. sender = U. user_id WHERE F. receiver = $user_id and F. status_request = 0  ORDER BY rand() ");
+	?>
+          <?php while($whoTofollow = $query->fetch_array()) {  
+			  $workname = (strlen($whoTofollow["workname"]) > 10)? substr($whoTofollow["workname"],0,10).'..' : $whoTofollow["workname"];
+
+echo '      <li class="jobHovers more friendrequest_id'.$whoTofollow['follow_id'].'">
+				<div class="whoTofollow-list-img">
+						'.((!empty($whoTofollow['profile_img'])?'
+						<img src="'.BASE_URL_LINK."image/users_profile_cover/".$whoTofollow['profile_img'].'">
+						':'
+						<img src="'.BASE_URL_LINK.NO_PROFILE_IMAGE_URL.'">
+					')).'
+
+					'.$follow->lengthsOfWhoNewCome($whoTofollow['date_registry']).'
+				</div>
+				<ul class="whoTofollow-list-info">
+					<li><a href="'.BASE_URL_PUBLIC.$whoTofollow['username'].'" id="'.$whoTofollow["user_id"].'" >'.$whoTofollow['username'].'</a>
+					</li>
+					<li>'.((!empty($workname)?'
+					<small class="my-0" style="font-size: 12px;">'.$workname.'</small>
+					':'
+					<small class="my-0" style="font-size: 12px;">Member</small>
+					')).'</li>
+				</ul>
+				<div class="whoTofollow-btn">
+					  <div class="my-0 ml-2">'.$follow->FriendRequestBtns($whoTofollow['user_id'],$user_id,$user_id).'</div>
+					<!-- <a href="#" type="button" class="btn main-active btn-sm">Follow</a> -->
+				</div>
+			</li> ';
+				
+		} ?>
 
 <?php }
 

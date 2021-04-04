@@ -102,7 +102,7 @@
                                         </div> 
                                        <span class="username">
                                             <a
-                                                href="<?php echo PROFILE ;?>"><?php echo $data['username'] ;?></a>
+                                                href="<?php echo BASE_URL_PUBLIC.$data['username'] ;?>"><?php echo $data['username'] ;?></a>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"> <div >Followed you on <!-- accepted your friend request --> </div></span>
@@ -134,7 +134,7 @@
                                             </div> 
                                            <span class="username">
                                                 <a
-                                                    href="<?php echo PROFILE ;?>"><?php echo $data['username'] ;?></a>
+                                                    href="<?php echo BASE_URL_PUBLIC.$data['username']; ?>"><?php echo $data['username'] ;?></a>
                                                 <!-- //Jonathan Burke Jr. -->
                                             </span>
                                             <span class="description"> <div>Likes your Post <!-- accepted your friend request --> </div></span>
@@ -168,7 +168,7 @@
                                                 </div>
                                             </div> 
                                            <span class="username">
-                                                <a href="<?php echo PROFILE ;?>"><?php echo $data['username'] ;?></a>
+                                                <a href="<?php echo BASE_URL_PUBLIC.$data['username'];?>"><?php echo $data['username'] ;?></a>
                                                 <!-- //Jonathan Burke Jr. -->
                                             </span>
                                             <span class="description"> <div>Shares your Post <!-- accepted your friend request --> </div></span>
@@ -204,7 +204,7 @@
                                             </div> 
                                            <span class="username">
                                                 <a
-                                                    href="<?php echo PROFILE ;?>"><?php echo $data['username'] ;?></a>
+                                                    href="<?php echo BASE_URL_PUBLIC.$data['username'];?>"><?php echo $data['username'] ;?></a>
                                                 <!-- //Jonathan Burke Jr. -->
                                             </span>
                                             <span class="description"> <div>Mention Your name <!-- accepted your friend request --> </div></span>

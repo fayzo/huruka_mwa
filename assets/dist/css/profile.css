@@ -185,7 +185,7 @@
 }
 
 .info-body-name {
-    width: 75%;
+    /* width: 75%; */
     position: relative;
     top: 40px;
     left: 8px;

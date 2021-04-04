@@ -96,12 +96,20 @@ class Follow extends Home
        }
 
     }
+    
+    public function FriendRequestBtns($profile_id,$user_id,$follow_id)
+    {
+        return '
+        <button type="button" class="btn btn-primary confirm_friendrequest btn-sm float-left mr-2" data-follow="'.$profile_id.'" data-profile="'.$follow_id.'" >Confirm</button>
+        <button type="button" class="btn btn-secondary delete_friendrequest btn-sm" data-follow="'.$profile_id.'" data-profile="'.$follow_id.'" > Delete</button>
+        ';
+    }
 
      public function follows($follow_id,$user_id,$profile_id)
     {
        $mysqli= $this->database;
        $this->addFollowCounts($follow_id,$user_id);
-       $this->creates("follow",array('sender' => $user_id ,'receiver' => $follow_id,'follow_on' => date('Y-m-d H:i:s')));
+       $this->creates("follow",array('sender' => $user_id ,'receiver' => $follow_id,'follow_on' => date('Y-m-d H:i:s') , 'status_request' => 0 ));
     //    $query="SELECT * FROM users WHERE user_id= $follow_id LEFT JOIN follow ON sender= $user_id AND CASE WHEN receiver= $user_id THEN sender= user_id END WHERE user_id=$profile_id ";
        $query="SELECT * FROM users WHERE user_id= $follow_id";
        $result= $mysqli->query($query);
@@ -115,8 +123,9 @@ class Follow extends Home
     {
        $mysqli= $this->database;
        $this->removeFollowCounts($follow_id,$user_id);
-       $this->delete("follow",array('sender' => $user_id ,'receiver' => $follow_id));
-    //    $query="SELECT * FROM users WHERE user_id= $follow_id LEFT JOIN follow ON sender= $user_id AND CASE WHEN receiver= $user_id THEN sender= user_id END WHERE user_id=$profile_id ";
+       $this->delete_("notification",array('type' => 'follow','notification_from' => $user_id ,'notification_for' => $follow_id ));
+       $this->delete_("follow",array('sender' => $user_id ,'receiver' => $follow_id));
+    // $query="SELECT * FROM users WHERE user_id= $follow_id LEFT JOIN follow ON sender= $user_id AND CASE WHEN receiver= $user_id THEN sender= user_id END WHERE user_id=$profile_id ";
        $query="SELECT * FROM users WHERE user_id= $follow_id";
        $result= $mysqli->query($query);
        $row = $result->fetch_assoc();
@@ -160,6 +169,8 @@ class Follow extends Home
        $query= "SELECT * FROM users LEFT JOIN follow ON receiver= user_id AND CASE WHEN sender = $profile_id THEN receiver = user_id END WHERE sender IS NOT NULL";
        $result=$mysqli->query($query);
        while ($following=$result->fetch_array()) {
+            $workname = (strlen($following["workname"]) > 18)? substr($following["workname"],0,18).'..' : $following["workname"];
+
            # code...
            echo '
                 <div class="col-md-4 mb-3">
@@ -179,7 +190,7 @@ class Follow extends Home
                         </div>
                         <div class="card-footer">
                             <h5 class="user-username-follow m-1 "><a href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a></h5>
-                            <h5 class="user-username-follow m-1"><small>'.((!empty($following['career']))? $this->getTweetLink($following['career']):'Member').'</small></h5>
+                            <h5 class="user-username-follow m-1"><small>'.((!empty($workname))? $workname:'Member').'</small></h5>
                             <span>'.$this->followBtn($following['user_id'],$user_id,$profile_id,$follow_id).'</span>
                         </div>
                         <!-- /.footer -->
@@ -197,6 +208,8 @@ class Follow extends Home
        $query= "SELECT * FROM users LEFT JOIN follow ON sender= user_id AND CASE WHEN receiver = $profile_id THEN sender = user_id END WHERE receiver IS NOT NULL";
        $result=$mysqli->query($query);
        while ($following=$result->fetch_array()) {
+            $workname = (strlen($following["workname"]) > 18)? substr($following["workname"],0,18).'..' : $following["workname"];
+
            # code...
            echo '
                 <div class="col-md-4 mb-3">
@@ -216,7 +229,7 @@ class Follow extends Home
                         </div>
                         <div class="card-footer">
                             <h5 class="user-username-follow m-1"><a href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a></h5>
-                            <h5 class="user-username-follow m-1"><small>'.((!empty($following['career']))? $this->getTweetLink($following['career']):'Member').'</small></h5>
+                            <h5 class="user-username-follow m-1"><small>'.((!empty($workname))? $workname:'Member').'</small></h5>
                             <span>'.$this->followBtn($following['user_id'],$user_id,$profile_id,$follow_id).'</span>
                         </div>
                         <!-- /.footer -->
@@ -292,6 +305,8 @@ class Follow extends Home
                      <ul class="whoTofollow-list">
                      ';
                      while ($whoTofollow=$result->fetch_array()) {
+                        $workname = (strlen($whoTofollow["workname"]) > 18)? substr($whoTofollow["workname"],0,18).'..' : $whoTofollow["workname"];
+
             echo '      <li class="px-0 more">
                             <div class="whoTofollow-list-img">
                                     '.((!empty($whoTofollow['profile_img'])?'
@@ -305,8 +320,8 @@ class Follow extends Home
                             <ul class="whoTofollow-list-info">
                                 <li><a href="'.BASE_URL_PUBLIC.$whoTofollow['username'].'" id="'.$whoTofollow["user_id"].'" >'.$whoTofollow['username'].'</a>
                                 </li>
-                                <li>'.((!empty($whoTofollow['career'])?'
-                                <small class="my-0" style="font-size: 12px;">Member</small>
+                                <li>'.((!empty($workname)?'
+                                <small class="my-0" style="font-size: 12px;">'.$workname.'</small>
                                 ':'
                                 <small class="my-0" style="font-size: 12px;">Member</small>
                                 ')).'</li>
@@ -367,7 +382,11 @@ class Follow extends Home
                             <div class="info-body-name">
                                 <div class="in-b-name">
                                     <div><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
-                                    <span><?php echo self::followBtns($whoTofollow,$user_id,$follow_id); ?></span></div>
+                                    <span><?php echo self::followBtns($whoTofollow,$user_id,$follow_id); ?></span>
+                                    </div>
+                                    <small class="my-0" style="font-size: 12px;"><?php 
+                                    $workname = (strlen($user["workname"]) > 18)? substr($user["workname"],0,18).'..' : $user["workname"];
+                                    echo $workname;?></small>
                                     <!-- <span><small><a href="< ?php echo BASE_URL_PUBLIC.$user['username'] ;?>">< ?php if(!empty($user['career'])){ echo $user['career'] ;}else{ echo 'Member' ;} ?></a></small></span> -->
                                 </div><!-- in b name end-->
                             </div><!-- info body name end-->
@@ -498,6 +517,79 @@ class Follow extends Home
         
     <?php }
 
+    static public function donate_recharge_tweet($user_id,$user_key,$username_key,$tweet)
+    {
+        $mysqli= self::$databases;
+        $sql="SELECT * FROM users WHERE user_id = '{$user_id}' ";
+        $query= $mysqli->query($sql);
+        $user= $query->fetch_assoc(); ?>
+
+         <div  class="container retweetcolor p-4 shadow-sm border">
+            <div class="">
+                <img class="img-donate-coins" src="<?php echo BASE_URL_LINK; ?>image/background_image/donate_coins.png">
+            </div>
+         
+            <form method="post" class="form-coins<?php echo $tweet['tweet_id'];?>">
+
+            <div  class="row">
+            <div class="col-12">
+
+            <input type="hidden" name="user_id" value="<?php echo $user_key; ?>">
+            <input type="hidden" name="user_id_coins_to" value="<?php echo $user_id; ?>">
+            <input type="hidden" name="username_coins_to" value="<?php echo $tweet['username']; ?>">
+            <input type="hidden" name="user_id_coins_from" value="<?php echo $user_key; ?>">
+            <input type="hidden" name="username_coins_from" value="<?php echo $username_key; ?>">
+
+                <label for="exampleFormControlInput1">Send Donation <i class="fas fa-coins text-warning"></i> Coins to <?php echo $tweet['username'];?>
+                    <!-- <img class="img-donate-coins" src="< ?php echo BASE_URL_LINK; ?>image/background_image/coinsAsset.png"> -->
+                </label>
+                <div class="form-group">
+                    <select class="form-control amount_coins" id="amount_coins<?php echo $tweet['tweet_id'];?>" name="amount_coins" style="background:none">
+                    <option value="">Select Coins</option>
+                    <option value='35=>500'>35 coins    =>    500 Frw</option>
+                    <option value='70=>1000'>70 coins    =>    1,000 Frw</option>
+                    <option value='350=>5000'>350 coins   =>    5,000 Frw </option>
+                    <option value='1400=>21000'>1400 coins  =>    21,000 Frw </option>
+                    <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control comment_coins" name="comment_coins" id="comment_coins<?php echo $tweet['tweet_id'];?>" placeholder="Comment to <?php echo $tweet['username'] ;?>" style="background:none">
+                </div>
+            </div>
+
+            <div class="col-12 mb-2">
+                
+                <div class="text-muted mb-1">Donation
+                    <span class="text-success px-1 float-right" style="border-radius:3px;font-size:11px;"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</span>
+                </div>
+                <div class="card-text">
+                <!-- 40,000 -->
+                    <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
+                    Raised
+                    <span class="float-right"><?php echo self::donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
+                    <!-- 40 -->
+                </div>
+                <div class="progress clear-float " style="height: 10px;">
+                    <?php echo self::Users_donationMoneyRaising($tweet['money_raising'],$tweet['money_to_target']); ?>
+                </div>
+                
+                <div class="clear-float">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    <span class="text-muted"><?php echo self::timeAgo($tweet['posted_on']); ?></span>
+                    <span class="text-muted float-right text-right">out of <?php echo number_format($tweet['money_to_target']).' Frw'; ?></span>
+                    <!-- 13 days Left -->
+                </div>
+
+                <span class="response_coins"></span>
+                <input type="button" name="reward_coins" value="Send Donation" <?php echo (!empty($_SESSION['key']))?'id="reward_coins" data-tweet_id="'.$tweet['tweet_id'].'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+            </div><!-- col -->
+            </div><!-- row -->
+        </form>
+        </div><!-- container -->
+        
+    <?php }
+
      public function Post_FollowingLists($user_id,$follow_id)
     {
        $mysqli= $this->database;
@@ -536,7 +628,7 @@ class Follow extends Home
                         </div>
                         <div class="card-footer">
                             <h5 class="user-username-follow m-1 "><a href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a></h5>
-                            <h5 class="user-username-follow m-1"><small>'.((!empty($following['career']))? $this->getTweetLink($following['career']):'Member').'</small></h5>
+                            <h5 class="user-username-follow m-1"><small>'.((!empty($following['workname']))? $this->getTweetLink($following['workname']):'Member').'</small></h5>
                             <span>'.$this->followBtn($following['user_id'],$user_id,$follow_id).'</span>
                         </div>
                         <!-- /.footer -->
@@ -601,6 +693,8 @@ class Follow extends Home
         <div class="row mb-3">
      <?php  while ($following=$result->fetch_array()) {
            # code...
+            $workname = (strlen($following["workname"]) > 30)? substr($following["workname"],0,30).'..' : $following["workname"];
+
            echo '
                 <div class="col-md-3 mb-2">
                     <!-- Widget: user widget style 1 -->
@@ -619,7 +713,7 @@ class Follow extends Home
                         </div>
                         <div class="card-footer">
                             <h5 class="user-username-follow m-1 "><a href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a></h5>
-                            <h5 class="user-username-follow m-1"><small>'.((!empty($following['career']))? 'Member':'Member').'</small></h5>
+                            <h5 class="user-username-follow m-1"><small>'.((!empty($workname))? $workname :'Member').'</small></h5>
                             <span>'.$this->followBtn($following['user_id'],$user_id,$follow_id).'</span>
                         </div>
                         <!-- /.footer -->
@@ -696,6 +790,8 @@ class Follow extends Home
                       <ul class="whoTofollow-list row">
                       ';
                       while ($whoTofollow=$result->fetch_array()) {
+                        $workname = (strlen($whoTofollow["workname"]) > 10)? substr($whoTofollow["workname"],0,10).'..' : $whoTofollow["workname"];
+
              echo '      <li class="px-0 more col-6">
                              <div class="whoTofollow-list-img">
                                      '.((!empty($whoTofollow['profile_img'])?'
@@ -709,8 +805,8 @@ class Follow extends Home
                              <ul class="whoTofollow-list-info">
                                  <li><a href="'.BASE_URL_PUBLIC.$whoTofollow['username'].'" id="'.$whoTofollow["user_id"].'" >'.$whoTofollow['username'].'</a>
                                  </li>
-                                 <li>'.((!empty($whoTofollow['career'])?'
-                                 <small class="my-0" style="font-size: 12px;">Member</small>
+                                 <li>'.((!empty($workname)?'
+                                 <small class="my-0" style="font-size: 12px;">'.$workname.'</small>
                                  ':'
                                  <small class="my-0" style="font-size: 12px;">Member</small>
                                  ')).'</li>

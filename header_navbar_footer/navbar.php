@@ -140,6 +140,33 @@
             </ul>
             </li>
 
+          <?php if (isset($_SESSION['key']) && $notific['total_FriendRequest'] > 0){ ?>
+
+            <!-- Email: style can be found in dropdown.less -->
+            <li class="dropdown email-menu messages-menu">
+            <a href="#" data-toggle="dropdown" id="FriendRequest-dropdown-menu">
+            <i class="fa fa-user"></i>
+            <span id="email1"><?php if($notific['total_FriendRequest'] > 0){echo '<span class="badge badge-warning navbar-badge">'.$notific['total_FriendRequest'].'</span>'; } ?></span>
+            </a>
+            <ul class="dropdown-menu">
+            <li class="header main-active">You have  <span ><?php if($notific['total_FriendRequest'] > 0){echo '<span >'.$notific['total_FriendRequest'].'</span>'; }else{ echo 'no';} ?></span> Friend Request</li>
+            <li class="pl-3">
+              <!-- inner menu: contains the actual data -->
+              <ul class="whoTofollow-list menu large-2" id="FriendRequest-menu-view">
+                <!-- <li>
+                  <a href="#">
+                    <i class="fa fa-users text-info"></i> 5 new members joined today
+                  </a>
+                </li> -->
+              </ul>
+            </li>
+            <li class="footer"><a href="<?php echo FRIEND_REQUEST ;?>" >View all</a></li>
+            </ul>
+            </li>
+
+          <?php } ?>
+
+
          <?php if (isset($_SESSION['job_user']) || $notific['total_email_user_id'] > 0){ ?>
 
              <!-- Email: style can be found in dropdown.less -->

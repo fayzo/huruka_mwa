@@ -41,7 +41,7 @@ if ($_POST['key'] == 'image') {
         $users->update('users',array(
             'firstname' => $firstname,
             'lastname' => $lastname,
-            'career' => $career,
+            'workname' => $career,
             'last_profile_edit' => $date,
         ),array('user_id' => $id));
 

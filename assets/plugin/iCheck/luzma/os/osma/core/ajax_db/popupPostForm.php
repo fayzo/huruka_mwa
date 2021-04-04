@@ -46,9 +46,13 @@ $user = $home->userData($_SESSION['key']);
                             <div class="form-group">
                                 <select class="custom-select" name="donation_payment" id="donation_payment">
                                     <option value="">Select one</option>
-                                    <option value="donation_coins.coins">coins payment</option>
+                                    <option value="donation_coins.coins">Support by Give away coins</option>
+                                    <option value="donation_coins.donate">Donate coins</option>
                                     <option value="donation_card.card">Mtn & Visa paymant</option>
                                 </select>
+                            </div>
+                            <div class="form-group" style="overflow: auto;width: 97%;">
+                                <input type="number" class="form-control" name="money_to_target" id="money_to_target" placeholder="Money to Target">
                             </div>
                         </span>
                     </div>

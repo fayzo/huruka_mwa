@@ -7,6 +7,8 @@ if (isset($_POST['key']) == 'textarea'){
 	$user_id= $users->test_input($_POST['id']);
 	$status= $users->test_input($_POST['status']);
     $title_name= $users->test_input($_POST['title_name']);
+	$money_to_target= $users->test_input($_POST['money_to_target']);
+
 
     if (!empty($_POST['donation_payment'])) {
         $donation_payment=  $users->test_input($_POST['donation_payment']);
@@ -30,6 +32,7 @@ if (isset($_POST['key']) == 'textarea'){
                         'status' => $status, 
                         'title_name' => $title_name, 
                         'tweet_image' => $donation_payment, 
+                        'money_to_target' => $money_to_target, 
                         'tweetBy' => $user_id, 
                         'posted_on' => date('Y-m-d H-i-s'),
                     ));
@@ -63,6 +66,7 @@ if (isset($_POST['key']) == 'textarea'){
 	$title_name= $users->test_input($_POST['title_name']);
 	$status= $users->test_input($_POST['status']);
     $files= $_FILES['files'];
+	$money_to_target= $users->test_input($_POST['money_to_target']);
 
 if (!empty($_POST['photo-Titleo0'])) {
         $photo_Titleo=  $users->test_input($_POST['photo-Titleo0']);
@@ -136,6 +140,7 @@ if (!empty($_POST['donation_payment'])) {
                         'tweet_image' => $tweetimages, 
                         'tweet_image' => $tweetimages.$equal.$donation_payment, 
                         'donation_payment' => $donation_payment, 
+                        'money_to_target' => $money_to_target, 
                         'tweet_image_size' => $tweetSize, 
                         'posted_on' => date('Y-m-d H-i-s')
                     ));

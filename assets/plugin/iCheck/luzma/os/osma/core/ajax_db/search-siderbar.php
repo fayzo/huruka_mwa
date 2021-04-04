@@ -31,13 +31,12 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
                               </div>
 	            		<div class="nav-right-down-right">
 	            			<div class="nav-right-down-right-headline">
-                                <a href="<?php echo BASE_URL_PUBLIC ;?><?php echo $user["username"] ;?>"><?php echo $user["username"] ;?></a>
-                                <span ><i class="fa fa-star" style="color:#e21010c7"></i> </span>
-                                <!-- < ?php echo " ".$user["career"]; ?> -->
+                        <span ><i class="fa fa-play" style="color:#e210a3c7"></i></span>
+                        <a href="<?php echo BASE_URL_PUBLIC ;?><?php echo $user["username"] ;?>"><?php echo $user["username"] ;?></a>
 	            			</div>
 	            			<div class="nav-right-down-right-body">
-                               <div><i class="fa fa-play" style="color:#e210a3c7"></i> <?php echo "Member"; ?></div>
-	            			 
+                    <?php $workname = (strlen($user["workname"]) > 18)? substr($user["workname"],0,18).'..' : $user["workname"]; ?>
+                          <div><i class="fa fa-star" style="color:#10e2bbc7"></i>  <?php echo (!empty($workname))? $workname:'Member' ; ?></div>
 	            		    </div>
 	            		</div>
 	            	</div> 

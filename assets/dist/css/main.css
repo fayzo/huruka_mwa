@@ -220,8 +220,8 @@
   background: #f6f6f6;
 } */
 
-.skin-Black #link_ .link_color{
-  color: rgb(115 154 232) !important;
+.skin-Black #link_ {
+  color: #ffffffd4 !important;
 }
 
 .skin-Black .link_color{
@@ -287,9 +287,16 @@ color: #c3bebe !important;
 .sportx .list-group-item-action {
 color: #171718 !important;
 }
+
 .skin-Black .retweetcolor {
   background-color:#3a3636;
+  color: #ffffffd4;
 }
+
+.skin-Black .retweetcolor .text-muted {
+  color: #ffffffd4 !important;
+}
+
 .skin-Black #count {
   color:#fff;
 }
@@ -436,9 +443,17 @@ color: #c3bebe !important;
 .sportx .list-group-item-action {
 color: #171718 !important;
 }
+
 .skin-Dark .retweetcolor {
-  background-color:#3a3636;
+  background-color:#000000;
+  color: #ffffffd4;
+  border: 0.5px solid #dee2e66e!important;
 }
+
+.skin-Dark .retweetcolor .text-muted {
+  color: #ffffffd4 !important;
+}
+
 .skin-Dark #count {
   color:#fff;
 }
@@ -523,6 +538,10 @@ border: 1px solid #635b5f61 !important;
 }
 .retweetcolor {
   background-color:#f8f9fa;
+  color: #666666;
+}
+.retweetcolor #link_ {
+  color: #666666 !important;
 }
 
 .post {

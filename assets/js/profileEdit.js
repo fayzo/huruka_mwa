@@ -208,9 +208,9 @@ function careers(key) {
             success: function (response) {
                 // console.log(response);
                 if (response.indexOf('SUCCESS') >= 0) {
-                    // setInterval(function() {
-                    //     location.reload();
-                    // }, 2000);
+                    setInterval(function() {
+                        location.reload();
+                    }, 2000);
                     $("#respone-success").html(response);
                 } else {
                     $("#response").html(response);
@@ -243,9 +243,9 @@ function aboutMe(key) {
             success: function (response) {
                 // console.log(response);
                 if (response.indexOf('SUCCESS') >= 0) {
-                    // setInterval(function() {
-                    //     location.reload();
-                    // }, 2000);
+                    setInterval(function() {
+                        location.reload();
+                    }, 2000);
                     $("#responses").html(response);
                 } else {
                     $("#responses").html(response);

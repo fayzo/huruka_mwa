@@ -42,6 +42,7 @@ $(document).ready(function () {
         var image_name = $('#file').val();
         var title_name = $('#title_name').val();
         var donation_payment = $('#donation_payment').val();
+        var money_to_target = $('#money_to_target').val();
         // var textarea = $('.status').val();
         var textarea = CKEDITOR.instances.editor5.getData();
 
@@ -57,6 +58,7 @@ $(document).ready(function () {
                         status: textarea,
                         title_name: title_name,
                         donation_payment: donation_payment,
+                        money_to_target: money_to_target,
                     },
                     success: function (response) {
                         $("#response-PostMessage").html(response);
@@ -64,7 +66,7 @@ $(document).ready(function () {
                             $("#response-PostMessage").fadeOut();
                         }, 800);
                         setInterval(function () {
-                            location.reload();
+                             location.reload();
                         }, 1100);
                     }, error: function (response) {
                         $("#response-PostMessage").html(response);
