@@ -21,6 +21,7 @@
                   <?php  } ?>
                         <h3 class="widget-user-username"><?php echo $profileData['username'] ;?></h3> <!-- Elizabeth Pierce -->
                         <!-- <h5 class="widget-user-desc">Web Designer</h5> -->
+                        <?php $workname = $profileData['workname']; echo (!empty($workname)?'<h5 class="widget-user-desc">'.$workname.'</h5>':'');?>
                         <h5 class="widget-user-desc">Member since <?php echo $users->timeAgo($profileData['date_registry']); ?></h5>
 
                     </div>

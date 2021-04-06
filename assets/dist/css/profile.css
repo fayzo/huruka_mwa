@@ -111,18 +111,33 @@
     /* background: #999; */
     background: #f6f6f6;
 }
+
 .jobHover:hover span {
     /* background: #999; */
-    background: #f6f6f6;
+    /* background: #f6f6f6; */
     color: #191717;
 }
+
+.skin-Black .card .jobHover:hover .user-block a{
+    color: #191717;
+}
+
+.skin-Dark .card .jobHover:hover .user-block a{
+    color: #191717;
+}
+
+.skin-Black .card .jobHover .user-block a{
+    color: #191717;
+
+}
+
 #black .jobHover:hover {
     /* background: #999; */
     background: #3a3636;
 }
 #black .jobHover:hover span {
     /* background: #999; */
-    background: #3a3636;
+    /* background: #3a3636; */
     color: #999;
 }
 /* profile home */

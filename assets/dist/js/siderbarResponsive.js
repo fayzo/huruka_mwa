@@ -10,6 +10,36 @@ function closeNav() {
   $('#siderbarResponsive').attr('onclick', 'openNav()');
 }
 
+function add_support_coins() {
+  $('#add-support-coins').show();
+  $("#add-support-coins").html(
+
+    '<div class="form-group">Support to be Given coins'+
+    '</div>'+
+    '<div class="form-group">'+
+      '<select class="custom-select" name="donation_payment" id="donation_payment">'+
+          '<option value="">Select one</option>' +
+          '<option value="donation_coins.coins">Support by Given coins</option>'+
+          '<option value="donation_coins.donate">Donate coins</option>'+
+          '<option value="donation_card.card">Mtn & Visa paymant</option>'+
+      '</select>'+
+  '</div>'+
+  '<div class="form-group" style="overflow: auto;width: 97%;">'+
+      '<input type="number" class="form-control" name="money_to_target" id="money_to_target" placeholder="Money to Target">'+
+  '</div>');
+
+  $('#add-more-support-coins').attr('onclick','coinsClose()');
+  $('#add-more-support-coins').attr('value','close');
+}
+
+function coinsClose() {
+  $("#add-support-coins").html(" ");
+  $('#add-more-support-coins').attr('onclick', 'add_support_coins()');
+  $('#add-more-support-coins').attr('value','more');
+
+}
+
+
 function fundAddmoreVideo() {
   $('#add-videohelp').show();
   $("#add-videohelp").html(

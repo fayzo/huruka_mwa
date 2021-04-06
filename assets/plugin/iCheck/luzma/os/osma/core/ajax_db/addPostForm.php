@@ -6,14 +6,19 @@ if (isset($_POST['key']) == 'textarea'){
 
 	$user_id= $users->test_input($_POST['id']);
 	$status= $users->test_input($_POST['status']);
-    $title_name= $users->test_input($_POST['title_name']);
-	$money_to_target= $users->test_input($_POST['money_to_target']);
 
+    if (!empty($_POST['title_name'])) {
+        $title_name= $users->test_input($_POST['title_name']);
+    }else {
+        $title_name= '';
+    }
 
     if (!empty($_POST['donation_payment'])) {
+        $money_to_target= $users->test_input($_POST['money_to_target']);
         $donation_payment=  $users->test_input($_POST['donation_payment']);
     }else {
         $donation_payment='';
+        $money_to_target= '';
     }
 
     if (!empty($status)) {
@@ -63,10 +68,16 @@ if (isset($_POST['key']) == 'textarea'){
 }else{
 	# code...
 	$user_id= $users->test_input($_POST['id_posts']);
-	$title_name= $users->test_input($_POST['title_name']);
+	// $title_name= $users->test_input($_POST['title_name']);
+
+    if (!empty($_POST['title_name'])) {
+        $title_name= $users->test_input($_POST['title_name']);
+    }else {
+        $title_name= '';
+    }
+    
 	$status= $users->test_input($_POST['status']);
     $files= $_FILES['files'];
-	$money_to_target= $users->test_input($_POST['money_to_target']);
 
 if (!empty($_POST['photo-Titleo0'])) {
         $photo_Titleo=  $users->test_input($_POST['photo-Titleo0']);
@@ -105,8 +116,10 @@ if (!empty($_POST['photo-Title5'])) {
 }
 if (!empty($_POST['donation_payment'])) {
        $donation_payment=  $users->test_input($_POST['donation_payment']);
+        $money_to_target= $users->test_input($_POST['money_to_target']);
 }else {
         $donation_payment='';
+        $money_to_target= '';
 }
 
 	if (!empty($status) || !empty(array_filter($files['name'])) ) {

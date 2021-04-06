@@ -34,10 +34,12 @@ $(document).ready(function () {
                         user_id: user_id,
                     }, success: function (response) {
                         $("#friendrequest_respone").html(response);
-                        $(".friendrequest_id"+user_id).remove();
+                        $(".friendrequest_id"+following).remove();
                         // console.log(response);
+                        console.log("friendrequest_id"+following);
+
                     }
-                });
+            });
     });
 
     $(document).on('click','.delete_friendrequest',function () {
@@ -54,10 +56,10 @@ $(document).ready(function () {
                         user_id: user_id,
                     }, success: function (response) {
                         $("#friendrequest_respone").html(response);
-                        $(".friendrequest_id"+user_id).remove();
-                        // console.log(response);
+                        $(".friendrequest_id"+following).remove();
+                        console.log("friendrequest_id"+following);
                     }
-                });
+            });
     });
 
     $(document).on('click', '#email-dropdown-menu', function () {

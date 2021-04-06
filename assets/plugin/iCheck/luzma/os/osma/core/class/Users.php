@@ -375,7 +375,7 @@ class Users{
         $query = "DELETE FROM ".$table.$whereSql;
         $delete = $mysqli->query($query);
         // return $delete?true:false;
-        var_dump($query,$delete );
+        // var_dump($query,$delete );
     }
 
     // public function delete($table,$array)

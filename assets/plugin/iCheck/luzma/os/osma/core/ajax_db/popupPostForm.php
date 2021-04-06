@@ -35,7 +35,7 @@ $user = $home->userData($_SESSION['key']);
                         </div>
                         <span class="username" style="margin-left: 50px">
                             <div class="form-group" style="overflow: auto;width: 97%;">
-                                <input type="text" class="form-control" name="title_name" id="title_name" placeholder=" Title of your post Or Ask question">
+                                <input type="hidden" class="form-control" name="title_name" id="title_name" placeholder=" Title of your post Or Ask question">
                             </div>
                             <textarea class="status" name="status" id="editor5"
                                 placeholder="Type Something here!" rows="4" cols="50"></textarea>
@@ -43,17 +43,12 @@ $user = $home->userData($_SESSION['key']);
                                 <ul>
                                 </ul>
                             </div>
-                            <div class="form-group">
-                                <select class="custom-select" name="donation_payment" id="donation_payment">
-                                    <option value="">Select one</option>
-                                    <option value="donation_coins.coins">Support by Give away coins</option>
-                                    <option value="donation_coins.donate">Donate coins</option>
-                                    <option value="donation_card.card">Mtn & Visa paymant</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="overflow: auto;width: 97%;">
-                                <input type="number" class="form-control" name="money_to_target" id="money_to_target" placeholder="Money to Target">
-                            </div>
+                           <!-- SUPPORT GIVEN COINS -->
+                           <!-- SUPPORT GIVEN COINS -->
+                           <input type="button" class="btn btn-primary btn-sm float-right mb-2" 
+                                    id="add-more-support-coins" onclick='add_support_coins()' value="more">
+                           <div id="add-support-coins" ></div>
+                           <!-- SUPPORT GIVEN COINS -->
                         </span>
                     </div>
 

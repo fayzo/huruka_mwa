@@ -109,6 +109,7 @@
    
    <script src="<?php echo BASE_URL_LINK ;?>js/follow.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/message.js"></script>
+   <script src="<?php echo BASE_URL_LINK ;?>js/post_second_like.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/posts_comments_home.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/postUsermessage.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/notification.js"></script>

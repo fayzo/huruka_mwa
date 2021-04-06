@@ -52,7 +52,7 @@
               <button type="button" class="btn btn-default"><i class="fas fa-money-check"></i> Withdraw</button>
             </div>
 
-              <label for="inputEmail" >Buy coins and deposit in your account <i class="fa fa-check-circle text-success"></i></label>
+              <label for="inputEmail" >Click any coins you wish to deposit in your account <i class="fa fa-check-circle text-success"></i></label>
               <table class="table table-hover table-inverse table-responsive">
                   <thead class="thead-inverse">
                       <tr>
@@ -156,7 +156,7 @@
 
         <div class="col-md-3">
             <!-- whoTofollow: user whoTofollow style 1 -->
-            <?php $follow->whoTofollow($user['user_id'],$user['user_id'])?>
+            <!-- < ?php $follow->whoTofollow($user['user_id'],$user['user_id'])?> -->
 
             <div class="sticky-top" style="top: 52px;z-index:1000;">
                 <?php echo $home->options(); ?>

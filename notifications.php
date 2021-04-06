@@ -89,7 +89,7 @@
 
                                 <div class="timeline-item card shadow-sm" style="background:white;">
                                   <div class="card-body">
-                                     <span class="time float-right mt-3"><i class=" fa fa-clock-o"></i> <?php echo $users->timeAgo($data['follow_on']) ;?></span>
+                                     <span class="time float-right mt-3"><i class=" fa fa-clock-o"></i> <?php echo $users->timeAgo($data['time']) ;?></span>
                                     <div class="user-block">
                                         <div class="user-blockImgBorder">
                                             <div class="user-blockImg">

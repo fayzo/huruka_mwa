@@ -25,7 +25,7 @@ class Comment extends Post_like
       $total_Comment= array_shift($row_Comment);
       $array= array(0,$total_Comment);
       $total_Comment= array_sum($array);
-      echo $total_Comment;
+      return $total_Comment;
     }
 
     public function comments_second($tweet_id)
@@ -48,7 +48,7 @@ class Comment extends Post_like
       $total_Comment= array_shift($row_Comment);
       $array= array(0,$total_Comment);
       $total_Comment= array_sum($array);
-      echo $total_Comment;
+      return $total_Comment;
     }
 
     public function delete($table,$array)

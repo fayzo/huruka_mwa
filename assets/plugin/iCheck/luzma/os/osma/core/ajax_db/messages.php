@@ -210,7 +210,7 @@ if (isset($_POST['notificationDrpdown']) && !empty($_POST['notificationDrpdown']
 				<img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>"  height="25px" width='25px' class=" rounded-circle" alt="User Image">
 				<?php } ?> <?php echo $data['username']; ?> 
 				Followed <i class="fa fa-user-plus text-primary"></i>you on 
-				<?php echo $users->timeAgo($data['follow_on']) ;?>
+				<?php echo $users->timeAgo($data['time']) ;?>
 				<!-- <i class=" fa fa-clock-o"></i>  -->
 			</a>
 		</li>
@@ -226,7 +226,7 @@ if (isset($_POST['notificationDrpdown']) && !empty($_POST['notificationDrpdown']
 				<img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>"  height="25px" width='25px' class=" rounded-circle" alt="User Image">
 				<?php } ?> <?php echo $data['username']; ?> 
 				mention <span  class="text-success">@<?php echo $user['username']; ?> </span> on post on 
-				<?php echo $users->timeAgo($data['follow_on']) ;?>
+				<?php echo $users->timeAgo($data['time']) ;?>
 				<!-- <i class=" fa fa-clock-o"></i>  -->
 			</a>
 		</li>
@@ -242,7 +242,7 @@ if (isset($_POST['notificationDrpdown']) && !empty($_POST['notificationDrpdown']
 				<?php } ?>
 				<?php echo $data['username']; ?>
 				 Shared <i class="fa fa-share-alt-square" aria-hidden="true"></i>your post on 
-				<?php echo $users->timeAgo($data['follow_on']) ;?>
+				<?php echo $users->timeAgo($data['time']) ;?>
 				<!-- <i class=" fa fa-clock-o"></i>  -->
 			</a>
 		</li>
@@ -258,7 +258,7 @@ if (isset($_POST['notificationDrpdown']) && !empty($_POST['notificationDrpdown']
 				<?php } ?>
 				<?php echo $data['username']; ?>
 				liked <i class="fa fa-heart text-danger"></i>  your post on 
-				<?php echo $users->timeAgo($data['follow_on']) ;?>
+				<?php echo $users->timeAgo($data['time']) ;?>
 				<!-- <i class=" fa fa-clock-o"></i>  -->
 			</a>
 		</li>
@@ -282,7 +282,7 @@ if (isset($_POST['notificationDrpdown']) && !empty($_POST['notificationDrpdown']
 				<img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>"  height="25px" width='25px' class=" rounded-circle" alt="User Image">
 				<?php } ?> <?php echo $data['username']; ?> 
 				Followed <i class="fa fa-user-plus text-primary"></i>you on 
-				<?php echo $users->timeAgo($data['follow_on']) ;?>
+				<?php echo $users->timeAgo($data['time']) ;?>
 				<!-- <i class=" fa fa-clock-o"></i>  -->
 			</a>
 		</li>
@@ -298,7 +298,7 @@ if (isset($_POST['notificationDrpdown']) && !empty($_POST['notificationDrpdown']
 				<img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>"  height="25px" width='25px' class=" rounded-circle" alt="User Image">
 				<?php } ?> <?php echo $data['username']; ?> 
 				mention <span  class="text-success">@<?php echo $user['username']; ?> </span> on post on 
-				<?php echo $users->timeAgo($data['follow_on']) ;?>
+				<?php echo $users->timeAgo($data['time']) ;?>
 				<!-- <i class=" fa fa-clock-o"></i>  -->
 			</a>
 		</li>
@@ -314,7 +314,7 @@ if (isset($_POST['notificationDrpdown']) && !empty($_POST['notificationDrpdown']
 				<?php } ?>
 				<?php echo $data['username']; ?>
 				 Shared <i class="fa fa-share-alt-square" aria-hidden="true"></i>your post on 
-				<?php echo $users->timeAgo($data['follow_on']) ;?>
+				<?php echo $users->timeAgo($data['time']) ;?>
 				<!-- <i class=" fa fa-clock-o"></i>  -->
 			</a>
 		</li>
@@ -330,7 +330,7 @@ if (isset($_POST['notificationDrpdown']) && !empty($_POST['notificationDrpdown']
 				<?php } ?>
 				<?php echo $data['username']; ?>
 				liked <i class="fa fa-heart text-danger"></i>  your post on 
-				<?php echo $users->timeAgo($data['follow_on']) ;?>
+				<?php echo $users->timeAgo($data['time']) ;?>
 				<!-- <i class=" fa fa-clock-o"></i>  -->
 			</a>
 		</li>
@@ -492,7 +492,7 @@ if (isset($_POST['showFriendRequest']) && !empty($_POST['showFriendRequest'])) {
           <?php while($whoTofollow = $query->fetch_array()) {  
 			  $workname = (strlen($whoTofollow["workname"]) > 10)? substr($whoTofollow["workname"],0,10).'..' : $whoTofollow["workname"];
 
-echo '      <li class="jobHovers more friendrequest_id'.$whoTofollow['follow_id'].'">
+echo '      <li class="jobHovers more friendrequest_id'.$whoTofollow['sender'].'">
 				<div class="whoTofollow-list-img">
 						'.((!empty($whoTofollow['profile_img'])?'
 						<img src="'.BASE_URL_LINK."image/users_profile_cover/".$whoTofollow['profile_img'].'">

@@ -61,8 +61,8 @@ class Crowfund extends Fundraising {
                     </div>
 
                     <hr>
-                     <div style="height:115px;">
-                        <a href="javascript:void(0);"  id="crowfund-readmore" data-crowfund="<?php echo $row['fund_id'] ;?>" class="card-text h5"><?php echo $row['photo_Title_main'] ;?></a>
+                     <div style="height:115px;"  id="crowfund-readmore" data-crowfund="<?php echo $row['fund_id'] ;?>" >
+                        <a href="javascript:void(0);" class="card-text h5"><?php echo $row['photo_Title_main'] ;?></a>
                         <!-- Kogera umusaruro muguhinga -->
                         <p class="mt-2">
                        <?php if (strlen($row["text"]) > 80) {

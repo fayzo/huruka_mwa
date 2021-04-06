@@ -4,7 +4,7 @@
  }
 
 
-class GetUsers extends Home
+class GetUsers extends Follow
 {
     
     public function getUserTweet($user_id,$user_idSession)
@@ -875,13 +875,20 @@ class GetUsers extends Home
 
                                    <div class="card collapse" id="a<?php echo  $tweet["tweet_id"];?>">
                                       <div class="card-body" style="padding-right:0">
-                                        <?php if (!empty($comment)) { ?>
-                                        <h5><i>Comments (<?php echo $this->CountsComment($tweet["tweet_id"]); ?>)</i></h5>
-                                        <span id='responseDeletePostSeconds0'></span>
+                                       
+                                      <?php 
+                                        if (!empty($comment)) {  
+                                            echo '<h5><i>Comments('.$this->CountsComment($tweet["tweet_id"]).')</i></h5>
+                                            <span id="responseDeletePostSeconds0"></span>
+                                            <div class="direct-chat-message direct-chat-messageS large-2" > '; 
+                                        } else{ echo '<div class="direct-chat-message_ direct-chat-messageS">'; } ?>
+                                        
+                                        <span class="commentsHome" id="commentsHome<?php echo $tweet['tweet_id'];?>">
 
-                                         <div class="direct-chat-message direct-chat-messageS large-2" >
-                                         <span class="commentsHome" id="commentsHome<?php echo $tweet['tweet_id'];?>">
-                                           <?php foreach ($comment as $comments) { 
+                                        <?php if (!empty($comment)) { ?>
+
+                                        <?php foreach ($comment as $comments) { 
+
                                                $second_likes= $this->Like_second($user_id,$comments['comment_id']);
                                                $dislikes= $this->dislike($user_id,$comments['comment_id']);
                                                ?>
@@ -961,14 +968,20 @@ class GetUsers extends Home
                                                             </div> <!-- input-group -->
                                                         </div>
                                                         <div class="card-body" style="padding-right:0">
-                                                            <?php 
+                                                        <?php 
                                                              $comment_second= $this->comments_second($comments['comment_id']);
-                                                            if (!empty($comment_second)) { ?>
-                                                            <h5><i>Comments (<?php echo $this->CountsComment_second($comments["comment_id"]); ?>)</i></h5>
-                                                            <span id='responseDeletePostSecond'></span>
-                                                            <div class="direct-chat-message direct-chat-messageS large-2" >
+                                                            
+                                                            if (!empty($comment_second)) {  
+                                                                echo '<h5><i>Comments('.$this->CountsComment_second($comments["comment_id"]).')</i></h5>
+                                                                <span id="responseDeletePostSecond"></span>
+                                                                <div class="direct-chat-message direct-chat-messageS large-2" > '; 
+                                                            }else{ echo '<div class="direct-chat-message_ direct-chat-messageS">'; } ?>
+                                                            
                                                             <span class="commentsHome" id="commentsHomeSecond<?php echo $comments['comment_id'];?>">
+
+                                                            <?php if (!empty($comment_second)) { ?>
                                                             <?php foreach ($comment_second as $comments0) { ?>
+
                                                                     <!-- Conversations are loaded here -->
                                                                     <!-- Message. Default to the left -->
                                                                         <div class="direct-chat-msg" id="userComment<?php echo $comments0["comment_id_"]; ?>" >
@@ -1008,17 +1021,17 @@ class GetUsers extends Home
                                                                         </div> <!-- /.direct-chat-messg -->
                                                                   
                                                                 <?php } ?>
+                                                             <?php } ?>
                                                             </span>
                                                         </div> <!-- /.direct-chat-message -->
-                                                      <?php } ?>
 
                                                     </div> <!-- /.card-body-->
                                                     </div> <!-- /.card collapse -->
                                                    </div> <!-- /.direct-chat-msg -->
                                           <?php } ?>
+                                          <?php } ?>
                                           </span>
                                       </div> <!-- /.direct-message -->
-                                          <?php } ?>
                                       </div> <!-- /.card-body-->
                                     </div> <!-- /.card collapse -->
 
@@ -1037,9 +1050,9 @@ class GetUsers extends Home
                                   <?php } ?>
                             </div>
                             </div>
-                             <span class="username">
-                                 <a href="<?php echo PROFILE ;?>">Irangiro</a>
-                             </span>
+                            <span class="username">
+                                <a href="<?php echo PROFILE ;?>">Irangiro</a><?php echo self::followBtns(1,$user_id,1); ?>
+                            </span>
                              <span class="description">Public Figure | Content Creator</span>
                          </div>
                          <!-- /.user-block -->

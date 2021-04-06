@@ -10,7 +10,8 @@ if(isset($_POST['key'])){
      $date_registry= date('Y-m-d'); // date_registry 
      $firstname =  $users->test_input($_POST['firstname']);
      $lastname = $users->test_input($_POST['lastname']);
-     $donate =  $users->test_input(number_format($_POST['donate'],2));
+    //  $donate =  $users->test_input(number_format($_POST['donate'],2));
+     $donate =  $users->test_input($_POST['donate']);
      $number =  $users->test_input($_POST['number']);
      $Sendby_firstname =  $users->test_input($_POST['Sendby_firstname']);
      $Sendby_lastname =  $users->test_input($_POST['Sendby_lastname']);

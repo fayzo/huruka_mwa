@@ -9,13 +9,13 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
         # code...
         $user_id= $_SESSION['key'];
     }else {
-        # code...
-        $username= $users->test_input('irangiro');
-        // $username= $users->test_input('$_REQUEST['username']');
-        $uprofileId= $home->usersNameId($username);
-        $profileData= $home->userData($uprofileId['user_id']);
-        $user_id= $profileData['user_id'];
-        echo $user_id;
+    # code...
+    $username= $users->test_input('irangiro');
+    // $username= $users->test_input('$_REQUEST['username']');
+    $uprofileId= $home->usersNameId($username);
+    $profileData= $home->userData($uprofileId['user_id']);
+    $user_id= $profileData['user_id'];
+    echo $user_id;
     }
     $fund_id = $_POST['fund_id'];
     $user= $fundraising->fundFecthReadmore($fund_id);
@@ -220,7 +220,7 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                                 </div>
                                 </div>
                                 <span class="username">
-                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['lastname'] ;?> | Created  on <?php echo $users->timeAgo($user['created_on2']) ;?></a>
+                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?> | Created  on <?php echo $users->timeAgo($user['created_on2']) ;?></a>
                                     <!-- //Jonathan Burke Jr. -->
                                 </span>
                                 <span class="description" ><span <?php if(isset($_SESSION['key'])){ echo 'class="people-message more"'; }else{ echo 'id="login-please" class="more" data-login="1"'; } ?>  data-user="<?php echo $user['user_id2'];?>"><i style="font-size: 20px;" class="fa fa-envelope-o"></i> Message </span> | <i class="fa fa-tag mr-1"></i><?php echo $user['categories_fundraising'] ;?></span>

@@ -23,7 +23,8 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                   <?php  } ?>
                         <div class="widget-user-desc"><i class="fas fa-coins text-warning"></i> 35 Coins</div>
                         <h3 class="widget-user-username"><?php echo $profileData['username'] ;?></h3> <!-- Elizabeth Pierce -->
-                        <h5 class="widget-user-desc">Member</h5>
+                        <?php $workname = $profileData['workname']; echo (!empty($workname)?'<h5 class="widget-user-desc">'.$workname.'</h5>
+                                 ':'<h5 class="widget-user-desc">Member</h5>');?>
                     </div>
                     <div class="widget-user-image">
                         <?php if (!empty($profileData['profile_img'])) {?>

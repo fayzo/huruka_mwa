@@ -122,13 +122,15 @@ class Follow extends Home
     public function unfollow($follow_id,$user_id,$profile_id)
     {
        $mysqli= $this->database;
-       $this->removeFollowCounts($follow_id,$user_id);
-       $this->delete_("notification",array('type' => 'follow','notification_from' => $user_id ,'notification_for' => $follow_id ));
-       $this->delete_("follow",array('sender' => $user_id ,'receiver' => $follow_id));
-    // $query="SELECT * FROM users WHERE user_id= $follow_id LEFT JOIN follow ON sender= $user_id AND CASE WHEN receiver= $user_id THEN sender= user_id END WHERE user_id=$profile_id ";
+          // $query="SELECT * FROM users WHERE user_id= $follow_id LEFT JOIN follow ON sender= $user_id AND CASE WHEN receiver= $user_id THEN sender= user_id END WHERE user_id=$profile_id ";
        $query="SELECT * FROM users WHERE user_id= $follow_id";
        $result= $mysqli->query($query);
        $row = $result->fetch_assoc();
+       
+       $this->removeFollowCounts($follow_id,$user_id);
+       $this->delete_("notification",array('type' => 'follow','notification_from' => $user_id ,'notification_for' => $follow_id ));
+       $this->delete_("follow",array('sender' => $user_id ,'receiver' => $follow_id));
+
        echo json_encode($row);
     }
 
@@ -168,6 +170,9 @@ class Follow extends Home
        $mysqli= $this->database;
        $query= "SELECT * FROM users LEFT JOIN follow ON receiver= user_id AND CASE WHEN sender = $profile_id THEN receiver = user_id END WHERE sender IS NOT NULL";
        $result=$mysqli->query($query);
+
+       if ($result->num_rows > 0) { 
+
        while ($following=$result->fetch_array()) {
             $workname = (strlen($following["workname"]) > 18)? substr($following["workname"],0,18).'..' : $following["workname"];
 
@@ -200,6 +205,43 @@ class Follow extends Home
                 <!-- col --> ';
        }
 
+    }else { ?>
+        <div class="card borders-tops mb-3"> 
+            <div class="card-body message-color">
+
+            <div class="post">
+                <div class="user-block">
+                    <div class="user-blockImgBorder">
+                   <div class="user-blockImg">
+                        <img src="<?php echo BASE_URL_LINK."image/users_profile_cover/irangiro.png" ;?>" alt="User Image">
+                   </div>
+                   </div>
+                    <span class="username">
+                        <a href="<?php echo PROFILE ;?>">Irangiro</a><?php echo self::followBtns(1,$user_id,1); ?>
+                    </span>
+                    <span class="description">Public Figure | Content Creator</span>
+                </div>
+                <!-- /.user-block -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <img class="img-fluid"
+                                    src="<?php echo BASE_URL_LINK."image/users_cover_profile/coming-soon.png" ;?>" alt="Photo">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+           </div>
+           <!-- /.post -->
+           </div>
+           </div>
+    <?php }
+
     }
 
        public function FollowersLists($profile_id,$user_id,$follow_id)
@@ -207,6 +249,9 @@ class Follow extends Home
        $mysqli= $this->database;
        $query= "SELECT * FROM users LEFT JOIN follow ON sender= user_id AND CASE WHEN receiver = $profile_id THEN sender = user_id END WHERE receiver IS NOT NULL";
        $result=$mysqli->query($query);
+
+       if ($result->num_rows > 0) { 
+
        while ($following=$result->fetch_array()) {
             $workname = (strlen($following["workname"]) > 18)? substr($following["workname"],0,18).'..' : $following["workname"];
 
@@ -238,6 +283,43 @@ class Follow extends Home
                 </div>
                 <!-- col --> ';
        }
+        
+        }else { ?>
+         <div class="card borders-tops mb-3"> 
+            <div class="card-body message-color">
+
+            <div class="post">
+                <div class="user-block">
+                    <div class="user-blockImgBorder">
+                <div class="user-blockImg">
+                        <img src="<?php echo BASE_URL_LINK."image/users_profile_cover/irangiro.png" ;?>" alt="User Image">
+                </div>
+                </div>
+                    <span class="username">
+                        <a href="<?php echo PROFILE ;?>">Irangiro</a><?php echo self::followBtns(1,$user_id,1); ?>
+                    </span>
+                    <span class="description">Public Figure | Content Creator</span>
+                </div>
+                <!-- /.user-block -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <img class="img-fluid"
+                                    src="<?php echo BASE_URL_LINK."image/users_cover_profile/coming-soon.png" ;?>" alt="Photo">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+        </div>
+        <!-- /.post -->
+        </div>
+        </div>
+    <?php }
 
     }
 

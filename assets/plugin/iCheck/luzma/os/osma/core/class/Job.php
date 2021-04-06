@@ -3,7 +3,7 @@
        header('Location: ../../404.html');
  } 
 
-class Job extends Home {
+class Job extends Follow {
 
     public function jobsData($user_id)
     {

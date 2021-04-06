@@ -15,13 +15,12 @@ $(document).ready(function () {
                         comments: comment,
                         tweet_id: tweet_id,
                     }, success: function (response) {
-                        $('#commentsHome' + tweet_id).html(response);
-                        $('#commentHome' + tweet_id).val("");
+                        $('#commentsHome'+tweet_id).html(response);
+                        $('#commentHome'+tweet_id).val("");
                         // console.log(response);
                     }
                 });
         }
-
     });
 
     $(document).on('click','#post_HomeCommentSecond',function () {
@@ -39,8 +38,8 @@ $(document).ready(function () {
                         comments_: comment,
                         comment_id: comment_id,
                     }, success: function (response) {
-                        $('#commentsHomeSecond' + comment_id).html(response);
-                        $('#commentHomeSecond' + comment_id).val("");
+                        $('#commentsHomeSecond'+comment_id).html(response);
+                        $('#commentHomeSecond'+comment_id).val("");
                         // console.log(response);
                     }
                 });

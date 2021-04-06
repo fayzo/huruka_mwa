@@ -856,13 +856,19 @@ class Notification_body extends Home
             </div>  --><!-- input-group -->
             
             <div class="card-body" style="padding-right:0">
-                <?php if (!empty($comment)) { ?>
-                <h5><i>Comments (<?php echo $this->CountsComment($tweet["tweet_id"]); ?>)</i></h5>
-                <span id='responseDeletePostSeconds0'></span>
+               
+            <?php 
+            if (!empty($comment)) {  
+                echo '<h5><i>Comments('.$this->CountsComment($tweet["tweet_id"]).')</i></h5>
+                <span id="responseDeletePostSeconds0"></span>
+                <div class="direct-chat-message direct-chat-messageS large-2" > '; 
+            } else{ echo '<div class="direct-chat-message_ direct-chat-messageS">'; } ?>
+            
+            <span class="commentsHome" id="commentsHome<?php echo $tweet['tweet_id'];?>">
 
-                <div class="direct-chat-message direct-chat-messageS large-2" >
-                <span class="commentsHome" id="commentsHome<?php echo $tweet['tweet_id'];?>">
+            <?php if (!empty($comment)) { ?>               
                 <?php foreach ($comment as $comments) { 
+                    
                     $second_likes= $this->Like_second($user_id,$comments['comment_id']);
                     $dislikes= $this->dislike($user_id,$comments['comment_id']);
                     ?>
@@ -870,7 +876,8 @@ class Notification_body extends Home
                         <!-- Message. Default to the left -->
                             <div class="direct-chat-msg" id="userComment0<?php echo $comments['comment_id']; ?>">
                                 <div class="direct-chat-info clearfix">
-                                    <span class="direct-chat-name float-left"><?php echo $comments["username"] ;?></span>
+                                    <span class="direct-chat-name float-left mr-1"><a href="<?php echo BASE_URL_PUBLIC.$comments["username"];?>"><?php echo $comments["username"] ;?></a> ||</span>
+                                    <span class="direct-chat-name float-left"><?php echo $comments["workname"] ;?></span>
                                     <span class="direct-chat-timestamp float-right"><?php echo $this->timeAgo($comments['comment_at']); ?></span>
                                 </div>
                                 <!-- /.direct-chat-info -->
@@ -942,19 +949,26 @@ class Notification_body extends Home
                                     </div> <!-- input-group -->
                                 </div>
                                 <div class="card-body" style="padding-right:0">
-                                    <?php 
+                                <?php 
                                     $comment_second= $this->comments_second($comments['comment_id']);
-                                    if (!empty($comment_second)) { ?>
-                                    <h5><i>Comments (<?php echo $this->CountsComment_second($comments["comment_id"]); ?>)</i></h5>
-                                    <span id='responseDeletePostSecond'></span>
-                                    <div class="direct-chat-message direct-chat-messageS large-2" >
+                                    
+                                    if (!empty($comment_second)) {  
+                                        echo '<h5><i>Comments('.$this->CountsComment_second($comments["comment_id"]).')</i></h5>
+                                        <span id="responseDeletePostSecond"></span>
+                                        <div class="direct-chat-message direct-chat-messageS large-2" > '; 
+                                    }else{ echo '<div class="direct-chat-message_ direct-chat-messageS">'; } ?>
+                                    
                                     <span class="commentsHome" id="commentsHomeSecond<?php echo $comments['comment_id'];?>">
+
+                                    <?php if (!empty($comment_second)) { ?>
+
                                     <?php foreach ($comment_second as $comments0) { ?>
                                             <!-- Conversations are loaded here -->
                                             <!-- Message. Default to the left -->
                                                 <div class="direct-chat-msg" id="userComment<?php echo $comments0["comment_id_"]; ?>" >
                                                     <div class="direct-chat-info clearfix">
-                                                        <span class="direct-chat-name float-left"><?php echo $comments0["username"] ;?></span>
+                                                        <span class="direct-chat-name float-left mr-1"><a href="<?php echo BASE_URL_PUBLIC.$comments0["username"];?>"><?php echo $comments0["username"] ;?></a> ||</span>
+                                                        <span class="direct-chat-name float-left"><?php echo $comments0["workname"] ;?></span>
                                                         <span class="direct-chat-timestamp float-right"><?php echo $this->timeAgo($comments0['comment_at_']); ?></span>
                                                     </div>
                                                     <!-- /.direct-chat-info -->
@@ -989,17 +1003,17 @@ class Notification_body extends Home
                                                 </div> <!-- /.direct-chat-messg -->
                                         
                                         <?php } ?>
+                                    <?php } ?>
                                     </span>
                                 </div> <!-- /.direct-chat-message -->
-                            <?php } ?>
 
                             </div> <!-- /.card-body-->
                             </div> <!-- /.card collapse -->
                         </div> <!-- /.direct-chat-msg -->
                 <?php } ?>
+                <?php } ?>
                 </span>
                 </div> <!-- /.direct-message -->
-                <?php } ?>
             </div> <!-- /.card-body-->
             </div> <!-- /.card collapse -->
 
