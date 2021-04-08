@@ -51,7 +51,7 @@ if (isset($_POST['showpopupdelete']) && !empty($_POST['showpopupdelete'])) {
                                     </div>
                                     </div>
                                 <span class="username">
-                                    <a style="padding-right:3px;" href="<?php echo PROFILE ;?>"><?php echo $cars['firstname']." ".$cars['lastname'] ;?></a>
+                                    <a style="padding-right:3px;" href="<?php echo PROFILE ;?>"><?php echo $cars['username'] ;?></a>
                                     <!-- //Jonathan Burke Jr. -->
                                 </span>
                                     <span class="description">Shared publicly - <?php echo $users->timeAgo($cars['created_on01']); ?></span>

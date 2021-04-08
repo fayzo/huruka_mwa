@@ -76,6 +76,7 @@ define('WATCHLIST', BASE_URL_PUBLIC.'shopping');
 define('NETWORK_RESPONSIVE', BASE_URL_PUBLIC.'network_responsive');
 define('BUSINESS_POST_JOBS', BASE_URL_PUBLIC.'business_jobPost');
 define('INDIVIDUAL_POST_JOBS', BASE_URL_PUBLIC.'individual_jobPost');
+define('FRIEND_REQUEST', BASE_URL_PUBLIC.'friend_request');
 
 
 // TWITTER SOCIAL MEDIA 

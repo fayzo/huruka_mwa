@@ -80,7 +80,7 @@ class Employment extends Home {
                    </div>
                     <div style="display: flow-root;" class="text_size">
                         <div class='float-left'>
-                            <span>Names: <?php echo $row['firstname']." ".$row['lastname']; ?> </span><br>
+                            <span>Names: <?php echo $row['username']; ?> </span><br>
                             <span>education: <?php echo $row['education']; ?> </span><br>
                             <span>diploma: <?php echo $row['diploma']; ?> </span><br>
                             <span >Fields study: <?php echo $row['categories_fields']; ?> </span>

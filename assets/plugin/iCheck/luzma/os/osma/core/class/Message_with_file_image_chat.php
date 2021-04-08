@@ -8,8 +8,9 @@ class Message extends Home
     public function recentMessage($user_id)
     {
        $mysqli= $this->database;
-       $query="SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 GROUP BY M. message_from, M. message_to HAVING  COUNT(DISTINCT M. message_to)=1 AND COUNT(DISTINCT M. message_from)=1 ORDER BY M. message_on Desc";
-
+    //    $query="SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 GROUP BY M. message_from, M. message_to HAVING  COUNT(DISTINCT M. message_to)=1 AND COUNT(DISTINCT M. message_from)=1 ORDER BY M. message_on Desc";
+       $query = "SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 and M. message_id in (select max(message_id) from message GROUP by message_to,message_from ORDER BY message_on Desc)";
+   
     // THIS ONE MAKE MODAL TO WORK BAD
     //    $query ="SELECT * FROM message m
     //             JOIN users U ON m. message_from = U. user_id 
@@ -36,7 +37,8 @@ class Message extends Home
     public function recentMessageUnread($user_id)
     {
        $mysqli= $this->database;
-       $query="SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 0 GROUP BY M. message_from, M. message_to HAVING  COUNT(DISTINCT M. message_to)=1 AND COUNT(DISTINCT M. message_from)=1 ORDER BY M. message_on Desc";
+    //    $query="SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 0 GROUP BY M. message_from, M. message_to HAVING  COUNT(DISTINCT M. message_to)=1 AND COUNT(DISTINCT M. message_from)=1 ORDER BY M. message_on Desc";
+       $query = "SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 0 and M. message_id in (select max(message_id) from message GROUP by message_to,message_from ORDER BY message_on Desc)";
 
        $result=$mysqli->query($query);
        $data=array();

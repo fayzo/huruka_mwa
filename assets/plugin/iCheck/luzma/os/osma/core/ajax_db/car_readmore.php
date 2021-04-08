@@ -67,7 +67,7 @@ if (isset($_POST['car_id']) && !empty($_POST['car_id'])) {
                          </div>
                          <span class="username">
                              <a
-                                 href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['firstname']." ".$user['lastname'] ;?></a>
+                                 href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
                              <!-- //Jonathan Burke Jr. -->
                          </span>
                          <span class="description">Shared publicly - <?php echo $users->timeAgo($user['created_on3']) ;?></span>

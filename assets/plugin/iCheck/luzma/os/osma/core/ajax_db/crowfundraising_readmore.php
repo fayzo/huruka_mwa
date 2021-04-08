@@ -50,7 +50,7 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                          </div>
                          <span class="username">
                              <a
-                                 href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['firstname']." ".$user['lastname'] ;?></a>
+                                 href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
                              <!-- //Jonathan Burke Jr. -->
                          </span>
                          <!-- <span class="description">Shared publicly - < ?php echo $home->timeAgo($user['posted_on']); ?></span> -->
