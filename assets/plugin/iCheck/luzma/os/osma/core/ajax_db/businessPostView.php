@@ -38,7 +38,7 @@ if (isset($_POST['job_id']) && !empty($_POST['job_id'])) {
                              <span class="username">
                                  <a style="padding-right:3px;" class="h5" href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $home->htmlspecialcharss($user['job_title']) ;?></a>
                              </span>
-                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $home->htmlspecialcharss($user['companyname']).' || '.$user['country'];?> <i class="flag-icon flag-icon-<?php echo strtolower($user['country']) ;?> h4 mb-0"
+                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $home->htmlspecialcharss($user['companyname']).' || '.$user['country'];?> <i style="font-size:12px" class="flag-icon flag-icon-<?php echo strtolower($user['country']) ;?> h4 mb-0"
                             id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></i></a>
                               <span class="description">Shared public - <?php echo $home->timeAgo($user['created_on']); ?>  . <span>Views: <?php echo number_format($user['total_view_post']); ?> times</span></span>
                          </div>

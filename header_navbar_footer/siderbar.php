@@ -148,6 +148,15 @@
               </span>
             </a>
           </li>
+          <li>
+            <a href="javascript:void()">
+              <i class="fab fa-facebook-messenger"></i><span class="people-message more" data-user="1">
+                 Service Center </span> 
+              <span class="pull-right-container" style="margin-right: 10px;">
+                <small class="label pull-right"> <i class="fa fa-envelope-o"></i></small>
+              </span>
+            </a>
+          </li>
         <?php } ?>
 
         </ul>

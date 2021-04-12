@@ -43,6 +43,7 @@ if(isset($_POST['key'])){
      $email =  $users->test_input($_POST['email']);
      $password =  $users->test_input($_POST['password']);
      $verifypassword =  $users->test_input($_POST['verifypassword']);
+     $link = array('Jobs','Professional','Fundraising','School','House','icyamunara','Car','GushoraStartUp','Marketplace');
 
      if(!preg_match("/^[a-zA-Z ]*$/", $firstname)){
         exit('<div class="alert alert-danger alert-dismissible fade show text-center">
@@ -68,6 +69,12 @@ if(isset($_POST['key'])){
                         <span>&times;</span>
                     </button>
                     <strong>Username must be between 6-10 character</strong> </div>');
+    }else if (in_array($username,$link)) {
+         exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                    <button class="close" data-dismiss="alert" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <strong>Username already in used </strong> </div>');
     }else if (strlen($password) < 3) {
          exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
@@ -84,23 +91,23 @@ if(isset($_POST['key'])){
 
         require '../signup_for_thank.php';
 
-      $users->alreadyUseEmail('users',array(
-           'username' => $username, 
-            'email' => $email, 
-      ), array(
-           'firstname' => $firstname, 
-            'lastname' => $lastname, 
-            'gender' => $gender, 
+        $users->alreadyUseEmail('users',array(
             'username' => $username, 
-            'email' => $email, 
-            'country' => $country, 
-            'password' => $password, 
-            'date_birth' => $date_birth,
-            'date_registry' => $date_registry, 
-            'last_login' => $datetime, 
-            'color' => '', 
-            'approval' => 'off', 
-      ));
+                'email' => $email, 
+        ), array(
+            'firstname' => $firstname, 
+                'lastname' => $lastname, 
+                'gender' => $gender, 
+                'username' => $username, 
+                'email' => $email, 
+                'country' => $country, 
+                'password' => $password, 
+                'date_birth' => $date_birth,
+                'date_registry' => $date_registry, 
+                'last_login' => $datetime, 
+                'color' => '', 
+                'approval' => 'off', 
+        ));
 
      } 
 }

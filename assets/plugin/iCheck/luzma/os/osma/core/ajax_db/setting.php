@@ -8,6 +8,7 @@ if(isset($_POST['key'])){
          $username= $users->test_input($_POST['username']);
          $email= $users->test_input($_POST['email']);
          $id= $users->test_input($_POST['id']);
+         $link = array('Jobs','Professional','Fundraising','School','House','icyamunara','Car','GushoraStartUp','Marketplace');
      
          if(!preg_match("/^[a-zA-Z ]*$/", $username)){
              exit('<div class="alert alert-danger alert-dismissible fade show text-center">
@@ -21,12 +22,18 @@ if(isset($_POST['key'])){
                         <span>&times;</span>
                     </button>
                     <strong>Email invalid format</strong> </div>');
-         }else if (strlen($username) > 10) {
+         }else if (strlen($username) > 20) {
               exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
                     </button>
-                    <strong>Username must be between 3-10 character</strong> </div>');
+                    <strong>Username must be between 3-20 character</strong> </div>');
+        }else if (in_array($username,$link)) {
+            exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                        <button class="close" data-dismiss="alert" type="button">
+                            <span>&times;</span>
+                        </button>
+                        <strong>Username already in used </strong> </div>');
          }else if (strlen($username) < 3) {
               exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
@@ -91,6 +98,45 @@ if(isset($_POST['key'])){
         }
     } 
  } 
+ } 
 
-}
+if (isset($_POST['close_account'])) {
+    
+    $id= $_POST['close_account'];
+    $result= $users->update('users',array( 'close_account' => $_POST['value'] ),array('user_id' => $id));
+    
+    if ($result) {
+        exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong>SUCCESS</strong> </div>');
+    }else{
+            exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong> Fail </strong> </div>');
+    }
+} 
+
+if (isset($_POST['delete_account'])) {
+    
+    $id= $_POST['delete_account'];
+    $result= $users->update('users',array( 'delete_account' => 'yes' ),array('user_id' => $id));
+    
+    if ($result) {
+        exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong>SUCCESS</strong> </div>');
+    }else{
+            exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong> Fail </strong> </div>');
+    }
+} 
 ?>

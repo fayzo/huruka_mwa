@@ -43,6 +43,119 @@ $(document).ready(function (e) {
 
         });
     });
+
+    $(document).on('click', '.pinTweet', function (e) {
+        e.preventDefault();
+        var tweet_id = $(this).data('tweet');
+        var comment_by = $(this).data('user');
+
+        $.ajax({
+            url: 'core/ajax_db/deletePost',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                pin_user_id: comment_by,
+                pin_Tweet_id: tweet_id,
+            }, success: function (response) {
+                
+                $("#userComment_" + tweet_id).html('');
+                $("#responseDeletePin"+ tweet_id).html(response);
+                setInterval(function() {
+                    $("#responseDeletePin"+ tweet_id).fadeOut();
+                }, 1000);
+                setInterval(function() {
+                    location.reload();
+                }, 1100);
+                // console.log(response);
+            }
+
+        });
+    });
+
+    $(document).on('click', '.pinRetweet', function (e) {
+        e.preventDefault();
+        var tweet_id = $(this).data('tweet');
+        var comment_by = $(this).data('user');
+
+        $.ajax({
+            url: 'core/ajax_db/deletePost',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                pin_user_id: comment_by,
+                pin_Retweet_id: tweet_id,
+            }, success: function (response) {
+                
+                $("#userComment_" + tweet_id).html('');
+                $("#responseDeletePin"+ tweet_id).html(response);
+                setInterval(function() {
+                    $("#responseDeletePin"+ tweet_id).fadeOut();
+                }, 1000);
+                setInterval(function() {
+                    location.reload();
+                }, 1100);
+                // console.log(response);
+            }
+
+        });
+    });
+    
+
+    $(document).on('click', '.unpinTweet', function (e) {
+        e.preventDefault();
+        var tweet_id = $(this).data('tweet');
+        var comment_by = $(this).data('user');
+
+        $.ajax({
+            url: 'core/ajax_db/deletePost',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                pin_user_id: comment_by,
+                unpin_Tweet_id: tweet_id,
+            }, success: function (response) {
+                
+                $("#userComment_" + tweet_id).html('');
+                $("#responseDeletePin"+ tweet_id).html(response);
+                setInterval(function() {
+                    $("#responseDeletePin"+ tweet_id).fadeOut();
+                }, 1000);
+                setInterval(function() {
+                    location.reload();
+                }, 1100);
+                // console.log(response);
+            }
+
+        });
+    });
+
+    $(document).on('click', '.unpinRetweet', function (e) {
+        e.preventDefault();
+        var tweet_id = $(this).data('tweet');
+        var comment_by = $(this).data('user');
+
+        $.ajax({
+            url: 'core/ajax_db/deletePost',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                pin_user_id: comment_by,
+                unpin_Retweet_id: tweet_id,
+            }, success: function (response) {
+                
+                $("#userComment_" + tweet_id).html('');
+                $("#responseDeletePin"+ tweet_id).html(response);
+                setInterval(function() {
+                    $("#responseDeletePin"+ tweet_id).fadeOut();
+                }, 1000);
+                setInterval(function() {
+                    location.reload();
+                }, 1100);
+                // console.log(response);
+            }
+
+        });
+    });
     
     $(document).on('click', '.delete_retweet_by', function (e) {
         e.preventDefault();

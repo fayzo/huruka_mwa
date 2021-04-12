@@ -13,7 +13,11 @@
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>icon/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>icon/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>icon/flag-icon-css-master/css/flag-icon.css">
-
+  <!-- Add the slick-theme.css if you want default styling -->
+  <!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> -->
+  <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL_LINK;?>plugin/slick/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL_LINK;?>plugin/slick/slick.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/AdminLTE.css">
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>plugin/skins/_all-skins.css">
@@ -959,13 +963,14 @@ if (isset($_SESSION['key']) && $result === '' ){ ?>
   <!-- <body class="hold-transition skin-blue fixed sidebar-collapse sidebar-mini "> -->
   <!-- Site wrapper skin-blue -->
 <?php }else if (isset($_SESSION['key']) && $self === 'profile.php' || isset($_SESSION['key']) && $self === 'hashtag.php' || 
- isset($_SESSION['key']) && $self === 'balance.php' || isset($_SESSION['key']) && $self ==='profileEdit.php'){ ?>
+ isset($_SESSION['key']) && $self === 'balance.php' || isset($_SESSION['key']) && $self ==='profileEdit.php' || 
+ isset($_SESSION['key']) && $self === 'profile_close_account.php' ){ ?>
   
   <!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
   <body class="hold-transition fixed sidebar-mini-expand-feature sidebar-mini <?php echo (!empty($user['color']))? $user['color'] :'skin-blue'; ?>">
   <!-- <body class="hold-transition skin-blue fixed sidebar-collapse sidebar-mini "> -->
   <!-- Site wrapper skin-blue -->
-<?php }else if($self === 'profile.php'){ ?>
+<?php }else if($self === 'profile.php' || $self === 'profile_close_account.php'){ ?>
 
   <!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
   <body class="hold-transition fixed sidebar-mini-expand-feature sidebar-mini <?php echo (!empty($user['color']))? $user['color'] :'skin-blue'; ?>">

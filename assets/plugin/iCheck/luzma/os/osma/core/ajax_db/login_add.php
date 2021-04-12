@@ -45,6 +45,7 @@ if(isset($_POST['key'])){
      $email =  $users->test_input($_POST['email']);
      $password =  $users->test_input($_POST['password']);
      $verifypassword =  $users->test_input($_POST['verifypassword']);
+     $link = array('Jobs','Professional','Fundraising','School','House','icyamunara','Car','GushoraStartUp','Marketplace');
 
      if(!preg_match("/^[a-zA-Z ]*$/", $firstname)){
         exit('<div class="alert alert-danger alert-dismissible fade show text-center">
@@ -70,6 +71,12 @@ if(isset($_POST['key'])){
                         <span>&times;</span>
                     </button>
                     <strong>Username must be between 6-20 character</strong> </div>');
+    }else if (in_array($username,$link)) {
+        exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                    <button class="close" data-dismiss="alert" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <strong>Username already in used </strong> </div>');
     }else if (strlen($password) < 3) {
          exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">

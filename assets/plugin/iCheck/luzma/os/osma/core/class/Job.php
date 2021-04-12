@@ -100,8 +100,9 @@ class Job extends Follow {
                    <!-- Job Title:  -->
                        <a style="padding-right:3px;" href="#"><?php echo $title ;?></a> 
                    </span>
-                   <!-- <span class="description">< ?php echo $this->htmlspecialcharss($jobs['companyname']); ?> || <i class="flag-icon flag-icon-<?php echo strtolower($jobs['location']) ;?> h4 mb-0"
-                            id="< ?php echo strtolower( $jobs['location']) ;?>" title="us"></i></span> -->
+                   <span class="description"><?php echo $this->htmlspecialcharss($jobs['companyname']); ?> || 
+                    <span style="font-size:12px" class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?>"
+                        id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></span></span>
                    <span class="description">Publish - <?php echo $this->timeAgo($jobs['created_on']); ?></span>
                    <span class="description">Deadline -  <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></span>
                </div>
@@ -297,7 +298,7 @@ class Job extends Follow {
                     </div>
                     <span> <a href="#"> <!-- Job Title: --> <?php echo $this->htmlspecialcharss($jobs['job_title']) ;?></a></span><br>
                     <span><?php echo $this->htmlspecialcharss($jobs['companyname']); ?></span> || 
-                        <i class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?> h4 mb-0"
+                        <i style="font-size:12px" class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?> h4 mb-0"
                                 id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></i><br>
                     <span>Shared public - <?php echo $this->timeAgo($jobs['created_on']); ?></span><br>
                     <span>Deadline - <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></span>

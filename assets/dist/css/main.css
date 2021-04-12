@@ -10,6 +10,16 @@
   /* background-color: #fff !important; */
   color: #999;
 }
+.dot-container {
+  text-align: center;
+  padding: 10px;
+  /* background: #ddd; */
+  /* background: #b9b6b28f; */
+  color: #ffffff;
+}
+.dot-container a{
+  color: #ffffff;
+}
 .link_color{
   color: green;
 }
@@ -375,6 +385,23 @@ border: 1px solid #635b5f61 !important;
   border: 1px solid #000;
 }
 
+.skin-Black .user-follow .user-username-follow {
+  font-size: 15px;
+  font-weight: 700;
+  color: #b4b0aebf;
+}
+.skin-Black .user-follow .user-username-follow a {
+  color: rgb(230, 221, 221);
+}
+
+.skin-Dark .user-follow .user-username-follow {
+  font-size: 15px;
+  font-weight: 700;
+  color: #b4b0aebf;
+}
+.skin-Dark .user-follow .user-username-follow a {
+  color: rgb(230, 221, 221);
+}
 
 .skin-Dark #link_{
   color: #ffffffd4;

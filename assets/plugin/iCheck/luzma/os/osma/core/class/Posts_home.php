@@ -3,16 +3,24 @@
 //        header('Location: ../../404.html');
 //  }
 
-class Posts_home extends Follow {
+class Posts_home extends Fundraising {
    
 
     public function tweets($user_id,$limit)
     {
         $mysqli= $this->database;
-        // $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id LEFT JOIN blog B ON B. tweet_blog_by = U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' AND B. blog_post = 'posted' OR T. tweetBy= U. user_id AND T. retweet_by != $user_id AND B. blog_post= 'posted' AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit ";
-        // $sql="SELECT * FROM tweets T LEFT JOIN users U ON (T. retweet_by = U. user_id OR T. tweetBy= U. user_id) WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR T. retweet_by != $user_id ORDER BY T. tweet_id DESC LIMIT $limit";
         // $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR T. tweetBy= U. user_id AND T. retweet_by != $user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit";
-        $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR  T. retweet_by = $user_id AND T. retweet_id !='0' OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit";
+        if (isset($_SESSION['key'])) {
+        # code...
+            $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR  T. retweet_by = $user_id AND T. retweet_id !='0' OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit";
+        } else {
+            $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id 
+            WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
+            OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
+            OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
+            ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , T. tweet_id DESC  LIMIT $limit";
+        }
+
         $query= $mysqli->query($sql);
         $tweets=array();
         while ($row= $query->fetch_assoc()) {
@@ -21,7 +29,8 @@ class Posts_home extends Follow {
         }
 
         if ($query->num_rows > 0) { 
-                       
+        $count_foreach=0;
+
         foreach ($tweets as $tweet) {
             $likes= $this->likes($user_id,$tweet['tweet_id']);
             $likes0= $this->Like_second($user_id,$tweet['tweet_id']);
@@ -30,19 +39,240 @@ class Posts_home extends Follow {
             $user= $this->userData($retweet['retweet_by']);
             $comment= $this->comments($tweet['tweet_id']);
             
-                 # code... 
+            if($this->isClosed($tweet['tweetBy']) == true) {
+                continue;
+            }
+            
             ?>
                
             <div class="post">
 
                 <?php 
-                 if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
-                  <span class="t-show-banner">
-                      <div class="t-show-banner-inner">
-                          <span><i class="fa fa-retweet "></i></span><span><?php echo $user['username'].' Shared';?></span>
-                      </div>
-                  </span>
-                 <?php } else{ echo '';}?>
+                if ($tweet['pin_tweet'] == 'pin') { ?>
+                    <div class="float-right" data-toggle="tooltip" data-original-title="pin"><i class="fa fa-flag"></i></div>
+                <?php }
+
+
+                if (isset($_SESSION['key'])) {
+                    # code...
+                
+                if($count_foreach == 2){
+
+                ?>
+                <div class="main-active dot-container h5">
+                    <a href="<?php echo BASE_URL_PUBLIC."network";?>">View more People >>> </a> 
+                </div>
+                <div class="row mb-4 regular slider">
+                    
+                <?php 
+
+                 $query= "SELECT * FROM users WHERE user_id != $user_id AND user_id NOT IN (SELECT receiver FROM follow WHERE sender = $user_id ) ORDER BY rand() LIMIT 0,12";
+                 $result=$mysqli->query($query); 
+                 $rowCount = 1;
+                while ($following=$result->fetch_array()) {
+                      # code...
+                       $workname = (strlen($following["workname"]) > 30)? substr($following["workname"],0,30).'..' : $following["workname"];
+           
+                      echo '
+                           <div class="col-md-3 mb-3">
+                               <!-- Widget: user widget style 1 -->
+                               <div class="card card-follow user-follow">
+                                   <!-- Add the bg color to the header using any of the bg-* classes -->
+                                    '.((!empty($following['cover_img']))?
+                                      '<div class="user-header-follow text-white" style="background: url('.BASE_URL_LINK."image/users_cover_profile/".$following['cover_img'].') center center;background-size: cover; overflow: hidden; width: 100%;">'
+                                     :'<div class="user-header-follow text-white" style="background: url('.BASE_URL_LINK.NO_COVER_IMAGE_URL.') center center;background-size: cover; overflow: hidden; width: 100%;">' ).'
+                                   </div>
+                                   <div class="user-image-follow">
+                                     '.((!empty($following['profile_img']))?
+                                          ' <img class="rounded-circle elevation-2"
+                                               src="'.BASE_URL_LINK."image/users_profile_cover/".$following['profile_img'].'">'
+                                         :' <img class="rounded-circle elevation-2" src="'.BASE_URL_LINK.NO_PROFILE_IMAGE_URL.'" />' ).'
+                                        <span> '.$this->lengthsOfusers($following['date_registry']).'</span>
+                                   </div>
+                                   <div class="card-footer">
+                                       <h5 class="user-username-follow m-1 "><a href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a>
+                                       </h5>
+                                       <h5 class="user-username-follow m-1"><small>'.((!empty($workname))? $workname :'Member').'</small></h5>
+                                       <span>'.$this->followBtn($following['user_id'],$user_id,$user['user_id']).'</span>
+                                   </div>
+                                   <!-- /.footer -->
+                               </div>
+                               <!-- /. card widget-user -->
+                           </div>
+                           <!-- col --> ';
+                           $rowCount++;
+                  } ?>
+                        </div>
+                        <!-- row -->
+                        <div class="main-active dot-container h5 mb-2" style="border-bottom: 1px solid #adb5bd;">
+                            <a href="<?php echo BASE_URL_PUBLIC."network";?>">View more People >>> </a> 
+                        </div>
+                         <hr>
+                <?php
+                }
+
+                if($count_foreach == 3){
+                    $query= $mysqli->query("SELECT * FROM users U Left JOIN fundraising F ON F. user_id2 = U. user_id WHERE F. categories_fundraising = F. categories_fundraising  ORDER BY created_on2 Desc Limit 0,8");
+              
+
+                    if ($query->num_rows > 0) { ?>
+                        <div class="main-active dot-container h5">
+                            <a href="<?php echo BASE_URL_PUBLIC."fundraising";?>">View more Fundraising >>> </a> 
+                        </div>
+                        <div class="row mt-3 regular0 slider">
+
+                <?php while($row= $query->fetch_array()) { 
+                    $likes= $this->Fundraisinglikes($user_id,$row['fund_id']); ?>
+                
+                        <div class="col-12 mb-3">
+
+                            <div class="card borders-bottoms more" >
+                                <img class="card-img-top" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>" height="160px" src="<?php echo BASE_URL_PUBLIC ;?>uploads/fundraising/<?php echo $row['photo'] ;?>" >
+                                <div class="card-body">
+                                    <div class="p-0 font-weight-bold">Fundraising 
+
+                                        <?php if(isset($_SESSION['key']) && $user_id == $row['user_id2']){ ?>
+                                        <ul class="list-inline mb-0  float-right" style="list-style-type: none;">  
+
+                                            <li  class=" list-inline-item">
+                                                <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                                                        <ul style="list-style-type: none; margin:0px;" >
+                                                            <li style="list-style-type: none; margin:0px;"> 
+                                                            <label class="deleteFundraising"  data-fund="<?php echo $row["fund_id"];?>"  data-user="<?php echo $row["user_id2"];?>">Delete </label>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                        </ul>
+                                        <?php } ?>
+
+                                        <?php if($likes['like_on'] == $row['fund_id']){ ?>
+                                                    <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2" data-login="1" '; } ?> style="font-size:16px;" data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>"><span class="likescounter "><?php echo $row['likes_counts'] ;?></span> <i class="fa fa-heart"  ></i></span>
+                                        <?php }else{ ?>
+                                            <span <?php if(isset($_SESSION['key'])){ echo 'class="like-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2"  data-login="1" '; } ?> style="font-size:16px;" data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>" ><span class="likescounter"> <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> <i class="fa fa-heart-o" ></i> </span>
+                                        <?php } ?>
+                                    
+                                    </div>
+
+                                    <hr>
+                                    <div style="height:115px;" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>">
+                                        <a href="javascript:void(0);"  class="card-text h5">
+                                            Helps <?php echo $row['lastname1'] ;?> 
+                                        </a>
+                                        <!-- Kogera umusaruro muguhinga -->
+                                        <p class="mt-2">
+                                    <?php if (strlen($row["text"]) > 80) {
+                                                echo $row["text"] = substr($row["text"],0,80).'...
+                                                <br><span class="mb-0"><a href="javascript:void(0)" id="fund-readmore" data-fund="'.$row['fund_id'].'" class="text-muted" style"font-weight: 500 !important;font-size:8px">read more...</a></span>';
+                                                }else{
+                                                echo $row["text"];
+                                                } ?> 
+                                        </p>
+                                        <!-- 117 -->
+                                        <!-- turashaka kongera umusaruro mu buhinzi tukabona ubufasha buhagije no kubona imbuto -->
+                                    </div>                      
+                                    <div class="text-muted mb-1"><?php echo $row['categories_fundraising']; ?>
+                                        <span class="text-success px-1 float-right" style="border-radius:3px;font-size:11px;"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</span>
+                                    </div>
+                                    <div class="card-text">
+                                    <!-- 40,000 -->
+                                        <span class="font-weight-bold"><?php echo number_format($row['money_raising']); ?> Frw</span>
+                                        Raised
+                                        <span class="float-right"><?php echo $this->donationPercetangeMoneyRaimaing($row['money_raising'],$row['money_to_target']); ?> %</span>
+                                        <!-- 40 -->
+                                    </div>
+                                    <div class="progress clear-float " style="height: 10px;">
+                                        <?php echo $this->Users_donationMoneyRaising($row['money_raising'],$row['money_to_target']); ?>
+                                    </div>
+                                    
+                                    <div class="clear-float">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <span class="text-muted"><?php echo $this->timeAgo($row['created_on2']); ?></span>
+                                        <span class="text-muted float-right text-right">out of <?php echo number_format($row['money_to_target']).' Frw'; ?></span>
+                                        <!-- 13 days Left -->
+                                    </div>
+                                </div>
+                            </div> <!-- card -->
+
+                        </div>
+
+                <?php } ?>
+                </div>
+                <div class="main-active dot-container h5 mb-2" style="border-bottom: 1px solid #adb5bd;">
+                    <a href="<?php echo BASE_URL_PUBLIC."fundraising";?>">View more Fundraising >>> </a> 
+                </div>
+            <hr>
+        <?php }  }
+         // count_foreachjob
+        }
+
+        if($count_foreach == 4){ 
+
+            $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J.turn = 'on' and J. deadline > CURDATE() ORDER BY rand() LIMIT 6 ");
+            if ($query->num_rows > 0) {
+            ?>
+            <div class="card card-primary mb-3 ">
+            <div class="card-header main-active dot-container h5">
+                Jobs
+            </div>
+            <div class="card-body message-color pt-0 pb-0">
+            <div class="row">
+            <?php while($jobs= $query->fetch_array()) { 
+
+                        $title= $jobs['job_title'];
+
+                        if (strlen($title) > 40) {
+                            $title = substr($title,0,40).'...';
+                        }else{
+                            $title;
+                        }
+                ?>
+
+                <div class="col-12 px-0 py-2 jobHover jobHovers more" data-job="<?php echo $jobs['job_id'];?>" data-business="<?php echo $jobs['business_id'];?>">
+                        <div class="user-block mb-2" >
+                            <div class="user-jobImgall">
+                                    <?php if (!empty($jobs['profile_img'])) {?>
+                                    <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $jobs['profile_img'] ;?>" alt="User Image">
+                                    <?php  }else{ ?>
+                                    <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                    <?php } ?>
+                            </div>
+                            <span><a href="#"> <!-- Job Title: --> <?php echo $this->htmlspecialcharss($jobs['job_title']) ;?></a></span><br>
+                            <span><?php echo $this->htmlspecialcharss($jobs['companyname']); ?></span> || 
+                                <i style="font-size:12px" class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?> h4 mb-0"
+                                        id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></i><br>
+                            <span>Shared public - <?php echo $this->timeAgo($jobs['created_on']); ?></span><br>
+                            <span>Deadline - <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></span>
+                    </div> <!-- user-block -->
+                    </div> <!-- col-12 -->
+                    <hr class="bg-info mt-0 mb-1" style="width:95%;">
+
+                    <?php } ?>
+                    </div>
+                    </div> <!-- /.card-body -->
+                    <div class="card-footer text-center">
+                        <a href="<?php echo JOBS;?>">View all Jobs</a>
+                    </div> <!-- /.card-footer -->
+                </div>
+                <hr>
+        
+        <?php } 
+        // query->num_rows
+        }
+        // isset session key
+        ++$count_foreach;
+
+            if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
+            <span class="t-show-banner">
+                <div class="t-show-banner-inner">
+                    <span><i class="fa fa-retweet "></i></span><span><?php echo $user['username'].' Shared';?></span>
+                </div>
+            </span>
+            <?php } else{ echo '';}?>
 
            <?php if(!empty($retweet['retweet_Msg']) && $tweet["tweet_id"] == $retweet["retweet_id"] || $tweet["retweet_id"] > 0){ ?> 
                 <div class="user-block">
@@ -59,6 +289,7 @@ class Posts_home extends Follow {
                     <span class="username">
                         <a style="float:left;padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
                         <!-- //Jonathan Burke Jr. -->
+                        <?php echo (!empty($user['bot']) && $user['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                         <span class="description">Shared public - <?php echo $this->timeAgo($retweet['posted_on']); ?></span>
                     </span>
                     <span class="description"><?php echo $this->getTweetLink($retweet['retweet_Msg']); ?></span>
@@ -66,6 +297,8 @@ class Posts_home extends Follow {
 
                 <div class="card retweetcolor t-show-popup more" data-tweet="<?php echo $tweet["tweet_id"];?>">
                   <div class="card-body">
+                     <span id="responseDeletePin<?php echo $tweet['tweet_id'] ;?>"></span>
+
                   <?php 
                        
                        $expodefile = explode("=",$tweet['tweet_image']);
@@ -148,6 +381,7 @@ class Posts_home extends Follow {
                                             </div>
                                             <span class="username">
                                             <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                            <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                 <!-- //Jonathan Burke Jr. -->
                                             </span>
                                             <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -252,6 +486,7 @@ class Posts_home extends Follow {
                                             </div>
                                             <span class="username">
                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                 <!-- //Jonathan Burke Jr. -->
                                             </span>
                                             <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -342,6 +577,7 @@ class Posts_home extends Follow {
                                             </div>
                                             <span class="username">
                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                 <!-- //Jonathan Burke Jr. -->
                                             </span>
                                             <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -429,6 +665,7 @@ class Posts_home extends Follow {
                                                 </div>
                                                 <span class="username">
                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                     <!-- //Jonathan Burke Jr. -->
                                                 </span>
                                                     <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -524,6 +761,7 @@ class Posts_home extends Follow {
                                                 </div>
                                                 <span class="username">
                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                     <!-- //Jonathan Burke Jr. -->
                                                 </span>
                                                     <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -596,6 +834,7 @@ class Posts_home extends Follow {
                                                 </div>
                                                 <span class="username">
                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                     <!-- //Jonathan Burke Jr. -->
                                                 </span>
                                                     <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -656,6 +895,7 @@ class Posts_home extends Follow {
                                                     </div>
                                                     <span class="username">
                                                         <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                        <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                         <!-- //Jonathan Burke Jr. -->
                                                     </span>
                                                         <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -716,6 +956,8 @@ class Posts_home extends Follow {
                                                </div>
                                                <span class="username">
                                                    <a style="float:left;padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                   <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?
+                                                    '<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                    <!-- //Jonathan Burke Jr. -->
                                                    <span class="description">Shared publicly - <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
                                                </span>
@@ -753,6 +995,7 @@ class Posts_home extends Follow {
                 </div><!-- card -->
 
             <?php }else { ?> 
+                <span id="responseDeletePin<?php echo $tweet['tweet_id'] ;?>"></span>
 
                 <div class="user-block">
                     <div class="user-blockImgBorder">
@@ -769,11 +1012,15 @@ class Posts_home extends Follow {
                        <?php if($user_id != $tweet['user_id']) { ?> 
                             <ul><li>
                                 <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
+                                <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?
+                                '<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                 <!-- <ul><li>< ?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id']); ?></li></ul> -->
                                 </li>
                             </ul>
                             <?php }else{ ?>
                                 <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
+                                <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?
+                                '<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                             <?php } ?> 
 
                     </span>
@@ -1609,7 +1856,14 @@ class Posts_home extends Follow {
                                    <a href="javascript:void(0)" class="more" ><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                                     <ul style="list-style-type: none; margin:0px;" >
                                         <li style="list-style-type: none; margin:0px;"> 
-                                            <label class="deleteTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" >Delete </label>
+                                            <label class="deleteTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </label>
+                                       </li>
+                                        <li style="list-style-type: none; margin:0px;"> 
+                                        <?php if ($tweet['pin_tweet'] == 'pin') { ?>
+                                            <label class="unpinTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> UnPin to profile</label>
+                                        <?php } else { ?>
+                                            <label class="pinTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> Pin to profile</label>
+                                        <?php } ?>
                                        </li>
                                    </ul>
                                 </li>
@@ -1622,7 +1876,14 @@ class Posts_home extends Follow {
                                    <a href="javascript:void(0)" class="more" ><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                                     <ul style="list-style-type: none; margin:0px;" >
                                         <li style="list-style-type: none; margin:0px;"> 
-                                            <label class="delete_retweet_by" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" >Delete </label>
+                                            <label class="delete_retweet_by" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </label>
+                                       </li>
+                                       <li style="list-style-type: none; margin:0px;"> 
+                                       <?php if ($tweet['pin_tweet'] == 'pin') { ?>
+                                            <label class="unpinRetweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> UnPin to profile</label>
+                                        <?php } else { ?>
+                                            <label class="pinRetweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> Pin to profile</label>
+                                        <?php } ?>
                                        </li>
                                    </ul>
                                 </li>
@@ -1845,7 +2106,9 @@ class Posts_home extends Follow {
                    </div>
                    </div>
                     <span class="username">
-                        <a href="<?php echo PROFILE ;?>">Irangiro</a><?php echo self::followBtns(1,$user_id,1); ?>
+                        <a href="<?php echo PROFILE ;?>">Irangiro</a>
+                        <span><img src="<?php echo BASE_URL_LINK.'image/img/verified-light.png' ; ?>" width="15px"></span>
+                        <?php echo self::followBtns(1,$user_id,1); ?>
                     </span>
                     <span class="description">Public Figure | Content Creator</span>
                 </div>

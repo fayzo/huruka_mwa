@@ -125,6 +125,66 @@ function settingsUsernamepass1(key) {
     }
 }
 
+function close_account(key,no) {
+    if (no == 'no') {
+        var result = confirm("Are you sure you want to Open your account?");
+    } else {
+        var result = confirm("Are you sure you want to close your account?");
+    }
+    
+    if (result) {
+        
+        $.ajax({
+            url: 'core/ajax_db/setting',
+            method: "POST",
+            dataType: "text",
+            data: {
+                close_account: key,
+                value: no
+            },
+            success: function (response) {
+                // console.log(response);
+                if (response.indexOf('SUCCESS') >= 0) {
+                    $("#response_close_account").html(response);
+                    if (no == 'no') {
+                        $("#close_account").attr('value', 'Yes! Close it!').attr("close_account("+key+",yes)");
+                    } else {
+                        $("#close_account").attr('value', 'Re-Open it!').attr("close_account("+key+",no)");
+                    }
+                }else {
+                    $("#response_close_account").html(response);
+                }
+            }
+        });
+    } 
+}
+
+function delete_account(key,no) {
+
+    var result = confirm("Are you sure you want to Delete complete your account?");
+    
+    if (result) {
+        
+        $.ajax({
+            url: 'core/ajax_db/setting',
+            method: "POST",
+            dataType: "text",
+            data: {
+                delete_account: key,
+                value: no
+            },
+            success: function (response) {
+                // console.log(response);
+                if (response.indexOf('SUCCESS') >= 0) {
+                    $("#response_delete_account").html(response);
+                }else {
+                    $("#response_delete_account").html(response);
+                }
+            }
+        });
+    } 
+}
+
 function isEmpty(caller) {
     if (caller.val() == "") {
         caller.css("border", "1px solid red");

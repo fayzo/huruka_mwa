@@ -57,10 +57,13 @@
                          <div class="list-group " id="list-tab" role="tablist">
                              <a class="list-group-item list-group-item-action active" id="list-Account-list"
                                  data-toggle="tab" href="#list-Account" role="tab" aria-controls="list-Account"><i
-                                     class="fa fa-lock"></i> Account</a>
+                                     class="fa fa-user"></i> Account</a>
                              <a class="list-group-item list-group-item-action" id="list-Password-list" data-toggle="tab"
                                  href="#list-Password" role="tab" aria-controls="list-Password"><i
                                      class="fa fa-key"></i> Password</a>
+                             <a class="list-group-item list-group-item-action" id="list-Close-Account-list" data-toggle="tab"
+                                 href="#list-Close-Account" role="tab" aria-controls="list-Close-Account"><i
+                                     class="fa fa-lock"></i> Close Account</a>
 
                          </div>
                      </div>
@@ -80,6 +83,10 @@
                      <div class="tab-pane fade " id="list-Password" role="tabpanel"
                          aria-labelledby="list-Password-list">
                          <?php include "settings/password.php"?>
+                     </div> <!-- END-OF A LINK OF sent ID=#  -->
+                     <div class="tab-pane fade " id="list-Close-Account" role="tabpanel"
+                         aria-labelledby="list-Close-Account-list">
+                         <?php include "settings/close_account.php"?>
                      </div> <!-- END-OF A LINK OF sent ID=#  -->
 
                  </div>

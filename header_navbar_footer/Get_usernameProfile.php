@@ -22,7 +22,6 @@ if (isset($_GET['username']) == true && empty($_GET['username']) == false) {
 	}else{
         $user_id= $profileData['user_id'];
         // $jobs= $home->jobsData($user_id);
-
 	}
 
 	$user= $home->userData($user_id);

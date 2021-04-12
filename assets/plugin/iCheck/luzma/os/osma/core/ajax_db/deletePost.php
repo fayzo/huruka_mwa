@@ -8,6 +8,42 @@ if (isset($_POST['deleteTweetHome']) && !empty($_POST['deleteTweetHome'])) {
     $comment->deleteLikesNotificatPosts($tweet_id,$user_id);
 }
 
+if (isset($_POST['pin_Tweet_id']) && !empty($_POST['pin_Tweet_id'])) {
+    $user_id= $_SESSION['key'];
+	$tweet_id= $_POST['pin_Tweet_id'];
+	$pin_user_id= $_POST['pin_user_id'];
+    $users->update('tweets',array( 
+        'pin_tweet'=> 'pin',
+        'pin_retweet_by'=> $pin_user_id ),array('tweet_id'=> $tweet_id,'tweetBy' => $pin_user_id,'retweet_by' => 0 ));
+}
+
+if (isset($_POST['pin_Retweet_id']) && !empty($_POST['pin_Retweet_id'])) {
+    $user_id= $_SESSION['key'];
+	$tweet_id= $_POST['pin_Retweet_id'];
+	$pin_user_id= $_POST['pin_user_id'];
+    $users->update('tweets',array( 
+        'pin_tweet'=> 'pin',
+        'pin_retweet_by'=> $pin_user_id ),array('tweet_id'=> $tweet_id,'retweet_by' => $pin_user_id ));
+}
+
+if (isset($_POST['unpin_Tweet_id']) && !empty($_POST['unpin_Tweet_id'])) {
+    $user_id= $_SESSION['key'];
+	$tweet_id= $_POST['unpin_Tweet_id'];
+	$pin_user_id= $_POST['pin_user_id'];
+    $users->update('tweets',array( 
+        'pin_tweet'=> '',
+        'pin_retweet_by'=> $pin_user_id ),array('tweet_id'=> $tweet_id,'tweetBy' => $pin_user_id,'retweet_by' => 0 ));
+}
+
+if (isset($_POST['unpin_Retweet_id']) && !empty($_POST['unpin_Retweet_id'])) {
+    $user_id= $_SESSION['key'];
+	$tweet_id= $_POST['unpin_Retweet_id'];
+	$pin_user_id= $_POST['pin_user_id'];
+    $users->update('tweets',array( 
+        'pin_tweet'=> '',
+        'pin_retweet_by'=> $pin_user_id ),array('tweet_id'=> $tweet_id,'retweet_by' => $pin_user_id ));
+}
+
 if (isset($_POST['showpopupdelete']) && !empty($_POST['showpopupdelete'])) {
     $user_id= $_SESSION['key'];
 	$tweet_id= $_POST['showpopupdelete'];

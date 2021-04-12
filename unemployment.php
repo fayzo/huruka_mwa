@@ -44,8 +44,8 @@
                       <?php if (isset($_SESSION['key'])){ ?>
                       <?php if ($user['user_id'] === $_SESSION['key']) { ?>
                     <li class="breadcrumb-item"><span id="messagePopup" class="more" data-user="<?php echo $user['user_id'];?>"><a href="javascript:void(0);" ><i class="fa fa-envelope-o"></i> Message </a></span></li>
+                    <li class="breadcrumb-item active"><i><a href="<?php echo PROFILE ;?>"> Profile</a></i></li>
                     <?php } } ?>
-                    <li class="breadcrumb-item active"><i><a href="<?php echo PROFILE ;?>"> User Profile</a></i></li>
                 </ol>
             </div>
         </div>
@@ -149,7 +149,36 @@
 
                               <div class="form-group">
                                     <label>Field study or Experience in it </label>
-                                    <input type="text" name="field" class="form-control field" id="field" placeholder="Accountant,electrician,nursery...">
+                                    <!-- <input type="text" name="field" class="form-control field" id="field" placeholder="Accountant,electrician,nursery..."> -->
+                                    <div class="form-group">
+                                      <select class="custom-select form-control field" name="field"  id="field">
+                                        <option value="">Select one</option>
+                                        <option value="Business_Administration">Business Administration</option>
+                                        <option value="Management">Management</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Accountant">Accountant</option>
+                                        <option value="Creative_Design">Creative Design</option>
+                                        <option value="Human_Resources">Human Resources</option>
+                                        <option value="Health_Science">Health Science</option>
+                                        <option value="Data_Analysts">Data Analysts</option>
+                                        <option value="Data_Science">Data Science</option>
+                                        <option value="Software_Developers">Software Developers</option>
+                                        <option value="Cybersecurity_Experts">Cybersecurity Experts</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Creative_Writing">Creative Writing</option>
+                                        <option value="Nurses">Nurses</option>
+                                        <option value="Computer_Enginnering">Computer Enginnering</option>
+                                        <option value="Mechanical_Enginnering">Mechanical Enginnering</option>
+                                        <option value="Electrical_Enginnering">Electrical Enginnering</option>
+                                        <option value="Medical_Professionals">Medical Professionals</option>
+                                        <option value="Plumbers">Plumbers</option>
+                                        <option value="Electricians">Electricians</option>
+                                        <option value="Dentists">Dentists</option>
+                                        <option value="Dental">Dental</option>
+                                        <option value="Technicians">Technicians</option>
+                                        <option value="Mental_Health_Professional">Mental Health Professional</option>
+                                      </select>
+                                    </div>
                               </div>
 
                               <div class="form-group">

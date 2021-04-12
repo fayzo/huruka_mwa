@@ -2,16 +2,9 @@
 <!-- < ?php include "header_navbar_footer/header_if_login.php"?> -->
 <?php include "header_navbar_footer/Get_usernameProfile.php"?>
 <title><?php echo $profileData['username'].' your profile'; ?></title>
-
-<?php if($home->isClosed($profileData['user_id']) == true) {
-    header('location: '.BASE_URL_PUBLIC.$profileData['username'].'.profile_close_account');
-    // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
-} ?>
-
 <?php include "header_navbar_footer/header.php"?>
 
-<?php 
-$users->CountViewIn_profile('users',
+<?php $users->CountViewIn_profile('users',
 array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id']); ?>
 
       <!-- Main content -->
@@ -46,28 +39,28 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                     </div>
                     <div class="card-footer">
                         <div class="description">
-                            <h5 class="description-header count-followers"><?php echo $profileData['followers']; ?></h5>
-                            <span class="description-text"><a href="<?php echo BASE_URL_PUBLIC.$profileData['username'].'.followers' ;?>">FOLLOWERS</a></span>
+                            <h5 class="description-header count-followers">0</h5>
+                            <span class="description-text"><a href="javascript:void()">FOLLOWERS</a></span>
                         </div>
                         <!-- /.description-block -->
                         <div class="description ">
-                            <h5 class="description-header count-following"><?php echo $profileData['following']; ?></h5>
-                            <span class="description-text"><a href="<?php echo BASE_URL_PUBLIC.$profileData['username'].'.following' ;?>"> FOLLOWING</a></span>
+                            <h5 class="description-header count-following">0</h5>
+                            <span class="description-text"><a href="javascript:void()"> FOLLOWING</a></span>
                         </div>
                         <!-- /.description-block -->
                         <div class="description">
-                            <h5 class="description-header"> <?php echo $home->countsPosts($profileData['user_id']);?></h5>
-                            <span class="description-text"><a href="<?php echo BASE_URL_PUBLIC.$profileData['username'].'.posts' ;?>"> POSTS</a></span>
+                            <h5 class="description-header"> 0</h5>
+                            <span class="description-text"><a href="javascript:void()"> POSTS</a></span>
                         </div>
                         <!-- /.description-block -->
                         <!-- /.description-block -->
                         <div class="description">
-                            <h5 class="description-header"> <?php echo $home->countsLike($profileData['user_id']);?></h5>
+                            <h5 class="description-header"> 0</h5>
                             <span class="description-text">LIKES</span>
                         </div>
                         <!-- /.description-block -->
                         <div class="description">
-                            <h5 class="description-header"><?php echo $profileData['countViewin_profile'] ;?></h5>
+                            <h5 class="description-header">0</h5>
                             <span class="description-text">VIEWS</span>
                         </div>
                         <!-- /.description-block -->
@@ -111,7 +104,6 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                     </span>
                     </i>
                     </li>
-                    <li class="breadcrumb-item"><a href="<?php echo BALANCE ;?>" ><i class="fas fa-money-check"></i> Withdraw </a></li>
                 </ol>
           </div>
       </div>
@@ -121,52 +113,6 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
 
         <div class="row">
           <div class="col-md-3 mb-3 d-none d-md-block">
-            <?php echo $home->userProfile($profileData['user_id']); ?>
-
-            <div class="sticky-tops" style="top: 52px;">
-                  <div class="card card-primary mb-3">
-                      <div class="card-header main-active p-1">
-                          <h5 class="card-title text-center"><i> About Me</i></h5>
-                      </div>
-                      <!-- /.card-header -->
-                      <div class="card-body">
-                          <strong><i class="fa fa-book mr-1"></i> Education</strong>
-
-                          <p class="text-muted">
-                              <?php echo $profileData['education']; ?>
-                          </p>
-
-                          <strong><i class="fa fa-book mr-1"></i> Diploma</strong>
-
-                          <p class="text-muted">
-                              <?php echo $profileData['diploma']; ?>
-                          </p>
-
-                          <strong><i class="fa fa-map-marker mr-1"></i> Location</strong>
-
-                          <p class="text-muted"> <?php echo $profileData['location']; ?></p>
-
-                          <strong><i class="fa fa-pencil mr-1"></i> Skills</strong>
-
-                          <p class="text-muted">
-                              <span class="badge badge-danger"> <?php echo $profileData['skills']; ?></span>
-                              <!-- <span class="badge badge-success">Coding</span>
-                              <span class="badge badge-info">Javascript</span>
-                              <span class="badge badge-warning">PHP</span>
-                              <span class="badge badge-primary">Node.js</span> -->
-                          </p>
-
-                          <strong><i class="fa fa-file-text-o mr-1"></i> Hobbys</strong>
-
-                          <p class="text-muted"> <?php echo $profileData['hobbys']; ?></p>
-                      </div>
-                      <!-- /.card-body -->
-                  </div>
-                  <!-- /.card -->
-                <div class="mb-3">
-                  <?php echo $follow->FollowingListsProfile($profileData['user_id'],$user_id,$profileData['user_id']); ?>
-                </div>
-            </div>
                 <div class="sticky-top" style="top: 52px;">
                   <?php echo $trending->trends(); ?>
                 </div>
@@ -178,7 +124,9 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                         <!-- Box Comment -->
                         <div class="card card-profile card1">
                             <div class="card-body">
-                                    <?php echo $Home_GetUsers->getUserTweet($profileData['user_id'],$user_id) ;?>
+                                <h4>User Closed This Account </h4>
+                                 No one can see Thier posts.
+                                <a href="<?php echo HOME ;?>"> Click here to Go Back.</a>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -192,8 +140,6 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
             <!-- /.col-md-6 -->
 
           <div class="col-md-3">
-            <?php $follow->whoTofollow($profileData['user_id'],$profileData['user_id'])?>
-
             <div class="sticky-top" style="top: 52px;z-index:1000;">
                <?php echo $home->options(); ?>
             </div>

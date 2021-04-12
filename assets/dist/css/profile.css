@@ -595,6 +595,7 @@ button.retweeted>.fa-retweet {
     cursor: pointer;
     padding: 10px;
     display: block;
+    width: 120px;
 }
 
 .deleteButt li ul li:hover>label {

@@ -14,6 +14,7 @@ class Notification_body extends Home
         $user= $this->userData($tweet['retweet_by']);
         $comment= $this->comments($tweet['tweet_id']);
         
+        
         ?>
                 <!-- TEXT -->
                 <!-- TEXT -->

@@ -9,6 +9,7 @@ include('class/Home.php');
 include('class/Follow.php');
 include('class/Job.php');
 // include('class/Message.php');
+
 include('class/Message_with_file_image_chat.php');
 include('class/Trending.php');
 include('class/Notification.php');
@@ -64,6 +65,8 @@ define('FOLLOWERS', BASE_URL_PUBLIC.'followers');
 define('FOLLOWING', BASE_URL_PUBLIC.'following');
 define('PROFILE', BASE_URL_PUBLIC.'profile');
 define('PROFILE_EDIT', BASE_URL_PUBLIC.'profileEdit');
+define('PROFILE_CLOSE_ACCOUNT', BASE_URL_PUBLIC.'profile_close_account');
+
 // define('HASHTAG', BASE_URL_PUBLIC.'hashtag');
 // define('JOBS', BASE_URL_PUBLIC.'jobs0.php');
 define('JOBS', BASE_URL_PUBLIC.'jobs');

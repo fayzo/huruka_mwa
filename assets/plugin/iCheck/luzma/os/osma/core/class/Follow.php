@@ -401,6 +401,7 @@ class Follow extends Home
                             </div>
                             <ul class="whoTofollow-list-info">
                                 <li><a href="'.BASE_URL_PUBLIC.$whoTofollow['username'].'" id="'.$whoTofollow["user_id"].'" >'.$whoTofollow['username'].'</a>
+                                '.((!empty($whoTofollow['bot']) && $whoTofollow['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"").'
                                 </li>
                                 <li>'.((!empty($workname)?'
                                 <small class="my-0" style="font-size: 12px;">'.$workname.'</small>
@@ -464,6 +465,7 @@ class Follow extends Home
                             <div class="info-body-name">
                                 <div class="in-b-name">
                                     <div><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
+                                    <?php echo (!empty($user['bot']) && $user['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                     <span><?php echo self::followBtns($whoTofollow,$user_id,$follow_id); ?></span>
                                     </div>
                                     <small class="my-0" style="font-size: 12px;"><?php 
@@ -794,7 +796,10 @@ class Follow extends Home
                              <span> '.$this->lengthsOfusers($following['date_registry']).'</span>
                         </div>
                         <div class="card-footer">
-                            <h5 class="user-username-follow m-1 "><a href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a></h5>
+                            <h5 class="user-username-follow m-1 "><a href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a>
+                            '.((!empty($following['bot']) && $following['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"").'
+                            
+                            </h5>
                             <h5 class="user-username-follow m-1"><small>'.((!empty($workname))? $workname :'Member').'</small></h5>
                             <span>'.$this->followBtn($following['user_id'],$user_id,$follow_id).'</span>
                         </div>
@@ -886,6 +891,7 @@ class Follow extends Home
                              </div>
                              <ul class="whoTofollow-list-info">
                                  <li><a href="'.BASE_URL_PUBLIC.$whoTofollow['username'].'" id="'.$whoTofollow["user_id"].'" >'.$whoTofollow['username'].'</a>
+                                '.((!empty($whoTofollow['bot']) && $whoTofollow['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"").'
                                  </li>
                                  <li>'.((!empty($workname)?'
                                  <small class="my-0" style="font-size: 12px;">'.$workname.'</small>

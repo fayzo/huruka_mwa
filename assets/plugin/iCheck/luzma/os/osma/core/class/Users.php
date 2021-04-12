@@ -223,6 +223,18 @@ class Users{
         }
     }
 
+    public function isClosed($user_id) {
+        $mysqli= $this->database;
+        // var_dump($user_id);
+        $query= $mysqli->query("SELECT close_account,delete_account FROM users WHERE user_id= '$user_id'");
+        $row= $query->fetch_assoc();
+
+		if($row['close_account'] == 'yes' || $row['delete_account'] == 'yes')
+			return true;
+		else 
+			return false;
+	}
+
     public function Postsjobscreates($table,$fields=array())
     {
         $mysqli= $this->database;
@@ -594,13 +606,16 @@ class Users{
                         <span>&times;</span>
                     </button>
                     <strong>Username Already Tooken ???</strong> </div>');
-        }else if(!empty($rows['email'])){
+        }
+        if(!empty($rows['email'])){
              exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
                     </button>
                     <strong>Email Already Tooken ???</strong> </div>');
-        }else{
+        }
+
+        if(empty($rows['email']) && empty($row['username']) ){
               $this->update($table,$conditions,$id);
         }
     } 
@@ -718,19 +733,9 @@ class Users{
         $sql .= (!empty($select))?$select:'*';
         $sql .= ' FROM '.$table;
         $sql .= ' WHERE ';
-        $condition= $conditions;
+        $condition= $arrayselects;
         $condition = array_diff_key($condition, [
-            'firstname' => 'firstname', 
-            'lastname' => 'lastname', 
             'email' => 'email', 
-            'gender' => 'gender', 
-            'country' => 'country', 
-            'password' => 'password', 
-            'date_birth' => 'date_birth',
-            'date_registry' => 'date_registry', 
-            'last_login' => 'datetime', 
-            'color' => 'black', 
-            'approval' => 'off',
             ]);
         $i= 0;
         foreach($condition as $key => $value){
@@ -750,19 +755,9 @@ class Users{
         $sql1 .= (!empty($select))?$select:'*';
         $sql1 .= ' FROM '.$table;
         $sql1 .= ' WHERE ';
-        $conditionz= $conditions;
+        $conditionz= $arrayselects;
         $conditionz = array_diff_key($conditionz, [
-            'firstname' => 'firstname', 
-            'lastname' => 'lastname', 
             'username' => 'username', 
-            'gender' => 'gender', 
-            'country' => 'country', 
-            'password' => 'password', 
-            'date_birth' => 'date_birth',
-            'date_registry' => 'date_registry', 
-            'last_login' => 'datetime', 
-            'color' => 'black',
-            'approval' => 'off',  
             ]);
         $i= 0;
         foreach($conditionz as $key => $value){
@@ -778,18 +773,22 @@ class Users{
         // var_dump($b[0]);
         
         if(!empty($row['username'])){
-             exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+            $username=    exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
                     </button>
                     <strong>Username Already Tooken ???</strong> </div>');
-        }else if(!empty($rows['email'])){
-             exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+        }
+        
+        if(!empty($rows['email'])){
+            exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
                     </button>
                     <strong>Email Already Tooken ???</strong> </div>');
-        }else{
+        }
+
+        if(empty($rows['email']) && empty($rows['username']) ){
              $this->Postsjobscreates('users',$conditions);
         }
     } 

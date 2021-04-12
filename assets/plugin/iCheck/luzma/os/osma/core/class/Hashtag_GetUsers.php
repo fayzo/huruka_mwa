@@ -19,6 +19,10 @@ class Hashtag_GetUsers extends Follow
                                 $comment= $this->comments($tweet['tweet_id']);
                                      # code... 
                                     //  echo var_dump($retweet['retweet_Msg']).'<br>';
+                                 
+                                if($this->isClosed($tweet['tweetBy']) == true) {
+                                    continue;
+                                }
                                 ?>
                                <div class="card borders-tops mb-3" id="userComment_<?php echo $tweet["tweet_id"]; ?>"> 
                                     <div class="card-body message-color">
@@ -47,6 +51,7 @@ class Hashtag_GetUsers extends Follow
                                          </div>
                                         <span class="username">
                                             <a style="float:left;padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
+                                            <?php echo (!empty($user['bot']) && $user['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                             <!-- //Jonathan Burke Jr. -->
                                             <span class="description">Shared public - <?php echo $this->timeAgo($retweet['posted_on']); ?></span>
                                         </span>
@@ -134,6 +139,7 @@ class Hashtag_GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                               <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                 </span>
                                                                 <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -238,6 +244,7 @@ class Hashtag_GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                     <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                 </span>
                                                                 <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -328,6 +335,7 @@ class Hashtag_GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                 </span>
                                                                 <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -415,6 +423,8 @@ class Hashtag_GetUsers extends Follow
                                                                     </div>
                                                                     <span class="username">
                                                                         <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                        <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                         <!-- //Jonathan Burke Jr. -->
                                                                     </span>
                                                                         <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -510,6 +520,8 @@ class Hashtag_GetUsers extends Follow
                                                                     </div>
                                                                     <span class="username">
                                                                         <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                        <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                         <!-- //Jonathan Burke Jr. -->
                                                                     </span>
                                                                         <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -582,6 +594,8 @@ class Hashtag_GetUsers extends Follow
                                                                     </div>
                                                                     <span class="username">
                                                                         <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                       <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                         <!-- //Jonathan Burke Jr. -->
                                                                     </span>
                                                                         <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -642,6 +656,8 @@ class Hashtag_GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                     <a style="float:left;padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                     <span class="description">Shared publicly - <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
                                                                 </span>
@@ -695,11 +711,15 @@ class Hashtag_GetUsers extends Follow
                                         <?php if($user_id != $tweet['user_id']) { ?> 
                                                 <ul><li>
                                                     <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
+                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                     <!-- <ul><li>< ?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id']); ?></li></ul> -->
                                                     </li>
                                                 </ul>
                                                 <?php }else{ ?>
                                                     <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
+                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                 <?php } ?> 
 
                                         </span>
@@ -1735,6 +1755,7 @@ class Hashtag_GetUsers extends Follow
                             </div>
                              <span class="username">
                                  <a href="<?php echo PROFILE ;?>">Irangiro</a>
+                                <span><img src="<?php echo BASE_URL_LINK.'image/img/verified-light.png' ; ?>" width="15px"></span>
                              </span>
                              <span class="description">Public Figure | Content Creator</span>
                          </div>

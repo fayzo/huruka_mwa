@@ -62,7 +62,7 @@ class Fundraising extends Follow
                             <hr>
                             <div style="height:115px;" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>">
                                 <a href="javascript:void(0);"  class="card-text h5">
-                                     Helps <?php echo $row['lastname'] ;?> 
+                                     Helps <?php echo $row['lastname1'] ;?> 
                                 </a>
                                 <!-- Kogera umusaruro muguhinga -->
                                 <p class="mt-2">

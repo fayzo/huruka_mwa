@@ -158,6 +158,8 @@
    <script src="<?php echo BASE_URL_LINK ;?>js/unemplyoment_message.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/transaction_coins.js"></script>
 
+   <!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+   <script src="<?php echo BASE_URL_LINK ;?>plugin/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
 
    <script>
     $(function () {
@@ -251,6 +253,107 @@
 				}
 			});
 	});
+  $(document).ready(function(){
+
+    $(".regular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+       {
+         breakpoint: 1024,
+         settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+         }
+       },
+       {
+         breakpoint: 700,
+         settings: {
+           slidesToShow: 2,
+           slidesToScroll: 2
+         }
+       },
+       {
+         breakpoint: 480,
+         settings: {
+           slidesToShow: 2,
+           slidesToScroll: 2
+         }
+       }
+       ]
+      });
+      
+    $(".regular0").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        responsive: [
+       {
+         breakpoint: 1024,
+         settings: {
+          slidesToShow: 2,
+           slidesToScroll: 2,
+         }
+       },
+       {
+         breakpoint: 700,
+         settings: {
+           slidesToShow: 2,
+           slidesToScroll: 2
+         }
+       },
+       {
+         breakpoint: 480,
+         settings: {
+           slidesToShow: 1,
+           slidesToScroll: 1
+         }
+       }
+       ]
+      });
+
+  $('.regulars').slick({
+     dots: true,
+    //  prevArrow: $('.slick-prev'),
+    //  nextArrow: $('.next'),
+     infinite: false,
+     speed: 300,
+     slidesToShow: 1,
+     slidesToScroll: 1,
+     responsive: [
+       {
+         breakpoint: 1024,
+         settings: {
+          slidesToShow: 1,
+           slidesToScroll: 1,
+           infinite: true,
+           dots: true
+         }
+       },
+       {
+         breakpoint: 700,
+         settings: {
+           slidesToShow: 1,
+           slidesToScroll: 1
+         }
+       },
+       {
+         breakpoint: 480,
+         settings: {
+           slidesToShow: 1,
+           slidesToScroll: 1
+         }
+       }
+       // You can unslick at a given breakpoint now by adding:
+       // settings: "unslick"
+       // instead of a settings object
+       ]
+   });
+   });
+
 
    </script>
 

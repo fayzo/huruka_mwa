@@ -90,6 +90,18 @@
             <!-- card -->
           <?php } ?>
 
+          <?php if(isset($_SESSION['key']) && $home->isClosed($_SESSION['key']) == true) { ?>
+              <div class="card borders-tops card-profile card1 mb-3">
+                  <div class="card-body">
+                      <h4>Your Closed This Account </h4>
+                      <p> No one can see your posts if you don't deactive your account</p>
+                      <a href="<?php echo SETTINGS;?>"> Click here to go back.</a>
+                  </div>
+                  <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+          <?php  } ?>
+
 
             <div class="posted">
             <!-- Box Comment -->

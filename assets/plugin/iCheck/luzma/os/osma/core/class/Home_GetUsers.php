@@ -11,8 +11,9 @@ class GetUsers extends Follow
     {
         $mysqli= $this->database;
         $stmt = $mysqli->stmt_init();
-        $query= "SELECT * FROM tweets LEFT JOIN users ON tweetBy = user_id WHERE tweetBy = $user_id AND retweet_id = 0 OR retweet_by= $user_id ORDER BY tweet_id DESC";
-        // $query="SELECT * FROM tweets LEFT JOIN users ON tweetBy= user_id WHERE tweetBy = $user_id AND retweet_id='0' OR  retweet_by= $user_id AND tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY tweet_id DESC ";
+        $query= "SELECT * FROM tweets LEFT JOIN users ON tweetBy = user_id  
+        WHERE tweetBy = $user_id AND retweet_id = 0 OR retweet_by= $user_id  
+        ORDER BY CASE WHEN pin_tweet !='' THEN pin_tweet END DESC,tweet_id DESC";
         $sql = $mysqli->query($query);
         $all_tweet=array();
         while ($row = $sql->fetch_array()) {
@@ -28,12 +29,21 @@ class GetUsers extends Follow
                                 $comment= $this->comments($tweet['tweet_id']);
                                      # code... 
                                     //  echo var_dump($retweet['retweet_Msg']).'<br>';
+                                                    
+                                if($this->isClosed($tweet['tweetBy']) == true) {
+                                    continue;
+                                }
                                 ?>
                                 <!-- <div class="card mb-3"> -->
                                     <!-- <div class="card-body"> -->
                                    
                                 <div class="post ">
+
                                     <?php 
+                                    if ($tweet['pin_tweet'] == 'pin') { ?>
+                                        <div class="float-right" data-toggle="tooltip" data-original-title="pin"><i class="fa fa-flag"></i></div>
+                                    <?php }
+
                                      if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
                                       <span class="t-show-banner">
                                           <div class="t-show-banner-inner">
@@ -55,6 +65,8 @@ class GetUsers extends Follow
                                          </div>
                                         <span class="username">
                                             <a style="float:left;padding-right:3px;" href="<?php echo PROFILEBASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
+                                            <?php echo (!empty($user['bot']) && $user['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                             <!-- //Jonathan Burke Jr. -->
                                             <span class="description">Shared public - <?php echo $this->timeAgo($retweet['posted_on']); ?></span>
                                         </span>
@@ -63,6 +75,7 @@ class GetUsers extends Follow
 
                                     <div class="card retweetcolor t-show-popup more" data-tweet="<?php echo $tweet["tweet_id"];?>">
                                       <div class="card-body">
+                                    <span id="responseDeletePin<?php echo $tweet['tweet_id'] ;?>"></span>
                                          
                                       <?php 
                        
@@ -142,6 +155,7 @@ class GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                 </span>
                                                                 <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -246,6 +260,7 @@ class GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                 </span>
                                                                 <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -336,6 +351,8 @@ class GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                 </span>
                                                                 <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -423,6 +440,8 @@ class GetUsers extends Follow
                                                                     </div>
                                                                     <span class="username">
                                                                         <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                        <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                         <!-- //Jonathan Burke Jr. -->
                                                                     </span>
                                                                         <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -518,6 +537,8 @@ class GetUsers extends Follow
                                                                     </div>
                                                                     <span class="username">
                                                                         <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                        <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                         <!-- //Jonathan Burke Jr. -->
                                                                     </span>
                                                                         <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -590,6 +611,8 @@ class GetUsers extends Follow
                                                                     </div>
                                                                     <span class="username">
                                                                         <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                        <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                         <!-- //Jonathan Burke Jr. -->
                                                                     </span>
                                                                         <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -650,6 +673,8 @@ class GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                     <a style="float:left;padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
+                                                                    <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                     <span class="description">Shared publicly - <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
                                                                 </span>
@@ -687,6 +712,7 @@ class GetUsers extends Follow
                                     </div><!-- card -->
 
                                 <?php }else { ?> 
+                                    <span id="responseDeletePin<?php echo $tweet['tweet_id'] ;?>"></span>
 
                                     <div class="user-block">
                                         <div class="user-blockImgBorder">
@@ -703,11 +729,14 @@ class GetUsers extends Follow
                                         <?php if($user_id != $tweet['user_id']) { ?> 
                                                 <ul><li>
                                                     <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
+                                                     <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
                                                     <!-- <ul><li>< ?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id']); ?></li></ul> -->
                                                     </li>
                                                 </ul>
                                                 <?php }else{ ?>
                                                     <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
+                                                     <?php echo (!empty($tweet['bot']) && $tweet['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
+
                                                 <?php } ?> 
 
                                         </span>
@@ -1517,8 +1546,15 @@ class GetUsers extends Follow
                                                        <a href="javascript:void(0)" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                                                         <ul style="list-style-type: none; margin:0px;" >
 											                <li style="list-style-type: none; margin:0px;"> 
-                        					                    <label class="deleteTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" >Delete </label>
+                        					                    <label class="deleteTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </label>
                                                            </li>
+                                                            <li style="list-style-type: none; margin:0px;"> 
+                                                                <?php if ($tweet['pin_tweet'] == 'pin') { ?>
+                                                                    <label class="unpinTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> UnPin to profile</label>
+                                                                <?php } else { ?>
+                                                                    <label class="pinTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> Pin to profile</label>
+                                                                <?php } ?>
+                                                            </li>
                                                        </ul>
                                                     </li>
                                                 </ul>
@@ -1530,9 +1566,16 @@ class GetUsers extends Follow
                                                     <a href="javascript:void(0)" class="more" ><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                                                         <ul style="list-style-type: none; margin:0px;" >
                                                             <li style="list-style-type: none; margin:0px;"> 
-                                                                <label class="delete_retweet_by" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" >Delete </label>
-                                                        </li>
-                                                    </ul>
+                                                                <label class="delete_retweet_by" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </label>
+                                                            </li>
+                                                            <li style="list-style-type: none; margin:0px;"> 
+                                                                <?php if ($tweet['pin_tweet'] == 'pin') { ?>
+                                                                    <label class="unpinRetweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> UnPin to profile</label>
+                                                                <?php } else { ?>
+                                                                    <label class="pinRetweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> Pin to profile</label>
+                                                                <?php } ?>
+                                                            </li>
+                                                        </ul>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -1730,7 +1773,10 @@ class GetUsers extends Follow
                             </div>
                             </div>
                             <span class="username">
-                                <a href="<?php echo PROFILE ;?>">Irangiro</a><?php echo self::followBtns(1,$user_id,1); ?>
+                                <a href="<?php echo PROFILE ;?>">Irangiro</a>
+                                <span><img src="<?php echo BASE_URL_LINK.'image/img/verified-light.png' ; ?>" width="15px"></span>
+
+                                <?php echo self::followBtns(1,$user_id,1); ?>
                             </span>
                              <span class="description">Public Figure | Content Creator</span>
                          </div>

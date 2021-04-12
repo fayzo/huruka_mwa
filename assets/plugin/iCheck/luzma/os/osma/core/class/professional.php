@@ -26,19 +26,39 @@ class Employment extends Home {
         <div class="card-header main-active p-1">
             <h5 class="card-title float-left pl-2"><i> Search Any Fields  </i></h5>
              <div class="dropdown float-right " style="clear:right;height:2rem;float:right;">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false">
                               Fields
                           </button>
-                  <div class="dropdown-menu" aria-labelledby="triggerId">
+                  <div class="dropdown-menu" >
                     <a class="dropdown-item" href="#">Select any field</a>
+                  
                     <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Featured',1);" >Featured<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Featured');?></span></a>
-                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('accountant',1);" >accountant<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('accountant');?></span></a>
-                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('finance',1);" >finace<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('finance');?></span></a>
-                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('management',1);" >management<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('management');?></span></a>
-                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('computer_enginnering',1);" >computer_enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('computer_enginnering');?></span></a>
-                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('mechanical_enginnering',1);" >mechanical_enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('mechanical_enginnering');?></span></a>
-                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('electrical_enginnering',1);" >electrical_enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('electrical_enginnering');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Accountant',1);" >Accountant<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Accountant');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Finance',1);" >Finance<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Finance');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Business_Administration',1);" >Business Administration<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Business_Administration');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Management',1);" >Management<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Management');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Human_Resources',1);" >Human Resources<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Human_Resources');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Creative_Design Design',1);" >Creative Design<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Creative Design');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Health_Science',1);" >Health Science<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Health_Science');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Data_Analysts',1);" >Data Analysts<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Data_Analysts');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Data_Science',1);" >Data Science<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Data_Science');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Software_Developers',1);" >Software Developers<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Software_Developers');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Cybersecurity_Experts',1);" >Cybersecurity Experts<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Cybersecurity_Experts');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Education',1);" >Education<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Education');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Creative_Writing',1);" >computer enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('computer_enginnering');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Nurses',1);" >Mechanical enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Mechanical_enginnering');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Computer_Enginnering',1);" >Electrical enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Electrical_enginnering');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Mechanical_Enginnering',1);" >Creative Writing<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Creative_Writing');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Electrical_Enginnering',1);" >Nurses<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Nurses');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Medical_Professionals',1);" >Medical Professionals<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Medical_Professionals');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Plumbers',1);" >Plumbers<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Plumbers');?></span></a> 
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Electricians',1);" >Electricians<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Electricians');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Dentists',1);" >Dentists<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Dentists');?></span></a>
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Dental',1);" >Dental<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Dental');?></span></a> 
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Technicians',1);" >Technicians<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Technicians');?></span></a> 
+                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Mental_Health_Professional',1);" >Mental Health Professionals<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Mental_Health_Professionals');?></span></a>
+
                   </div>
               </div> 
              <form class="form-inline float-right">
@@ -53,12 +73,31 @@ class Employment extends Home {
             <div class="nav-scroller py-0" style="clear:right;height:3.4rem;"> 
                 <nav class="nav d-flex justify-content-between pb-0  horizontal-large-2"  >
                 <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Featured',1);" >Featured<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Featured');?></span></a>
-                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('accountant',1);" >accountant<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('accountant');?></span></a>
-                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('finance',1);" >finance<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('finance');?></span></a>
-                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('management',1);" >management<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('management');?></span></a>
-                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('computer_enginnering',1);" >computer_enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('computer_enginnering');?></span></a>
-                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('mechanical_enginnering',1);" >mechanical_enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('mechanical_enginnering');?></span></a>
-                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('electrical_enginnering',1);" >electrical_enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('electrical_enginnering');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Accountant',1);" >Accountant<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Accountant');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Finance',1);" >Finance<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Finance');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Business_Administration',1);" >Business Administration<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Business_Administration');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Management',1);" >Management<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Management');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Human_Resources',1);" >Human Resources<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Human_Resources');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Creative_Design',1);" >Creative Design<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Creative Design');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Health_Science',1);" >Health Science<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Health_Science');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Data_Analysts',1);" >Data Analysts<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Data_Analysts');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Data_Science',1);" >Data Science<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Data_Science');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Software_Developers',1);" >Software Developers<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Software_Developers');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Cybersecurity_Experts',1);" >Cybersecurity Experts<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Cybersecurity_Experts');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Education',1);" >Education<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Education');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Creative_Writing',1);" >Creative Writing<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Creative_Writing');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Nurses',1);" >Nurses<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Nurses');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Computer_Enginnering',1);" >Computer Enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Computer_enginnering');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Mechanical_Enginnering',1);" >Mechanical Enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Mechanical_enginnering');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Electrical_Enginnering',1);" >Electrical Enginnering<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Electrical_enginnering');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Medical_Professionals',1);" >Medical Professionals<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Medical_Professionals');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Plumbers',1);" >Plumbers<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Plumbers');?></span></a> 
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Electricians',1);" >Electricians<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Electricians');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Dentists',1);" >Dentists<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Dentists');?></span></a>
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Dental',1);" >Dental<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Dental');?></span></a> 
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Technicians',1);" >Technicians<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Technicians');?></span></a> 
+                <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Mental_Health_Professional',1);" >Mental Health Professionals<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Mental_Health_Professionals');?></span></a>
+
                 </nav>
             </div> 
             <!-- nav-scroller -->
@@ -67,7 +106,10 @@ class Employment extends Home {
         <div class="card-body">
         <span class="job-show"></span>
         <div class="job-hide">
-          <?php while($row= $query->fetch_array()) { ?>
+            <?php 
+            if ($query->num_rows > 0) { 
+            
+            while($row= $query->fetch_array()) { ?>
 
             <div class="col-12 px-0 py-2 jobHover more" data-user="<?php echo $row['user_id'];?>" >
             <div class="user-block mb-2" >
@@ -100,7 +142,14 @@ class Employment extends Home {
           </div> <!-- col-12 -->
           <hr class="bg-info mt-0 mb-1" style="width:70%;">
 
-        <?php }
+        <?php } }else{
+                echo ' <div class="col-md-12 col-lg-12"><div class="alert alert-danger alert-dismissible fade show text-center">
+                        <button class="close" data-dismiss="alert" type="button">
+                            <span>&times;</span>
+                        </button>
+                        <strong>No Record</strong>
+                    </div></div>'; 
+            } 
 
         if($categories == 'Featured'){
             $query1= $mysqli->query("SELECT COUNT(*) FROM users WHERE unemployment ='no' ");
