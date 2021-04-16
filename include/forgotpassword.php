@@ -86,31 +86,24 @@ if(isset($_POST['key'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>welcome</title>
-    <link href="<?php echo BASE_URL_LINK ;?>dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL_LINK ;?>icon/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <script src="<?php echo BASE_URL_LINK ;?>icon/fontawesome_5_4/js/all.js"></script>
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>plugin/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>icon/font-awesome/css/font-awesome.min.css">
+    <!-- Font Awesome -->
+    <link href="<?php echo BASE_URL_LINK;?>dist/css/AdminLTE.css" rel="stylesheet" >
+    <link href="<?php echo BASE_URL_LINK;?>plugin/skins/_all-skins.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/background.css">
 
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> -->
     <style>
-    body {
-        font-family: 'Montserrat', sans-serif;
-        background: #f6f5f7;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 20px 0 50px;
-    }
 
-    h1 {
+    #container h1 {
         font-weight: bold;
         margin: 0;
         /* font-size: 15px; */
     }
 
-    p {
+    .form-container p {
         font-size: 14px;
         font-weight: 100;
         line-height: 20px;
@@ -118,27 +111,15 @@ if(isset($_POST['key'])){
         margin: 20px 0 30px;
     }
 
-    span {
+    .form-container span {
         font-size: 12px;
     }
 
-    a {
+    .form-container a {
         color: #333;
         font-size: 14px;
         text-decoration: none;
         margin: 15px 0;
-    }
-
-    .container {
-        background: #f6f5f7;
-        border-radius: 10px;
-        box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
-        width: 768px;
-        max-width: 100%;
-        min-height: 480px;
-        padding: 10px 50px;
-        height: 60%;
-        text-align: center
     }
 
     .form-container {
@@ -222,10 +203,26 @@ if(isset($_POST['key'])){
     </style>
 </head>
 
-<body>
-    <div class="container" id="container">
-        <h1>irangiro</h1>
-        <div id="response"></div>
+<!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
+<body class="hold-transition fixed sidebar-collapse skin-blue">
+<!-- Site wrapper skin-blue -->
+<div class="wrapper">
+    <!-- =============================================== -->
+    <!-- navbar path -->
+    <?php include '../header_navbar_footer/navbar.php'; ?>
+    <!-- =============================================== -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper chair">
+    <!-- <div style="float:left;margin:50px 50px;">
+            < ?php echo $home->options0();?>
+    </div> -->
+
+    <!-- Main content -->
+    <section class="content container ">
+
+    <div id="container">
+
         <div class="form-container">
             <form action="post">
                 <h2 style="text-align: center;">Forgot Password</h2>
@@ -247,6 +244,8 @@ if(isset($_POST['key'])){
 
                 </div>
                 <div style="margin-top:7px;">
+                    <div id="response"></div>
+
                     <button class="blackbutton" type="button"><a href="<?php echo LOGIN ;?>">Cancel</a></button>
                     <button class="redbutton" id="submit" onclick="forgot('email')" type="button">submit</button>
                 </div>
@@ -254,9 +253,26 @@ if(isset($_POST['key'])){
             <!-- </div> -->
 
         </div>
+ 
+    </section>
+    </div><!-- content-wrapper  -->
+
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 1.0.01
+      </div>
+      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro IRG</a>.</strong> All rights
+      reserved.
+    </footer>
+
+</div><!-- wrapper -->
+
         <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.min.js"></script>
         <script src="<?php echo BASE_URL_LINK ;?>dist/js/popper.min.js"></script>
         <script src="<?php echo BASE_URL_LINK ;?>dist/js/bootstrap.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="<?php echo BASE_URL_LINK ;?>js/adminlte.js"></script>
+
         <script>
         function forgot(key) {
             var email = $("#email");
@@ -264,7 +280,7 @@ if(isset($_POST['key'])){
             if (isEmpty(email)) {
                 //    alert("complete register");
                 $.ajax({
-                    url: "forgotpassword.php",
+                    url: "forgotpassword",
                     method: "POST",
                     dataType: "text",
                     data: {

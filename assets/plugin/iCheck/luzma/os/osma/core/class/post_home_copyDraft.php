@@ -3,7 +3,7 @@
        header('Location: ../../404.html');
  }
 
-class Posts_copyDraft extends Fundraising {
+class Posts_copyDraft extends Promote_home_post {
 
     public function tweets($user_id,$limit)
     {
@@ -44,6 +44,20 @@ class Posts_copyDraft extends Fundraising {
                                 if($this->isClosed($tweet['tweetBy']) == true) {
                                     continue;
                                 }
+
+                                if($count_foreach == 2 && !empty($tweet['marketing'])){ ?>
+
+                                    <div class="main-active dot-container h5">
+                                        <a href="<?php echo BASE_URL_PUBLIC."promote_ads";?>">View more Promotion >>> </a> 
+                                    </div>
+                                    <div class="row mb-4 regulars slider"> 
+                                        <?php echo $this->promote_post($user_id,$limit); ?>
+                                    </div>
+                                    <div class="main-active dot-container h5">
+                                        <a href="<?php echo BASE_URL_PUBLIC."promote_ads";?>">View more Promotion >>> </a> 
+                                    </div>
+                
+                                <?php } 
                                                         
                                         if (isset($_SESSION['key'])) {
                                             # code...
@@ -988,16 +1002,15 @@ class Posts_copyDraft extends Fundraising {
                                                                             echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
                                                                         }  
                                                                         ?>
-                                                                           <span class="btn btn-primary btn-sm float-right" >View More >>></span>
-
-                                                                    </div>
+                                                                           <!-- <span class="btn btn-primary btn-sm float-right" >View More >>></span> -->
+                                                                        </div>
+                                                                        <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
 
                                                                     <!-- TEXT -->
                                                                     <!-- TEXT -->
                                                                    <!-- < ?php echo $this->getTweetLink($tweet['status']); ?> -->
                                                                    </span>
                                                                </div>
-
                                                         </div><!-- col -->
                                                     </div><!-- row -->
 
@@ -1823,6 +1836,8 @@ class Posts_copyDraft extends Fundraising {
                                 <?php } 
                             
                             } ?>
+                            
+                            <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
 
                             <!--   <p id="link_">
                                     < ?php echo $this->getTweetLink($tweet['status']) ;?>

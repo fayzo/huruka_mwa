@@ -3,7 +3,7 @@
 //        header('Location: ../../404.html');
 //  }
 
-class Posts_home extends Fundraising {
+class Posts_home extends Promote_home_post {
    
 
     public function tweets($user_id,$limit)
@@ -18,7 +18,7 @@ class Posts_home extends Fundraising {
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
-            ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , T. tweet_id DESC  LIMIT $limit";
+            ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , CASE WHEN  T. marketing != '' THEN T. marketing END DESC , T. tweet_id DESC LIMIT $limit";
         }
 
         $query= $mysqli->query($sql);
@@ -53,21 +53,35 @@ class Posts_home extends Fundraising {
                 <?php }
 
 
+                if($count_foreach == 2 && !empty($tweet['marketing'])){ ?>
+
+                    <div class="main-active dot-container h5">
+                        <a href="<?php echo BASE_URL_PUBLIC."promote_ads";?>">View more Promotion >>> </a> 
+                    </div>
+                    <div class="row mb-4 regulars slider"> 
+                        <?php echo $this->promote_post($user_id,$limit); ?>
+                    </div>
+                    <div class="main-active dot-container h5">
+                        <a href="<?php echo BASE_URL_PUBLIC."promote_ads";?>">View more Promotion >>> </a> 
+                    </div>
+
+                <?php } 
+
                 if (isset($_SESSION['key'])) {
                     # code...
-                
                 if($count_foreach == 2){
+                    $query= "SELECT * FROM users WHERE user_id != $user_id AND user_id NOT IN (SELECT receiver FROM follow WHERE sender = $user_id ) ORDER BY rand() LIMIT 0,12";
+                    $result=$mysqli->query($query); 
 
-                ?>
+                    if ($result->num_rows > 0) { ?>
+
                 <div class="main-active dot-container h5">
                     <a href="<?php echo BASE_URL_PUBLIC."network";?>">View more People >>> </a> 
                 </div>
                 <div class="row mb-4 regular slider">
                     
                 <?php 
-
-                 $query= "SELECT * FROM users WHERE user_id != $user_id AND user_id NOT IN (SELECT receiver FROM follow WHERE sender = $user_id ) ORDER BY rand() LIMIT 0,12";
-                 $result=$mysqli->query($query); 
+                 
                  $rowCount = 1;
                 while ($following=$result->fetch_array()) {
                       # code...
@@ -91,6 +105,7 @@ class Posts_home extends Fundraising {
                                    </div>
                                    <div class="card-footer">
                                        <h5 class="user-username-follow m-1 "><a href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a>
+                                        '.((!empty($following['bot']) && $following['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"").'
                                        </h5>
                                        <h5 class="user-username-follow m-1"><small>'.((!empty($workname))? $workname :'Member').'</small></h5>
                                        <span>'.$this->followBtn($following['user_id'],$user_id,$user['user_id']).'</span>
@@ -109,7 +124,7 @@ class Posts_home extends Fundraising {
                         </div>
                          <hr>
                 <?php
-                }
+                } }
 
                 if($count_foreach == 3){
                     $query= $mysqli->query("SELECT * FROM users U Left JOIN fundraising F ON F. user_id2 = U. user_id WHERE F. categories_fundraising = F. categories_fundraising  ORDER BY created_on2 Desc Limit 0,8");
@@ -982,6 +997,8 @@ class Posts_home extends Fundraising {
                                                             echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
                                                         }  
                                                     ?>
+                                                       <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
+
                                                     </div>
                                                 </span>
                                            </div>
@@ -1783,10 +1800,9 @@ class Posts_home extends Fundraising {
                         <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
                     </div>
                 </div>
-                <?php } 
+                <?php } ?>
 
-
-                if(!empty($fileActualExt_donate)){ 
+                <?php if(!empty($fileActualExt_donate)){ 
                     
                     $expodefile = explode("=",$tweet['tweet_image']);
 
@@ -1812,7 +1828,8 @@ class Posts_home extends Fundraising {
             
             } ?>
 
-            
+            <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
+
     <!--   <p id="link_">
             < ?php echo $this->getTweetLink($tweet['status']) ;?>
         </p> -->

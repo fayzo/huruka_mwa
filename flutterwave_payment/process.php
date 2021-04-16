@@ -23,7 +23,7 @@
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => array(
                   "Content-Type: application/json",
-                  "Authorization: Bearer FLWSECK_TEST-3a6fcc6365d18de249131a4964d5a704-X"
+                  "Authorization: Bearer FLWSECK-7f609337676e8f929afa61d988c1838c-X"
                 ),
               ));
               
@@ -39,6 +39,7 @@
                 if($amountPaid >= $amountToPay)
                 {
                     echo 'Payment successful';
+                    var_dump($res);
 
                     //* Continue to give item to the user
                 }

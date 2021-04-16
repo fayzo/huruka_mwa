@@ -26,7 +26,16 @@ function add_support_coins() {
   '</div>'+
   '<div class="form-group" style="overflow: auto;width: 97%;">'+
       '<input type="number" class="form-control" name="money_to_target" id="money_to_target" placeholder="Money to Target">'+
-  '</div>');
+  '</div>'+
+  '<div class="form-row mt-2">' +
+     '<div class="col">' +
+         '<div class="form-group">' +
+     '<label for="">' +'Youtube Link</label>' +
+           '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="IF any link of youtube video to show us">' +
+         '</div>' +
+     '</div>' +
+    '</div>'
+  );
 
   $('#add-more-support-coins').attr('onclick','coinsClose()');
   $('#add-more-support-coins').attr('value','close');
@@ -61,7 +70,7 @@ function fundAddmoreVideo() {
      '<div class="col">' +
          '<div class="form-group">' +
      '<label for="">' +'youtube link</label>' +
-           '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="if any link of youtube video to show us of help you need ">' +
+           '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="IF any link of youtube video to show us of help you need ">' +
          '</div>' +
      '</div>' +
     '</div>');
@@ -93,17 +102,17 @@ function AddVideo() {
 }
 
 function Addyoutube() {
-  $('#add-youtube').show();
-  $("#add-youtube").html(
+  $('#add-more').show();
+  $("#add-more").html(
   '<div class="form-row mt-2">' +
      '<div class="col">' +
          '<div class="form-group">' +
-     '<label for="">' +'youtube link</label>' +
-           '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="if any link of youtube video to show us of help you need ">' +
+     '<label for="">' +'Youtube Link</label>' +
+           '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="IF any link of youtube video to show us">' +
          '</div>' +
      '</div>' +
     '</div>');
-  $('#add-more1').attr('onclick','CloseYoutube()');
+  $('#add-youtube').attr('onclick','CloseYoutube()');
 }
 
 /* Set the width of the side navigation to 0 */
@@ -118,8 +127,8 @@ function CloseVideo() {
 }
 
 function CloseYoutube() {
-  $("#add-youtube").html(" ");
-  $('#add-more1').attr('onclick', 'Addyoutube()');
+  $("#add-more").html(" ");
+  $('#add-youtube').attr('onclick', 'Addyoutube()');
 }
 
 function displayImage0(e) { 

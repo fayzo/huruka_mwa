@@ -113,6 +113,7 @@ if(isset($_POST['key'])){
 }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,18 +123,37 @@ if(isset($_POST['key'])){
     <title>welcome</title>
     <link href="<?php echo BASE_URL_LINK ;?>dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL_LINK ;?>dist/css/login.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL_LINK;?>plugin/fontawesome-free/css/all.min.css" rel="stylesheet" >
-    <link href="<?php echo BASE_URL_LINK ;?>icon/Ionicons/css/ionicons.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>plugin/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>icon/font-awesome/css/font-awesome.min.css">
+    <!-- Font Awesome -->
+    <link href="<?php echo BASE_URL_LINK;?>dist/css/AdminLTE.css" rel="stylesheet" >
+    <link href="<?php echo BASE_URL_LINK;?>plugin/skins/_all-skins.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/background.css">
+
     <script src="<?php echo BASE_URL_LINK ;?>js/country_login.js"></script>
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> -->
 </head>
+<!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
+<body class="hold-transition fixed sidebar-collapse skin-blue">
+<!-- Site wrapper skin-blue -->
+<div class="wrapper">
+    <!-- =============================================== -->
+    <!-- navbar path -->
+    <?php include '../header_navbar_footer/navbar.php'; ?>
+    <!-- =============================================== -->
 
-<body style="background: #f6f5f7;">
-    <div style="float:left;margin:50px 50px;">
-            <!-- < ?php echo $home->options0();?> -->
-    </div>
-<div class='body-center  clear-float'>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper chair">
+    <!-- <div style="float:left;margin:50px 50px;">
+            < ?php echo $home->options0();?>
+    </div> -->
+
+    <!-- Main content -->
+    <section class="content container ">
+
+    <div class='body-center'>
     <!-- <div class="containers container  d-none d-md-block" id="container">
         <div class="form-container sign-up-container">
             <form action="post">
@@ -227,7 +247,7 @@ if(isset($_POST['key'])){
                 </div>
                 <input type="text" name="usernameoremail" id="usernameoremail" placeholder="Username or Email " />
                 <input type="password" name="passwordlogin" id="passwordlogin" placeholder="Password" />
-                <a class="alink" href="<?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
+                <a class="alink" href="< ?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
                 <button class="blacButton" onclick="manage('login')" type="button">Sign In</button>
             </form>
         </div>
@@ -248,10 +268,25 @@ if(isset($_POST['key'])){
     </div> -->
     
         <?php include 'login_dispay_sm_phone.php'; ?>
-</div><!-- body-center -->
+    </div><!-- body-center -->
+    </section>
+    </div><!-- content-wrapper  -->
+
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 1.0.01
+      </div>
+      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro IRG</a>.</strong> All rights
+      reserved.
+    </footer>
+
+</div><!-- wrapper -->
+
     <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.min.js"></script>
     <script src="<?php echo BASE_URL_LINK ;?>dist/js/popper.min.js"></script>
     <script src="<?php echo BASE_URL_LINK ;?>dist/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="<?php echo BASE_URL_LINK ;?>js/adminlte.js"></script>
     <script src="<?php echo BASE_URL_LINK ;?>js/login.js"></script>
     <script>
 
@@ -262,7 +297,7 @@ if(isset($_POST['key'])){
         if (isEmpty(email) && isEmpty(password)) {
             //    alert("complete register");
             $.ajax({
-                url: "login.php",
+                url: "login",
                 method: "POST",
                 dataType: "text",
                 data: {
@@ -307,7 +342,7 @@ if(isset($_POST['key'])){
          isEmpty(verifypassword)) {
             //    alert("complete register");
             $.ajax({
-                url: "login.php",
+                url: "login",
                 method: "POST",
                 dataType: "text",
                 data: {

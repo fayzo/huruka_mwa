@@ -96,7 +96,9 @@ if (isset($_POST['showMessage']) && !empty($_POST['showMessage'])) {
 							<?php } ?>
         					</div>
         					<div class="name-right2">
-        						<span><a href="#"><?php echo $Message['username'];?></a></span>
+        						<span><a href="#"><?php echo $Message['username'];?></a>
+								<?php echo (!empty($Message['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?>
+								</span>
         					</div>
         					
         					<span> 
@@ -164,7 +166,9 @@ if (isset($_POST['showMessage']) && !empty($_POST['showMessage'])) {
 											<?php } ?>
         			        			</div>
         			        			<div class="name-right2 people-message" data-user="<?php echo $Message['user_id'];?>">
-        			        				<span><a href="#"><?php echo $Message['username'];?></a></span>
+        			        				<span><a href="#"><?php echo $Message['username'];?></a>
+												<?php echo (!empty($Message['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?>
+											</span>
         			        			</div>
         			        			<div class="msg-box">
         			        			   <?php echo $Message['message'];?>
@@ -407,7 +411,7 @@ if (isset($_POST['showMessage1']) && !empty($_POST['showMessage1'])) {
 							<?php } ?>
                       </div>
                       <h4>
-						<span class="people-message" data-user="<?php echo $Message['user_id'];?>" ><?php echo $Message['username'];?></span> 
+						<span class="people-message" data-user="<?php echo $Message['user_id'];?>" ><?php echo $Message['username'];?><?php echo (!empty($Message['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?></span> 
                         <small><i class="fa fa-clock-o"></i> <?php echo $users->timeAgo($Message['message_on']);?></small>
                       </h4>
                       <p><?php echo $Message['message'];?></p>
@@ -439,7 +443,7 @@ if (isset($_POST['showMessage1']) && !empty($_POST['showMessage1'])) {
 							<?php } ?>
                       </div>
                       <h4>
-						<span> <?php echo $Message['username'];?> </span>
+						<span> <?php echo $Message['username'];?> <?php echo (!empty($Message['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?></span> 
                         <small><span><i class="fa fa-trash" aria-hidden="true"></i></span> <i class="fa fa-clock-o"></i> <?php echo $users->timeAgo($Message['message_on']);?></small>
                         <!-- <small><span class="deleteMessage more" data-user="< ?php echo $_SESSION["key"]; ?>" data-message="< ?php echo $Message["user_id"]; ?>" ><i class="fa fa-trash" aria-hidden="true"></i></span> <i class="fa fa-clock-o"></i> < ?php echo $users->timeAgo($Message['message_on']);?></small> -->
                       </h4>
@@ -482,7 +486,6 @@ if (isset($_POST['showJobs1']) && !empty($_POST['showJobs1'])) {
 <?php }
 
 if (isset($_POST['showFriendRequest']) && !empty($_POST['showFriendRequest'])) {
-	echo '<li><span id="friendrequest_respone"></span></li>';
 	
 	$user_id= $_SESSION['key'];
     // $tweet_id= $_POST['showMessage'];
@@ -503,7 +506,9 @@ echo '      <li class="jobHovers more friendrequest_id'.$whoTofollow['sender'].'
 					'.$follow->lengthsOfWhoNewCome($whoTofollow['date_registry']).'
 				</div>
 				<ul class="whoTofollow-list-info">
-					<li><a href="'.BASE_URL_PUBLIC.$whoTofollow['username'].'" id="'.$whoTofollow["user_id"].'" >'.$whoTofollow['username'].'</a>
+					<li><a href="'.BASE_URL_PUBLIC.$whoTofollow['username'].'" id="'.$whoTofollow["user_id"].'" >'.$whoTofollow['username'].'
+					'.((!empty($whoTofollow['bot']) && $whoTofollow['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"").'
+					</a>
 					</li>
 					<li>'.((!empty($workname)?'
 					<small class="my-0" style="font-size: 12px;">'.$workname.'</small>
@@ -552,7 +557,9 @@ if (isset($_POST['showChatPopup']) && !empty($_POST['showChatPopup'])) {
 								</div>
 								 <div class="d-inline-block pt-1 pl-3">
 								   <div>
-                                    <?php echo $user['username'].(($user['chat'] == 'on')?' online':' offline '.$home->timeAgo($user['last_login'])) ;?>
+                                    <?php echo $user['username']; ?>
+									<?php echo (!empty($user['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-dark.png" width="15px"></span>':"" ;?>
+									<?php echo ($user['chat'] == 'on')?' online':' offline '.$home->timeAgo($user['last_login']);?>
                                     <!-- < ?php echo $user['username'].(($user['chat'] == 'on')?' <img src="'.BASE_URL_LINK.'image/color/green.png" class="img-rounded" width="9px"> online':' <img src="'.BASE_URL_LINK.'image/color/rose.png" class="img-rounded" width="9px"> offline '.$home->timeAgo($user['last_login'])) ;?> -->
 								   </div>
 								   <div><i style="font-size: 20px;" class="fa fa-envelope-o"></i> Messages</div>

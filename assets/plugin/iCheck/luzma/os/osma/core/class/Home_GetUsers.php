@@ -700,6 +700,8 @@ class GetUsers extends Follow
                                                                             }  
                                                                         ?>
                                                                         </div>
+                                                                        <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
+
                                                                     </span>
                                                             </div>
 
@@ -1499,6 +1501,9 @@ class GetUsers extends Follow
                                     <?php } 
                                 
                                 } ?>
+
+                            <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
+
                              <!--   <p id="link_">
                                 < ?php echo $this->getTweetLink($tweet['status']) ;?>
                             </p> -->

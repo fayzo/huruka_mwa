@@ -2,19 +2,29 @@
       <!-- Logo -->
       <a href="<?php echo HOME; ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>IR</b>G</span>
+        <span class="logo-mini">
+        <!-- <img src="< ?php echo BASE_URL_LINK.'image/img/irangiro-blue-light.png'; ?>" > -->
+        <img src="<?php echo BASE_URL_LINK.'image/img/irangiro-irg.png'; ?>" >
+        <b>IR</b>G</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>irangiro </b>IRG</span>
+        <span class="logo-lg">
+        <img src="<?php echo BASE_URL_LINK.'image/img/irangiro-irg.png'; ?>">
+        <b>irangiro </b></span>
+        <!-- <b>irangiro </b>IRG</span> -->
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-expand navbar-static-top">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <?php  $self= basename($_SERVER['PHP_SELF']); if($self != 'login.php'){ ?>
+
+        <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="push-menu" role="button">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
+        <?php  } ?>
+
         <a class="sidebar-toggle_" href="<?php echo HOME; ?>">
           <i class="fa fa-home"> </i>
           <span class="hidden-xs">Home</span>
@@ -150,6 +160,7 @@
             </a>
             <ul class="dropdown-menu">
             <li class="header main-active">You have  <span ><?php if($notific['total_FriendRequest'] > 0){echo '<span >'.$notific['total_FriendRequest'].'</span>'; }else{ echo 'no';} ?></span> Friend Request</li>
+	          <li><span id="friendrequest_respone"></span></li>
             <li class="pl-3">
               <!-- inner menu: contains the actual data -->
               <ul class="whoTofollow-list menu large-2" id="FriendRequest-menu-view">
@@ -233,7 +244,10 @@
                 <?php  } ?>
                 
                   <p>
-                    <?php echo $_SESSION['username'];?>
+                    <?php echo $user['username'];?>
+												<?php echo (!empty($user['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-dark.png" width="15px"></span>':"" ;?>
+                        <?php $workname = (strlen($user["workname"]) > 28)? substr($user["workname"],0,28).'..' : $user["workname"]; ?>
+                        <br><?php echo (!empty($workname))? $workname :'Member';?>
                     <!-- - Member -->
                     <!-- <small>Member since Nov. 2012</small> -->
                     <small>Member since <?php echo $users->timeAgo($user['date_registry']); ?></small>
@@ -279,8 +293,9 @@
           </ul>
         </div>
           <?php }else{ ?>
-              <a style="color:white;border: none;" class="btn btn-sm btn-outline-success ml-auto" id="login-please" data-login="1" href="javascript:void(0)">
-              <i class="fa fa-user" aria-hidden="true"></i> login</a>
+            <!-- <a style="color:white;border: none;" class="btn btn-sm btn-outline-success ml-auto" id="login-please" data-login="1" href="javascript:void(0)"> -->
+                <a style="color:white;border: none;" class="btn btn-sm btn-outline-success ml-auto" href="<?php echo LOGOUT ;?>">
+                <i class="fa fa-user" aria-hidden="true"></i> login</a>
           <?php } ?>
       </nav>
     </header>

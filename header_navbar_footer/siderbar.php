@@ -3,6 +3,8 @@
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
+        <?php if(isset($_SESSION['key'])) { ?>
+
         <div class="user-panel">
           <div class="pull-left image">
             <!-- <img src="user2-160x160.jpg" class="rounded-circle" alt="User Image"> -->
@@ -35,8 +37,23 @@
           </div>
         </form>
         <!-- /.search form -->
+        <?php } ?>
+
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
+
+        <?php if(!isset($_SESSION['key'])) { ?>
+          <!-- <li class="treeview"> -->
+          <li>
+            <a data-login="1" href="<?php echo LOGIN;?>">
+              <i class="fa fa-user"></i> <span>Login</span>
+              <span class="pull-right-container" style="margin-right: 10px;">
+                <small class="label pull-right"><i class="fa fa-lock"></i></small>
+              </span>
+            </a>
+          </li>
+        <?php } ?>
+        
           <!-- <li class="header">MAIN NAVIGATION</li> -->
           <?php if(isset($_SESSION['key']) && isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
 
@@ -150,10 +167,19 @@
           </li>
           <li>
             <a href="javascript:void()">
-              <i class="fab fa-facebook-messenger"></i><span class="people-message more" data-user="1">
+              <i class="fab fa-facebook-messenger mr-1"></i><span class="people-message more" data-user="1">
                  Service Center </span> 
               <span class="pull-right-container" style="margin-right: 10px;">
                 <small class="label pull-right"> <i class="fa fa-envelope-o"></i></small>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="<?php echo PROMOTE_ADS; ?>">
+              <i class="fas fa-dollar-sign"></i><span class="more">
+                 Marketing Ads </span> 
+              <span class="pull-right-container" style="margin-right: 10px;">
+                <small class="label pull-right"> <i class="fa fa-level-up"></i></small>
               </span>
             </a>
           </li>

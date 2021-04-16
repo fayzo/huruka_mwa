@@ -682,6 +682,8 @@ class Hashtag_GetUsers extends Follow
                                                                                 echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
                                                                             }  
                                                                         ?>
+                                                                        <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
+
                                                                         </div>
                                                                     </span>
                                                             </div>
@@ -1482,6 +1484,9 @@ class Hashtag_GetUsers extends Follow
                                     <?php } 
                                 
                                 } ?>
+
+                               <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
+
                              <!--   <p id="link_">
                                 < ?php echo $this->getTweetLink($tweet['status']) ;?>
                             </p> -->

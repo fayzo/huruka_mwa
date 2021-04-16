@@ -231,8 +231,15 @@ if (isset($_POST['search1']) && !empty($_POST['search1'])) {
                         </div>
                          <div class="contacts-list-info">
                              <span class="contacts-list-name">
-                                 <?php echo $user['username'];?>
+                                 <?php echo $user['username'];?> <?php echo (!empty($user['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?>
                              </span>
+                            <?php 
+                            $workname = (strlen($user["workname"]) > 60)? substr($user["workname"],0,60).'..' : $user["workname"];
+                            echo '<div>'.((!empty($workname)?'
+                                 <small class="my-0" style="font-size: 12px;">'.$workname.'</small>
+                                 ':'
+                                 <small class="my-0" style="font-size: 12px;">Member</small>
+                                 ')).'</div> ' ;?>
                          </div>
                          <!-- /.contacts-list-info -->
                  </li>
@@ -327,7 +334,7 @@ if (isset($_POST['showListMessage1']) && !empty($_POST['showListMessage1'])) {
                         </div>
                          <div class="contacts-list-info">
                              <span class="contacts-list-name">
-						        <span class="people-message2" data-user="<?php echo $Message['user_id'];?>" > <?php echo $Message['username'];?> </span>
+						        <span class="people-message2" data-user="<?php echo $Message['user_id'];?>" > <?php echo $Message['username'];?> <?php echo (!empty($Message['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?></span>
                                 <small class="contacts-list-date float-right" ><span class="deleteMessage more" data-user="<?php echo $_SESSION["key"]; ?>" data-message="<?php echo $Message["user_id"]; ?>" ><i class="fa fa-trash" aria-hidden="true"></i></span> <i class="fa fa-clock-o"></i> <?php echo $users->timeAgo($Message['message_on']);?></small>
                                   
                              </span>
@@ -379,7 +386,7 @@ if (isset($_POST['showListMessage2']) && !empty($_POST['showListMessage2'])) {
                         </div>
                          <div class="contacts-list-info">
                              <span class="contacts-list-name">
-                                <?php echo $Message['username'];?>
+                                <?php echo $Message['username'];?><?php echo (!empty($Message['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?>
                                  <small class="contacts-list-date float-right"><i class="fa fa-clock-o"></i> <?php echo $users->timeAgo($Message['message_on']);?></small>
                              </span>
                              <span class="contacts-list-msg"><?php echo $Message['message'];?></span>

@@ -95,6 +95,15 @@ if (isset($_POST['showpopupdelete']) && !empty($_POST['showpopupdelete'])) {
                     echo $home->getTweetLink($tweet['status']);
                     }  
                 ?>
+                <?php 
+                if (strlen($tweet['status']) > 200) {
+                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                    $tweettext = substr($tweet['status'], 0, 200);
+                    $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
+                    echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
+                }  
+                ?>
+                </div>
 
                 <!-- TEXT -->
                 <!-- TEXT -->
@@ -268,15 +277,7 @@ if (isset($_POST['showpopupdelete']) && !empty($_POST['showpopupdelete'])) {
                         </div>
                     <?php } ?>
 
-                <?php 
-                if (strlen($tweet['status']) > 200) {
-                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                    $tweettext = substr($tweet['status'], 0, 200);
-                    $tweetstatus = substr($tweet['status'], strrpos($tweettext, ' '));
-                    echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
-                }  
-                ?>
-                </div>
+                    <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
                     </div> <!-- user-block -->
                 </div><!-- card-body -->
                 <div class="card-footer"><!-- card-footer -->

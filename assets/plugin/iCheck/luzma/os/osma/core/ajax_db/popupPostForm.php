@@ -88,7 +88,9 @@ $user = $home->userData($_SESSION['key']);
         </div><!-- user-show-popup-box -->
     </div> <!-- Wrp4 -->
 </div> <!-- apply-popup" -->
- <!-- POPUP TWEET-FORM END -->
+<!-- POPUP TWEET-FORM END -->
+
+
 <script type="text/javascript"> $('.progress-hided').hide();</script>
 
 <script>

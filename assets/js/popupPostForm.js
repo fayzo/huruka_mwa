@@ -43,6 +43,7 @@ $(document).ready(function () {
         var title_name = $('#title_name').val();
         var donation_payment = $('#donation_payment').val();
         var money_to_target = $('#money_to_target').val();
+        var youtube = $('#youtube').val();
         // var textarea = $('.status').val();
         var textarea = CKEDITOR.instances.editor5.getData();
 
@@ -59,6 +60,8 @@ $(document).ready(function () {
                         title_name: title_name,
                         donation_payment: donation_payment,
                         money_to_target: money_to_target,
+                        youtube: youtube,
+
                     },
                     success: function (response) {
                         $("#response-PostMessage").html(response);

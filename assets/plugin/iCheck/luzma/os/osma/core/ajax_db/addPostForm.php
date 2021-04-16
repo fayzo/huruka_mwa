@@ -13,6 +13,34 @@ if (isset($_POST['key']) == 'textarea'){
         $title_name= '';
     }
 
+    
+    if (!empty($_POST['youtube'])) {
+        $youtube= $users->test_input($_POST['youtube']);
+        $tweet = $youtube;
+        if (strpos($tweet,'www.youtube.com/embed/') !== false) {
+
+            $search = '/((https:\/\/)www\.youtube\.com\/embed\/\w+)/';
+            $tweet= preg_replace($search,'<iframe width="100%" height="280" src="$0" frameborder="0"
+                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                                </iframe><br>',$tweet);
+        }
+
+        if (strpos($tweet,'www.youtube.com/watch?v=') !== false) {
+
+            $link = preg_split("!&!", $tweet);
+            $tweet= preg_replace("!watch\?v=!", "embed/", $link[0]);
+            $tweet= "<iframe width='100%' height='280' frameborder='0' src='" . $tweet ."'
+            allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>
+            </iframe><br>";
+        }
+
+        // $youtube= htmlentities($tweet);
+        $youtube= $tweet;
+        // var_dump($tweet);
+    }else {
+        $youtube= '';
+    }
+
     if (!empty($_POST['donation_payment'])) {
         $money_to_target= $users->test_input($_POST['money_to_target']);
         $donation_payment=  $users->test_input($_POST['donation_payment']);
@@ -38,6 +66,7 @@ if (isset($_POST['key']) == 'textarea'){
                         'title_name' => $title_name, 
                         'tweet_image' => $donation_payment, 
                         'money_to_target' => $money_to_target, 
+                        'youtube' => $youtube, 
                         'tweetBy' => $user_id, 
                         'posted_on' => date('Y-m-d H-i-s'),
                     ));
@@ -74,6 +103,31 @@ if (isset($_POST['key']) == 'textarea'){
         $title_name= $users->test_input($_POST['title_name']);
     }else {
         $title_name= '';
+    }
+
+    
+    if (!empty($_POST['youtube'])) {
+        $youtube= $users->test_input($_POST['youtube']);
+        $tweet = $youtube;
+        if (strpos($tweet,'www.youtube.com/embed/') !== false) {
+
+            $search = '/((https:\/\/)www\.youtube\.com\/embed\/\w+)/';
+            $tweet= preg_replace($search,'<iframe width="100%" height="280" src="$0" frameborder="0"
+                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                                </iframe><br>',$tweet);
+        }
+
+        if (strpos($tweet,'www.youtube.com/watch?v=') !== false) {
+
+            $link = preg_split("!&!", $tweet);
+            $tweet= preg_replace("!watch\?v=!", "embed/", $link[0]);
+            $tweet= "<iframe width='100%' height='280' frameborder='0' src='" . $tweet ."'
+            allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>
+            </iframe><br>";
+        }
+        $youtube= $tweet;
+    }else {
+        $youtube= '';
     }
     
 	$status= $users->test_input($_POST['status']);
@@ -152,6 +206,7 @@ if (!empty($_POST['donation_payment'])) {
                         'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
                         'tweet_image' => $tweetimages, 
                         'tweet_image' => $tweetimages.$equal.$donation_payment, 
+                        'youtube' => $youtube, 
                         'donation_payment' => $donation_payment, 
                         'money_to_target' => $money_to_target, 
                         'tweet_image_size' => $tweetSize, 

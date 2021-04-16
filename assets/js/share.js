@@ -40,7 +40,10 @@ $(document).ready(function() {
                         $('.retweet-popup').hide();
                         $count++;
                         $counter.text($count++);
-
+                        setInterval(function () {
+                            $('html,body').animate({scrollTop:10},'slow');
+                            location.reload();
+                        }, 1100);
                         // console.log(response);
                     }
                 });

@@ -15,6 +15,7 @@ include('class/Trending.php');
 include('class/Notification.php');
 include('class/Fundraising.php');
 include('class/Crowfund.php');
+include('class/Promote_home_post.php');
 include('class/Home_GetUsers.php');
 include('class/Hashtag_GetUsers.php');
 include('class/Notification_body.php');
@@ -80,6 +81,7 @@ define('NETWORK_RESPONSIVE', BASE_URL_PUBLIC.'network_responsive');
 define('BUSINESS_POST_JOBS', BASE_URL_PUBLIC.'business_jobPost');
 define('INDIVIDUAL_POST_JOBS', BASE_URL_PUBLIC.'individual_jobPost');
 define('FRIEND_REQUEST', BASE_URL_PUBLIC.'friend_request');
+define('PROMOTE_ADS', BASE_URL_PUBLIC.'promote_ads');
 
 
 // TWITTER SOCIAL MEDIA 

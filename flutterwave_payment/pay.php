@@ -9,11 +9,11 @@ if(isset($_POST['pay']))
         'tx_ref' => time(),
         'amount' => $amount,
         'currency' => 'RWF',
-        'payment_options' => 'card',
+        'payment_options' => "card",
         'redirect_url' => 'http://localhost/irangiro_social_site/flutterwave_payment/process.php',
         'customer' => [
             'email' => $email,
-            'name' => 'Zubdev'
+            'name' => 'shema irangiro'
         ],
         'meta' => [
             'price' => $amount
@@ -38,7 +38,7 @@ if(isset($_POST['pay']))
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => json_encode($request),
     CURLOPT_HTTPHEADER => array(
-        'Authorization: Bearer FLWSECK_TEST-3a6fcc6365d18de249131a4964d5a704-X',
+        'Authorization: Bearer FLWSECK-7f609337676e8f929afa61d988c1838c-X',
         'Content-Type: application/json'
     ),
     ));

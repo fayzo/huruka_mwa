@@ -255,7 +255,7 @@ public function links(){ ?>
     {
         $mysqli= $this->database;
         $param= '%'.$search.'%';
-        $query = "SELECT user_id, username, email, career,hobbys, profile_img,workname,chat FROM users Where username LIKE '{$param}' OR firstname LIKE '{$param}' OR lastname LIKE '{$param}' ";
+        $query = "SELECT user_id, username, email, career,hobbys, profile_img,workname,chat,bot FROM users Where username LIKE '{$param}' OR firstname LIKE '{$param}' OR lastname LIKE '{$param}' ";
         $result= $mysqli->query($query);
         $contacts = array();
         while ($row= $result->fetch_array()) {
@@ -266,6 +266,7 @@ public function links(){ ?>
             'workname' => $row['workname'],
             'hobbys' => $row['hobbys'],
             'profile_img' => $row['profile_img'],
+            'bot' => $row['bot'],
             'chat' => $row['chat']
            );
         }
@@ -322,7 +323,9 @@ public function links(){ ?>
                             </div><!--  in b box end-->
                             <div class="info-body-name">
                                 <div class="in-b-name">
-                                    <div><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a></div> <!-- Nina Mcintire -->
+                                    <div><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
+                                    <?php echo (!empty($user['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?>
+                                    </div> <!-- Nina Mcintire -->
                                     <?php $workname = (strlen($user["workname"]) > 18)? substr($user["workname"],0,18).'..' : $user["workname"]; ?>
                                     <span><small><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo (!empty($workname))? $workname :'Member';?></a></small></span>
                                 </div><!-- in b name end-->
@@ -1449,18 +1452,19 @@ public function links(){ ?>
         $stmt->bind_param('i',$retweet_id);
         $stmt->execute();
 
-        $query= "INSERT INTO tweets (status,title_name,photo_Title_main,photo_Title, tweetBy, retweet_id, retweet_by,pin_tweet,pin_retweet_by,donation_payment, donate_counts, money_raising, money_to_target, tweet_image,tweet_image_size, likes_counts, retweet_counts, posted_on, retweet_Msg) 
-        SELECT status,title_name,photo_Title_main,photo_Title, tweetBy, ?, ?,?,?,donation_payment, donate_counts, money_raising, money_to_target, tweet_image,tweet_image_size, likes_counts, retweet_counts, ? , ?  FROM tweets WHERE tweet_id= ? ";
+        $query= "INSERT INTO tweets (status,title_name,photo_Title_main,photo_Title, tweetBy, retweet_id, retweet_by,pin_tweet,pin_retweet_by,marketing,donation_payment, donate_counts, money_raising, money_to_target, tweet_image,tweet_image_size,youtube, likes_counts, retweet_counts, posted_on, retweet_Msg) 
+        SELECT status,title_name,photo_Title_main,photo_Title, tweetBy, ?, ?,?,pin_retweet_by,?,donation_payment, donate_counts, money_raising, money_to_target, tweet_image,tweet_image_size,youtube, likes_counts, retweet_counts, ? , ?  FROM tweets WHERE tweet_id= ? ";
         $stmt->prepare($query);
         $time = date('Y-m-d H-i-s');
-        $stmt->bind_param('iisissi', $retweet_id, $user_id,'',0,$time,$comments, $retweet_id);
+        $null = null; 
+        $stmt->bind_param('iissssi', $retweet_id, $user_id,$null,$null,$time,$comments, $retweet_id);
         $stmt->execute();  
         $query= "DELETE FROM tweets WHERE tweet_id= ?";
         $stmt->prepare($query);
         $stmt->bind_param('i',$stmt->insert_id);
 
         if ($retweet_id != $user_id) {
-            // var_dump($tweet_by,$user_id, $retweet_id,'retweet');
+            // var_dump($query,$tweet_by,$user_id, $retweet_id,'retweet');
             Notification::SendNotifications($tweet_by,$user_id,$retweet_id,'retweet');
             // var_dump(Notification::SendNotifications($tweet_by,$user_id,$retweet_id,'retweet'));
         }

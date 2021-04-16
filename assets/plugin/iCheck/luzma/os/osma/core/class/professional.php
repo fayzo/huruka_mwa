@@ -26,11 +26,11 @@ class Employment extends Home {
         <div class="card-header main-active p-1">
             <h5 class="card-title float-left pl-2"><i> Search Any Fields  </i></h5>
              <div class="dropdown float-right " style="clear:right;height:2rem;float:right;">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" data-display="static" data-flip="false" aria-haspopup="true"
                           aria-expanded="false">
                               Fields
                           </button>
-                  <div class="dropdown-menu" >
+                  <div class="dropdown-menu large-2" aria-labelledby="triggerId" style="left: -155px;">
                     <a class="dropdown-item" href="#">Select any field</a>
                   
                     <a class="dropdown-item d-flex justify-content-between align-items-center" href="javascript:void(0)" onclick="employmentCategories('Featured',1);" >Featured<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Featured');?></span></a>

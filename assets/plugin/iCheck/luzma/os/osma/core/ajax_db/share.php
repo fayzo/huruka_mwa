@@ -72,19 +72,19 @@ if (isset($_POST['showpopretweet']) && !empty($_POST['showpopretweet'])) {
                                                     // $tweetstatus = substr($retweet['status'],0, strpos($retweet['status'], ' ', 200)).'
                                                 $tweettext = substr($retweet['status'], 0, 200);
                                                 $tweetstatus = substr($retweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                <span class="readtext-tweet-readmore" data-tweettext="'.$retweet['tweet_id'].'"><a href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$retweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                <span class="readtext-tweet-readmore"><a href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$retweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
                                                 echo $home->getTweetLink($tweetstatus);
                                                 }else{
                                                 echo $home->getTweetLink($retweet['status']);
                                                 }  
-                                                
-                                             if (strlen($retweet['status']) > 200) {
-                                                // $tweetstatus = substr($retweet['status'],0, strpos($retweet['status'], ' ', 200)).'
-                                                $tweettext = substr($retweet['status'], 0, 200);
-                                                $tweetstatus = substr($retweet['status'], strrpos($tweettext, ' '));
-                                                echo '<span style="display: none;" class="more-text view-more-text'.$retweet["tweet_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
-                                            }  
-                                            ?>
+
+                                                if (strlen($retweet['status']) > 200) {
+                                                    // $tweetstatus = substr($retweet['status'],0, strpos($retweet['status'], ' ', 200)).'
+                                                    $tweettext = substr($retweet['status'], 0, 200);
+                                                    $tweetstatus = substr($retweet['status'], strrpos($tweettext, ' '));
+                                                    echo '<span style="display: none;" class="more-text view-more-text'.$retweet["tweet_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
+                                                }  
+                                                ?>
                                             </div>
 
                                             <!-- TEXT -->
@@ -260,7 +260,7 @@ if (isset($_POST['showpopretweet']) && !empty($_POST['showpopretweet'])) {
                                                     } ?> 
                                                     </div>
                                                 <?php } ?>
-
+                                                <?php if(!empty($retweet['youtube'])){ echo $retweet['youtube']; } ?>
                                            
                                 </div>
                 		   </div> <!-- retweet-popup-comment-wrap -->

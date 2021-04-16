@@ -771,6 +771,7 @@ class Notification_body extends Home
             <?php } 
 
         } ?>
+        <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
 
 
         <ul class="mt-2 list-inline" style="list-style-type: none; margin-bottom:10px;">  

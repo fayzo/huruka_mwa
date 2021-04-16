@@ -22,7 +22,7 @@
                 <div class="tab-content" id="custom-tabs-three-tabContent">
                   <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
                     <div class="login-card-body">
-                        <p class="login-box-msg">Sign in to start your session</p>
+                        <p class="login-box-msg">Sign in to start</p>
                             <span id="responses"></span>
                             <div class="input-group mb-3">
                             <input type="email" class="form-control" name="usernameoremail" id="usernameoremail" placeholder="Username Or Email">
@@ -51,7 +51,7 @@
                             </div>
                             <!-- /.col -->
                             <div class="col-4">
-                                <button onclick="javascript:manage('login')" type="button" id="myBtn" class="btn btn-primary btn-block">Sign In</button>
+                                <button onclick="javascript:manage('login')" type="button" id="myBtn" class="btn btn-primary ">Sign In</button>
                             </div>
                             <!-- /.col -->
                             </div>
@@ -64,7 +64,7 @@
                   <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
                     
                     <div class="register-card-body">
-                    <p class="login-box-msg">Register a new membership</p>
+                    <p class="login-box-msg">Register as new member</p>
                         <span id="response"></span>
                         <div class="row">
                             <div class="col-md-6">
@@ -173,7 +173,7 @@
                             </div>
                             <!-- /.col -->
                             <div class="col-4">
-                                <button  onclick="javascript:signup('signup')" type="button" class="btn btn-primary btn-block">Register</button>
+                                <button  onclick="javascript:signup('signup')" type="button" class="btn btn-primary ">Register</button>
                             </div>
                             <!-- /.col -->
                         </div>

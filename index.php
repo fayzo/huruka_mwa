@@ -59,7 +59,8 @@
                           accept="audio/*,video/*,image/*"
                           accept="image/png, image/jpg, image/jepg, image/gif" -->
                       <ul>
-                        <input type="file" name="files[]" id="file" accept="image/*" onChange="displayImage(this)" multiple >
+                        <!-- <input type="file" name="files[]" id="file" accept="image/*" onChange="displayImage(this)" multiple > -->
+                        <input type="file" name="files[]" id="file" accept="image/*" onChange="displayImageNameSize(this)" multiple >
                         <?php if(isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
                         <li><label for="file"><i class="fa fa-camera" aria-hidden="true"></i></label>
                           <span class="tweet-error">

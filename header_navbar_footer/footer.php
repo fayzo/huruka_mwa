@@ -97,6 +97,7 @@
    <script src="<?php echo BASE_URL_LINK ;?>js/settings.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/search.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/message_posts.js"></script>
+   <script src="<?php echo BASE_URL_LINK ;?>js/message_promote_post.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/hashtag.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/likes.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/share.js"></script>
@@ -160,9 +161,17 @@
 
    <!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
    <script src="<?php echo BASE_URL_LINK ;?>plugin/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+   <script src="<?php echo BASE_URL_LINK ;?>dist/js/easing.js" type="text/javascript"></script>
+    <!-- UItoTop plugin -->
+    <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.ui.totop.js" type="text/javascript"></script>
+    <!-- Starting the plugin -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $().UItoTop({ easingType: 'easeOutQuart' });
 
-   <script>
-    $(function () {
+        });
+
+    // $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     // CKEDITOR.replace('editor1')
@@ -170,7 +179,7 @@
     // CKEDITOR.replace('editor3')
     //bootstrap WYSIHTML5 - text editor
     // $('.textarea').wysihtml5()
-  });
+  // });
 
     // $(document).ready(function() {
     //     $("#content-slider").lightSlider({
@@ -315,12 +324,20 @@
        ]
       });
 
+
   $('.regulars').slick({
-     dots: true,
+    draggable: true,
+    autoplay: true,
+    autoplaySpeed: 10000,
+    // speed: 10000,
+    dots: true,
+    infinite: false,
+    // fade: true,
+    cssEase: 'linear',
+    slidesToShow: 1,
+    slidesToScroll: 1,
     //  prevArrow: $('.slick-prev'),
     //  nextArrow: $('.next'),
-     infinite: false,
-     speed: 300,
      slidesToShow: 1,
      slidesToScroll: 1,
      responsive: [

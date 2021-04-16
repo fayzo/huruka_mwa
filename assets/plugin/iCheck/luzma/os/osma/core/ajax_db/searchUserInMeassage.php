@@ -11,6 +11,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
           ';
      foreach ($result as $user) {
          if ($user['user_id'] != $user_id) {
+            $workname = (strlen($user["workname"]) > 60)? substr($user["workname"],0,60).'..' : $user["workname"];
              # code...
              echo '<div class="people-message p-3 people-messageM" data-user="'.$user['user_id'].'">
                     	<div class="people-inner">
@@ -21,9 +22,14 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
                                     <a href="#"><img src="'.BASE_URL_LINK.NO_PROFILE_IMAGE_URL.'"  class="img" /></a>
                                 ').'
                     		</div>
-                    		<div class="name-right2">
-                    			<span></span><span> '.$user['username'].'</span>
-                    		</div>
+                    		<span class="name-right2">
+                                '.$user['username'].((!empty($user['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"").'
+                                <div>'.((!empty($workname)?'
+                                        <small class="my-0" style="font-size: 12px;">'.$workname.'</small>
+                                        ':'
+                                        <small class="my-0" style="font-size: 12px;">Member</small>
+                                        ')).'</div>
+                            </span >
                     	</div>
                      </div> ';
          }

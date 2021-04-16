@@ -817,6 +817,7 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
                 
                 } ?>
 
+                <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
 
                 </div> <!-- card-body -->
                 <div class="card-footer text-muted text-center">
@@ -982,6 +983,7 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
 				</ul>
 			</div"> <!-- /.card-footer -->
 		 </div><!-- /.card -->';
+         
 	           			  }
 	           			 ?>
                 </div><!-- comment-End -->

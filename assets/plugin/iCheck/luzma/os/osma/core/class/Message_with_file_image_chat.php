@@ -9,7 +9,7 @@ class Message extends Home
     {
        $mysqli= $this->database;
     //    $query="SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 GROUP BY M. message_from, M. message_to HAVING  COUNT(DISTINCT M. message_to)=1 AND COUNT(DISTINCT M. message_from)=1 ORDER BY M. message_on Desc";
-       $query = "SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 and M. message_id in (select max(message_id) from message GROUP by message_to,message_from ORDER BY message_on Desc)";
+       $query = "SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 and M. message_id in (select max(message_id) from message GROUP by message_to,message_from ) ORDER BY M. message_on Desc";
    
     // THIS ONE MAKE MODAL TO WORK BAD
     //    $query ="SELECT * FROM message m
@@ -38,8 +38,7 @@ class Message extends Home
     {
        $mysqli= $this->database;
     //    $query="SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 0 GROUP BY M. message_from, M. message_to HAVING  COUNT(DISTINCT M. message_to)=1 AND COUNT(DISTINCT M. message_from)=1 ORDER BY M. message_on Desc";
-       $query = "SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 0 and M. message_id in (select max(message_id) from message GROUP by message_to,message_from ORDER BY message_on Desc)";
-
+       $query = "SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 0 and M. message_id in (select max(message_id) from message GROUP by message_to,message_from) ORDER BY M. message_on Desc";
        $result=$mysqli->query($query);
        $data=array();
        while ($row = $result->fetch_array()) {
@@ -571,11 +570,12 @@ class Message extends Home
 
                            <div class="direct-chat-msg">
                                <div class="direct-chat-info clearfix">
-                               <span class="direct-chat-name float-right" style="color: #999;"><?php echo $message['username'] ;?> </span>
+                               <span class="direct-chat-name float-right" style="color: #999;"><?php echo $this->timeAgo($message['message_on']);?> 
+                               <a><i class="fa fa-ban" aria-hidden="true"></i></a>
+                                <a class="deleteMsg more" data-message="<?php echo $message['message_id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                               </span>
                                    <span class="direct-chat-timestamp float-left">
-                                   <?php echo $this->timeAgo($message['message_on']); ?>
-                                          <a><i class="fa fa-ban" aria-hidden="true"></i></a>
-                                          <a class="deleteMsg more" data-message="<?php echo $message['message_id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                   <?php echo $message['username']; ?>
                                    </span>
                                </div>
                                <!-- /.direct-chat-info -->
