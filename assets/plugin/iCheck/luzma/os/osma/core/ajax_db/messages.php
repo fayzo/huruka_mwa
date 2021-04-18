@@ -89,16 +89,17 @@ if (isset($_POST['showMessage']) && !empty($_POST['showMessage'])) {
         			<div class="people-message p-3 people-messageM" data-user="<?php echo $Message['user_id'];?>">
         				<div class="people-inner">
         					<div class="people-img">
-							<?php if (!empty($Message['profile_img'])) { ?>
-        						     <img src="<?php echo BASE_URL_LINK."image/users_profile_cover/".$Message['profile_img'];?>" class="img" />
-							<?php }else {?>
-        						     <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>"  class="img" />
-							<?php } ?>
+								<?php if (!empty($Message['profile_img'])) { ?>
+										<img src="<?php echo BASE_URL_LINK."image/users_profile_cover/".$Message['profile_img'];?>" class="img" />
+								<?php }else {?>
+										<img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>"  class="img" />
+								<?php } ?>
         					</div>
         					<div class="name-right2">
         						<span><a href="#"><?php echo $Message['username'];?></a>
 								<?php echo (!empty($Message['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?>
 								</span>
+								<div><?php echo $Message['message'];?></div>
         					</div>
         					
         					<span> 
@@ -476,6 +477,7 @@ if (isset($_POST['showJobs1']) && !empty($_POST['showJobs1'])) {
 						<span style="font-size:13px"><?php echo $home->htmlspecialcharss($jobs['job_title']);?>
                    		</span>
 					</h4>
+						<!-- < ?php echo !($jobs['companyname'])? '<p>'.$jobs['companyname'].'<p>' :''; ?> -->
 						<p>Publish - <?php echo $home->timeAgo($jobs['created_on']); ?></p>
 						<p>Deadline -  <?php echo $home->timeDeadiline($jobs['deadline']).''.$home->dayRemain($jobs['deadline']); ?></p>
                     </a>
@@ -493,7 +495,7 @@ if (isset($_POST['showFriendRequest']) && !empty($_POST['showFriendRequest'])) {
 	$query= $mysqli->query("SELECT * FROM  users U Left JOIN  follow F ON F. sender = U. user_id WHERE F. receiver = $user_id and F. status_request = 0  ORDER BY rand() ");
 	?>
           <?php while($whoTofollow = $query->fetch_array()) {  
-			  $workname = (strlen($whoTofollow["workname"]) > 10)? substr($whoTofollow["workname"],0,10).'..' : $whoTofollow["workname"];
+			  $workname = (strlen($whoTofollow["workname"]) > 30)? substr($whoTofollow["workname"],0,30).'..' : $whoTofollow["workname"];
 
 echo '      <li class="jobHovers more friendrequest_id'.$whoTofollow['sender'].'">
 				<div class="whoTofollow-list-img">

@@ -1368,15 +1368,16 @@ public function links(){ ?>
                 }
 
         }else if(strpos($tweet,'http') !== false){
-            $tweet= preg_replace('/(http:\/\/)([\w+.])([\w.]+)/','<a  class="link_color" href="$0" target="_blink">$0</a>',$tweet);
-            $tweet= preg_replace('/(https:\/\/)([\w+.])([\w.]+)/','<a  class="link_color" href="$0" target="_blink">$0</a>',$tweet);
+            // $tweet= preg_replace('/(http:\/\/)([\w+.])([\w.]+))/','<a class="link_color" href="$0" target="_blink">$0</a>',$tweet);
+            // $tweet= preg_replace('/(https:\/\/)([\w+.])([\w.]+))/','<a class="link_color" href="$0" target="_blink">$0</a>',$tweet);
+            $tweet= preg_replace('/(http:\/\/)([\w+.])([\w.]+)([^.]+(\s|$))/','<a class="link_color" href="$0" target="_blink">$0</a>',$tweet);
+            $tweet= preg_replace('/(https:\/\/)([\w+.])([\w.]+)([^.]+(\s|$))/','<a class="link_color" href="$0" target="_blink">$0</a>',$tweet);
         }
 
         $tweet= preg_replace('/#([\w]+)/','<a class="link_color" href="'.BASE_URL_PUBLIC.'$1.hashtag" >$0</a>',$tweet);
         $tweet= preg_replace('/@([\w]+)/','<a class="link_color" href="'.BASE_URL_PUBLIC.'$1">$0</a>',$tweet);
                                           
         return  htmlspecialchars_decode($tweet);
-        // var_dump($tweet);
     }
 
      public function addLike($user_id,$tweet_id,$get_id)

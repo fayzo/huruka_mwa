@@ -22,11 +22,11 @@ function togglePopup ( ) {
 
 $(document).ready(function() {
 
-    $(".table_adminLA").DataTable({
-      "lengthChange": true,
-      "pageLength":10,
-      "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]]
-    });
+    // $(".table_adminLA").DataTable({
+    //   "lengthChange": true,
+    //   "pageLength":10,
+    //   "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]]
+    // });
   
     $(".table_admin").DataTable({
       "lengthChange": true,

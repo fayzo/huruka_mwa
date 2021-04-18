@@ -3,18 +3,17 @@
     <section class="content-header">
         <div class="row mb-2">
             <div class="col-sm-12 col-md-6 hidden-xs">
-                <h1><i> Memorial</i></h1>
+                <h1><i> Agriculture</i></h1>
             </div>
             <div class="col-sm-12 col-md-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">Memorial</li>
+                    <li class="breadcrumb-item">Agriculture</li>
                     <li class="breadcrumb-item active"><i>helps</i></li>
                 </ol>
             </div>
         </div>
     </section>
-
-  <div id="memorialPagination">
-     <?php echo $fundraising->fundraisings(1,'memorial',$user_id); ?>
-  </div>
+  <div id="animalsPagination">
+   <?php echo $fundraising->fundraisings(1,'Agriculture',$user_id); ?>
+   </div>
 </div>

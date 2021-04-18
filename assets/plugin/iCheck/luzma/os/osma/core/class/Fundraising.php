@@ -67,16 +67,19 @@ class Fundraising extends Follow
                                 <!-- Kogera umusaruro muguhinga -->
                                 <p class="mt-2">
                             <?php if (strlen($row["text"]) > 80) {
-                                        echo $row["text"] = substr($row["text"],0,80).'...
-                                        <br><span class="mb-0"><a href="javascript:void(0)" id="fund-readmore" data-fund="'.$row['fund_id'].'" class="text-muted" style"font-weight: 500 !important;font-size:8px">read more...</a></span>';
+                                        $tweettext = substr($row["text"], 0, 80);
+                                        $tatus = substr($row["text"], 0, strrpos($tweettext, ' ')).'
+                                        <span class="mb-0"><a href="javascript:void(0)" id="fund-readmore" data-fund="'.$row['fund_id'].'" class="text-muted" style"font-weight: 500 !important;font-size:8px">read more...</a></span>';
+                                        echo $tatus;
                                         }else{
                                         echo $row["text"];
                                         } ?> 
                                 </p>
+                                <button type="button" class="btn btn-success btn-sm mb-2 float-right">Support</button>            
                                 <!-- 117 -->
                                 <!-- turashaka kongera umusaruro mu buhinzi tukabona ubufasha buhagije no kubona imbuto -->
-                            </div>                      
-                            <div class="text-muted mb-1"><?php echo $categories; ?>
+                            </div>          
+                            <div class="text-muted mt-2 clear-float"><?php echo $categories; ?>
                                 <span class="text-success px-1 float-right" style="border-radius:3px;font-size:11px;"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</span>
                             </div>
                             <div class="card-text">
@@ -343,6 +346,18 @@ class Fundraising extends Follow
     {
       $db =$this->database;
       $query="SELECT COUNT(*) FROM fundraising_donation WHERE fund_id0= $fund_id";
+      $sql= $db->query($query);
+      $row_Comment = $sql->fetch_array();
+      $total_Comment= array_shift($row_Comment);
+      $array= array(0,$total_Comment);
+      $total_Comment= array_sum($array);
+      echo $total_Comment;
+    }
+
+    public function fundraisingcountPOSTS($categories)
+    {
+      $db =$this->database;
+      $query="SELECT COUNT(*) FROM fundraising WHERE categories_fundraising= '$categories' ";
       $sql= $db->query($query);
       $row_Comment = $sql->fetch_array();
       $total_Comment= array_shift($row_Comment);

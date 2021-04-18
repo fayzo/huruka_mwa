@@ -66,11 +66,13 @@ class Crowfund extends Fundraising {
                         <!-- Kogera umusaruro muguhinga -->
                         <p class="mt-2">
                        <?php if (strlen($row["text"]) > 80) {
-                                echo $row["text"] = substr($row["text"],0,80).'...
-                                <br><span class="mb-0"><a href="javascript:void(0)" id="crowfund-readmore" data-crowfund="'.$row['fund_id'].'" class="text-muted" style"font-weight: 500 !important;font-size:8px">read more...</a></span>';
+                                $tweettext = substr($row["text"], 0, 80);
+                                $tatus = substr($row["text"], 0, strrpos($tweettext, ' ')).'
+                                <span class="mb-0"><a href="javascript:void(0)" id="crowfund-readmore" data-crowfund="'.$row['fund_id'].'" class="text-muted" style"font-weight: 500 !important;font-size:8px">read more...</a></span>';
+                                echo $tatus;
                                 }else{
-                                echo $row["text"];
-                                } ?> 
+                                echo $row["text"]; 
+                                } ?>
                         </p>
                         <!-- 117 -->
                         <!-- turashaka kongera umusaruro mu buhinzi tukabona ubufasha buhagije no kubona imbuto -->
