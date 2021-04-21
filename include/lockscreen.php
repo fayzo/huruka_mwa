@@ -124,7 +124,7 @@ if (isset($_POST['key']) == 'lockscreen') {
         top: -20px;
         z-index: 10;
     }
-    #white .lockscreen-image>img {
+    .lockscreen-image>img {
         border-radius: 50%;
         background: #fff;
         padding: 5px;
@@ -289,7 +289,6 @@ if (isset($_POST['key']) == 'lockscreen') {
         }
         return true;
     }
-    $('body').attr("id", 'white');
     </script>
 </body>
 </html>

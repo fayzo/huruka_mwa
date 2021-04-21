@@ -108,7 +108,7 @@ function Addyoutube() {
      '<div class="col">' +
          '<div class="form-group">' +
      '<label for="">' +'Youtube Link</label>' +
-           '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="IF any link of youtube video to show us">' +
+           '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="IF any link of youtube video to show us Http://youtube.com/....">' +
          '</div>' +
      '</div>' +
     '</div>');

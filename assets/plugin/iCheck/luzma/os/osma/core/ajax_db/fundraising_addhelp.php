@@ -131,17 +131,18 @@ if (isset($_POST['fund_view']) && !empty($_POST['fund_view'])) {
                                 <label for="">types of categories of fund</label>
                               <select class="form-control" name="categories_fundraising" id="categories_fundraising">
                                 <option value="">Select what types of categories of fund </option>
-                                <option value="medical">medical</option>
-                                <option value="education">education</option>
-                                <option value="faith">faith</option>
-                                <option value="community">community</option>
-                                <option value="competition">competition</option>
-                                <option value="business">business</option>
-                                <option value="creative">creative</option>
-                                <option value="memorial">memorial</option>
-                                <option value="emergency">emergency</option>
-                                <option value="nonprofit">nonprofit</option>
-                                <option value="animals">animals</option>
+                                <option value="Medical">medical</option>
+                                <option value="Education">education</option>
+                                <option value="Faith">faith</option>
+                                <option value="Agriculture">agriculture</option>
+                                <option value="Community">community</option>
+                                <option value="Competition">competition</option>
+                                <option value="Business">business</option>
+                                <option value="Creative">creative</option>
+                                <option value="Memorial">memorial</option>
+                                <option value="Emergency">emergency</option>
+                                <option value="Nonprofit">nonprofit</option>
+                                <option value="Animals">animals</option>
                               </select>
                             </div>
                         </div>

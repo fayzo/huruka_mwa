@@ -1,5 +1,5 @@
 <?php 
-include('../core/init.php');
+include('../init.php');
 // $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpath($_SERVER['SCRIPT_FILENAME']));
 
     if(isset($_GET['status']))
@@ -8,8 +8,7 @@ include('../core/init.php');
         if($_GET['status'] == 'cancelled')
         {
             // echo 'YOu cancel the payment';
-            echo "<script>window.close();</script>";
-            // header('Location: '.HOME.'');
+            header('Location: index.php');
         }
         elseif($_GET['status'] == 'successful')
         {
@@ -49,7 +48,7 @@ include('../core/init.php');
                 }
                 else
                 {
-                    echo 'Fraud transaction detected';
+                    echo 'Fraud transactio detected';
                 }
               }
               else

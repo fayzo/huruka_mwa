@@ -8,9 +8,12 @@ if (!isset($_SESSION['keys'])) {
 }
 
 if (isset($_POST['key']) == 'lockscreen') {
-    
+
+    $users->forgotUsernameCountsTodelete('users',
+    array('forgotUsernameCounts' => 'forgotUsernameCounts +1', ),$_SESSION['keys']);
+
     $password = $users->test_input($_POST['password']);
-    $sql= $db->query("SELECT user_id ,username,approval,chat FROM users WHERE user_id= $_SESSION[keys] AND password='{$password}' ");
+    $sql= $db->query("SELECT user_id ,username,approval,chat,email FROM users WHERE user_id= $_SESSION[keys] AND password='{$password}' ");
     $row= $sql->fetch_assoc();
 
     if ($sql->num_rows > 0) {
@@ -22,6 +25,7 @@ if (isset($_POST['key']) == 'lockscreen') {
         $_SESSION['username'] = $row['username'];
         $_SESSION['approval'] = $row['approval'];
         $_SESSION['chat'] = $row['chat'];
+        $_SESSION['email'] = $row['email'];
         exit ('<div class="alert alert-success alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
@@ -34,8 +38,6 @@ if (isset($_POST['key']) == 'lockscreen') {
                     </button>
                     <strong>Please Try Again ...!!!</strong> </div>');
     }
-    $users->forgotUsernameCountsTodelete('users',
-          array('forgotUsernameCounts' => 0, ),$_SESSION['keys']);
   } 
 
 ?>
@@ -209,9 +211,7 @@ if (isset($_POST['login_id']) && !empty($_POST['login_id'])) {
 
         <div class="body-center1">
         <div class="containers1 container" id="container">
-                <h1 class="mb-3 h10">irangiro.com</h1>
                 <div id="response"></div>
-
                 <div class="form-container1">
                     <h4><?php echo $_SESSION['username'] ;?></h4>
                     <!-- START LOCK SCREEN ITEM -->

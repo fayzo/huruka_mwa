@@ -1,5 +1,10 @@
 <?php 
 session_start();
+include 'Mobile_Detect.php';
+// https://www.developer.com/mobile/creating-a-mobile-friendly-website-in-php/
+$detect = new Mobile_Detect;
+$device_type = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+// $script_version = $detect->getScriptVersion();
 
 include('database/db.php');
 include('class/Users.php');

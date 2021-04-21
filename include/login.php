@@ -154,7 +154,10 @@ if(isset($_POST['key'])){
     <section class="content container ">
 
     <div class='body-center'>
-    <!-- <div class="containers container  d-none d-md-block" id="container">
+
+    <?php if($device_type == 'computer') { ?>
+  
+    <div class="containers d-none d-md-block" id="container">
         <div class="form-container sign-up-container">
             <form action="post">
                 <div id="response"></div>
@@ -243,7 +246,7 @@ if(isset($_POST['key'])){
                 <div id="responses"></div>
                 <h1 class="h10">Sign in</h1>
                 <div class="social-container">
-                    Irangiro LTD
+                irangiro
                 </div>
                 <input type="text" name="usernameoremail" id="usernameoremail" placeholder="Username or Email " />
                 <input type="password" name="passwordlogin" id="passwordlogin" placeholder="Password" />
@@ -265,9 +268,13 @@ if(isset($_POST['key'])){
                 </div>
             </div>
         </div>
-    </div> -->
-    
-        <?php include 'login_dispay_sm_phone.php'; ?>
+    </div>
+    <?php }
+
+    if($device_type == 'phone') { ?>
+        <?php include 'login_dispay_sm_phone.php';
+    } ?>
+
     </div><!-- body-center -->
     </section>
     </div><!-- content-wrapper  -->

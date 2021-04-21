@@ -78,31 +78,43 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                     <div class="card">
                         <div class="card-header text-center">
                             <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button>
-                            <h4 class="card-title">Donate to Mr(s) <?php echo $user['lastname']; ?></h4>
+                            <h4 class="card-title">Donate to Mr(s)</h4>
                         </div>
                         <div class="card-body">
                             <form method="post">
                                 <div class="form-row mt-2">
                                     <div class="col">
-                                        <!-- <label for="firstname">Firstname :</label> -->
+                                        <label for="firstname">Firstname :</label>
                                         <input type="hidden" name="sent_to_user_id" id="sent_to_user_id"
                                             value="<?php echo $user_id;?>" style="display:none" />
                                          <input type="hidden" name="sentby_user_id" id="sentby_user_id"
                                             value="<?php echo $sentby_user_id;?>" style="display:none" />
                                          <input type="hidden" name="fund_id" id="fund_id"
                                             value="<?php echo $fund_id;?>" style="display:none" />
-                                            <input type="hidden" class="form-control" name="firstname" id="firstname"
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon2"><i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" name="firstname" id="firstname"
                                                 aria-describedby="helpId" value="<?php echo $user['firstname']; ?>" placeholder="Firstname">
+                                        </div>
                                     </div>
                                     <div class="col">
-                                        <!-- <label for="lastname">Lastname :</label> -->
-                                            <input type="hidden" class="form-control" name="lastname" id="lastname"
+                                        <label for="lastname">Lastname :</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon2"><i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" name="lastname" id="lastname"
                                                 aria-describedby="helpId" value="<?php echo $user['lastname']; ?>"  placeholder="Lastname">
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-row mt-2">
-                                    <div class="col-md-12 col-sm-12">
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="donate">How much you will donate :</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -114,25 +126,58 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12 col-sm-12">
-                                        <!-- <label for="lastname">Send Mobile money to This number :</label> -->
-                                            <input type="hidden" class="form-control" name="number" id="number"
-                                                aria-describedby="helpId" value="flutterwave" readonly>
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="lastname">Send Mobile money to This number :</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon2"><i class="fa fa-money"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" name="number" id="number"
+                                                aria-describedby="helpId" value="MTN:*182*1*1*0782822402*amount#" readonly>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- <div class="h4 mt-3">Send By </div> -->
+                                <div class="row mt-2 mb-2">
+                                    <div class="col">
+                                        <div class="h4">Money Gram </div>
+                                        <div>Send to : Crowfundraising ltd</div>
+                                        <div>pin code : RKLD04JK</div>
+                                        <div>Country : Rwanda</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class=" h4">WEST UNION </div>
+                                        <div>Send to : Crowfundraising ltd</div>
+                                        <div>pin code : RKLD04JK</div>
+                                        <div>Country : Rwanda</div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="h4 mt-3">Send By </div>
                                 <div class="form-row mt-2 mb-2">
 
                                     <div class="col">
-                                        <!-- <label for="firstname">Firstname :</label> -->
-                                            <input type="hidden" class="form-control" name="Sendby_firstname" id="sendby_firstname"
+                                        <label for="firstname">Firstname :</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon2"><i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Sendby_firstname" id="sendby_firstname"
                                                 aria-describedby="helpId" value="<?php echo $user0['firstname']; ?>" placeholder="Firstname">
+                                        </div>
                                     </div>
                                     <div class="col">
-                                        <!-- <label for="lastname">Lastname :</label> -->
-                                            <input type="hidden" class="form-control" name="Sendby_lastname" id="sendby_lastname"
+                                        <label for="lastname">Lastname :</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon2"><i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Sendby_lastname" id="sendby_lastname"
                                                 aria-describedby="helpId" value="<?php echo $user0['lastname']; ?>"  placeholder="Lastname">
+                                        </div>
                                     </div>
                                 </div>
                                  <div class="form-row mt-2 mb-2">

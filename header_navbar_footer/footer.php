@@ -162,6 +162,7 @@
    <!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
    <script src="<?php echo BASE_URL_LINK ;?>plugin/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
    <script src="<?php echo BASE_URL_LINK ;?>dist/js/easing.js" type="text/javascript"></script>
+   <script src="<?php echo BASE_URL_LINK ;?>js/slick.js" type="text/javascript"></script>
     <!-- UItoTop plugin -->
     <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.ui.totop.js" type="text/javascript"></script>
     <!-- Starting the plugin -->
@@ -171,7 +172,9 @@
 
         });
 
-    // $(function () {
+    $(function () {
+      CKEDITOR.plugins.addExternal('wordcount', '/irangiro_social_site/assets/plugin/ckeditor/plugins/WordCount/', 'plugin.js');
+      // CKEDITOR.plugins.addExternal('wordcount', '/assets/plugin/ckeditor/plugins/WordCount/', 'plugin.js');
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     // CKEDITOR.replace('editor1')
@@ -179,7 +182,7 @@
     // CKEDITOR.replace('editor3')
     //bootstrap WYSIHTML5 - text editor
     // $('.textarea').wysihtml5()
-  // });
+  });
 
     // $(document).ready(function() {
     //     $("#content-slider").lightSlider({
@@ -262,115 +265,6 @@
 				}
 			});
 	});
-  $(document).ready(function(){
-
-    $(".regular").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        responsive: [
-       {
-         breakpoint: 1024,
-         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-         }
-       },
-       {
-         breakpoint: 700,
-         settings: {
-           slidesToShow: 2,
-           slidesToScroll: 2
-         }
-       },
-       {
-         breakpoint: 480,
-         settings: {
-           slidesToShow: 2,
-           slidesToScroll: 2
-         }
-       }
-       ]
-      });
-      
-    $(".regular0").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        responsive: [
-       {
-         breakpoint: 1024,
-         settings: {
-          slidesToShow: 2,
-           slidesToScroll: 2,
-         }
-       },
-       {
-         breakpoint: 700,
-         settings: {
-           slidesToShow: 2,
-           slidesToScroll: 2
-         }
-       },
-       {
-         breakpoint: 480,
-         settings: {
-           slidesToShow: 1,
-           slidesToScroll: 1
-         }
-       }
-       ]
-      });
-
-
-  $('.regulars').slick({
-    draggable: true,
-    autoplay: true,
-    autoplaySpeed: 10000,
-    // speed: 10000,
-    dots: true,
-    infinite: false,
-    // fade: true,
-    cssEase: 'linear',
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    //  prevArrow: $('.slick-prev'),
-    //  nextArrow: $('.next'),
-     slidesToShow: 1,
-     slidesToScroll: 1,
-     responsive: [
-       {
-         breakpoint: 1024,
-         settings: {
-          slidesToShow: 1,
-           slidesToScroll: 1,
-           infinite: true,
-           dots: true
-         }
-       },
-       {
-         breakpoint: 700,
-         settings: {
-           slidesToShow: 1,
-           slidesToScroll: 1
-         }
-       },
-       {
-         breakpoint: 480,
-         settings: {
-           slidesToShow: 1,
-           slidesToScroll: 1
-         }
-       }
-       // You can unslick at a given breakpoint now by adding:
-       // settings: "unslick"
-       // instead of a settings object
-       ]
-   });
-   });
-
 
    </script>
 

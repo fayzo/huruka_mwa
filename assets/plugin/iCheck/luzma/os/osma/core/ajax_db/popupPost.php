@@ -106,10 +106,11 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
                             $image= array('jpg','jpeg','png','gif');
                             $pdf= array('pdf');
                             $coins= array('coins');
+                            $donate= array('donate');
                             $docx= array('doc','docx','lsx');
                             $mp3= array('mp3','m4a','ogg');
                             $mp4= array('mp4','mov','vob','mpeg','3gp','avi','wmv','mov','amv','svi','flv','mkv','webm','asf');
-                            $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4);
+                            $allower_ext= array_merge($image,$pdf,$coins,$docx,$mp3,$mp4,$donate);
 
 
                     if (array_diff($fileActualExt,$allower_ext) == false) { 
@@ -132,7 +133,10 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
 
                             $fileActualExt_mp4 =array_intersect($fileActualExt,$mp4);
                             $count_mp4 =count(array_intersect($fileActualExt_mp4,$mp4));
-
+                            
+                            $fileActualExt_donate =array_intersect($fileActualExt,$donate);
+                            $count_donate =count(array_intersect($fileActualExt_donate,$donate));
+    
                             $fileActualExt_mp3 =array_intersect($fileActualExt,$mp3);
                             $count_mp3 =count(array_intersect($fileActualExt_mp3,$mp3));
                         
@@ -813,7 +817,31 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
                             <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
                         </div>
                     </div>
-                    <?php } 
+                    <?php } ?>
+
+                    <?php if(!empty($fileActualExt_donate)){ 
+                                        
+                        $expodefile = explode("=",$tweet['tweet_image']);
+
+                        foreach ($expodefile as $file_image) {
+                            # code...
+                            $filePathinfo = pathinfo($file_image);
+
+                            if (in_array($filePathinfo['extension'],$fileActualExt_coins)) {
+                                # code...
+                                $filePathinfo_coins[]= $filePathinfo['basename'];
+                            }
+                        } 
+                        
+                        ?>
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
+                            <?php echo Follow::donate_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet); ?>
+                        </div><!-- col -->
+                    </div><!-- row -->
+
+                <?php } 
                 
                 } ?>
 
@@ -942,7 +970,7 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
                     <?php foreach ($comment_ as $comments) {
 				# code..
 	echo '
- 		 <div class="card text-light">
+ 		 <div class="card">
 		   <div class="card-body">
 		     <div class="user-block">
               '.((!empty($comments["profile_img"])?'
@@ -965,7 +993,7 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
                 </span>
                  <span class="description"> Shared publicly - '.$home->timeAgo($comments["comment_at"]).'
                  </span>
-                 <span class="description">'.$home->getTweetLink($comments["comment"]).'</span>
+                 <div>'.$home->getTweetLink($comments["comment"]).'</div>
               </div> <!-- /.user-block -->
 		  </div> <!-- /.card-body -->
 

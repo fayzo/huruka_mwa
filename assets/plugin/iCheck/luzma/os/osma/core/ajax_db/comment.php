@@ -16,7 +16,7 @@ if (isset($_POST['comments']) && !empty($_POST['comments'])) {
 		foreach ($commentx as $comments) {
 				# code..
 	echo '
- 		 <div class="card text-light">
+ 		 <div class="card">
 		   <div class="card-body">
 		     <div class="user-block">
 		       '.((!empty($comments["profile_img"])?'
@@ -37,7 +37,7 @@ if (isset($_POST['comments']) && !empty($_POST['comments'])) {
                 </span>
                  <span class="description"> Shared publicly - '.$home->timeAgo($comments["comment_at"]).' today
                  </span>
-                 <span class="description">'.$home->getTweetLink($comments["comment"]).'</span>
+                 <div>'.$home->getTweetLink($comments["comment"]).'</div>
               </div> <!-- /.user-block -->
 		  </div> <!-- /.card-body -->
 

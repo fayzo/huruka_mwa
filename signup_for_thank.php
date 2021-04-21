@@ -14,12 +14,12 @@ $mail->SMTPOptions = array(
     'allow_self_signed' => true
     )
     );
-$mail->Host = 'iragiro.com';  // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'admin@iragiro.com';                 // SMTP username
-$mail->Password = '';                         // SMTP passwordrwanda1234@z
-$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 465;    // TCP port to connect to 465 or 587
+// $mail->Host = 'iragiro.com';  // Specify main and backup SMTP servers
+// $mail->SMTPAuth = true;                               // Enable SMTP authentication
+// $mail->Username = 'admin@iragiro.com';                 // SMTP username
+// $mail->Password = '';                         // SMTP passwordrwanda1234@z
+// $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+// $mail->Port = 465;    // TCP port to connect to 465 or 587
 
 $mail->setFrom('admin@iragiro.com', 'Irangiro');
 $mail->addAddress($email);               // Name is optional

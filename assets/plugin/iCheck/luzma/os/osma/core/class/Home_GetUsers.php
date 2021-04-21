@@ -68,8 +68,8 @@ class GetUsers extends Follow
                                             <?php echo (!empty($user['bot']) && $user['bot'] == 'bot')?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"";?>
 
                                             <!-- //Jonathan Burke Jr. -->
-                                            <span class="description">Shared public - <?php echo $this->timeAgo($retweet['posted_on']); ?></span>
                                         </span>
+                                        <span class="description">Shared public - <?php echo $this->timeAgo($retweet['posted_on']); ?></span>
                                         <span class="description"><?php echo $this->getTweetLink($retweet['retweet_Msg']); ?></span>
                                     </div>
 
@@ -567,7 +567,7 @@ class GetUsers extends Follow
                                                                         echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
                                                                     }  
                                                                 ?>
-                                                                <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                                <!-- <span class="btn btn-primary btn-sm float-right" >View More >>></span> -->
                                                                 </div>
                                                             </div><!-- col -->
                                                             
@@ -641,7 +641,7 @@ class GetUsers extends Follow
                                                                         echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
                                                                     }  
                                                                 ?>
-                                                                <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                                <!-- <span class="btn btn-primary btn-sm float-right" >View More >>></span> -->
                                                                 </div>
                                                             </div><!-- col -->
                                                             

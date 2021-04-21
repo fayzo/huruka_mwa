@@ -26,4 +26,33 @@ $(document).ready(function () {
 
 });
 
+function coins(amount,firstname,lastname,email,user_id,coins) {
+    $.ajax({
+        url: 'flutterwave_payment/pay',
+        method: 'POST',
+        dataType : "text",
+        // contentType: "application/json",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        data: {
+            pay: 'pay',
+            description: coins,
+            amount: amount,
+            name: firstname+' '+lastname,
+            email: email,
+            user_id: user_id
+        },
+        success: function (response) {
+            var  objJSON = JSON.parse(response);
+            // console.log(objJSON.status,objJSON.data.link);
+            if (objJSON.status == "success") {
+                window.open(objJSON.data.link, '_blank');
+                // window.location.href = objJSON.data.link;
+                // window.location = objJSON.data.link;
+            } else{
+                return 'We can not process your payment';
+            }
+        }
+    });
+}
+
 

@@ -87,7 +87,7 @@
                     <li class="breadcrumb-item"><span id="messagePopup" class="more" data-user="<?php echo $user['user_id'];?>"><a href="javascript:void(0);" ><i class="fa fa-envelope-o"></i> Message </a></span></li>
                      <li class="breadcrumb-item active"><i><a href="javascript:void(0);" onclick="location.href='<?php echo BASE_URL_PUBLIC.$user['username'] ;?>'">Profile</a></i></li>
                     <?php } } ?>
-                    <li class="breadcrumb-item active"><i><a href="javascript:void(0);" class="price-jobs" data-pricejob="1"> Post a jobs</a></i></li>
+                    <li class="breadcrumb-item active"><i><a href="javascript:void(0);" <?php echo (isset($_SESSION['key']))?(!empty($user['subscription_job']))?'class="post_as" data-post_as="1"':'class="price-jobs" data-pricejob="1"':'id="login-please" data-login="1"';?>> Post a jobs</a></i></li>
                 </ol>
             </div>
         </div>

@@ -45,8 +45,11 @@
 }
 
 .user-block .description {
-    color: #999;
+    /* color: #999; */
     font-size: 13px;
+}
+.user-block .description-job {
+    display: table-row;
 }
 
 .user-block.user-block-sm .username,
@@ -407,7 +410,8 @@
 .user-jobImgBorder {
     float: left;
     /* margin:10px 5px 0px 10px; */
-    margin: 1px 5px 0px 10px;
+    /* margin: 1px 5px 0px 10px; */
+    margin: 2px 5px 10px 10px;
     border-radius: 50%;
     border: 2px solid #e6dada;
 }

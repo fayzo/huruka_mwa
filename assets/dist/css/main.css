@@ -571,9 +571,9 @@ border: 1px solid #635b5f61 !important;
   background-color:#f8f9fa;
   color: #666666;
 }
-.retweetcolor #link_ {
+/* .retweetcolor #link_ {
   color: #666666 !important;
-}
+} */
 
 .post {
     border-bottom: 1px solid #adb5bd;

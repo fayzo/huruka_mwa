@@ -185,6 +185,8 @@ if (isset($_POST['loginTerms0']) && !empty($_POST['loginTerms0'])) {
 
 if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
     $user_id= $_SESSION['key'];
+    $user= $home->userData($_SESSION['key']);
+
      ?>
 
 <div class="jobs-popup">
@@ -219,7 +221,9 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                               <li>Email support</li>
                               <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-user="<?php echo $user_id; ?>">Get started </button>
+                            <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
+                            <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'job subscription payment\'' ;?>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,<?php echo $details ;?>)" >Get started </button>
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -235,7 +239,8 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                             <li>Priority email support</li>
                             <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-user="<?php echo $user_id; ?>">Get started</button>
+                            <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="pro" data-user="< ?php echo $user_id; ?>">Get started</button> -->
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(35000,<?php echo $details ;?>)" >Get started</button>
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -251,7 +256,8 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                             <li>Email support</li>
                             <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-user="<?php echo $user_id; ?>">Get started</button>
+                            <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="enterprise" data-user="< ?php echo $user_id; ?>">Get started</button> -->
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(80000,<?php echo $details ;?>)" >Get started</button>
                         </div>
                         </div>
                     </div>

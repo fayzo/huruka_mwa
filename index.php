@@ -91,6 +91,14 @@
             <!-- card -->
           <?php } ?>
 
+          <?php if (!isset($_SESSION['key'])) { ?>
+              <div class="card mb-3">
+                <div class="card-body main-active">
+                  <a class="text-light" href="https://flutterwave.com/pay/irangirogtxt" target='_blank'>>>> CLICK HERE TO SUPPORT US TO KEEP WORKING THIS SITE IRANGIRO</a>
+                </div>
+              </div>
+            <?php } ?>
+
           <?php if(isset($_SESSION['key']) && $home->isClosed($_SESSION['key']) == true) { ?>
               <div class="card borders-tops card-profile card1 mb-3">
                   <div class="card-body">
@@ -106,13 +114,6 @@
 
             <div class="posted">
             <!-- Box Comment -->
-            <?php if (!isset($_SESSION['key'])) { ?>
-              <div class="card mb-3">
-                <div class="card-body main-active">
-                  <a class="text-light" href="http://" target='_blank'>>>> CLICK HERE TO SUPPORT US TO KEEP WORKING THIS SITE IRANGIRO</a>
-                </div>
-              </div>
-            <?php } ?>
               <div class="card  borders-tops card-profile card1">
                   <div class="card-body message-color">
                     <?php echo $posts_home->tweets($user_id,15); ?> 

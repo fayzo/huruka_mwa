@@ -1,13 +1,11 @@
 <?php 
-// include('../core/init.php');
+include('../init.php');
 // $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpath($_SERVER['SCRIPT_FILENAME']));
 
 if(isset($_POST['pay']))
 {
-    $name = $_POST['name'];
     $email = $_POST['email'];
     $amount = $_POST['amount'];
-    $description = $_POST['description'];
 
     //* Prepare our rave request
     $request = [
@@ -15,17 +13,17 @@ if(isset($_POST['pay']))
         'amount' => $amount,
         'currency' => 'RWF',
         'payment_options' => "card",
-        'redirect_url' => 'http://localhost/irangiro_social_site/flutterwave_payment/process.php',
+        'redirect_url' => 'http://localhost/irangiro_social_site/core/ajax_db/process.php',
         'customer' => [
             'email' => $email,
-            'name' => $name
+            'name' => 'shema irangiro'
         ],
         'meta' => [
             'price' => $amount
         ],
         'customizations' => [
-            'title' => 'Paying to irangiro',
-            'description' => $description
+            'title' => 'Paying for a sample product',
+            'description' => 'sample'
         ]
     ];
 
@@ -53,17 +51,15 @@ if(isset($_POST['pay']))
     curl_close($curl);
     
     $res = json_decode($response);
-    exit($response);
-
-    // if($res->status == 'success')
-    // {
-    //     $link = $res->data->link;
-    //     header('Location: '.$link);
-    // }
-    // else
-    // {
-    //     echo 'We can not process your payment';
-    // }
+    if($res->status == 'success')
+    {
+        $link = $res->data->link;
+        header('Location: '.$link);
+    }
+    else
+    {
+        echo 'We can not process your payment';
+    }
 }
 
 ?>

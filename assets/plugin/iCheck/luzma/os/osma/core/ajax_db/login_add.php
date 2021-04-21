@@ -12,7 +12,6 @@ if (isset($_SESSION['keys']) && isset($_SESSION['username']) && isset($_SESSION[
     exit();
 }
 
-
 if(isset($_POST['key'])){
 
  if ($_POST['key'] == 'login') {
@@ -118,7 +117,7 @@ if(isset($_POST['key'])){
 if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
     $login_id= $_REQUEST['login_id']; 
     ?>
-   <!-- <link href="< ?php echo BASE_URL_LINK ;?>dist/css/login.css" rel="stylesheet"> -->
+   <link href="<?php echo BASE_URL_LINK ;?>dist/css/login.css" rel="stylesheet">
    <script src="<?php echo BASE_URL_LINK ;?>js/country_login_ajax-db.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/login.js"></script>
 
@@ -128,10 +127,13 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
         <span class="colose">
         	<button class="close-imagePopup d-none d-md-block"><i class="fa fa-times" aria-hidden="true"></i></button>
         </span>
-        <div class="img-popup-wrapLogin"  id="popupEnd" style="max-width: 439px;">
+
+        <?php if($device_type == 'computer') { ?>
+        
+        <div class="img-popup-wrapLogin"  id="popupEnd">
         	<div class="img-popup-body">
                   
-            <!-- <div class='body-center0  clear-float d-none d-md-block'>
+            <div class='body-center0  clear-float d-none d-md-block'>
                 <div class="containers container" id="container">
                     <div class="form-container sign-up-container">
                         <form action="post">
@@ -221,11 +223,14 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
                             <div id="responses"></div>
                             <h1 class="h10">Sign in</h1>
                             <div class="social-container">
+                                irangiro
+                            </div>
+                            <!-- <div class="social-container">
                                 <a href="#" class="social alink"><i class="fab fa-facebook-f"></i></a>
                                 <a href="#" class="social alink"><i class="fab fa-google-plus-g"></i></a>
                                 <a href="#" class="social alink"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                            <span>or use your account</span>
+                            </div> -->
+                            <!-- <span>irangiro</span> -->
                             <input type="text" name="usernameoremail" id="usernameoremail" placeholder="Username or Email " />
                             <input type="password" name="passwordlogin" id="passwordlogin" placeholder="Password" />
                             <a class="alink" href="< ?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
@@ -247,14 +252,18 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
-
+        <?php } if($device_type == 'phone') { ?>
+            <div class="img-popup-wrapLogin"  id="popupEnd" style="max-width: 439px;">
+        	    <div class="img-popup-body">
+                  
             <?php include 'login_dispay_sm_phone.php'; ?>
-
-
-             </div><!-- img-popup-body -->
+        <?php } ?>
+        
+            </div><!-- img-popup-body -->
         </div><!-- user-show-popup-box -->
+
     </div> <!-- Wrp4 -->
 </div> <!-- apply-popup" -->
 

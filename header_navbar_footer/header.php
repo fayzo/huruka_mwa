@@ -3,6 +3,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
   <!-- Bootstrap 3.3.7 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
   <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/dataTables.bootstrap4.min.css">
@@ -994,4 +995,9 @@ if (isset($_SESSION['key']) && $result === '' ){ ?>
     <!-- =============================================== -->
 
 <!-- Content Wrapper. Contains page content -->
+<?php if($device_type == 'phone') { ?>
+<div class="content-wrapper">
+<?php } 
+if($device_type == 'computer') { ?>
 <div class="content-wrapper <?php echo (!empty($user['background']))? $user['background'] :'chair'; ?> ">
+<?php } ?>
