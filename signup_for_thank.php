@@ -14,6 +14,19 @@ $mail->SMTPOptions = array(
     'allow_self_signed' => true
     )
     );
+// $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+// $mail->SMTPAuth = true;                               // Enable SMTP authentication
+// $mail->Username = 'irangiroltd@gmail.com';                 // SMTP username
+// $mail->Password = ;                         // SMTP password$mail->passme()
+// $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+// $mail->Port = 587;                                    // TCP port to connect to
+// $mail->SMTPOptions = array(
+//     'ssl' => array(
+//     'verify_peer' => false,
+//     'verify_peer_name' => false,
+//     'allow_self_signed' => true
+//     )
+//     );
 // $mail->Host = 'iragiro.com';  // Specify main and backup SMTP servers
 // $mail->SMTPAuth = true;                               // Enable SMTP authentication
 // $mail->Username = 'admin@iragiro.com';                 // SMTP username
