@@ -98,7 +98,7 @@
                 
                 <?php echo $job->jobsfetch() ;?>
                 
-                <div class="sticky-top" style="top: 52px;">
+                <div class="sticky-top">
                     <?php echo $trending->trends(); ?>
                 </div>
           </div>
@@ -113,7 +113,7 @@
           <div class="col-md-3 d-none d-md-block">
             <?php $follow->whoTofollow($profileData['user_id'],$profileData['user_id'])?>
 
-            <div class="sticky-top" style="top: 52px;">
+            <div class="sticky-top">
                 <?php echo $home->options(); ?>
                 <!-- jobs -->
             </div>

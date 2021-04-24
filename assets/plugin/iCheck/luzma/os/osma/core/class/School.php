@@ -46,11 +46,11 @@ class School extends Home {
         <div class="card-header main-active p-1">
             <h5 class="card-title float-left pl-2"><i> School to Search</i></h5>
              <div class="dropdown  float-right">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-display="static" data-flip="false" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                             school province
                         </button>
-                <div class="dropdown-menu" aria-labelledby="triggerId">
+                <div class="dropdown-menu" aria-labelledby="triggerId" style="left: -30px;">
                     <a class="dropdown-item" href="javascript:void(0)" onclick="schoolCategories(1,1);" >kigali city<span class="badge badge-primary"><?php echo $this->schoolcountPOSTS(1);?></span></a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="schoolCategories(4,1);" >Northern province<span class="badge badge-primary"><?php echo $this->schoolcountPOSTS(4);?></span></a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="schoolCategories(5,1);" >East province<span class="badge badge-primary"><?php echo $this->schoolcountPOSTS(5);?></span></a>

@@ -256,7 +256,10 @@ if($count_foreach == 4){
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
-            ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , CASE WHEN  T. marketing != '' THEN T. marketing END DESC , T. tweet_id DESC LIMIT $limit";
+            ORDER BY 
+            CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
+            CASE WHEN  T. marketing != '' THEN T. marketing END DESC ,
+            T. tweet_id DESC LIMIT $limit";
         }
 
         $query= $mysqli->query($sql);
@@ -288,6 +291,10 @@ if($count_foreach == 4){
                 <?php 
                 if ($tweet['pin_tweet'] == 'pin') { ?>
                     <div class="float-right" data-toggle="tooltip" data-original-title="pin"><i class="fa fa-flag"></i></div>
+                <?php }
+
+                if ($tweet['newsfeeds'] == 'yes') { ?>
+                    <div class="float-right" data-toggle="tooltip" data-original-title="News-feed"><i class="fas fa-globe"></i></div>
                 <?php }
 
             $this->slick_tweets($user_id,$limit,$tweet,$count_foreach,$user);

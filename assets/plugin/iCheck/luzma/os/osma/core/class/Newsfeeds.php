@@ -3,17 +3,15 @@
        header('Location: ../../404.html');
  }
 
-class Promote_home_post extends Fundraising {
+class Newsfeeds extends Fundraising {
 
-    public function promote_post($user_id,$limit)
+    public function NewsFeedsposts($user_id,$limit)
     {
         $mysqli= $this->database;
         $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id 
-        WHERE T. tweetBy = U. user_id AND T. retweet_id='0' AND T. marketing != ''
-        OR  T. retweet_by = U. user_id AND T. retweet_id !='0' AND T. marketing != ''
-        ORDER BY 
-        CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
-        T. tweet_id DESC  LIMIT $limit";
+        WHERE T. tweetBy = U. user_id AND T. retweet_id='0' AND T. newsfeeds != ''
+        OR  T. retweet_by = U. user_id AND T. retweet_id !='0' AND T. newsfeeds != ''
+        ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , T. tweet_id DESC  LIMIT $limit";
 
         $query= $mysqli->query($sql);
         $tweets=array();
@@ -43,7 +41,11 @@ class Promote_home_post extends Fundraising {
                         <div class="card-body message-color">
                             
                         <div class="post">
-                                                            
+
+                        <?php if ($tweet['newsfeeds'] == 'yes') { ?>
+                            <div class="float-right" data-toggle="tooltip" data-original-title="News-feed"><i class="fas fa-globe"></i></div>
+                        <?php } ?>  
+
                         <span id="responseDeletePin<?php echo $tweet['tweet_id'] ;?>"></span>
 
                         <div class="user-block">
@@ -1182,18 +1184,179 @@ class Promote_home_post extends Fundraising {
                 </div>
                 <!-- /.row -->
                 </div>
+                <!-- /.post -->
                 </div>
-            </div>
-            <!-- /.post -->
+                </div>
 
             <?php } 
             // $QUERY->NUMROWS
 
-    }  
+    } 
+    
+    public function newsfeedsmall()
+    { 
+        $mysqli= $this->database;
+        $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id 
+        WHERE T. tweetBy = U. user_id AND T. retweet_id='0' AND T. newsfeeds != ''
+        OR  T. retweet_by = U. user_id AND T. retweet_id !='0' AND T. newsfeeds != ''
+        ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , T. tweet_id DESC  LIMIT 5";
+
+        $query= $mysqli->query($sql);
+        $tweets=array();
+        while ($row= $query->fetch_assoc()) {
+            # code...
+             $tweets[]= $row;
+        }
+        
+        if ($query->num_rows > 0) {  
+
+        ?>
+        
+        <div class="card mt-2 mb-2">
+          <div class="card-header main-active"> 
+              <!-- <span class="glyphicon glyphicon-list-alt"></span> -->
+          <!-- <b>News</b> -->
+            <div class="ms-header__title" style="text-align: left;">
+                <div class="banner"><h2> News</h2>
+                    <span></span>
+                </div>
+                <div class="ms-slider" style="width: auto;">
+                    <ul class="ms-slider__words">
+                        <li class="ms-slider__word">Education</li>
+                        <li class="ms-slider__word">Religion</li>
+                        <li class="ms-slider__word">Science</li>
+                        <li class="ms-slider__word">Cryptocurrency</li>
+                        <li class="ms-slider__word">Sports</li>
+                        <li class="ms-slider__word">Game</li>
+                        <li class="ms-slider__word">Tourism</li>
+                        <li class="ms-slider__word">islam</li>
+                    </ul>
+                </div><!-- ms-slider  -->
+            </div>
+        </div><!-- END HEADER -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xs-12 newsfeedbox">
+                <ul class="demo1">
+
+                <?php  foreach ($tweets as $tweet) { 
+                    $photo = explode("=",$tweet['tweet_image']);
+                    $photo = $photo[0];
+                    ?>
+
+                    <li class="news-item">
+                        <table cellpadding="4">
+                        <tr>
+                        <td>
+
+                        <?php if (!empty($photo)) {?>
+                             <img src="<?php echo BASE_URL_PUBLIC."uploads/posts/".$photo;?>"  width="60" class="img-circle">
+                        <?php  }else{ ?>
+                            <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>"  width="60" class="img-circle">
+                        <?php } ?>
+
+                        </td>
+                        <td>
+
+                       <?php
+                        if (strlen($tweet['status']) > 95) {
+                            // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                            $tweettext = substr($tweet['status'], 0, 95);
+                            $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                            <a class="t-show-popup more" href="javascript:void(0)" data-tweet="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a>';
+                            echo $this->getTweetLink($tweetstatus);
+                        }else{
+                        echo $this->getTweetLink($tweet['status']);
+                        }   ?>
+
+                        <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... 
+                        <a href="#">Read more...</a> -->
+                            
+                        </td>
+                         </tr>
+                        </table>
+                    </li>
+
+                <?php  } ?>
+
+                  <li class="news-item">
+                    <table cellpadding="4">
+                      <tr>
+                        <td><img src="<?php echo BASE_URL_LINK ;?>image/images/1.png" width="60" class="img-circle" /></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a
+                            href="#">Read more...</a></td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li class="news-item">
+                    <table cellpadding="4">
+                      <tr>
+                        <td><img src="<?php echo BASE_URL_LINK ;?>image/images/2.png" width="60" class="img-circle" /></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a
+                            href="#">Read more...</a></td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li class="news-item">
+                    <table cellpadding="4">
+                      <tr>
+                        <td><img src="<?php echo BASE_URL_LINK ;?>image/images/3.png" width="60" class="img-circle" /></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a
+                            href="#">Read more...</a></td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li class="news-item">
+                    <table cellpadding="4">
+                      <tr>
+                        <td><img src="<?php echo BASE_URL_LINK ;?>image/images/4.png" width="60" class="img-circle" /></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a
+                            href="#">Read more...</a></td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li class="news-item">
+                    <table cellpadding="4">
+                      <tr>
+                        <td><img src="<?php echo BASE_URL_LINK ;?>image/images/5.png" width="60" class="img-circle" /></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a
+                            href="#">Read more...</a></td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li class="news-item">
+                    <table cellpadding="4">
+                      <tr>
+                        <td><img src="<?php echo BASE_URL_LINK ;?>image/images/6.png" width="60" class="img-circle" /></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a
+                            href="#">Read more...</a></td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li class="news-item">
+                    <table cellpadding="4">
+                      <tr>
+                        <td><img src="<?php echo BASE_URL_LINK ;?>image/images/7.png" width="60" class="img-circle" /></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a
+                            href="#">Read more...</a></td>
+                      </tr>
+                    </table>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer"> 
+             <a href="<?php echo NEWSFEED; ?>">>> View more News</a>
+          </div>
+        </div>
+
+    <?php }
+     }
     
 }
 
-$promote_home_post= new Promote_home_post();
+$newsfeeds= new Newsfeeds();
 
 /*
 ===========================================

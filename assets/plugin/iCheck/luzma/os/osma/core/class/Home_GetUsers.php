@@ -44,6 +44,10 @@ class GetUsers extends Follow
                                         <div class="float-right" data-toggle="tooltip" data-original-title="pin"><i class="fa fa-flag"></i></div>
                                     <?php }
 
+                                    if ($tweet['newsfeeds'] == 'yes') { ?>
+                                        <div class="float-right" data-toggle="tooltip" data-original-title="News-feed"><i class="fas fa-globe"></i></div>
+                                    <?php }
+
                                      if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
                                       <span class="t-show-banner">
                                           <div class="t-show-banner-inner">

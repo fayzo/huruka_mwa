@@ -1,4 +1,29 @@
 <header class="main-header">
+
+      <div class="progress-container" id="progress-container" style="display:none">
+          <div class="progress-top-bar" id="myBar" ></div>
+      </div>
+    <!-- Content Wrapper. Contains page content -->
+      <!-- < ?php if($device_type == 'phone') { ?>
+        <div class="ms-header__title main-active">
+          < ?php } 
+      if($device_type == 'computer') { ?>
+        <div class="ms-header__title" style="position:absolute;z-index:1200;text-align: right;">
+        < ?php } ?>
+          <div class="banner">
+            <h2> This is</h2>
+            <span></span>
+          </div>
+          <div class="ms-slider">
+            <ul class="ms-slider__words">
+              <li class="ms-slider__word">Provide the back story, including date of founding, and who was involved </li>
+              <li class="ms-slider__word">easy</li>
+              <li class="ms-slider__word">powerful</li>
+              <li class="ms-slider__word">simple</li>
+            </ul>
+          </div>
+        </div> -->
+      
       <!-- Logo -->
       <a href="<?php echo HOME; ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->

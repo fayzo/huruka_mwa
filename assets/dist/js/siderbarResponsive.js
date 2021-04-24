@@ -331,7 +331,7 @@ if(file.type == "application/pdf"){
           $('#add-photo' + [y + 1] + '').html(
             '<div class="form-group mt-3">' +
             '<img src="#" class="profilephoto' + y + '" alt="User Image"  width= "200px">' +
-            '<input type="text" name="photo-Title' + y + '" class="form-control mt-1" id="photo-Title' + y + '" placeholder="title of photo">' +
+            // '<input type="text" name="photo-Title' + y + '" class="form-control mt-1" id="photo-Title' + y + '" placeholder="title of photo">' +
             '</div>'
           );
         } else {
@@ -398,8 +398,8 @@ if(file.type == "application/pdf"){
     setupReader(e.files[y],y);
   }
 
-  console.log(e.files);
-  console.log(e.files.length);
+  // console.log(e.files);
+  // console.log(e.files.length);
   
 } 
 // else if 

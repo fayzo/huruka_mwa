@@ -1,3 +1,14 @@
+
+.progress-top-bar {
+  height: 4px;
+  background: #3a4e90;
+  width: 0%
+}
+.sticky-top{
+  top: 60px;
+  z-index:1000;
+}
+
 .card {
   border-radius: 5px !important;
 }

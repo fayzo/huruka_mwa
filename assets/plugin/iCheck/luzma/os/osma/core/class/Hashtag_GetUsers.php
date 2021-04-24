@@ -29,6 +29,10 @@ class Hashtag_GetUsers extends Follow
                                    
                                     <div class="post">
 
+                                    <?php if ($tweet['newsfeeds'] == 'yes') { ?>
+                                        <div class="float-right" data-toggle="tooltip" data-original-title="News-feed"><i class="fas fa-globe"></i></div>
+                                    <?php } ?>
+
                                     <?php 
                                      if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
                                       <span class="t-show-banner">

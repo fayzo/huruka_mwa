@@ -95,3 +95,100 @@
     background: #6ea3d4;
     border-radius: 4px
 }
+
+/* THIS IS FOR ANIMATE NEWS IN IRANGIRO */
+/* THIS IS FOR ANIMATE NEWS IN IRANGIRO */
+
+.banner {
+    width: auto;
+    display: inline-block;
+    background:  #34ce0e;
+    position: relative;
+    margin-right: 10px;
+}
+
+.banner>h2 {
+    display: inline-block;
+    margin: 0;
+    padding: 0 5px;
+    font-size: 12px;
+    color: #fff;
+    /* height: 20px; */
+    box-sizing: border-box
+}
+
+.banner > span {
+    width: 0;
+    position: absolute;
+    right: -10px;
+    top: 3px;
+    height: 0;
+    border-style: solid;
+    /* border-width: 7px 0 7px 10px; */
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent  #34ce0e
+    /*  #2096cd */
+}
+
+.ms-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right bottom, #9dd7d5, #fea096);
+  }
+  .ms-header__title {
+    flex: 1 1 100%;
+    width: 100%;
+    text-align: center;
+    /* font-size: 4rem; */
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  }
+  .ms-slider {
+    display: inline-block;
+    /* height: 1.5em; */
+    height: 1.3em;
+    width: 260px;
+    overflow: hidden;
+    overflow-x: hidden;
+    vertical-align: middle;
+    mask-image: linear-gradient(transparent, white, white, white, transparent);
+    mask-type: luminance;
+    mask-mode: alpha;
+  }
+  .ms-slider__words {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    animation-name: wordSlider;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-duration: 7s;
+  }
+  .ms-slider__word {
+    display: block;
+    line-height: 1.3em;
+    text-align: left;
+  }
+
+@keyframes wordSlider {
+    0%, 27% {
+      transform: translateY(0%);
+    }
+    33%, 60% {
+      transform: translateY(-25%);
+    }
+    66%, 93% {
+      transform: translateY(-50%);
+    }
+    100% {
+      transform: translateY(-75%);
+    }
+  }
+  

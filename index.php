@@ -18,7 +18,7 @@
             
             <!-- Profile Image -->
             
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
+            <div class="sticky-top">
               <?php echo $job->jobsfetch() ;?>
             </div>
 
@@ -132,9 +132,11 @@
             <?php if (isset($_SESSION['key'])){
                     echo  $follow->whoTofollow($user_id,$user_id);
                  } ?>
+                 
+            <?php echo $home->options(); ?>
 
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
-               <?php echo $home->options(); ?>
+            <div class="sticky-top">
+               <?php echo $newsfeeds->newsfeedsmall(); ?>
             </div>
           
           </div>

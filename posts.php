@@ -29,13 +29,13 @@
           <div class="col-md-3 mb-3 d-none d-md-block ">
             <?php echo $home->userProfile($user_id); ?>
 
-            <div class="sticky-tops" style="top: 52px;">
+            <div class="sticky-tops">
                 <div class="mb-3">
                   <?php echo $follow->FollowingListsProfile($profileData['user_id'],$user_id,$profileData['user_id']); ?>
                 </div>
                 <?php echo $job->jobsfetch() ;?>
             </div>
-            <div class="sticky-top" style="top: 52px;">
+            <div class="sticky-top">
                   <?php echo $trending->trends(); ?>
             </div>
           </div>
@@ -63,7 +63,7 @@
           <div class="col-md-3 d-none d-md-block">
             <?php $follow->whoTofollow($profileData['user_id'],$profileData['user_id'])?>
 
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
+            <div class="sticky-top" >
                 <?php echo $home->options(); ?>
             </div>
 

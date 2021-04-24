@@ -70,6 +70,26 @@
             </ul>
           </li>
 
+          <li>
+            <a href="<?php echo NEWSFEED; ?>">
+              <i class="fas fa-globe"></i><span class="more">
+                 Newsfeeds </span> 
+              <span class="pull-right-container" style="margin-right: 10px;">
+                <small class="label pull-right"> <i class="fa fa-level-up"></i></small>
+              </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo PROMOTE_ADS; ?>">
+              <i class="fas fa-dollar-sign"></i><span class="more">
+                 Marketing Ads </span> 
+              <span class="pull-right-container" style="margin-right: 10px;">
+                <small class="label pull-right"> <i class="fa fa-level-up"></i></small>
+              </span>
+            </a>
+          </li>
+
           <li class="treeview">
             <a href="<?php echo BALANCE; ?>">
               <i class="fas fa-coins"></i> <span>Balance</span>
@@ -174,15 +194,7 @@
               </span>
             </a>
           </li>
-          <li>
-            <a href="<?php echo PROMOTE_ADS; ?>">
-              <i class="fas fa-dollar-sign"></i><span class="more">
-                 Marketing Ads </span> 
-              <span class="pull-right-container" style="margin-right: 10px;">
-                <small class="label pull-right"> <i class="fa fa-level-up"></i></small>
-              </span>
-            </a>
-          </li>
+         
         <?php } ?>
 
         </ul>

@@ -324,7 +324,7 @@
             <!-- whoTofollow: user whoTofollow style 1 -->
             <?php $follow->whoTofollow($user['user_id'],$user['user_id'])?>
 
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
+            <div class="sticky-top">
                 <?php echo $home->options(); ?>
             </div>
         </div>

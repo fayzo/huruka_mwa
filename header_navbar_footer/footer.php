@@ -98,6 +98,7 @@
    <script src="<?php echo BASE_URL_LINK ;?>js/search.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/message_posts.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/message_promote_post.js"></script>
+   <script src="<?php echo BASE_URL_LINK ;?>js/message_newsfeed_post.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/hashtag.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/likes.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/share.js"></script>
@@ -163,6 +164,7 @@
    <script src="<?php echo BASE_URL_LINK ;?>plugin/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
    <script src="<?php echo BASE_URL_LINK ;?>dist/js/easing.js" type="text/javascript"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/slick.js" type="text/javascript"></script>
+   <script src="<?php echo BASE_URL_LINK ;?>plugin/newsbox/jquery.bootstrap.newsbox.min.js" type="text/javascript" charset="utf-8"></script>
     <!-- UItoTop plugin -->
     <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.ui.totop.js" type="text/javascript"></script>
     <!-- Starting the plugin -->
@@ -182,7 +184,21 @@
     // CKEDITOR.replace('editor3')
     //bootstrap WYSIHTML5 - text editor
     // $('.textarea').wysihtml5()
-  });
+    });
+
+    $(function () {
+      $(".demo1").bootstrapNews({
+        newsPerPage: 4,
+        autoplay: true,
+        pauseOnHover: true,
+        direction: 'up', // up,or down
+        newsTickerInterval: 4000,
+        animationSpeed: 'normal',
+        onToDo: function () {
+          //console.log(this);
+        }
+      });
+    });
 
     // $(document).ready(function() {
     //     $("#content-slider").lightSlider({
@@ -265,7 +281,19 @@
 				}
 			});
 	});
-
+  // "home" === window.location.pathname.replace(/^\/([^\/]*).*$/, "$1")) {
+  //   var e = document.location.href.split("/");
+  //   if (e[4] && "category" != e[4] && !e[4].includes("search?keyword=")) {
+        function myFunction() {
+            var e = (document.body.scrollTop || document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
+            document.getElementById("myBar").style.width = e + "%"
+            document.getElementById("progress-container").style.backgroundColor = "#f8f9fa";
+            document.getElementById("progress-container").style.display = 'block';
+        }
+        window.onscroll = function() {
+            myFunction()
+        }
+    // }
    </script>
 
 </body>

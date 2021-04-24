@@ -61,7 +61,7 @@ class Employment extends Home {
 
                   </div>
               </div> 
-             <form class="form-inline float-right">
+             <form class="form-inline float-right hidden-xs" style="width: 200px;">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i> </span>
@@ -70,7 +70,7 @@ class Employment extends Home {
                 </div>
               </form>
 
-            <div class="nav-scroller py-0" style="clear:right;height:3.4rem;"> 
+            <div class="nav-scroller py-0" style="clear:both;height:3.4rem;"> 
                 <nav class="nav d-flex justify-content-between pb-0  horizontal-large-2"  >
                 <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Featured',1);" >Featured<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Featured');?></span></a>
                 <a class="p-2" href="javascript:void(0)" onclick="employmentCategories('Accountant',1);" >Accountant<span class="badge badge-primary"><?php echo $this->emplyomentcountPOSTS('Accountant');?></span></a>
@@ -103,7 +103,7 @@ class Employment extends Home {
             <!-- nav-scroller -->
         </div> <!-- /.card-header -->
 
-        <div class="card-body">
+        <div class="card-body px-1">
         <span class="job-show"></span>
         <div class="job-hide">
             <?php 
@@ -122,19 +122,20 @@ class Employment extends Home {
                    </div>
                     <div style="display: flow-root;" class="text_size">
                         <div class='float-left'>
-                            <span>Names: <?php echo $row['username']; ?> </span><br>
-                            <span>education: <?php echo $row['education']; ?> </span><br>
-                            <span>diploma: <?php echo $row['diploma']; ?> </span><br>
-                            <span >Fields study: <?php echo $row['categories_fields']; ?> </span>
+                            <span> <?php echo $row['username']; ?> </span><br> <!-- Names: -->
+                            <span><?php echo $row['education']; ?> </span><br><!-- education:  -->
+                            <span><?php echo $row['diploma']; ?> </span><br><!-- diploma:  -->
+                            <span ><?php echo $row['categories_fields']; ?> </span><!-- study:  -->
                         </div>
-                        <div class="float-right text-right hidden-xs">
-                            <span <?php if(isset($_SESSION['key'])){ echo 'class="people-message more"'; }else{ echo 'class="more" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $row['user_id'];?>"><i style="font-size: 20px;" class="fa fa-envelope-o"></i> Message </span><br>
-                            <span  <?php if(isset($_SESSION['key'])){ echo 'class=emailSent more"'; }else{ echo 'class="more" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $row['user_id'];?>"><?php echo $row['email']; ?></span><br>
+                        <!-- hidden-xs -->
+                        <div class="float-right text-right ">
+                            <span <?php if(isset($_SESSION['key'])){ echo 'class="people-message more"'; }else{ echo 'class="more" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $row['user_id'];?>"><i class="fa fa-envelope-o"></i> Message </span><br>
                             <?php if (isset($_SESSION['key']) && $_SESSION['approval'] === 'on') { ?>
                                 <span><?php echo $row['phone']; ?> </span><br>
                             <?php  }else{ ?>
                                 <div>RW <i class="flag-icon flag-icon-rw h4 mb-0" id="rw" title="us"></i></div>
                             <?php  } ?>
+                            <span  <?php if(isset($_SESSION['key'])){ echo 'class=emailSent more"'; }else{ echo 'class="more" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $row['user_id'];?>"><?php echo $row['email']; ?></span><br>
                             <span>Unemployment: <?php echo $row['unemployment']; ?> </span>
                         </div>
                     </div>

@@ -100,7 +100,7 @@
             
             <?php echo $job->jobsfetch() ;?>
             
-            <div class="sticky-top" style="top: 52px;">
+            <div class="sticky-top">
                   <?php echo $trending->trends(); ?>
             </div>
 

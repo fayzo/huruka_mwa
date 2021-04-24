@@ -270,7 +270,7 @@
             <div class="col-md-3 d-none d-md-block">
                 <?php echo $follow->whoTofollow($user_id,$user_id) ;?>
                 
-                <div class="sticky-top" style="top: 52px;">
+                <div class="sticky-top">
                     <?php echo $home->options(); ?>
                 </div>
             </div>

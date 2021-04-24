@@ -30,7 +30,7 @@ class Job extends Follow {
             <div class="card-header main-active">
              <h5 class="text-center">jobs</h5>
             </div>
-            <div class="card-body">
+            <div class="card-body px-1">
               <div class="row ">
            
           <?php while($jobs= $query->fetch_array()) { ?>
@@ -150,7 +150,7 @@ class Job extends Follow {
             <div class="card card-primary mb-1 ">
             <div class="card-header main-active p-1">
                 <h5 class="card-title float-left pl-2"><i> Jobs to Search</i></h5>
-                <form class="form-inline float-right">
+                <form class="form-inline float-right" style="width: 200px;">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i> </span>
@@ -171,7 +171,7 @@ class Job extends Follow {
                 </div> <!-- nav-scroller -->
             </div> <!-- /.card-header -->
 
-            <div class="card-body">
+            <div class="card-body px-1">
             <span class="job-show"></span>
             <div class="job-hide">
             <?php
@@ -264,7 +264,7 @@ class Job extends Follow {
             <div class="card card-primary mb-1 ">
             <div class="card-header main-active p-1">
                 <h5 class="card-title float-left pl-2"><i> Jobs to Search</i></h5>
-                <form class="form-inline float-right">
+                <form class="form-inline float-right" style="width: 200px;">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i> </span>
@@ -288,7 +288,7 @@ class Job extends Follow {
             <div class="card-body">
             <span class="job-show"></span>
             <div class="job-hide row">
-                <div class="col-md-6 large-2 ">
+                <div class="col-md-6 large-2 px-1">
                 <?php 
                 if ($query->num_rows > 0) { 
 

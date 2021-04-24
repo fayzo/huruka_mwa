@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/background.css">
   <!-- <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/follow.css"> -->
   <link rel="stylesheet"  href="<?php echo BASE_URL_LINK ;?>dist/css/lightslider.css" />
+  <link rel="stylesheet"  href="<?php echo BASE_URL_LINK ;?>dist/css/newsbox.css" />
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

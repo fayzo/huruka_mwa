@@ -67,7 +67,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                                     style="background: url('<?php echo BASE_URL_LINK.NO_COVER_IMAGE_URL ;?>')no-repeat center center;background-size:cover;">
                         <?php  } ?>
                                 <!-- <h3 class="widget-user-username">Elizabeth Pierce</h3>  -->
-                                <h3 class="widget-user-username"><?php echo $user['firstname'].' '.$user['lastname']; ?></h3> 
+                                <h3 class="widget-user-username"><?php echo $user['username']; ?></h3> 
                                 <h5 class="widget-user-desc"><?php echo $user['categories_fields']; ?></h5>
                                 <!-- web developers -->
                             </div>
@@ -90,7 +90,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                     <?php } ?>
                 </div>
                 <div class="col-md-1-3 mr-3 p-2">
-                    <div><?php echo $user['firstname'].' '.$user['lastname']; ?></div>
+                    <div><?php echo $user['username']; ?></div>
                     <!-- <h4>Elizabeth Pierce</h4> -->
                     <div><?php echo $user['country']; ?>
                     <i class="flag-icon flag-icon-<?php echo strtolower($user["country"]) ;?> h4 mb-0"

@@ -384,12 +384,15 @@ class Follow extends Home
                            <i> WHO TO FOLLOW </i>
                      </div>
                      <div class="card-body message-color  whoTofollow  py-0">
-                     <ul class="whoTofollow-list">
+                     <ul class="whoTofollow-list row">
                      ';
+                    //  var_dump(Users::$device_type,self::$device_type);
+
                      while ($whoTofollow=$result->fetch_array()) {
                         $workname = (strlen($whoTofollow["workname"]) > 18)? substr($whoTofollow["workname"],0,18).'..' : $whoTofollow["workname"];
 
-            echo '      <li class="px-0 more">
+            echo '      
+                    '.((Users::$device_type == 'computer')?'<li class="px-0 more col-12">':'<li class="px-0 more col-6">').'
                             <div class="whoTofollow-list-img">
                                     '.((!empty($whoTofollow['profile_img'])?'
                                     <img src="'.BASE_URL_LINK."image/users_profile_cover/".$whoTofollow['profile_img'].'">
@@ -910,7 +913,7 @@ class Follow extends Home
                       </ul>
                       </div>
                       <div class="card-footer text-center">
-                          Pull down To View more >>>
+                          Suggestion People >>>
                       </div>
                   </div>';
                   

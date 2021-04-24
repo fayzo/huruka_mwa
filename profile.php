@@ -83,10 +83,10 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
       </section>
       <section class="content-header">
         <div class="row">
-          <div class="col-3">
+          <div class="col-sm-12 col-md-3">
                 <h5><i>Profile</i></h5>
           </div>
-          <div class="col-9">
+          <div class="col-sm-12 col-md-9">
                 <ol class="breadcrumb float-right">
                     <li class="breadcrumb-item"><a href="<?php if (isset($_SESSION['key'])){ echo HOME ; }else{ echo LOGIN; } ?>">Home</a></li>
                     <?php if (isset($_SESSION['key']) && $_SESSION['approval'] === 'on'){ ?>
@@ -167,7 +167,7 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                   <?php echo $follow->FollowingListsProfile($profileData['user_id'],$user_id,$profileData['user_id']); ?>
                 </div>
             </div>
-                <div class="sticky-top" style="top: 52px;">
+                <div class="sticky-top">
                   <?php echo $trending->trends(); ?>
                 </div>
           </div>
@@ -194,7 +194,7 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
           <div class="col-md-3">
             <?php $follow->whoTofollow($profileData['user_id'],$profileData['user_id'])?>
 
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
+            <div class="sticky-top">
                <?php echo $home->options(); ?>
             </div>
           </div>

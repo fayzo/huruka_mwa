@@ -6,6 +6,7 @@
 class Users{
    
     protected $database;
+    static protected $device_type;
     static protected $databases;
 
     static public function getconstruct($db)
@@ -17,6 +18,11 @@ class Users{
     {
         global $db;
         $this->database=$db;
+    }
+
+    static public function device_type($type)
+    {   
+       return self::$device_type= $type;
     }
 
      public function preventUsersAccess($request,$currentfile,$currently)
@@ -1846,7 +1852,9 @@ class Users{
 
 $users = new Users();
 global $db;
+global $device_type;
 Users::getconstruct($db);
+Users::device_type($device_type);
 
 /*
 ===========================================

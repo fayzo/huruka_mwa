@@ -70,7 +70,7 @@
             <!-- < ?php if (isset($_SESSION['key'])){
                     echo  $follow->whoTofollow($user_id,$user_id);
                  } ?> -->
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
+            <div class="sticky-top" >
                <?php echo $home->options(); ?>
             </div>
           

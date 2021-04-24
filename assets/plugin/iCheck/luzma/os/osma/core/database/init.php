@@ -5,6 +5,7 @@ include 'Mobile_Detect.php';
 $detect = new Mobile_Detect;
 $device_type = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
 // $script_version = $detect->getScriptVersion();
+global $device_type;
 
 include('database/db.php');
 include('class/Users.php');
@@ -26,6 +27,7 @@ include('class/Hashtag_GetUsers.php');
 include('class/Notification_body.php');
 include('class/Posts_home.php');
 include('class/post_home_copyDraft.php');
+include('class/Newsfeeds.php');
 // include('class/pathinfo_docx_Post_home.php');
 // include('class/pathinfo_docx_Posts_copyDraft.php');
 // include('class/pathinfo_with_foreach_pdf_posts_home.php');
@@ -87,6 +89,7 @@ define('BUSINESS_POST_JOBS', BASE_URL_PUBLIC.'business_jobPost');
 define('INDIVIDUAL_POST_JOBS', BASE_URL_PUBLIC.'individual_jobPost');
 define('FRIEND_REQUEST', BASE_URL_PUBLIC.'friend_request');
 define('PROMOTE_ADS', BASE_URL_PUBLIC.'promote_ads');
+define('NEWSFEED', BASE_URL_PUBLIC.'newsfeeds');
 
 
 // TWITTER SOCIAL MEDIA 
