@@ -111,6 +111,7 @@
               <!-- /.card -->
           <?php  } ?>
 
+          <?php if (isset($_SESSION['key'])) { ?>
 
             <div class="posted">
             <!-- Box Comment -->
@@ -124,16 +125,86 @@
             <div class="loading-div text-center mt-2">
                 <img id="loader" src="<?php echo BASE_URL_LINK."image/img/"?>loading.svg" style="display: none;"/> 
             </div>
+        
+          <?php }else{ ?>
+          
+          
+            <div class="card borders-tops mb-3"> 
+                <div class="card-body message-color">
+                <div class="post">
+
+                <!-- <div class="user-block">
+                    <div class="user-blockImgBorder">
+                    <div class="user-blockImg">
+                        <img src="< ?php echo BASE_URL_LINK."image/users_profile_cover/irangiro.png" ;?>" alt="User Image">
+                    </div>
+                    </div>
+                    <span class="username">
+                        <a href="< ?php echo PROFILE ;?>">Irangiro </a>
+                        <span><img src="< ?php echo BASE_URL_LINK.'image/img/verified-light.png' ; ?>" width="15px"></span>
+                        < ?php echo self::followBtns(1,$user_id,1); ?>
+                    </span>
+                    <span class="description">Public Figure | Content Creator</span>
+                </div> -->
+                <!-- /.user-block -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h3 >Welcome To Irangiro</h3>
+                                <div>Meet People <br> & <br> Explore new connection</div>
+                            </div>
+                            <div class="col-12">
+                                <img class="img-fluid"
+                                    src="<?php echo BASE_URL_LINK."image/users_cover_profile/coming-soon.png" ;?>" alt="Photo">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+                <!-- <p>
+                    <a href="#" class="link-black text-sm mr-2"><i class="fa fa-share mr-1"></i>
+                        Share</a>
+                    <a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up mr-1"></i>
+                        Like</a>
+                    <span class="float-right">
+                        <a href="#" class="link-black text-sm">
+                            <i class="fa fa-comments-o mr-1"></i> Comments ()
+                        </a>
+                    </span>
+                </p>
+
+                <div class="input-group">
+                    <input class="form-control form-control-sm" type="text"
+                        placeholder="Type a comment">
+                    <div class="input-group-append">
+                        <span class="input-group-text btn" onclick="#" aria-label="Username"
+                            aria-describedby="basic-addon1"><i
+                                class="fa fa-arrow-right text-muted"></i></span>
+                    </div>
+                </div> -->
+
+                </div>
+              </div>
+            </div>
+            <!-- /.post -->
+
+          <?php } ?>
+
           </div>
           <!-- col -->
 
           <div class="col-md-3 d-none d-md-block">
             <!-- whoTofollow: user whoTofollow style 1 -->
             <?php if (isset($_SESSION['key'])){
-                    echo  $follow->whoTofollow($user_id,$user_id);
-                 } ?>
+                    echo  $follow->whoTofollow($user_id,$user_id); ?>
+
+                    <?php echo $home->options(); ?>
+            <?php  } ?>
                  
-            <?php echo $home->options(); ?>
 
             <div class="sticky-top">
                <?php echo $newsfeeds->newsfeedsmall(); ?>

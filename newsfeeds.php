@@ -19,8 +19,11 @@
         </div>
         <div class="col-sm-12 col-md-6 mb-4">
             <div class="main-active dot-container promote-posts newsfeeds_forms more mb-3" data-promote="payment">
-              <a href="javascript:void(0)"> >>> CLICK HERE TO START <<< </a>
-               <h6>Boost Your News-Feeds Post Here   !!!</br> 
+                <img src="<?php echo BASE_URL_LINK ;?>image/img/promote1.png" width="30px" witalt="User Image">
+                <a href="javascript:void(0)"> >> CLICK HERE TO START << </a>
+                <img src="<?php echo BASE_URL_LINK ;?>image/img/promote1.png" width="30px" witalt="User Image">
+                <!-- <i class="fas fa-bullhorn" aria-hidden="true"></i> -->
+                <h6>Boost Your News-Feeds Post Here   !!!</br> 
                Get more people to see and engage with your posts</h6>
             </div>
 

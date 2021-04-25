@@ -15,7 +15,7 @@ if(isset($_POST['pay']))
         'amount' => $amount,
         'currency' => 'RWF',
         'payment_options' => "card",
-        'redirect_url' => 'http://localhost/irangiro_social_site/flutterwave_payment/process.php',
+        'redirect_url' => 'http://localhost/irangiro_social_site/flutter/process.php',
         'customer' => [
             'email' => $email,
             'name' => $name

@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <form action="http://localhost/irangiro_social_site/flutterwave_payment/pay.php" method="POST">
+        <form action="http://localhost/irangiro_social_site/flutter/pay.php" method="POST">
 
         <label>Email</label>
         <input type="email" name="email">

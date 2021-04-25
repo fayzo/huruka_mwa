@@ -19,9 +19,11 @@
         </div>
         <div class="col-sm-12 col-md-6 mb-4">
             <div class="main-active dot-container promote-posts promote_forms more mb-3" data-promote="payment">
-              <a href="javascript:void(0)"> >>> CLICK HERE TO START <<< </a>
-               <h6>Promote Anything Here To Boost Your Post  !!!</br> 
-               Get more people to see and engage with your posts</h6>
+            <img src="<?php echo BASE_URL_LINK ;?>image/img/promote1.png" width="30px" witalt="User Image">
+            <a href="javascript:void(0)"> >> CLICK HERE TO START << </a>
+            <img src="<?php echo BASE_URL_LINK ;?>image/img/promote1.png" width="30px" witalt="User Image">
+            <h6>Promote Anything Here To Boost Your Post  !!!</br> 
+            Get more people to see and engage with your posts</h6>
             </div>
 
             <div class="row mb-4" > 

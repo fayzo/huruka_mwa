@@ -28,7 +28,7 @@ $(document).ready(function () {
 
 function coins(amount,firstname,lastname,email,user_id,coins) {
     $.ajax({
-        url: 'flutterwave_payment/pay',
+        url: 'flutter/pay',
         method: 'POST',
         dataType : "text",
         // contentType: "application/json",
