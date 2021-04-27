@@ -16,6 +16,8 @@ if (isset($_GET['username']) == true && empty($_GET['username']) == false) {
         $houseV= $house->houseData($_SESSION['key']);
         $carV= $car->carData($_SESSION['key']);
         $icyamunaraV= $icyamunara->icyamunaraData($_SESSION['key']);
+        $subscription= $users->subscription_pay($_SESSION['key']);
+
 
 		$notific= $notification->getNotificationCount($user_id,$_SESSION['email']);
 		$notification->notificationsView($user_id);
@@ -50,6 +52,7 @@ else{
             $carV= $car->carData($_SESSION['key']);
             $icyamunaraV= $icyamunara->icyamunaraData($_SESSION['key']);
             $saleV= $sale->saleData($_SESSION['key']);
+            $subscription= $users->subscription_pay($_SESSION['key']);
 
             // $eventV= $home->eventsData($_SESSION['key']);
             // $blogV= $home->blogData($_SESSION['key']);

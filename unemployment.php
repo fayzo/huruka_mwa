@@ -84,9 +84,9 @@
 
             <div class="col-md-3">
                 <div class="row">
-                    <div class="col-md-12 mb-3 d-none d-md-block">
-                       <?php echo $follow->whoTofollow($user_id,$user_id) ;?>
-                    </div>
+                    <!-- <div class="col-md-12 mb-3 d-none d-md-block">
+                       < ?php echo $follow->whoTofollow($user_id,$user_id) ;?>
+                    </div> -->
                     <!-- /.col -->
                     <div class="col-md-12 mb-3">
                        <?php echo $home->options(); ?>
@@ -154,6 +154,9 @@
                                       <select class="custom-select form-control field" name="field"  id="field">
                                         <option value="">Select one</option>
                                         <option value="Business_Administration">Business Administration</option>
+                                        <option value="Tourism">Tourism</option>
+                                        <option value="Hospitality">Hospitality</option>
+                                        <option value="Construction">Construction</option>
                                         <option value="Management">Management</option>
                                         <option value="Finance">Finance</option>
                                         <option value="Accountant">Accountant</option>

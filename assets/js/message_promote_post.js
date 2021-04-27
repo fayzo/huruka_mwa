@@ -18,6 +18,29 @@ $(document).ready(function () {
     //     CKEDITOR.replace('editor1')
     //     console.log(targetValue,path,pathname,filename,url);
 	// }
+
+      // post payment to marketing your post like ADS
+
+      $(document).on('click', '.promote-post', function (e) {
+        e.stopPropagation();
+        var promote_post = $(this).data('promote');
+
+        $.ajax({
+            url: 'core/ajax_db/price_promote_post',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                promote_post: promote_post,
+
+            }, success: function (response) {
+                $(".popupTweet").html(response);
+                $(".close-imagePopup").click(function () {
+                    $(".promote-popup").hide();
+                });
+                // console.log(response);
+            }
+        });
+    });
     
     $(document).on('click', '.promote_forms', function () {
 

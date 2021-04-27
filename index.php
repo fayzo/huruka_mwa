@@ -151,7 +151,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <h3 >Welcome To Irangiro</h3>
+                                <h3 >Welcome To irangiro</h3>
                                 <div>Meet People <br> & <br> Explore new connection</div>
                             </div>
                             <div class="col-12">

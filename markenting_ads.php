@@ -1,7 +1,7 @@
 
 <?php include "header_navbar_footer/header_if_login.php"?>
 <!-- < ?php include "header_navbar_footer/Get_usernameProfile.php"?> -->
-<title><?php echo $user['username'].' News-Feeds'; ?></title>
+<title><?php echo $user['username'].' Marketing Place'; ?></title>
 <?php include "header_navbar_footer/header.php"?>
 
       <!-- Main content -->
@@ -18,17 +18,16 @@
             
         </div>
         <div class="col-sm-12 col-md-6 mb-4">
-            <div <?php echo (isset($_SESSION['key']))?(empty($subscription['newsfeed_subscription']))?'class="promote-post main-active dot-container more mb-3" data-promote="payment" ':'class="newsfeeds_forms main-active dot-container more mb-3" ' :'id="login-please" data-login="1"';?>>
+            <div <?php echo (isset($_SESSION['key']))?(empty($subscription['marketing_subscription']))?'class="promote-post main-active dot-container more mb-3" data-promote="payment" ':'class="promote_forms main-active dot-container more mb-3" ' :'id="login-please" data-login="1"';?>>
                 <img src="<?php echo BASE_URL_LINK ;?>image/img/promote1.png" width="30px" witalt="User Image">
                 <a href="javascript:void(0)"> >> CLICK HERE TO START << </a>
                 <img src="<?php echo BASE_URL_LINK ;?>image/img/promote1.png" width="30px" witalt="User Image">
-                <!-- <i class="fas fa-bullhorn" aria-hidden="true"></i> -->
-                <h6>Boost Your News-Feeds Post Here   !!!</br> 
-               Get more people to see and engage with your posts</h6>
+                <h6>Promote Anything Here To Boost Your Post  !!!</br> 
+                Get more people to see and engage with your posts</h6>
             </div>
 
             <div class="row mb-4" > 
-                <?php echo $newsfeeds->NewsFeedsposts($user_id,15); ?>
+                <?php echo $posts_home->promote_post($user_id,15); ?>
             </div>
             
         </div>

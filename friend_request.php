@@ -61,7 +61,7 @@
                         $query= $mysqli->query("SELECT * FROM  users U Left JOIN  follow F ON F. sender = U. user_id WHERE F. receiver = $user_id and F. status_request = 0  ORDER BY rand() ");
                         ?>
                                 <?php while($whoTofollow = $query->fetch_array()) {  
-                                    $workname = (strlen($whoTofollow["workname"]) > 10)? substr($whoTofollow["workname"],0,10).'..' : $whoTofollow["workname"];
+                                    $workname = (strlen($whoTofollow["workname"]) > 20)? substr($whoTofollow["workname"],0,20).'..' : $whoTofollow["workname"];
                     
                     echo '      <li class="col-sm-12 col-md-4 mb-2 bg-light jobHovers more friendrequest_id'.$whoTofollow['sender'].'" style="margin-right: 10px;padding: 5px;border-radius: 5px;">
                                     <div class="whoTofollow-list-img">

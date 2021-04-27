@@ -168,6 +168,40 @@
             }
         }
 
+         function bot_approved(rowID,approval) {
+            if (confirm('Are you sure??')) {
+                $.ajax({
+                    url: 'core/ajax_db/manage_admin_db',
+                    method: 'POST',
+                    dataType: 'text',
+                    data: {
+                        key: approval,
+                        rowID: rowID
+                    }, success: function (response) {
+                        $("#bot"+rowID).html(approval);
+                        alert(response);
+                    }
+                });
+            }
+        }
+
+         function bot_unapproved(rowID,approval) {
+            if (confirm('Are you sure??')) {
+                $.ajax({
+                    url: 'core/ajax_db/manage_admin_db',
+                    method: 'POST',
+                    dataType: 'text',
+                    data: {
+                        key: approval,
+                        rowID: rowID
+                    }, success: function (response) {
+                        $("#bot"+rowID).html('');
+                        alert(response);
+                    }
+                });
+            }
+        }
+
         function ajax_requests(key) {
             var editRowID = $("#admin_editRowID");
             var firstname = $("#firstname");

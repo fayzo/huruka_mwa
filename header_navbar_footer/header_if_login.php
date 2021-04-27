@@ -14,6 +14,7 @@ if ($users->loggedin() == false) {
     $carV= $car->carData($_SESSION['key']);
     $icyamunaraV= $icyamunara->icyamunaraData($_SESSION['key']);
     $saleV= $sale->saleData($_SESSION['key']);
+    $subscription= $users->subscription_pay($_SESSION['key']);
 
     // $eventV= $home->eventsData($_SESSION['key']);
     // $blogV= $home->blogData($_SESSION['key']);

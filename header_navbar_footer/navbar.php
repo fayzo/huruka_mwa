@@ -270,7 +270,7 @@
                 
                   <p>
                     <?php echo $user['username'];?>
-												<?php echo (!empty($user['bot']))?'<span><img src="'.BASE_URL_LINK.'image/img/verified-dark.png" width="15px"></span>':"" ;?>
+                        <?php echo $home->bot_dark($user['bot'],$user['followers']) ;?>
                         <?php $workname = (strlen($user["workname"]) > 28)? substr($user["workname"],0,28).'..' : $user["workname"]; ?>
                         <br><?php echo (!empty($workname))? $workname :'Member';?>
                     <!-- - Member -->

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $(document).on('click','.t-show-popup',function () {
         var tweet_id= $(this).data('tweet');
           $.ajax({

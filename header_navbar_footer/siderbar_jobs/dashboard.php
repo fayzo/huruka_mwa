@@ -41,7 +41,7 @@
                  <div class="card bg-light text-dark">
                      <div class="card-body">
                          <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i>
-                           <!-- < ?php echo $users->jobCountbusiness(); ?> -->
+                           <?php echo $users->jobCountbusiness(); ?>
                              </h4>
                          <p class="card-text">No Of Jobs</p>
                      </div>
@@ -50,7 +50,7 @@
              <div class="col-md-3 mb-2">
                  <div class="card bg-light text-dark">
                      <div class="card-body">
-                         <h4 class="card-title"><i class="fa fa-pen" aria-hidden="true"></i> 
+                         <h4 class="card-title"> <i class="fas fa-edit" aria-hidden="true"></i> 
                          <?php echo $users->countPOSTS(); ?>
                          </h4>
                          <p class="card-text">Posts</p>
@@ -60,7 +60,7 @@
              <div class="col-md-3 mb-2">
                  <div class="card bg-light text-dark">
                      <div class="card-body">
-                         <h4 class="card-title"><i class="material-icons md-48"></i> 3435</h4>
+                         <h4 class="card-title"><i class="material-icons md-48"></i> <?php echo $user['countViewin_profile']; ?></h4>
                          <p class="card-text">Visitors</p>
                      </div>
                  </div>
