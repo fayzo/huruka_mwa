@@ -389,6 +389,7 @@ if (isset($_POST['showListMessage2']) && !empty($_POST['showListMessage2'])) {
                         </div>
                          <div class="contacts-list-info">
                              <span class="contacts-list-name">
+                                <?php echo $Message['username'];?>
                                 <?php echo $home->bot_light($Message['bot'],$Message['followers']) ;?>
                                  <small class="contacts-list-date float-right"><i class="fa fa-clock-o"></i> <?php echo $users->timeAgo($Message['message_on']);?></small>
                              </span>

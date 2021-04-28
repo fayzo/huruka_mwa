@@ -12,13 +12,26 @@ class Posts_copyDraft extends Posts_home {
         // $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR  T. retweet_by = $user_id AND T. retweet_id !='0' OR T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit";
         if (isset($_SESSION['key'])) {
         # code...
-            $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. tweetBy = $user_id AND T. retweet_id='0' OR  T. retweet_by = $user_id AND T. retweet_id !='0' OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) ORDER BY T. tweet_id DESC LIMIT $limit";
+            $sql="SELECT * FROM tweets T 
+            LEFT JOIN users U ON T. tweetBy= U. user_id 
+            LEFT JOIN comment C ON T. tweet_id = C. comment_on 
+            LEFT JOIN likes L ON T. tweet_id = L. like_on 
+            WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
+            OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
+            OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
+            GROUP BY 
+            CASE WHEN C. comment_on != '' THEN C. comment_on END,
+            CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
+
+            ORDER BY T. tweet_id DESC LIMIT $limit";
         } else {
             $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
-            OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
-            ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , T. tweet_id DESC  LIMIT $limit";
+            OR  T. tweetBy= U. user_id AND T. tweetBy IN 
+            (SELECT receiver FROM follow WHERE sender= $user_id) 
+            ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
+            T. tweet_id DESC  LIMIT $limit";
         }
     
         $query= $mysqli->query($sql);
@@ -36,6 +49,9 @@ class Posts_copyDraft extends Posts_home {
                                 $retweet= $this->checkRetweet($tweet['tweet_id'],$tweet['retweet_by']);
                                 $user= $this->userData($retweet['retweet_by']);
                                 $comment= $this->comments($tweet['tweet_id']);
+                                $commentRET= $this->comments_shared($tweet['tweet_id']);
+                                $likeRET= $this->like_shared($tweet['tweet_id']);
+
                                 // var_dump($comment);
                                 // var_dump($tweet['tweet_id']);
                                      # code... 
@@ -50,10 +66,11 @@ class Posts_copyDraft extends Posts_home {
 
                                 
 
-                                    <div class="card borders-tops mb-3" id="userComment_<?php echo $tweet["tweet_id"]; ?>"> 
-                                    <div class="card-body message-color">
+                                <div class="card borders-tops mb-3" id="userComment_<?php echo $tweet["tweet_id"]; ?>"> 
+                                <div class="card-body message-color">
                                    
                                 <div class="post">
+
                                     <?php 
                                     if ($tweet['pin_tweet'] == 'pin') { ?>
                                         <div class="float-right" data-toggle="tooltip" data-original-title="pin"><i class="fa fa-flag"></i></div>
@@ -63,14 +80,35 @@ class Posts_copyDraft extends Posts_home {
                                         <div class="float-right" data-toggle="tooltip" data-original-title="News-feed"><i class="fas fa-globe"></i></div>
                                     <?php }
 
-                                    
-                                     if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
-                                      <span class="t-show-banner">
-                                          <div class="t-show-banner-inner">
-                                              <span><i class="fa fa-retweet "></i></span><span><?php echo $user['username'].' Shared';?></span>
-                                          </div>
-                                      </span>
-                                     <?php } else{ echo '';}?>
+                                     if($likeRET['like_on'] == $tweet["tweet_id"]){ ?>
+                                    <span class="t-show-banner" style="display:inline-block; margin-right: 5px;">
+                                        <div class="t-show-banner-inner">
+                                            <span><i class="fa fa-heart-o"></i></span> 
+                                            <span><?php echo $likeRET['username'].' like ';?></span>
+                                        </div>
+                                    </span>
+                                    <?php } else{ echo '';}
+
+                                    if($commentRET['comment_on'] == $tweet["tweet_id"]){ ?>
+                                    <span class="t-show-banner" style="display:inline-block;">
+                                        <div class="t-show-banner-inner">
+                                            <span><i class="fa fa-comments-o"></i></span> <span><?php echo $commentRET['username'].' comment';?></span>
+                                        </div>
+                                    </span>
+                                    <?php } else{ echo '';}
+
+                                    if ($commentRET['comment_on'] == $tweet["tweet_id"] && $tweet["retweet_id"] > 0) {
+                                        echo '<span> to </span>';
+                                    }
+
+                                    if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
+                                    <span class="t-show-banner"  style="display:inline-block;">
+                                        <div class="t-show-banner-inner">
+                                            <span><i class="fa fa-retweet "></i></span><span><?php echo $user['username'].' Shared';?></span>
+                                        </div>
+                                    </span>
+                                    <?php } else{ echo '';}?>
+
 
                                <?php if(!empty($retweet['retweet_Msg']) && $tweet["tweet_id"] == $retweet["retweet_id"] || $tweet["retweet_id"] > 0){ ?> 
                                     <div class="user-block">

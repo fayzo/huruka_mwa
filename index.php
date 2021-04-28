@@ -122,6 +122,7 @@
                   </div>
               </div>
             </div>
+            
             <div class="loading-div text-center mt-2">
                 <img id="loader" src="<?php echo BASE_URL_LINK."image/img/"?>loading.svg" style="display: none;"/> 
             </div>

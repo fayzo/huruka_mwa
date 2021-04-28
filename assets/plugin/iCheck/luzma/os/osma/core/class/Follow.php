@@ -469,7 +469,7 @@ class Follow extends Home
                             <div class="info-body-name">
                                 <div class="in-b-name">
                                     <div><a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
-                                    <?php echo $this->bot_light($user['bot'],$user['followers']) ;?>
+                                    <?php echo self::bot_light_($user['bot'],$user['followers']) ;?>
                                     
                                     <span><?php echo self::followBtns($whoTofollow,$user_id,$follow_id); ?></span>
                                     </div>

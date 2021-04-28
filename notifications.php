@@ -52,6 +52,10 @@
                         <?php 
                               $notif= $notification->notifications($user_id);
                               // var_dump($notif);
+                            //   for ($i=0; $i < count($notif); $i++) { 
+                            //       var_dump($notif[$i]['type']).'<br>';
+                            //       var_dump($notif[$i]['notification_id']);
+                            //   }
                               foreach ($notif as $data): 
                                       if ($data['type'] == 'message'):
                         ?>
@@ -117,6 +121,7 @@
                          <?php  endif; 
       
                            if ($data['type'] == 'likes'):  ?>
+                           
                             <!-- timeline item -->
                             <li>
                                 <i class="fa fa-heart bg-danger text-light"></i>

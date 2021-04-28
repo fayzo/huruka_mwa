@@ -16,6 +16,24 @@ class Comment extends Post_like
         }
         return $comments;
     }
+
+    public function comments_shared($tweet_id)
+    {
+        $mysqli= $this->database;
+        $query= "SELECT comment_on,username FROM comment LEFT JOIN users ON comment_by= user_id 
+        WHERE comment_on = $tweet_id GROUP BY comment_by HAVING COUNT(DISTINCT comment_by)=1 
+        ORDER BY comment_at DESC ";
+        $result= $mysqli->query($query);
+        $comments= array();
+        while ($row= $result->fetch_assoc()) {
+            $comments[] = $row;
+        }
+
+        foreach ($comments as $comment) {
+            # code...
+            return $comment; // Return the $comment array
+        }
+    }
     
     public function CountsComment($tweet_id){
       $db =$this->database;

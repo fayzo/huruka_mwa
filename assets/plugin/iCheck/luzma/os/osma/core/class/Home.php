@@ -296,6 +296,11 @@ public function links(){ ?>
         return $contacts; // Return the $contacts array
     }
 
+    static public function bot_light_($bot,$followers)
+    { ?>
+        <?php return (!empty($bot) && $bot == 'bot' || $followers > 2000)?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?>
+    <?php }
+
     public function bot_light($bot,$followers)
     { ?>
         <?php return (!empty($bot) && $bot == 'bot' || $followers > 2000)?'<span><img src="'.BASE_URL_LINK.'image/img/verified-light.png" width="15px"></span>':"" ;?>
@@ -1425,6 +1430,29 @@ public function links(){ ?>
              $fetchCountLikes[] = array(
             'like_id' => $row['like_id'],
             'like_by' => $row['like_by'],
+            'like_on' => $row['like_on']
+           );
+        }
+        foreach ($fetchCountLikes as $fetchLikes) {
+            # code...
+            return $fetchLikes; // Return the $contacts array
+        }
+    }
+
+      public function like_shared($tweet_id)
+    {
+        $mysqli= $this->database;
+        $query= "SELECT like_on ,username FROM likes LEFT JOIN users ON like_by = user_id 
+        WHERE like_on = $tweet_id  AND like_id IN (SELECT MAX(like_id) FROM likes GROUP BY like_on) ";
+        // $query= "SELECT like_on ,username FROM likes LEFT JOIN users ON like_by = user_id 
+        // WHERE like_on = $tweet_id  GROUP BY like_on ";
+
+        $result= $mysqli->query($query);
+
+        $fetchCountLikes= array();
+        while ($row= $result->fetch_assoc()) {
+             $fetchCountLikes[] = array(
+            'username' => $row['username'],
             'like_on' => $row['like_on']
            );
         }
