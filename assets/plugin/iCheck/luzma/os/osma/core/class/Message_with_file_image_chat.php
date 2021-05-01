@@ -9,27 +9,45 @@ class Message extends Home
     {
        $mysqli= $this->database;
     //    $query="SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 GROUP BY M. message_from, M. message_to HAVING  COUNT(DISTINCT M. message_to)=1 AND COUNT(DISTINCT M. message_from)=1 ORDER BY M. message_on Desc";
-       $query = "SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 and M. message_id in (select max(message_id) from message GROUP by message_to,message_from ) ORDER BY M. message_on Desc";
-   
-    // THIS ONE MAKE MODAL TO WORK BAD
-    //    $query ="SELECT * FROM message m
-    //             JOIN users U ON m. message_from = U. user_id 
-    //             JOIN (
-    //                 SELECT message_from, message_to, MAX(message_on) AS max_date
-    //                 FROM message
-    //                 WHERE message_to = $user_id  
-    //                 GROUP BY message_from, message_to
-    //             ) AS lm ON m. message_on = lm .max_date AND 
-    //             m. message_from= lm. message_from AND
-    //             m. message_to=lm. message_to 
-    //             WHERE m. message_to= $user_id AND m. status= 1 ";
-
+        $query = "SELECT * FROM message M LEFT JOIN users U ON M. message_from= U. user_id WHERE M. message_to= $user_id AND M. status= 1 and M. message_id in (select max(message_id) from message GROUP by message_to,message_from ) ORDER BY M. message_id Desc ";
+        
         $result=$mysqli->query($query);
         // var_dump('ERROR: Could not able to execute'. $result.mysqli_error($mysqli));
-       $data=array();
-       while ($row = $result->fetch_array()) {
+        $data=array();
+        while ($row = $result->fetch_array()) {
+
+                $query = "SELECT message,message_to FROM message 
+                WHERE message_to= $user_id AND message_from= $row[message_from] OR
+                    message_from = $user_id AND message_to= $row[message_from]
+                ORDER BY message_id Desc LIMIT 1";
+
+                $results=$mysqli->query($query);
+		        $latest_msg = array();
+
+                while ($row_latest = $results->fetch_array()) {
+
+                            $message= $row_latest['message'];
+                            if(strlen($message) > 20) {
+                                $message = substr($message,0,20).'...';
+                            }else{
+                                $message;
+                            } 
+
+                            $sent_by = ($row_latest['message_to'] == $user_id) ? "<span style='color:#9a9af5f7;'>They said: </span>".$message : "<span style='color:#d47a7a;'>You said: </span>".$message ;
+                            // array_push($row, array( 'message' => $sent_by ));
+                            if (isset($row['message'])) {
+                                    // echo 'true';
+                                    $row['message']= $sent_by;
+                                }
+                                
+                            }
+
                 $data[]= $row;
        }
+    //    echo '<pre>';
+    //    print_r($data);
+    //    echo '</pre>';
+
        return $data;
 
     }
@@ -42,6 +60,32 @@ class Message extends Home
        $result=$mysqli->query($query);
        $data=array();
        while ($row = $result->fetch_array()) {
+           
+                    $query = "SELECT message,message_to FROM message 
+                    WHERE message_to= $user_id AND message_from= $row[message_from] OR
+                        message_from = $user_id AND message_to= $row[message_from]
+                    ORDER BY message_id Desc LIMIT 1";
+
+                    $results=$mysqli->query($query);
+                    $latest_msg = array();
+
+                    while ($row_latest = $results->fetch_array()) {
+
+                                $message= $row_latest['message'];
+                                if(strlen($message) > 20) {
+                                    $message = substr($message,0,20).'...';
+                                }else{
+                                    $message;
+                                } 
+
+                                $sent_by = ($row_latest['message_to'] == $user_id) ? "<span style='color:#9a9af5f7;'>They said: </span>".$message : "<span style='color:#d47a7a;'>You said: </span>".$message ;
+                                // array_push($row, array( 'message' => $sent_by ));
+                                if (isset($row['message'])) {
+                                        // echo 'true';
+                                        $row['message']= $sent_by;
+                                    }
+                                    
+                                }
                 $data[]= $row;
        }
        return $data;

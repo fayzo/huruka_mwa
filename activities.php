@@ -122,4 +122,89 @@
 
 </div>
 
+        <div id="Postjobs" class="modal fade">
+             <div class="modal-dialog" style="max-width: 800px;margin: 1.75rem auto;position: relative;">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                      <h4><i>Jobs To Posts</i> </h4>
+                      <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                       <div class="modal-body">
+                         <div class="edit-body">
+                           <span id="responseBusinessJobs"></span>
+                           <form method="post">
+                             <!-- <input type="hidden" id="editor1" value="0"> -->
+                             <input type="hidden" id="id_posts" value="0">
+                             <input type="hidden" id="businessID_posts" value="<?php echo $_SESSION['key'] ;?>">
+                               
+                              <div class="form-group">
+                                    <select class="form-control" name="categories_jobs" id="categories_jobs">
+                                      <option class="categories_jobsx" value="">Select what types of jobs</option>
+                                      <option value="Featured">Featured</option>
+                                      <option value="Tenders">Tenders</option>
+                                      <option value="Consultancy">Consultancy</option>
+                                      <option value="Internships">Internships</option>
+                                      <option value="Public">Public</option>
+                                      <option value="Training">Training</option>
+                                    </select>
+                              </div>
+
+                               <div class="form-group">
+                                   <label for="jobs title">Job Title</label>
+                                   <input type="text" class="form-control  job-title" placeholder="job-title">
+                               </div>
+                               <div class="form-group">
+                                   <label for="Job Summary">Job Summary</label>
+                                   <textarea class="form-control job-summary" id="editor4" rows="4"  placeholder="job summary"></textarea>
+                               </div>
+                               <div class="form-group">
+                                    <label for="Pages Body">Deadline to submit</label>
+                                    <input type="date" class="form-control deadline" placeholder="Deadline to submit">
+                               </div>
+                               <div class="form-group">
+                                   <label for="Pages Body">Apply to website</label>
+                                   <input class="form-control website" id="editor6" placeholder="website" >
+                               </div>
+                               <div class="form-check">
+                                   <label class="form-check-label">
+                                       <input type="checkbox" class="form-check-input"   value="checkedValue" checked>
+                                       Publish
+                                   </label>
+                               </div>
+                          </form>  
+                          </div> <!-- edit-body END -->
+
+                          <div class="view-body">
+
+                          <div style="float:right">
+                              <h4>categories_jobs: </h4>
+                              <p class="categories_jobs0">Examples of an Accountant Responsibilities. </p>
+                          </div>
+
+                           <h4 >Job Title: </h4>
+                            <label class="job-title0">Examples of Accountant job titles </label>
+                          <hr>
+                      
+                             <h4 >Job Summary: </h4>
+                             <p class="job-summary0"> Example of an Accountant job summary. </p>
+                           <hr>
+                      
+                            <h4 class="card-title">Deadline to submit: </h4>
+                            <p class="card-title deadlin0e">Explaination of Deadline to submit: </p>
+                          <hr>
+                  
+                            <h4 class="card-title">Apply to website: </h4>
+                            <p class="card-title website0">Explaination of Apply to website: </p>
+                          <hr>
+                         </div><!-- THiS IS A vIew body --> 
+                       </div> <!-- THiS IS A MODAL BODY -->
+                       <div class="modal-footer">
+                           <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+                           <input type="button" id="posts" value="Save" onclick="ajax_requestsPosts('create');" class="btn btn-success">
+                       </div><!-- THiS IS A MODAL FOOTER -->
+                  </div><!-- THiS IS A MODAL CONTENT -->
+                </div><!-- THiS IS A MODAL DIALOG -->
+            </div><!-- THiS IS A MODAL FADE -->
+
+
 <?php include "header_navbar_footer/footer.php"?>

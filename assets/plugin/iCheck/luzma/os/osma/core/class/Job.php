@@ -24,37 +24,44 @@ class Job extends Follow {
         public function jobsactivities($user_id)
     {
         $mysqli= $this->database;
-        $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J.turn = 'on' and J. business_id = '{$user_id}' and J. deadline > CURDATE()");
+        // $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J.turn = 'on' and J. business_id = '{$user_id}' and J. deadline > CURDATE()");
+        $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J.turn = 'on' and J. business_id = '{$user_id}' ");
         ?>
         <div class="card">
             <div class="card-header main-active">
              <h5 class="text-center">jobs</h5>
             </div>
-            <div class="card-body px-1">
+            <div class="card-body">
               <div class="row ">
            
           <?php while($jobs= $query->fetch_array()) { ?>
-            <div class="col-8 offset-2 px-0 jobHovers more" data-job="<?php echo $jobs['job_id'];?>"  data-business="<?php echo $jobs['business_id'];?>">
-               <div class="user-block mb-2 jobHover" >
-                   <div class="user-jobImgBorder">
-                   <div class="user-jobImg">
-                         <?php if (!empty($jobs['profile_img'])) {?>
-                         <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $jobs['profile_img'] ;?>" alt="User Image">
-                         <?php  }else{ ?>
-                           <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                         <?php } ?>
-                   </div>
-                   </div>
-                   <span class="username">
-                       <a href="#"> <!-- Job Title: --> <?php echo $this->htmlspecialcharss($jobs['job_title']) ;?></a> 
-                   </span>
-                   <span class="description description-job">
+            <div class="col-12 px-0 ">
+               <div class="user-block mb-2 jobHover jobHovers more" data-job="<?php echo $jobs['job_id'];?>"  data-business="<?php echo $jobs['business_id'];?>" >
+                    <div class="user-jobImgall">
+                        <?php if (!empty($jobs['profile_img'])) {?>
+                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $jobs['profile_img'] ;?>" alt="User Image">
+                        <?php  }else{ ?>
+                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                        <?php } ?>
+                    </div>
+                    <span><a href="#"> <!-- Job Title: --> <?php echo $this->htmlspecialcharss($jobs['job_title']) ;?></a></span><br>
+                    <span class="description description-job">
                         <?php echo $this->htmlspecialcharss($jobs['companyname']); ?> || 
-                        <span style="font-size:12px" class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?>"
-                        id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></span><br>
-                        <div>Publish - <?php echo $this->timeAgo($jobs['created_on']); ?></div>
-                        <div>Deadline -  <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></div>
-                    </span>               
+                        <i style="font-size:12px" class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?> h4 mb-0"
+                            id="<?php echo strtolower( $jobs['location']) ;?>" title="us"></i>
+                        <div> Shared public - <?php echo $this->timeAgo($jobs['created_on']); ?></div>
+                        <div> Deadline - <?php echo date("M j, Y",strtotime($this->htmlspecialcharss($jobs['deadline']))); ?></div>
+                    </span>            
+                </div> <!-- user-block -->
+                <div>
+                        <?php echo '
+                                <a href="job_apply?job_id='.$jobs["job_id"].'&business_id='.$jobs["business_id"].'" class="btn btn-primary">Show Who applies ('.$this->count_job_apply($jobs["business_id"],$jobs["job_id"]).') </a>
+                                <input type="button" onclick="PostsEdits('.$jobs["job_id"].','.$jobs["business_id"].', \'edit\')" value="Edit" class="btn btn-primary">
+                                <input type="button" onclick="PostsEdits('.$jobs["job_id"].','.$jobs["business_id"].', \'view\')" value="View" class="btn">
+                                <input type="button" onclick="shows('.$jobs["job_id"].',\'on\')" value="turn on" class="btn btn-warning">
+                                <input type="button" onclick="shows('.$jobs["job_id"].',\'off\')" value="turn off" class="btn btn-danger">
+                                ';?>
+                                <!-- <input type="button" onclick="jobsdeleteRow('.$jobs["job_id"].')" value="Delete" class="btn btn-danger"> -->
                 </div>
                <hr class="main-active" style="width:100%">
             </div>
@@ -122,7 +129,9 @@ class Job extends Follow {
            </div> <!-- /.card-footer -->
        </div>
        
-       <?php } 
+       <?php }else{
+                echo $this->options();
+             }
     
         }
 
@@ -789,6 +798,17 @@ class Job extends Follow {
 
         }
 
+        
+    public function count_job_apply($business_id,$job_id)
+    {
+        $db =$this->database;
+        $sql= $db->query("SELECT COUNT(*) FROM email_apply_job WHERE job_id0= '$job_id' and business_id0= '$business_id' AND type_of_email = 'inbox' ");
+        $row_unapproval = $sql->fetch_array();
+        $total_unapprovalcomm= array_shift($row_unapproval);
+        $array= array(0,$total_unapprovalcomm);
+        $total_unapproval= array_sum($array);
+        return $total_unapproval;
+    }
         
     public function count_inbox_job($email)
     {

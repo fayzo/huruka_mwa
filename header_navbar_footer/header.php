@@ -42,6 +42,7 @@
   <!-- <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/follow.css"> -->
   <link rel="stylesheet"  href="<?php echo BASE_URL_LINK ;?>dist/css/lightslider.css" />
   <link rel="stylesheet"  href="<?php echo BASE_URL_LINK ;?>dist/css/newsbox.css" />
+  <link rel="stylesheet"  href="<?php echo BASE_URL_LINK ;?>dist/css/balance_withdraw.css" />
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -79,7 +80,7 @@
 			width: 800px;
 		}
 </style>
-<!-- END image-gallery10 -->
+
 <script>
 
     function colors(requests) {

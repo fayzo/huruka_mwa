@@ -84,7 +84,9 @@
             <a href="<?php echo PROMOTE_ADS; ?>">
               <!-- <i class="fas fa-dollar-sign"></i><span class="more"> -->
               <i class="fas fa-bullhorn"></i><span class="more">
-                 Marketing Ads </span> 
+                 <!-- Marketing Ads -->
+                 Campaign Ads
+                 </span> 
               <span class="pull-right-container" style="margin-right: 10px;">
                 <small class="label pull-right"> <i class="fa fa-level-up"></i></small>
               </span>

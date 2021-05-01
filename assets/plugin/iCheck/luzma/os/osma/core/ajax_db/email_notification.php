@@ -15,8 +15,8 @@ if (isset($_POST['email_notificationDrpdown']) && !empty($_POST['email_notificat
 		 <?php foreach ($MsgUnread as $Message ) {
 			   $message = htmlspecialchars_decode($Message['addition_information']);
 
-			   if(strlen($message) > 10) {
-			   $message = substr($message,0,10).' read more ...';
+			   if(strlen($message) > 40) {
+			   $message = substr($message,0,40).'<span class="text-primary"> Read more ... </span>';
 			   }else{
 			   $message;
 			   }
@@ -44,8 +44,8 @@ if (isset($_POST['email_notificationDrpdown']) && !empty($_POST['email_notificat
 					// <!--Direct Messages-->
 				    $message = htmlspecialchars_decode($Message['addition_information']);
 
-                    if(strlen($message) > 10) {
-                    $message = substr($message,0,10).' read more ...';
+                    if(strlen($message) > 40) {
+                    $message = substr($message,0,40).'<span class="text-primary"> Read more ... </span>';
                     }else{
                     $message;
                     }

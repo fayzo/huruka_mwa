@@ -69,6 +69,7 @@
 
   <!-- jQuery 3 -->
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.min.js"></script>
+  <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.form.js"></script>
   <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/popper.min.js"></script>
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/bootstrap.min.js"></script>
@@ -199,6 +200,43 @@
           //console.log(this);
         }
       });
+    });
+
+    $(function() {
+
+        $('form.setting-general-form').ajaxForm({
+            url: 'http://localhost/irangiro_social_site/withdraw.php' + '?f=request_payment',
+            // url: window.location.pathname + '?f=request_payment',
+            // url: window.location.href + '?&f=request_payment',
+            beforeSend: function() {
+            $('.settings_page').find('.add_wow_loader').addClass('btn-loading');
+            },
+            success: function(data) {
+                scrollToTop();
+                if (data.status == 200) {
+                    $('.setting-general-alert').html('<div class="alert alert-success">' + data.message + '</div>');
+                    $('.alert-success').fadeIn('fast');
+                } else if (data.errors) {
+                    var errors = data.errors.join("<br>");
+                    $('.setting-general-alert').html('<div class="alert alert-danger">' + errors + '</div>');
+                    $('.alert-danger').fadeIn(300);
+                }
+                $('.settings_page').find('.add_wow_loader').removeClass('btn-loading');
+            }
+        });
+
+
+        // scroll to top function
+        function scrollToTop() {
+            verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
+            element = $('html');
+            offset = element.offset();
+            offsetTop = offset.top;
+            $('html, body').animate({
+                scrollTop: offsetTop
+            }, 300, 'linear');
+        }
+
     });
 
     // $(document).ready(function() {

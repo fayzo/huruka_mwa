@@ -26,7 +26,7 @@ if (isset($_POST['recharge_coins']) && !empty($_POST['recharge_coins'])) {
             <div class="form-group">
               <label>Your Coins Balance is: </label> <i class="fa fa-money text-success"></i>
               <i class="fas fa-coins text-warning"></i> 15,000 coins
-              <button type="button" class="btn btn-default"><i class="fas fa-money-check"></i>  Withdraw</button>
+              <!-- <button type="button" class="btn btn-default"><i class="fas fa-money-check"></i>  Withdraw</button> -->
             </div>
 
               <label for="inputEmail" >Click any coins you wish to deposit in your account</label>
