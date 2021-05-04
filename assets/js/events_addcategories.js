@@ -43,41 +43,33 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click', '#form-events', function (e) {
-        // event.preventDefault();
+    $(document).on('click', '#submit-form-events', function (e) {
         e.stopPropagation();
+        var formdatas = $('#form-events');
+        var title = $('#title');
         var country = $('#country');
-        var province = $('.provincecode');
-        var districts = $('.districtcode');
-        var sector = $('.sectorcode');
-        var cell = $('.codecell');
-        var village = $('.CodeVillage');
-
+        var location = $('#Location');
+        var event_start = $('#event-start');
+        var event_start_time = $('#event-start-time');
+        var event_end_date = $('#event-end-date');
+        var event_end_time = $('#event-end-time');
+        
+        var categories_events = $('#categories_events');
         var additioninformation = $('#addition-information');
         var photo = $('#photo');
-        var video = $('#video');
-        var youtube = $('#youtube');
-        var categories_events = $('#categories_events');
 
-        var name_place = $('#name_place');
-        var location_events = $('#location_events');
-        var start_events = $('#start_events');
-        var date0 = $('#date0');
-        var title = $('#title');
-        var authors = $('#authors');
-
-        var photo_Title0 = $('#photo-Title0');
-        var photo_Title1 = $('#photo-Title1');
-        var photo_Title2 = $('#photo-Title2');
-        var photo_Title3 = $('#photo-Title3');
-        var photo_Title4 = $('#photo-Title4');
-        var photo_Title5 = $('#photo-Title5');
-
-
-        if (isEmpty(country) && isEmpty(province) && isEmpty(districts) && isEmpty(sector) && 
-            isEmpty(cell) && isEmpty(village) && isEmpty(title) && isEmpty(authors) && isEmpty(name_place) && isEmpty(location_events) && isEmpty(date0)  && isEmpty(start_events)  && isEmpty(categories_events) && isEmpty(additioninformation) && 
-            isEmpty(photo) && isEmpty(video) && isEmpty(youtube) && isEmpty(photo_Title0) && isEmpty(photo_Title1) && isEmpty(photo_Title2) &&
-            isEmpty(photo_Title3) && isEmpty(photo_Title4) && isEmpty(photo_Title5)) {
+        // var districts = $('.districtcode');
+        // var sector = $('.sectorcode');
+        // var cell = $('.codecell');
+        // var village = $('.CodeVillage');
+        // var video = $('#video');
+        // var youtube = $('#youtube');
+        
+        if (isEmpty(title) && isEmpty(country) && isEmpty(location) &&
+            isEmpty(event_start) && isEmpty(event_start_time) && 
+            isEmpty(event_end_date) && isEmpty(event_end_time) &&
+            isEmpty(categories_events) && isEmpty(additioninformation) && 
+            isEmpty(photo) ) {
             
             var extensions1 = $('#photo').val().split('.').pop().toLowerCase();
             
@@ -93,7 +85,8 @@ $(document).ready(function () {
                 $.ajax({
                     url: 'core/ajax_db/events_addcategories',
                     method: "POST",
-                    data: new FormData(this),
+                    // data: new FormData(this),
+                    data: formdatas.serializefiles(),
                     contentType: false,
                     processData: false,
                     xhr: function () {

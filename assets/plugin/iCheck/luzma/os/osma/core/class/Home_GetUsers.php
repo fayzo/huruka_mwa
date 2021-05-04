@@ -20,8 +20,9 @@ class GetUsers extends Follow
             CASE WHEN C. comment_on != '' THEN C. comment_on END,
             CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
         ORDER BY 
-        CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC,
-        T. tweet_id DESC";
+            CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
+            CASE WHEN  T. marketing != '' THEN T. marketing END DESC ,
+            T. tweet_id DESC";
 
         $sql = $mysqli->query($query);
         $all_tweet=array();

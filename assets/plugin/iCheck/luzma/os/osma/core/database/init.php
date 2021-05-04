@@ -21,6 +21,7 @@ include('class/Trending.php');
 include('class/Notification.php');
 include('class/Fundraising.php');
 include('class/Crowfund.php');
+include('class/Events.php');
 include('class/Promote_home_post.php');
 include('class/Home_GetUsers.php');
 include('class/Hashtag_GetUsers.php');

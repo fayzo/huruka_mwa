@@ -258,20 +258,25 @@ if($count_foreach == 4){
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
             GROUP BY 
-            CASE WHEN C. comment_on != '' THEN C. comment_on END,
-            CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
+                CASE WHEN C. comment_on != '' THEN C. comment_on END,
+                CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
 
             ORDER BY T. tweet_id DESC LIMIT $limit";
 
         } else {
             $sql="SELECT * FROM tweets T 
             LEFT JOIN users U ON T. tweetBy= U. user_id 
+            LEFT JOIN comment C ON T. tweet_id = C. comment_on 
+            LEFT JOIN likes L ON T. tweet_id = L. like_on 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
+            GROUP BY 
+                CASE WHEN C. comment_on != '' THEN C. comment_on END,
+                CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
             ORDER BY 
-            CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
-            CASE WHEN  T. marketing != '' THEN T. marketing END DESC ,
+                CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
+                CASE WHEN  T. marketing != '' THEN T. marketing END DESC ,
             T. tweet_id DESC LIMIT $limit";
         }
 

@@ -61,7 +61,7 @@
 
                 $user = $job->jobsviewData($business_id,$job_id); 
                 // $query= $mysqli->query("SELECT * FROM users U Left JOIN email_apply_job A ON A. business_id0= U. user_id LEFT JOIN jobs J ON J. job_id = A. job_id0  WHERE A. email_sent_to= '$sessions' AND A. type_of_email = 'inbox' ORDER BY A. created_on0 DESC ");
-                $query= $db->query("SELECT * FROM email_apply_job A LEFT JOIN jobs J ON J. job_id = A. job_id0 WHERE A. job_id0 = $job_id AND A. email_sent_to= '$email' AND A. type_of_email = 'inbox' ORDER BY A. created_on0 DESC ");
+                $query= $db->query("SELECT * FROM email_apply_job A LEFT JOIN jobs J ON J. job_id = A. job_id0 WHERE A. job_id0 = $job_id AND A. email_sent_to= '$email' AND A. type_of_email = 'inbox' ORDER BY A. created_on0 ASC ");
                 // var_dump($email);
 
                 ?>

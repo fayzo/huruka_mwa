@@ -1,4 +1,5 @@
 <?php include "header_navbar_footer/header_if_login.php"?>
+<title>Activities</title>
 <!-- < ?php include "header_navbar_footer/Get_usernameProfile.php"?> -->
 <?php include "header_navbar_footer/header.php"?>
 

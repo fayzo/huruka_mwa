@@ -88,6 +88,7 @@ class Home extends Comment {
                 <!-- <li><h5><a class="alink" href="sale">Sale</a></h5></li> -->
                 <!-- <li><h5><a class="alink" href="events">Events</a></h5></li> -->
                 <li><h5><a class="alink" href="school">School</a></h5> </li>
+                <li><h5><a class="alink" href="events">Events</a></h5> </li>
                 <li><h5><a class="alink" href="house">House</a></h5></li>
                 <li><h5><a class="alink" href="crowfund">GushoraStartUp</a></h5> </li>
                 <li><h5><a class="alink" href="icyamunara">Cyamunara</a></h5></li>
@@ -105,6 +106,7 @@ class Home extends Comment {
                 <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.blog">Blog</a></h5> -->
                 <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></h5> -->
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.school">School</a></h5> </li>
+                <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></h5> </li>
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.house">House</a></h5>
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.icyamunara">icyamunara</a></h5>
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.car">Car</a></h5>
@@ -133,6 +135,7 @@ public function links(){ ?>
       <!-- <li class="list-inline-item"><a href="blog"><i class="fas fa-edit"></i> Blog</a></li> -->
       <li class="list-inline-item"><a href="jobs"><i class="fas fa-newspaper    "></i> Jobs</a></li>
       <li class="list-inline-item"><a href="school"><i class="fas fa-school    "></i> School</a></li>
+      <li class="list-inline-item"><a href="events"><i class="fas fa-calendar    "></i> Events</a></li>
       <!-- <li class="list-inline-item"><a href="events"><i class="fas fa-envelope-open-text    "></i> Events</a></li> -->
       <li class="list-inline-item"><a href="house"><i class="fas fa-house-damage    "></i> House</a></li>
       <li class="list-inline-item"><a href="icyamunara"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Cyamunara</a></li>
@@ -150,6 +153,7 @@ public function links(){ ?>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.jobs">Jobs</a></li>
         <!-- <li class="list-inline-item"><a href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></li> -->
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.school">School</a> </li>
+        <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></li>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.house">House</a></li>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.icyamunara">Cyamunara</a></li>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.car">Car</a></li>
@@ -1256,6 +1260,43 @@ public function links(){ ?>
         $filenamedb = implode("=", $valued);
         // var_dump($filenamedb);
         // $fileSizex = implode("=", $fileSize);
+        return  $filenamedb;
+
+    }
+
+    
+    public function uploadEventsFile($file)
+    {
+
+        $insertValuesSQL ="";
+        $targetDir = DOCUMENT_ROOT.'/uploads/events/';
+        $allowTypes = array('jpg','png','jpeg','mp4','mp3', 'gif', 'bmp' , 'pdf' , 'doc' , 'ppt','docx', 'xlsx','xls','zip');
+        
+        foreach($file['name'] as $key => $value){
+            // File upload path
+            $fileName = basename($file['name'][$key]);
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+
+             $filenames = (strlen($fileName) > 10)? 
+                     strtolower(date('Y').'_'.rand(10,100).substr($fileName,0,4).".".$fileActualExt):
+                     strtolower(date('Y').'_'.rand(10,100).$fileName);
+
+            $valued[] = $filenames;
+
+            $targetFilePath = $targetDir . $filenames;
+            
+            // Check whether file type is valid
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+            if(in_array($fileType, $allowTypes)){
+                // Upload file to server
+                $fileTmpName = $file["tmp_name"];
+                move_uploaded_file($fileTmpName[$key], $targetFilePath);
+            }
+        }
+        
+        # Build the values
+        $filenamedb = implode("=", $valued);
         return  $filenamedb;
 
     }

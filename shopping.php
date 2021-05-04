@@ -1,5 +1,6 @@
 <!-- < ?php include "header_navbar_footer/header_if_login.php"?> -->
 <?php include "header_navbar_footer/Get_usernameProfile.php"?>
+<title>Shopping</title>
 <?php include "header_navbar_footer/header.php"?>
   
     <header class="blog-header py-2 bg-light">

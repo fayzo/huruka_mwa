@@ -158,6 +158,9 @@
 
    <script src="<?php echo BASE_URL_LINK ;?>js/email_notifiacation.js"></script>
 
+   <script src="<?php echo BASE_URL_LINK ;?>js/events_addcategories.js"></script>
+   <script src="<?php echo BASE_URL_LINK ;?>js/events_like.js"></script>
+
    <script src="<?php echo BASE_URL_LINK ;?>js/unemplyoment_message.js"></script>
    <script src="<?php echo BASE_URL_LINK ;?>js/transaction_coins.js"></script>
 
