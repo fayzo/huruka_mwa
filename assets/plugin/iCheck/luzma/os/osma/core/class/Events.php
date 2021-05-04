@@ -24,94 +24,93 @@ class Events extends Follow{
               $retweet= $this->checkEventsRetweet($row['events_id'],$user_id);
               $likes= $this->Eventslikes($user_id,$row['events_id']);
              ?>
+            <div class="col-md-3 mb-3" >
 
-        <div class="col-md-6">
+            <div class="card borders-bottoms more" >
+                <img class="pic-responsive card-img-top" width="242px" height="160px"  id="events-readmore" data-events="<?php echo $row['events_id']; ?>" src="<?php echo BASE_URL_PUBLIC ;?>uploads/events/<?php echo $row['photo'] ;?>" alt="Card image cap">
+                <div class="card-body">
+                    <div class="p-0 font-weight-bold">Events 
 
-          <div class="card flex-md-row mb-4 border-0 h-md-250" style="box-shadow:0 0 0.5ch 0.5ch rgba(35, 35, 32, 0.15);">
-            <div class='col-md-4 px-0 card-img-left flex-auto' >
-              <img class="pic-responsive " width="200px" height="250px" src="<?php echo BASE_URL_PUBLIC ;?>uploads/events/<?php echo $row['photo'] ;?>" alt="Card image cap">
-            </div>
+                        <ul class="list-inline mb-0  float-right" style="list-style-type: none;">  
 
-            <div class="col-md-8 card-body d-flex flex-column align-items-start">
-              
-              <h4 style="font-family: Playfair Display, Georgia, Times New Roman, serif;text-align:left;">
-                <a class="text-primary text-left" href="javascript:void(0)" id="events-readmore" data-events="<?php echo $row['events_id'] ;?>">
-                  <?php echo $row["name_place"]; ?>
-                </a>
-              </h4>
+                            <?php if($likes['like_on'] == $row['events_id']){ ?>
+                                <li  class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="unlike-events-btn text-sm  mr-2"'; }else{ echo 'id="login-please"  data-login="1"'; } ?> data-events="<?php echo $row['events_id']; ?>" data-user="<?php echo $row['user_id']; ?>">
+                                <i class="fa fa-heart-o mr-1" style="color: red"> <span class="likescounter"><?php echo $row['likes_counts'] ;?> </span> </i> Like</button></li>
+                            <?php }else{ ?>
+                                <li  class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="like-events-btn text-sm  mr-2"'; }else{ echo 'id="login-please" data-login="1"'; } ?> data-events="<?php echo $row['events_id']; ?>" data-user="<?php echo $row['user_id']; ?>">
+                                <i class="fa fa-heart-o mr-1" > <span class="likescounter">  <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> </i> Like</button></li>
+                            <?php } ?>
 
-              <div class="mb-3 text-muted">Created on <?php echo $this->timeAgo($row['created_on3']) ;?> By <?php echo $row['authors'] ;?> </div>
-              <p class="mb-auto"> 
-                <?php 
-                    if (strlen($row["additioninformation"]) > 113) {
-                      echo $row["additioninformation"] = substr($row["additioninformation"],0,113).'... <span class="mb-0"><a href="javascript:void(0)" id="events-readmore" data-events="'.$row['events_id'].'" style"font-weight: 500 !important;">Read more >>> </a></span>';
-                    }else{
-                      echo $row["additioninformation"];
-                    } ?> 
-              </p>
+                                <span class='text-right float-right'>
+                            
+                                    <li  class="list-inline-item"><button class="comments-btn text-sm" >
+                                        <i class="fa fa-comments-o mr-1"></i> (<?php echo $this->count_Events($row['events_id']) ;?>)
+                                        <!-- Comments -->
+                                    </button></li>
 
-                <div class="black-bg" style="padding:4px;border-radius:3px">
-                    ------------------------
-                     <div><i class="fa fa-map-marker" aria-hidden="true"></i> Avenue: <?php echo $row['location_events']; ?> </div>
-                     ------------------------
-                     <div><i class="fa fa-calendar text-success" aria-hidden="true"></i> Start event: <?php echo date('M j, Y', strtotime($row['start_events'])); ?> 
-                        <!-- <i class="fa fa-clock-o" aria-hidden="true"></i> < ?php echo $row['start_time']; ?> -->
-                     </div>
-                      ------------------------
-                     <div><i class="fa fa-calendar text-danger" aria-hidden="true"></i> End event: <?php echo date('M j, Y', strtotime($row['end_events'])); ?> 
-                        <!-- <i class="fa fa-clock-o" aria-hidden="true"></i> < ?php echo $row['end_time']; ?> -->
-                     </div>
-                     ------------------------
-                     <!-- <div><i class="fa fa-clock-o" aria-hidden="true"></i>  Posted on < ?php echo $this->timeAgo($row['created_on3']); ?> </div>
-                     ------------------------ -->
-                </div>
-                  <ul class="list-inline mb-0" style="list-style-type: none;">  
+                            <?php if($user_id == $row['user_id3']){ ?>
 
-                      <!-- < ?php if($row['events_id'] == $retweet['retweet_events_id']){ ?>
-                              <li class=" list-inline-item"><button < ?php if(isset($_SESSION['key'])){ echo 'class="share-btn events-retweeted0 text-sm mr-2" data-events="'.$row['events_id'].'"  data-user="'.$row['user_id3'].'"'; }else{ echo 'id="login-please" data-login="1"'; } ?>  >
-                              <i class="fa fa-share green mr-1" style="color: green"> <span class="retweetcounter"><?php echo $retweet['retweet_counts'] ;?> </span></i></button></li>
-                      < ?php }else{ ?>
-                              <li class=" list-inline-item"><button < ?php if(isset($_SESSION['key'])){ echo 'class="share-btn events-retweet0 text-sm mr-2" data-events="'.$row['events_id'].'"  data-user="'.$row['user_id3'].'"'; }else{ echo 'id="login-please"  data-login="1"'; } ?>  >
-                              <i class="fa fa-share mr-1" > <span class="retweetcounter">  < ?php if ($row['retweet_counts'] > 0){ echo $row['retweet_counts'];}else{ echo '';} ?></span></i>
-                              //< ?php if($retweet["retweet_counts"] > 0){ echo '<i class="fa fa-share mr-1" style="color: green"> <span class="retweetcounter">'.$retweet["retweet_counts"].'</span></i>' ; }else{ echo '<i class="fa fa-share mr-1"> <span class="retweetcounter">'.$retweet["retweet_counts"].'</span></i>';} ?> 
-                              </button></li>
-                      < ?php } ?> -->
+                                    <li  class=" list-inline-item">
+                                        <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
+                                            <li>
+                                                <a href="javascript:void(0)" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                                                <ul style="list-style-type: none; margin:0px;" >
+                                                    <li style="list-style-type: none; margin:0px;"> 
+                                                        <label class="deleteEvents"  data-events="<?php echo $row["events_id"];?>"  data-user="<?php echo $row["user_id3"];?>">Delete </label>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            <?php } ?>
+                                    </span>
+                            </ul>
+                                    
+                    </div>
 
-                      <?php if($likes['like_on'] == $row['events_id']){ ?>
-                            <li  class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="unlike-events-btn text-sm  mr-2"'; }else{ echo 'id="login-please"  data-login="1"'; } ?> data-events="<?php echo $row['events_id']; ?>" data-user="<?php echo $row['user_id']; ?>">
-                            <i class="fa fa-heart-o mr-1" style="color: red"> <span class="likescounter"><?php echo $row['likes_counts'] ;?> </span> </i> Like</button></li>
-                      <?php }else{ ?>
-                            <li  class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="like-events-btn text-sm  mr-2"'; }else{ echo 'id="login-please" data-login="1"'; } ?> data-events="<?php echo $row['events_id']; ?>" data-user="<?php echo $row['user_id']; ?>">
-                            <i class="fa fa-heart-o mr-1" > <span class="likescounter">  <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> </i> Like</button></li>
-                      <?php } ?>
-
-                            <span class='text-right float-right'>
+                    <hr>
+                    <div style="height:115px;"  id="events-readmore" data-events="<?php echo $row['events_id']; ?>" >
                         
-                              <li  class="list-inline-item"><button class="comments-btn text-sm" >
-                                  <i class="fa fa-comments-o mr-1"></i> Comments(5)
-                              </button></li>
+                        <!-- <div class="mb-3 text-muted">Posted on < ?php echo $this->timeAgo($row['created_on3']) ;?> By < ?php echo $row['authors'] ;?> </div> -->
+                    
+                        <h4 style="font-family: Playfair Display, Georgia, Times New Roman, serif;text-align:left;">
+                            <a class="text-primary text-left" href="javascript:void(0)" id="events-readmore" data-events="<?php echo $row['events_id'] ;?>">
+                            <?php echo $row["name_place"]; ?>
+                            </a>
+                        </h4>
 
-                         <?php if($user_id == $row['user_id3']){ ?>
+                        <p class="mb-auto"> 
+                            <?php 
+                                if (strlen($row["additioninformation"]) > 113) {
+                                echo $row["additioninformation"] = substr($row["additioninformation"],0,113).'... <span class="mb-0"><a href="javascript:void(0)" id="events-readmore" data-events="'.$row['events_id'].'" style"font-weight: 500 !important;">Read more >>> </a></span>';
+                                }else{
+                                echo $row["additioninformation"];
+                                } ?> 
+                        </p>
 
-                                <li  class=" list-inline-item">
-                                    <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
-                                        <li>
-                                            <a href="javascript:void(0)" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-                                            <ul style="list-style-type: none; margin:0px;" >
-                                                <li style="list-style-type: none; margin:0px;"> 
-                                                  <label class="deleteEvents"  data-events="<?php echo $row["events_id"];?>"  data-user="<?php echo $row["user_id3"];?>">Delete </label>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                         <?php } ?>
-                              </span>
-                        </ul>
+                        
+                    </div>          
+                    <div class="black-bg" style="padding:4px;border-radius:3px">
+                        ------------------------
+                            <div><i class="fa fa-map-marker" aria-hidden="true"></i> Avenue: <?php echo $row['location_events']; ?> </div>
+                            ------------------------
+                            <div><i class="fa fa-calendar text-success" aria-hidden="true"></i> Start event: <?php echo date('M j, Y', strtotime($row['start_events'])); ?> 
+                            <!-- <i class="fa fa-clock-o" aria-hidden="true"></i> < ?php echo $row['start_time']; ?> -->
+                            </div>
+                            ------------------------
+                            <div><i class="fa fa-calendar text-danger" aria-hidden="true"></i> End event: <?php echo date('M j, Y', strtotime($row['end_events'])); ?> 
+                            <!-- <i class="fa fa-clock-o" aria-hidden="true"></i> < ?php echo $row['end_time']; ?> -->
+                            </div>
+                            ------------------------
+                            <div><i class="fa fa-clock-o" aria-hidden="true"></i>  Posted on <?php echo $this->timeAgo($row['created_on3']); ?> </div>
+                            ------------------------
+                    </div>
+                </div>
+            </div> <!-- card -->
+
             </div>
-          </div>
-        </div>
-            <?php   } 
+            
+        <?php   } 
 
         $query1= $mysqli->query("SELECT COUNT(*) FROM events WHERE categories_events ='$categories' ORDER BY created_on3 Desc ");
         $row_Paginaion = $query1->fetch_array();
@@ -143,6 +142,111 @@ class Events extends Follow{
 
     }
 
+    public function eventsActivities($user_id,$ativities)
+    {
+        $mysqli= $this->database;
+        if ($ativities == 'activities') {
+            # code...
+            $query= $mysqli->query("SELECT * FROM events LEFT JOIN users ON user_id= user_id3 WHERE user_id3 ='$user_id' ORDER BY created_on3 Desc ");
+        }else {
+            # code...
+            $query= $mysqli->query("SELECT * FROM events LEFT JOIN users ON user_id= user_id3 WHERE user_id3 !='' AND events_post != 'posted'  ORDER BY created_on3 Desc ");
+        }
+       ?>
+          <?php while($row= $query->fetch_array()){ 
+            
+             $retweet= $this->checkEventsRetweet($row['events_id'],$user_id);
+             $likes= $this->Eventslikes($user_id,$row['events_id']);
+            ?>
+           <div class="col-md-6 mb-3" >
+
+           <div class="card borders-bottoms more" >
+               <img class="pic-responsive card-img-top" width="242px" height="160px"  id="events-readmore" data-events="<?php echo $row['events_id']; ?>" src="<?php echo BASE_URL_PUBLIC ;?>uploads/events/<?php echo $row['photo'] ;?>" alt="Card image cap">
+               <div class="card-body">
+                   <div class="p-0 font-weight-bold">Events 
+
+                       <ul class="list-inline mb-0  float-right" style="list-style-type: none;">  
+
+                           <?php if($likes['like_on'] == $row['events_id']){ ?>
+                               <li  class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="unlike-events-btn text-sm  mr-2"'; }else{ echo 'id="login-please"  data-login="1"'; } ?> data-events="<?php echo $row['events_id']; ?>" data-user="<?php echo $row['user_id']; ?>">
+                               <i class="fa fa-heart-o mr-1" style="color: red"> <span class="likescounter"><?php echo $row['likes_counts'] ;?> </span> </i> Like</button></li>
+                           <?php }else{ ?>
+                               <li  class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="like-events-btn text-sm  mr-2"'; }else{ echo 'id="login-please" data-login="1"'; } ?> data-events="<?php echo $row['events_id']; ?>" data-user="<?php echo $row['user_id']; ?>">
+                               <i class="fa fa-heart-o mr-1" > <span class="likescounter">  <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> </i> Like</button></li>
+                           <?php } ?>
+
+                               <span class='text-right float-right'>
+                           
+                                   <li  class="list-inline-item"><button class="comments-btn text-sm" >
+                                       <i class="fa fa-comments-o mr-1"></i> (<?php echo $this->count_Events($row['events_id']) ;?>)
+                                       <!-- Comments -->
+                                   </button></li>
+
+                           <?php if($user_id == $row['user_id3']){ ?>
+
+                                   <li  class=" list-inline-item">
+                                       <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
+                                           <li>
+                                               <a href="javascript:void(0)" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                                               <ul style="list-style-type: none; margin:0px;" >
+                                                   <li style="list-style-type: none; margin:0px;"> 
+                                                       <label class="deleteEvents"  data-events="<?php echo $row["events_id"];?>"  data-user="<?php echo $row["user_id3"];?>">Delete </label>
+                                                   </li>
+                                               </ul>
+                                           </li>
+                                       </ul>
+                                   </li>
+                           <?php } ?>
+                                   </span>
+                           </ul>
+                                   
+                   </div>
+
+                   <hr>
+                   <div style="height:115px;"  id="events-readmore" data-events="<?php echo $row['events_id']; ?>" >
+                       
+                       <!-- <div class="mb-3 text-muted">Posted on < ?php echo $this->timeAgo($row['created_on3']) ;?> By < ?php echo $row['authors'] ;?> </div> -->
+                   
+                       <h4 style="font-family: Playfair Display, Georgia, Times New Roman, serif;text-align:left;">
+                           <a class="text-primary text-left" href="javascript:void(0)" id="events-readmore" data-events="<?php echo $row['events_id'] ;?>">
+                           <?php echo $row["name_place"]; ?>
+                           </a>
+                       </h4>
+
+                       <p class="mb-auto"> 
+                           <?php 
+                               if (strlen($row["additioninformation"]) > 113) {
+                               echo $row["additioninformation"] = substr($row["additioninformation"],0,113).'... <span class="mb-0"><a href="javascript:void(0)" id="events-readmore" data-events="'.$row['events_id'].'" style"font-weight: 500 !important;">Read more >>> </a></span>';
+                               }else{
+                               echo $row["additioninformation"];
+                               } ?> 
+                       </p>
+
+                       
+                   </div>          
+                   <div class="black-bg" style="padding:4px;border-radius:3px">
+                       ------------------------
+                           <div><i class="fa fa-map-marker" aria-hidden="true"></i> Avenue: <?php echo $row['location_events']; ?> </div>
+                           ------------------------
+                           <div><i class="fa fa-calendar text-success" aria-hidden="true"></i> Start event: <?php echo date('M j, Y', strtotime($row['start_events'])); ?> 
+                           <!-- <i class="fa fa-clock-o" aria-hidden="true"></i> < ?php echo $row['start_time']; ?> -->
+                           </div>
+                           ------------------------
+                           <div><i class="fa fa-calendar text-danger" aria-hidden="true"></i> End event: <?php echo date('M j, Y', strtotime($row['end_events'])); ?> 
+                           <!-- <i class="fa fa-clock-o" aria-hidden="true"></i> < ?php echo $row['end_time']; ?> -->
+                           </div>
+                           ------------------------
+                           <div><i class="fa fa-clock-o" aria-hidden="true"></i>  Posted on <?php echo $this->timeAgo($row['created_on3']); ?> </div>
+                           ------------------------
+                   </div>
+               </div>
+           </div> <!-- card -->
+
+           </div><!-- col -->
+   <?php  }
+   
+    }
+
     public function EventsReadmore($events_id)
     {
         $mysqli= $this->database;
@@ -161,6 +265,18 @@ class Events extends Follow{
              $comments[] = $row;
         }
         return $comments;
+    }
+
+    public function count_Events($events_id)
+    {
+        $db =$this->database;
+        $query= "SELECT COUNT(*) FROM events_comment LEFT JOIN events ON comment_on= $events_id  WHERE comment_on = $events_id ";
+        $sql= $db->query($query);
+        $row_unapproval = $sql->fetch_array();
+        $total_unapprovalcomm= array_shift($row_unapproval);
+        $array= array(0,$total_unapprovalcomm);
+        $total_unapproval= array_sum($array);
+        return $total_unapproval;
     }
 
     public function getPopupEventsTweet($user_id,$events_id,$events_by)

@@ -1274,13 +1274,18 @@ public function links(){ ?>
         
         foreach($file['name'] as $key => $value){
             // File upload path
+            $size  = $file['size'][$key];
+            $type  = $file['type'][$key];
+            $error = $file['error'][$key];
+            // File upload path
             $fileName = basename($file['name'][$key]);
             $fileExt = explode('.', $fileName);
             $fileActualExt = strtolower(end($fileExt));
 
-             $filenames = (strlen($fileName) > 10)? 
-                     strtolower(date('Y').'_'.rand(10,100).substr($fileName,0,4).".".$fileActualExt):
-                     strtolower(date('Y').'_'.rand(10,100).$fileName);
+            // $filenames = $fileName;
+            $searching = " ";
+            $replace = "_";
+            $filenames = str_replace($searching,$replace, $fileExt[0]).strtolower(date('Y').'_'.rand(10,100).".".$fileActualExt);
 
             $valued[] = $filenames;
 
@@ -1291,7 +1296,10 @@ public function links(){ ?>
             if(in_array($fileType, $allowTypes)){
                 // Upload file to server
                 $fileTmpName = $file["tmp_name"];
+                  
+                $dz= $this->thumbnail($fileTmpName[$key],$targetDir,$targetDir, 480, 400 , $file['type'][$key]);
                 move_uploaded_file($fileTmpName[$key], $targetFilePath);
+
             }
         }
         

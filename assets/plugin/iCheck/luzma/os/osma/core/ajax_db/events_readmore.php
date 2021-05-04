@@ -171,7 +171,7 @@ if (isset($_POST['events_id']) && !empty($_POST['events_id'])) {
                                         <span class="float-right">44 <i class="fa fa-heart"></i></span>
                                         <!-- //Jonathan Burke Jr. -->
                                     </span>
-                                    <span class="description"> nice to donate keep up </span>
+                                    <span class="description"> Events</span>
                                 </div> <!-- /.user-block -->
 
                                 <div class="input-group mt-2">

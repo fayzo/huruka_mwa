@@ -70,6 +70,10 @@
             </ul>
           </li>
 
+          <?php } 
+          
+          if(isset($_SESSION['key'])) { ?>
+
           <li>
             <a href="<?php echo NEWSFEED; ?>">
               <i class="fas fa-globe"></i><span class="more">

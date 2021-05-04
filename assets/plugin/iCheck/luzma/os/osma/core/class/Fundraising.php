@@ -3,7 +3,7 @@
        header('Location: ../../404.html');
  }
 
-class Fundraising extends Follow
+class Fundraising extends Events
 {
     public function fundraisings($pages,$categories,$user_id)
     {

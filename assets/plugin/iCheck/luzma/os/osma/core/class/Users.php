@@ -1534,8 +1534,8 @@ class Users{
 
     public function timeDeadiline($datetime){
 
-        $time= strtotime($datetime.' 00:00:00');
-        $current= time($datetime.' 00:00:00');
+        $time= strtotime($datetime);
+        $current= time($datetime);
         if ($time > $current) {
             # code...
             $second= $time - $current ;

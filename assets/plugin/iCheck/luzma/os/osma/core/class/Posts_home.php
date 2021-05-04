@@ -24,6 +24,20 @@ class Posts_home extends Promote_home_post {
 
         <?php } 
 
+        if($count_foreach == 6){ ?>
+
+            <div class="main-active dot-container h5">
+                <a href="<?php echo EVENTS;?>">View more Events >>> </a> 
+            </div>
+            <div class="row mb-4 regulars_event slider"> 
+                <?php echo $this->eventsActivities($user_id,'post'); ?>
+            </div>
+            <div class="main-active dot-container h5">
+                <a href="<?php echo EVENTS ;?>">View more Events >>> </a> 
+            </div>
+
+        <?php } 
+
         if (isset($_SESSION['key'])) {
             # code...
         if($count_foreach == 2){

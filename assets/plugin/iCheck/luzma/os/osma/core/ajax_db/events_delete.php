@@ -13,6 +13,7 @@ if (isset($_POST['showpopupdelete']) && !empty($_POST['showpopupdelete'])) {
 	$events_id= $_POST['showpopupdelete'];
 	$events_user_id= $_POST['deleteEvents'];
     $tweet=$events->events_getPopupTweet($user_id,$events_id,$events_user_id);
+
     ?>
     <div class="events-popup">
       <div class="wrap5">
@@ -27,85 +28,67 @@ if (isset($_POST['showpopupdelete']) && !empty($_POST['showpopupdelete'])) {
 
                 <div class="shadow-lg">
                     <div class="user-block border-bottom">
-                     <div class="user-blockImgBorder">
+                        <div class="user-blockImgBorder">
                             <div class="user-blockImg">
-                                     <?php if (!empty($tweet['profile_img'])) {?>
-                                     <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
-                                     <?php  }else{ ?>
-                                       <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
-                                     <?php } ?>
-                               </div>
+                                    <?php if (!empty($tweet['profile_img'])) {?>
+                                    <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $tweet['profile_img'] ;?>" alt="User Image">
+                                    <?php  }else{ ?>
+                                    <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
+                                    <?php } ?>
                             </div>
+                        </div>
                         <span class="username">
                             <a style="float:left;padding-right:3px;" href="<?php echo PROFILE ;?>"><?php echo $tweet['firstname']." ".$tweet['lastname'] ;?></a>
                             <!-- //Jonathan Burke Jr. -->
-                            <span class="description">Shared publicly - <?php echo $users->timeAgo($tweet['created_on3']); ?></span>
                         </span>
+                        <span class="description">Shared publicly - <?php echo $users->timeAgo($tweet['created_on3']); ?></span>
                         <span class="description"></span>
                     </div> <!-- user-block -->
         
                         <div class="row">
-                        <div class="col-md-12">
-                        <div class="card flex-md-row mb-4 border-0 h-md-250" >
-                        <img class="card-img-left flex-auto d-none d-lg-block" width="200px" height="250px" src="<?php echo BASE_URL_PUBLIC ;?>uploads/Events/<?php echo $tweet['photo'] ;?>" alt="Card image cap">
-                        <div class="card-body d-flex flex-column align-items-start">
-                            <h4 style="font-family: Playfair Display, Georgia, Times New Roman, serif;text-align:left;">
-                            <a class="text-primary" href="javascript:void(0)" id="events-readmore" data-events="<?php echo $tweet['events_id'] ;?>"> <?php echo  $tweet['title']; ?></a>
-                            </h4>
-                            <div class="mb-1 text-muted">Created on <?php echo $home->timeAgo($tweet['created_on3']) ;?> By <?php echo $tweet['authors'] ;?> </div>
-                            <p class="mb-auto"> 
-                            <?php 
-                                if (strlen($tweet["additioninformation"]) > 200) {
-                                    echo $tweet["additioninformation"] = substr($tweet["additioninformation"],0,200).'...<br><span class="mb-0"><a href="javascript:void(0)" id="events-readmore" data-events="'.$tweet['events_id'].'" class="text-muted" style"font-weight: 500 !important;">Continue reading...</a></span>';
-                                }else{
-                                    echo $tweet["additioninformation"];
-                                } ?> 
-                            </p>
-                                <ul class="list-inline mb-0" style="list-style-type: none;">  
+                            <div class="col-md-12">
 
-                                    <?php if($tweet['events_id'] == $tweet['retweet_events_id']){ ?>
-                                            <li class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="share-btn events-retweeted0 text-sm mr-2" data-events"'.$tweet['events_id'].'"  data-user="'.$tweet['user_id3'].'"'; }else{ echo 'id="login-please" class="more float-right" data-login="1"'; } ?>  >
-                                            <i class="fa fa-share green mr-1" style="color: green"> <span class="retweetcounter"><?php echo $user['retweet_counts'] ;?> </span></i></button></li>
-                                    <?php }else{ ?>
-                                            <li class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="share-btn events-retweet0 text-sm mr-2" data-events"'.$tweet['events_id'].'"  data-user="'.$tweet['user_id3'].'"'; }else{ echo 'id="login-please" class="more float-right" data-login="1"'; } ?>  >
-                                            <?php if($tweet["retweet_counts"] > 0){ echo '<i class="fa fa-share mr-1" style="color: green"> <span class="retweetcounter">'.$tweet["retweet_counts"].'</span></i>' ; }else{ echo '<i class="fa fa-share mr-1"> <span class="retweetcounter">'.$tweet["retweet_counts"].'</span></i>';} ?>
-                                    <?php } ?>
-
-                                    <?php if($tweet['like_on'] == $tweet['events_id']){ ?>
-                                        <li  class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="unlike-events-btn text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right" data-login="1"'; } ?> data-events="<?php echo $tweet['events_id']; ?>" data-user="<?php echo $tweet['user_id']; ?>">
-                                        <i class="fa fa-heart-o mr-1" style="color: red"> <span class="likescounter"><?php echo $tweet['likes_counts'] ;?> </span></i></button></li>
-                                    <?php }else{ ?>
-                                        <li  class=" list-inline-item"><button <?php if(isset($_SESSION['key'])){ echo 'class="unlike-events-btn text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right" data-login="1"'; } ?> data-events="<?php echo $tweet['events_id']; ?>" data-user="<?php echo $tweet['user_id']; ?>">
-                                        <i class="fa fa-heart-o mr-1" > <span class="likescounter">  <?php if ($tweet['likes_counts'] > 0){ echo $tweet['likes_counts'];}else{ echo '';} ?></span></span></i></button></li>
-                                    <?php } ?>
-
-                                        <span class='text-right float-right'>
+                                <div class="card flex-md-row mb-4 border-0 h-md-250" style="box-shadow:0 0 0.5ch 0.5ch rgba(35, 35, 32, 0.15);">
+                                    <div class='col-md-4 px-0 card-img-left flex-auto' >
+                                        <img class="pic-responsive " width="200px" height="250px" src="<?php echo BASE_URL_PUBLIC ;?>uploads/events/<?php echo $tweet['photo'] ;?>" alt="Card image cap">
+                                    </div>
+                                    <div class="col-md-8 card-body d-flex flex-column align-items-start">
                                     
-                                            <li  class="list-inline-item"><button class="comments-btn text-sm" data-toggle="collapse">
-                                                <i class="fa fa-comments-o mr-1"></i> (5)
-                                            </button></li>
+                                        <h4 style="font-family: Playfair Display, Georgia, Times New Roman, serif;text-align:left;">
+                                            <a class="text-primary text-left" href="javascript:void(0)" id="events-readmore" data-events="<?php echo $tweet['events_id'] ;?>">
+                                            <?php echo $tweet["name_place"]; ?>
+                                            </a>
+                                        </h4>
 
-                                        <?php if($_SESSION['key'] == $tweet['user_id3']){ ?>
+                                        <div class="mb-3 text-muted">Created on <?php echo $home->timeAgo($tweet['created_on3']) ;?> By <?php echo $tweet['authors'] ;?> </div>
+                                        <p class="mb-auto"> 
+                                            <?php 
+                                                if (strlen($tweet["additioninformation"]) > 113) {
+                                                echo $tweet["additioninformation"] = substr($tweet["additioninformation"],0,113).'... <span class="mb-0"><a href="javascript:void(0)" id="events-readmore" data-events="'.$tweet['events_id'].'" style"font-weight: 500 !important;">Read more >>> </a></span>';
+                                                }else{
+                                                echo $tweet["additioninformation"];
+                                                } ?> 
+                                        </p>
 
-                                            <li  class=" list-inline-item">
-                                                <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
-                                                    <li>
-                                                        <a href="javascript:void(0)" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-                                                        <ul style="list-style-type: none; margin:0px;" >
-                                                            <li style="list-style-type: none; margin:0px;"> 
-                                                                <label class="deleteTweet" >Delete </label>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        <?php } ?>
-                                            </span>
-                                    </ul>
-                        </div>
-                        </div>
-                    </div>
-                </div><!-- row -->
+                                        <div class="black-bg" style="padding:4px;border-radius:3px">
+                                            ------------------------
+                                            <div><i class="fa fa-map-marker" aria-hidden="true"></i> Avenue: <?php echo $tweet['location_events']; ?> </div>
+                                            ------------------------
+                                            <div><i class="fa fa-calendar text-success" aria-hidden="true"></i> Start event: <?php echo date('M j, Y', strtotime($tweet['start_events'])); ?> 
+                                                <!-- <i class="fa fa-clock-o" aria-hidden="true"></i> < ?php echo $tweet['start_time']; ?> -->
+                                            </div>
+                                            ------------------------
+                                            <div><i class="fa fa-calendar text-danger" aria-hidden="true"></i> End event: <?php echo date('M j, Y', strtotime($tweet['end_events'])); ?> 
+                                                <!-- <i class="fa fa-clock-o" aria-hidden="true"></i> < ?php echo $tweet['end_time']; ?> -->
+                                            </div>
+                                            ------------------------
+                                            <div><i class="fa fa-clock-o" aria-hidden="true"></i>  Posted on <?php echo $home->timeAgo($tweet['created_on3']); ?> </div>
+                                            ------------------------
+                                        </div>
+                                    </div>
+                                </div><!-- card -->
+                        </div><!-- col -->
+                     </div><!-- row -->
                 </div><!-- shadow -->
 
                 </div><!-- card-body -->

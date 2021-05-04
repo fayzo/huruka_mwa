@@ -113,6 +113,10 @@ if (isset($_POST['events_view']) && !empty($_POST['events_view'])) {
                                   </div>
                                   <select class="form-control" name="categories_events" id="categories_events">
                                     <option value="">Select what types of Events</option>
+                                    <option value="Workshops">Workshops</option>
+                                    <option value="Networking">Networking </option>
+                                    <option value="Trade_Shows">Trade Shows</option>
+                                    <option value="Conferences">Conferences</option>
                                     <option value="Party">Party</option>
                                     <option value="Training">Training</option>
                                     <option value="Anime-Series">Education</option>
@@ -167,7 +171,7 @@ if (isset($_POST['events_view']) && !empty($_POST['events_view'])) {
 
                  </div><!-- card-body end-->
                 <div class="card-footer text-center">
-                    <button type="button" id="submit-events" class="btn btn-primary btn-lg btn-block text-center">Publish</button>
+                    <button type="button" id="submit-form-events" class="btn btn-primary btn-lg btn-block text-center">Publish</button>
                 </div><!-- card-footer -->
                </form>
             </div><!-- card end-->

@@ -62,6 +62,8 @@
                                 data-toggle="tab">Fundraisings</a></li>
                             <li class="nav-item"><a class="nav-link" href="#Crowfundraising"
                                 data-toggle="tab">Crowfundraising</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#Events"
+                                data-toggle="tab">Events</a></li>
                             <li class="nav-item"><a class="nav-link" href="#House"
                                 data-toggle="tab">House</a></li>
                             <li class="nav-item"><a class="nav-link" href="#car"
@@ -83,6 +85,12 @@
                         <div class="tab-pane" id="Crowfundraising">
                         <!-- < ?php echo $home->eventsListActivities($_SESSION['key']); ?> -->
                         <?php echo $crowfund->crowfundraisingsActivities($_SESSION['key']); ?>
+                        </div>
+                        <div class="tab-pane" id="Events">
+                        <!-- < ?php echo $home->eventsListActivities($_SESSION['key']); ?> -->
+                            <div class="row">
+                                <?php echo $events->eventsActivities($_SESSION['key'],'ativities'); ?>
+                            </div>
                         </div>
                         <div class="tab-pane" id="House">
                             <!-- < ?php echo $home->blogsActivities($_SESSION['key']); ?> -->

@@ -77,7 +77,7 @@
 }
 
 .post-popup-body-wrap {
-    width: 550px;
+    max-width: 550px;
     height: auto;
     margin: 0px auto;
     top: 5%;
