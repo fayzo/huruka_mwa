@@ -12,8 +12,10 @@ class Promote_home_post extends Fundraising {
         WHERE T. tweetBy = U. user_id AND T. retweet_id='0' AND T. marketing != ''
         OR  T. retweet_by = U. user_id AND T. retweet_id !='0' AND T. marketing != ''
         ORDER BY 
-        CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
-        T. tweet_id DESC  LIMIT $limit";
+            CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
+            CASE WHEN  T. marketing != '' THEN T. marketing END DESC ,
+
+        T. tweet_id DESC LIMIT $limit";
 
         $query= $mysqli->query($sql);
         $tweets=array();
@@ -35,9 +37,10 @@ class Promote_home_post extends Fundraising {
                                 # code... 
                             //  echo var_dump($retweet['retweet_Msg']).'<br>';
                             
-                        if($this->isClosed($tweet['tweetBy']) == true) {
+                        if($this->isClosed($tweet['tweetBy']) != true) {
                             continue;
                         } ?>
+
                         <div class="col-12 ">
                         <div class="card mb-3" id="userComment_<?php echo $tweet["tweet_id"]; ?>"> 
                         <div class="card-body message-color">
@@ -86,12 +89,12 @@ class Promote_home_post extends Fundraising {
 
                                 if (strlen($tweet['status']) > 200) {
                                     // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                                $tweettext = substr($tweet['status'], 0, 200);
-                                $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
-                                echo $this->getTweetLink($tweetstatus);
+                                    $tweettext = substr($tweet['status'], 0, 200);
+                                    $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
+                                    <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                    echo $this->getTweetLink($tweetstatus);
                                 }else{
-                                echo $this->getTweetLink($tweet['status']);
+                                    echo $this->getTweetLink($tweet['status']);
                                 }  
 
                                 if (strlen($tweet['status']) > 200) {
@@ -829,7 +832,7 @@ class Promote_home_post extends Fundraising {
                         <div class="row mb-2">
                             <div class="col-12">
                                 <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
-                                <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                                <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"],$tweet); ?>
                             </div>
                         </div>
                         <?php } ?>

@@ -4,7 +4,11 @@ $(document).ready(function (e) {
         e.preventDefault();
         var tweet_id = $(this).data('tweet');
         var comment_by = $(this).data('user');
-
+        $('.form-coins'+tweet_id).removeClass();
+        $('#amount_coins'+tweet_id).removeAttr('id');
+        $('#comment_coins'+tweet_id).removeAttr('id');
+        $(".response_coins").removeClass();
+        
         $.ajax({
             url: 'core/ajax_db/deletePost',
             method: 'POST',

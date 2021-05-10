@@ -136,7 +136,15 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                                 <!-- <li class="list-inline-item h4 btn btn-outline-primary emailSent" data-user="< ?php echo $user['user_id'];?>"> <i>< ?php echo $user['email']; ?></i></li> -->
                                 <li class="list-inline-item h4" ><a href="javascript:vois(0)" <?php if(isset($_SESSION['key'])){ echo 'class="people-message btn btn-primary"'; }else{ echo 'class="btn btn-primary" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $user['user_id'];?>" > <i style="font-size: 14px;" class="fa fa-envelope-o"> Message </i></a></li>
                             </ul>
-                            <div class="h4 btn btn-outline-primary emailSent"  data-user="<?php echo $user['user_id'];?>"> <i><?php echo $user['email']; ?></i></div>
+                            <div <?php if(isset($_SESSION['key'])){ echo 'class="h4 btn btn-outline-primary emailSent"'; }else{ echo 'class="h4 btn btn-outline-primary " id="login-please"  data-login="1"'; } ?> data-user="<?php echo $user['user_id'];?>"><i>
+                            <?php 
+                            if (strlen($user["email"]) > 5) {
+                            echo substr($user["email"],0,5).'****@***.com';
+                            }else{
+                            echo $user["email"];
+                            } ?> 
+                            <!-- < ?php echo $user['email']; ?> -->
+                            </i></div>
                             <?php if (isset($_SESSION['key']) && $_SESSION['approval'] === 'on') { ?>
                             <div class="h4 btn btn-outline-primary" ><i class="fa fa-phone" aria-hidden="true"></i> <i><?php echo $user['phone']; ?> </i></div>
                              <?php  } ?>

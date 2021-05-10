@@ -765,7 +765,7 @@ class Notification_body extends Home
             <div class="row mb-2">
                 <div class="col-12">
                     <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
-                    <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                    <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"],$tweet); ?>
                 </div>
             </div>
             <?php } 

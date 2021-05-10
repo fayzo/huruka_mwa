@@ -2,8 +2,13 @@
 <!-- < ?php include "header_navbar_footer/header_if_login.php"?> -->
 <?php include "header_navbar_footer/Get_usernameProfile.php"?>
 <title><?php echo 'Post for '.$profileData['username']; ?></title>
-<?php include "header_navbar_footer/header.php"?>
 
+<?php if($home->isClosed($profileData['user_id']) != true) {
+    header('location: '.BASE_URL_PUBLIC.$profileData['username'].'.profile_close_account');
+    // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
+} ?>
+
+<?php include "header_navbar_footer/header.php"?>
 
       <!-- Main content -->
       <section class="content container">

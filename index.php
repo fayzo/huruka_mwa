@@ -99,19 +99,15 @@
               </div>
             <?php } ?>
 
-          <?php if(isset($_SESSION['key']) && $home->isClosed($_SESSION['key']) == true) { ?>
-              <div class="card borders-tops card-profile card1 mb-3">
-                  <div class="card-body">
-                      <h4>Your Closed This Account </h4>
-                      <p> No one can see your posts if you don't deactive your account</p>
-                      <a href="<?php echo SETTINGS;?>"> Click here to go back.</a>
-                  </div>
-                  <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-          <?php  } ?>
+          <!-- < ?php if(isset($_SESSION['key']) && $home->isClosed($_SESSION['key']) != true) { 
+                    echo $home->isClosed($_SESSION['key']);
+           } ?> -->
 
-          <?php if (isset($_SESSION['key'])) { ?>
+          <?php if (isset($_SESSION['key']) && 
+          $users->subscription_deadline($subscription['irangiro_date_pay'],$subscription['irangiro_subscription']) == true  && 
+          $home->isClosed($_SESSION['key']) == true) { ?>
+
+          <!-- < ?php if (isset($_SESSION['key'])) { ?> -->
 
             <div class="posted">
             <!-- Box Comment -->

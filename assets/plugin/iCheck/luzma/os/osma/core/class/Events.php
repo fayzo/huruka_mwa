@@ -43,7 +43,7 @@ class Events extends Follow{
 
                                 <span class='text-right float-right'>
                             
-                                    <li  class="list-inline-item"><button class="comments-btn text-sm" >
+                                    <li  class="list-inline-item"><button class="comments-btn text-sm"  id="events-readmore" data-events="<?php echo $row['events_id']; ?>"  >
                                         <i class="fa fa-comments-o mr-1"></i> (<?php echo $this->count_Events($row['events_id']) ;?>)
                                         <!-- Comments -->
                                     </button></li>
@@ -177,7 +177,7 @@ class Events extends Follow{
 
                                <span class='text-right float-right'>
                            
-                                   <li  class="list-inline-item"><button class="comments-btn text-sm" >
+                                   <li  class="list-inline-item"><button class="comments-btn text-sm"  id="events-readmore" data-events="<?php echo $row['events_id']; ?>">
                                        <i class="fa fa-comments-o mr-1"></i> (<?php echo $this->count_Events($row['events_id']) ;?>)
                                        <!-- Comments -->
                                    </button></li>
@@ -270,7 +270,7 @@ class Events extends Follow{
     public function count_Events($events_id)
     {
         $db =$this->database;
-        $query= "SELECT COUNT(*) FROM events_comment LEFT JOIN events ON comment_on= $events_id  WHERE comment_on = $events_id ";
+        $query= "SELECT COUNT(*) FROM events_comment C LEFT JOIN events E ON C. comment_on= E. events_id  WHERE C. comment_on = $events_id ";
         $sql= $db->query($query);
         $row_unapproval = $sql->fetch_array();
         $total_unapprovalcomm= array_shift($row_unapproval);

@@ -102,7 +102,7 @@ if (isset($_POST['job_id']) && !empty($_POST['job_id'])) {
                           <?php } ?>
                           <?php if (empty($user['website'])) { ?>
                             <!-- # code... -->
-                            <input type="button" value="Apply"  <?php echo 'id="Apply" data-applyjob="'.$job_id.'" data-business="'.$business_id.'"';?>  class="btn btn-success">
+                            <input type="button" value="Apply"  <?php  if(isset($_SESSION['key'])){ echo '  class="btn btn-success" id="Apply" data-applyjob="'.$job_id.'" data-business="'.$business_id.'"' ; }else{ echo 'class="btn btn-success" id="login-please"  data-login="1"'; } ?> >
                           <?php } ?>
                   </div>
                 </div>

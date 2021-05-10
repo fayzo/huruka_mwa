@@ -2,6 +2,12 @@
 <?php include "header_navbar_footer/header_if_login.php"?>
 <!-- < ?php include "header_navbar_footer/Get_usernameProfile.php"?> -->
 <title><?php echo $user['username'].' Marketing Place'; ?></title>
+
+<?php if($home->isClosed($user['user_id']) != true) {
+    header('location: '.BASE_URL_PUBLIC.$user['username'].'.profile_close_account');
+    // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
+} ?>
+
 <?php include "header_navbar_footer/header.php"?>
 
       <!-- Main content -->
@@ -19,6 +25,13 @@
                         
                        <ul class="ads-nav list-unstyled">
                            <li>
+                               <a href="javascript:void(0)" class="">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,8H4A2,2 0 0,0 2,10V14A2,2 0 0,0 4,16H5V20A1,1 0 0,0 6,21H8A1,1 0 0,0 9,20V16H12L17,20V4L12,8M21.5,12C21.5,13.71 20.54,15.26 19,16V8C20.53,8.75 21.5,10.3 21.5,12Z"></path></svg>
+                               Subscribe <br>
+                               From May 21 To May 04</a>
+                           </li>
+                           <li><hr></li>
+                           <li>
                                <a href="<?php echo PROMOTE_ADS; ?>" class=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,8H4A2,2 0 0,0 2,10V14A2,2 0 0,0 4,16H5V20A1,1 0 0,0 6,21H8A1,1 0 0,0 9,20V16H12L17,20V4L12,8M21.5,12C21.5,13.71 20.54,15.26 19,16V8C20.53,8.75 21.5,10.3 21.5,12Z"></path></svg> Campaigns</a>
                            </li>
                            <li><hr></li>
@@ -27,7 +40,13 @@
                            </li>
                            <li><hr></li>
                            <li>
-                               <a href="javascript:void(0)"  <?php echo (isset($_SESSION['key']))?(empty($subscription['marketing_subscription']))?'class="promote-post" data-promote="payment" ':'class="promote_forms " ' :'id="login-please" data-login="1"';?>> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> New campaign</a>
+                               <a href="javascript:void(0)"  <?php 
+                               echo (isset($_SESSION['key']))?
+                                (!empty($subscription['marketplace_subscription'])  && $users->subscription_deadline($subscription['marketplace_date_pay'],$subscription['marketplace_subscription']) == true )?
+                                'class="promote_forms " ' :
+                                'class="promote-post" data-promote="payment" ':
+                                'id="login-please" data-login="1"'
+                                ;?>> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> New campaign</a>
                            </li>
                        </ul>
 
@@ -42,7 +61,11 @@
             
         </div>
         <div class="col-sm-12 col-md-6 mb-4">
-            <div <?php echo (isset($_SESSION['key']))?(empty($subscription['marketing_subscription']))?'class="promote-post main-active dot-container more mb-3" data-promote="payment" ':'class="promote_forms main-active dot-container more mb-3" ' :'id="login-please" data-login="1"';?>>
+            <div <?php echo (isset($_SESSION['key']))?
+            (!empty($subscription['marketplace_subscription'])  && $users->subscription_deadline($subscription['marketplace_date_pay'],$subscription['marketplace_subscription']) == true )?
+                'class="promote_forms main-active dot-container more mb-3" ' :
+                'class="promote-post main-active dot-container more mb-3" data-promote="payment" ':
+                'id="login-please" data-login="1"';?>>
                 <img src="<?php echo BASE_URL_LINK ;?>image/img/promote1.png" width="30px" witalt="User Image">
                 <a href="javascript:void(0)"> >> CLICK HERE TO START << </a>
                 <img src="<?php echo BASE_URL_LINK ;?>image/img/promote1.png" width="30px" witalt="User Image">

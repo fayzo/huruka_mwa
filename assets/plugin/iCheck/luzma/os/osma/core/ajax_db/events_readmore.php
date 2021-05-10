@@ -70,11 +70,12 @@ if (isset($_POST['events_id']) && !empty($_POST['events_id'])) {
                 <div class="card-body">
 
                     <div class="events-post mb-0">
-                        <h2 class="events-post-title"><?php echo $user['name_place'] ;?></h2>
+                        <h4 class="events-post-title"><?php echo $user['name_place'] ;?></h4>
                     </div><!-- /.events-post -->
 
                    <div class="row reusercolor p-2 clear-float">
                        <div class="col-md-6">
+                            <div class="pr-5">
                            <div id="jssor_1"  style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:980px;overflow:hidden;visibility:hidden;">
                                 <!-- Loading Screen -->
                                 <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
@@ -120,12 +121,32 @@ if (isset($_POST['events_id']) && !empty($_POST['events_id'])) {
                            </div>
                            <script type="text/javascript">jssor_1_slider_init();</script>
                       
-                       <div class="mt-2">
-                           <?php echo $user["additioninformation"]; ?>
+                       <div class="my-2">
+                            <div id="link_" class="show-read-more">
+                            <?php 
+
+                                if (strlen($user["additioninformation"]) > 200) {
+                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                $tweettext = substr($user["additioninformation"], 0, 200);
+                                $tweetstatus = substr($user["additioninformation"], 0, strrpos($tweettext, ' ')).'
+                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$user["events_id"].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                echo $home->getTweetLink($tweetstatus);
+                                }else{
+                                echo $home->getTweetLink($user["additioninformation"]);
+                                }  
+
+                                if (strlen($user["additioninformation"]) > 200) {
+                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                    $tweettext = substr($user["additioninformation"], 0, 200);
+                                    $tweetstatus = substr($user["additioninformation"], strrpos($tweettext, ' '));
+                                    echo '<span style="display: none;" class="more-text view-more-text'.$user["events_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
+                                }  
+                                ?>
+                            </div>
+                       </div>
                        </div>
                      </div> <!-- col-md-6  -->
-                     <div class="col-md-6 pl-5">
-                     
+                     <div class="col-md-6">
                             <div><i class="fa fa-map-marker" aria-hidden="true"></i> Avenue: <?php echo $user['location_events']; ?> </div>
                             <div><i class="fa fa-clock-o" aria-hidden="true"></i>  Created on <?php echo $home->timeAgo($user['created_on3']); ?> </div>
 

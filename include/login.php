@@ -93,20 +93,20 @@ if(isset($_POST['key'])){
 
         $users->alreadyUseEmail('users',array(
             'username' => $username, 
-                'email' => $email, 
+            'email' => $email, 
         ), array(
             'firstname' => $firstname, 
-                'lastname' => $lastname, 
-                'gender' => $gender, 
-                'username' => $username, 
-                'email' => $email, 
-                'country' => $country, 
-                'password' => $password, 
-                'date_birth' => $date_birth,
-                'date_registry' => $date_registry, 
-                'last_login' => $datetime, 
-                'color' => '', 
-                'approval' => 'off', 
+            'lastname' => $lastname, 
+            'gender' => $gender, 
+            'username' => $username, 
+            'email' => $email, 
+            'country' => $country, 
+            'password' => $password, 
+            'date_birth' => $date_birth,
+            'date_registry' => $date_registry, 
+            'last_login' => $datetime, 
+            'color' => '', 
+            'approval' => 'off', 
         ));
 
      } 

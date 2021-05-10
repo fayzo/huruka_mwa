@@ -12,17 +12,20 @@
 
     <div class="col-8 col-md-10 col-lg-10 ">
       <div class="tab-content" id="nav-tabContent">
+      
         <div class="tab-pane fade show active" id="list-Dashboard" role="tabpanel" aria-labelledby="list-home-list">
            <?php include "siderbar_jobs/dashboard.php"?>
         </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
 
         <div class="tab-pane fade" id="list-Manage_Admins" role="tabpanel" aria-labelledby="list-messages-list">
+           
             <div class="row">
                 <!-- <div class="col-12" style="overflow: auto; white-space: nowrap; width: 100%;height: 250px"> -->
                 <div class="col-md-12 bg-light mb-2">
-                      <?php include "siderbar_jobs/approval_users.php"?>
+                    <?php include "siderbar_jobs/approval_users.php"?>
                 </div>
             </div>
+
             <div class="row">
                 <!-- <div class="col-12" style="overflow: auto; white-space: nowrap; width: 100%;height: 250px"> -->
                 <div class="col-md-12 bg-light">
@@ -40,6 +43,7 @@
         <div class="tab-pane fade" id="list-Logout" role="tabpanel" aria-labelledby="list-settings-list">
             <?php include "siderbar_jobs/logout.php"?>
         </div> <!-- END-OF A LINK OF logout ID=#  -->
+
       </div>
     </div>
 

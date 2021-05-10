@@ -1,7 +1,7 @@
 <?php
-//  if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])){
-//        header('Location: ../../404.html');
-//  }
+ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])){
+       header('Location: ../../404.html');
+ }
 
 class Posts_home extends Promote_home_post {
 
@@ -9,17 +9,17 @@ class Posts_home extends Promote_home_post {
     public function slick_tweets($user_id,$limit,$tweet,$count_foreach,$user)
     {
         $mysqli= $this->database;
-
-        if($count_foreach == 2 && !empty($tweet['marketing'])){ ?>
+        
+        if($count_foreach == 4){ ?>
 
             <div class="main-active dot-container h5">
-                <a href="<?php echo BASE_URL_PUBLIC."promote_ads";?>">View more Promotion >>> </a> 
+                <a href="<?php echo BASE_URL_PUBLIC."marketing_ads";?>">View more Promotion >>> </a> 
             </div>
             <div class="row mb-4 regulars slider"> 
                 <?php echo $this->promote_post($user_id,$limit); ?>
             </div>
             <div class="main-active dot-container h5">
-                <a href="<?php echo BASE_URL_PUBLIC."promote_ads";?>">View more Promotion >>> </a> 
+                <a href="<?php echo BASE_URL_PUBLIC."marketing_ads";?>">View more Promotion >>> </a> 
             </div>
 
         <?php } 
@@ -115,10 +115,16 @@ class Posts_home extends Promote_home_post {
                     <div class="card borders-bottoms more" >
                         <img class="card-img-top" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>" height="160px" src="<?php echo BASE_URL_PUBLIC ;?>uploads/fundraising/<?php echo $row['photo'] ;?>" >
                         <div class="card-body">
-                            <div class="p-0 font-weight-bold">Fundraising 
+                            <div class="p-0"> <span class="font-weight-bold"> Fundraising </span>
 
                                 <?php if(isset($_SESSION['key']) && $user_id == $row['user_id2']){ ?>
                                 <ul class="list-inline mb-0  float-right" style="list-style-type: none;">  
+
+                                    <li  class="list-inline-item"><button class="comments-btn text-sm" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>" >
+                                        <i class="fa fa-comments-o mr-1"></i> (<?php echo $this->count_fund($row['fund_id']) ;?>)
+                                        <!-- Comments -->
+                                    </button>
+                                    </li>
 
                                     <li  class=" list-inline-item">
                                         <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
@@ -137,9 +143,9 @@ class Posts_home extends Promote_home_post {
                                 <?php } ?>
 
                                 <?php if($likes['like_on'] == $row['fund_id']){ ?>
-                                            <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2" data-login="1" '; } ?> style="font-size:16px;" data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>"><span class="likescounter "><?php echo $row['likes_counts'] ;?></span> <i class="fa fa-heart"  ></i></span>
+                                            <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2" data-login="1" '; } ?> data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>"><span class="likescounter "><?php echo $row['likes_counts'] ;?></span> <i class="fa fa-heart"  ></i> Like</span>
                                 <?php }else{ ?>
-                                    <span <?php if(isset($_SESSION['key'])){ echo 'class="like-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2"  data-login="1" '; } ?> style="font-size:16px;" data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>" ><span class="likescounter"> <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> <i class="fa fa-heart-o" ></i> </span>
+                                    <span <?php if(isset($_SESSION['key'])){ echo 'class="like-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2"  data-login="1" '; } ?> data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>" ><span class="likescounter"> <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> <i class="fa fa-heart-o" ></i> Like</span>
                                 <?php } ?>
                             
                             </div>
@@ -266,35 +272,39 @@ if($count_foreach == 4){
         # code...
             $sql="SELECT * FROM tweets T 
             LEFT JOIN users U ON T. tweetBy= U. user_id 
-            LEFT JOIN comment C ON T. tweet_id = C. comment_on 
-            LEFT JOIN likes L ON T. tweet_id = L. like_on 
+            -- LEFT JOIN comment C ON T. tweet_id = C. comment_on 
+            -- LEFT JOIN likes L ON T. tweet_id = L. like_on 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
-            GROUP BY 
-                CASE WHEN C. comment_on != '' THEN C. comment_on END,
-                CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
+            -- GROUP BY 
+            --     CASE WHEN C. comment_on != '' THEN C. comment_on END,
+            --     CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
 
             ORDER BY T. tweet_id DESC LIMIT $limit";
 
         } else {
             $sql="SELECT * FROM tweets T 
             LEFT JOIN users U ON T. tweetBy= U. user_id 
-            LEFT JOIN comment C ON T. tweet_id = C. comment_on 
-            LEFT JOIN likes L ON T. tweet_id = L. like_on 
+            -- LEFT JOIN comment C ON T. tweet_id = C. comment_on 
+            -- LEFT JOIN likes L ON T. tweet_id = L. like_on 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
-            GROUP BY 
-                CASE WHEN C. comment_on != '' THEN C. comment_on END,
-                CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
+            -- GROUP BY 
+            --     CASE WHEN C. comment_on != '' THEN C. comment_on END,
+            --     CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
+
             ORDER BY 
                 CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
                 CASE WHEN  T. marketing != '' THEN T. marketing END DESC ,
+                
             T. tweet_id DESC LIMIT $limit";
         }
 
         $query= $mysqli->query($sql);
+        // var_dump('ERROR: Could not able to execute'. $sql.mysqli_error($mysqli));
+
         $tweets=array();
         while ($row= $query->fetch_assoc()) {
             # code...
@@ -315,7 +325,7 @@ if($count_foreach == 4){
             $likeRET= $this->like_shared($tweet['tweet_id']);
             // var_dump($commentRET['comment_on'],$tweet['tweet_id']);
             
-            if($this->isClosed($tweet['tweetBy']) == true) {
+            if($this->isClosed($tweet['tweetBy']) != true) {
                 continue;
             }
             
@@ -962,7 +972,7 @@ if($count_foreach == 4){
 
                                 <div class="col-md-6 col-sm-12">
                                         <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
-                                        <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                                        <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"],$tweet); ?>
                                 </div><!-- col -->
 
                             </div><!-- row -->
@@ -1870,7 +1880,7 @@ if($count_foreach == 4){
                 <div class="row mb-2">
                     <div class="col-12">
                         <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
-                        <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                        <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"],$tweet); ?>
                     </div>
                 </div>
                 <?php } ?>

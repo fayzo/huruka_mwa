@@ -233,10 +233,10 @@
     border-radius: 50%;
 }
 
-.wow_mini_wallets {display: flex;align-items: center;padding-bottom: 7px;}
+.wow_mini_wallets {display: flex;align-items: center;padding-bottom: 7px;flex-wrap: wrap;}
 .wow_mini_wallets h5 {margin: 0;font-size: 50px;font-family: "Roboto", sans-serif;font-weight: 400;}
 .wow_mini_wallets_btns {margin-left: auto;}
-.wow_mini_wallets_btns .btn {margin-left: 5px;}
+/* .wow_mini_wallets_btns .btn {margin-left: 5px;} */
 .wow_add_money_hid_form {display: none;}
 .wow_add_money_hid_form .add-amount, .wow_snd_money_form .add-amount {margin: 15px 0 25px;}
 .wow_add_money_hid_form .add-amount h5, .wow_snd_money_form .add-amount h5 {margin: 0 auto;font-size: 42px;font-family: "Lato", sans-serif;width: 130px;padding: 4px 0;border-bottom: 2px solid #ddd;}

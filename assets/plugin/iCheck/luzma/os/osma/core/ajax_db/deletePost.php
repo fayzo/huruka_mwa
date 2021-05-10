@@ -228,7 +228,7 @@ if (isset($_POST['showpopupdelete']) && !empty($_POST['showpopupdelete'])) {
                         if(in_array(pathinfo($expode[$i])['extension'],$fileActualExt_coins)) { ?>
                             <div class="col-<?php echo $count_divide ;?>  my-2">
                                 <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
-                                <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                                <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"],$tweet); ?>
                             </div>
                         <?php } 
 

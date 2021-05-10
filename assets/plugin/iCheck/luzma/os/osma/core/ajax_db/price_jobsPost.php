@@ -19,7 +19,7 @@ if (isset($_POST['key'])) {
 if (isset($_POST['post_as']) && !empty($_POST['post_as'])) {
     // $user_id= $_SESSION['key'];
      ?>
-<div class="jobs-popup">
+<div class="promote-popup">
     <div class="wrap6" id="disabler">
         <div class="wrap6Pophide" onclick="togglePopup( )"></div>
         <div class="img-popup-wrapLogin"  id="popupEnd" >
@@ -74,7 +74,7 @@ if (isset($_POST['loginTerms']) && !empty($_POST['loginTerms'])) {
 	  $user= $home->userData($_SESSION['key']);
   ?>
 
-  <div class="jobs-popup">
+  <div class="promote-popup">
     <div class="wrap6" id="disabler">
         <span class="colose">
         	<button class="close-imagePopup"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -129,7 +129,7 @@ if (isset($_POST['loginTerms']) && !empty($_POST['loginTerms'])) {
 if (isset($_POST['loginTerms0']) && !empty($_POST['loginTerms0'])) {
     $user= $home->userData($_SESSION['key']);
   ?>
-  <div class="jobs-popup">
+  <div class="promote-popup">
     <div class="wrap6" id="disabler">
         <span class="colose">
         	<button class="close-imagePopup"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -189,7 +189,7 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
 
      ?>
 
-<div class="jobs-popup">
+<div class="promote-popup">
     <div class="wrap6" id="disabler">
       <div class="wrap6Pophide" onclick="togglePopup( )"></div>
         <span class="colose">
@@ -213,17 +213,17 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                             <h4 class="my-0 font-weight-normal">Individual</h4>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$10 <small class="text-muted">/ mo</small></h1>
+                            <h1 class="card-title pricing-card-title">$10 <small class="text-muted">/ we</small></h1>
                             <ul class="list-unstyled mt-3 mb-4">
                               <li>1 users included</li>
-                              <li>1 job post per day</li>
+                              <li>3 jobs post last for week</li>
                               <li>2 GB of storage</li>
                               <li>Email support</li>
                               <li>Help center access</li>
                             </ul>
                             <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
-                            <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'job subscription payment\'' ;?>
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,<?php echo $details ;?>)" >Get started </button>
+                            <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\''.$_POST['post_jobs'].'\'' ;?>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -231,16 +231,16 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                             <h4 class="my-0 font-weight-normal">Pro</h4>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$35 <small class="text-muted">/ mo</small></h1>
+                            <h1 class="card-title pricing-card-title">$60 <small class="text-muted">/ mo</small></h1>
                             <ul class="list-unstyled mt-3 mb-4">
                             <li>10 users included</li>
-                            <li>10 job post per week</li>
+                            <li>10 jobs post for month</li>
                             <li>5 GB of storage</li>
                             <li>Priority email support</li>
                             <li>Help center access</li>
                             </ul>
                             <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="pro" data-user="< ?php echo $user_id; ?>">Get started</button> -->
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(35000,<?php echo $details ;?>)" >Get started</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(35000,'months',<?php echo $details ;?>)" >Get started</button>
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -248,16 +248,16 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                             <h4 class="my-0 font-weight-normal">Enterprise</h4>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$80 <small class="text-muted">/ mo</small></h1>
+                            <h1 class="card-title pricing-card-title">$180 <small class="text-muted">/ mo</small></h1>
                             <ul class="list-unstyled mt-3 mb-4">
                             <li>30 users included</li>
-                            <li>Unlimited job post</li>
+                            <li>Unlimited jobs post</li>
                             <li>15 GB of storage</li>
                             <li>Email support</li>
                             <li>Help center access</li>
                             </ul>
                             <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="enterprise" data-user="< ?php echo $user_id; ?>">Get started</button> -->
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(80000,<?php echo $details ;?>)" >Get started</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(80000,'months',<?php echo $details ;?>)" >Get started</button>
                         </div>
                         </div>
                     </div>
@@ -279,7 +279,7 @@ if (isset($_POST['payment_jobs_jobs']) && !empty($_POST['payment_jobs_jobs'])) {
     $user_id= $_POST['user'];
      ?>
 
-<div class="jobs-popup">
+<div class="promote-popup">
     <div class="wrap6" id="disabler">
       <!-- <div class="wrap6Pophide" onclick="togglePopup( )"></div> -->
         <span class="colose">

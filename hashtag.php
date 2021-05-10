@@ -27,6 +27,12 @@ if (isset($_GET['hashtag']) && !empty($_GET['hashtag'])) {
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo '#'.$hashtag.' hashtag on Posts' ; ?></title>
+    
+    <?php if($home->isClosed($user['user_id']) != true) {
+        header('location: '.BASE_URL_PUBLIC.$user['username'].'.profile_close_account');
+        // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
+    } ?>
+
 <?php include "header_navbar_footer/header.php"?>
 
     <!-- Main content -->

@@ -2,6 +2,12 @@
 <?php include "header_navbar_footer/header_if_login.php"?>
 <!-- < ?php include "header_navbar_footer/Get_usernameProfile.php"?> -->
 <title><?php echo $user['username'].' Your Balance'; ?></title>
+
+<?php if($home->isClosed($user['user_id']) != true) {
+    header('location: '.BASE_URL_PUBLIC.$user['username'].'.profile_close_account');
+    // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
+} ?>
+
 <?php include "header_navbar_footer/header.php"?>
 
 <section class="content-header">
@@ -85,7 +91,7 @@
                                 <p class="bold">Current balance</p>
                                 <div class="my_wallet wow_mini_wallets">
                                     <div>
-                                        <h5>$0.00</h5>
+                                        <h5 style="font-size:30px">$0.00</h5>
                                     </div>
                                     <div class="wow_mini_wallets_btns">
                                         <button data-toggle="modal" data-target="#send_money_modal" class="btn btn-default btn-mat">
@@ -115,8 +121,50 @@
                                 Payment History
                             </div>
                             <div class="card-body">
-     
+                                
                                 <p class="bold">Transactions</p>
+
+                                <?php 
+
+                                $sql= "SELECT * FROM subscription_statement WHERE user_id_subscription = $user_id ORDER BY date_subscription_ DESC ";
+                                $query= $db->query($sql);
+                                if ($query->num_rows > 0) {  ?>
+
+                                <!-- <table class="table table-striped table-bordered table-responsive-sm table-hover table_admin1"> -->
+                                <table id="example2" class="table table-striped table-bordered table-hover table-inverse table-responsive-sm table-responsive" >
+                                        <thead class="main-active thead-inverse">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Description</th>
+                                                <!-- <th>Name</th>
+                                                <th>email</th> -->
+                                                <th>Month</th>
+                                                <th>Price</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody>
+                                <?php
+                                    $i=1;
+                                    while($row= $query->fetch_array()) { 
+                                        // var_dump($row); 
+                                    ?>
+                                                <tr>
+                                                    <td><?php echo $i++ ?></td>
+                                                    <td><?php echo $row['subscription']?></td>
+                                                    <!-- <td>< ?php echo $row['name_subscription_']?></td>
+                                                    <td>< ?php echo $row['email_subscription_']?></td> -->
+                                                    <td><?php echo $row['month_subscription_']?></td>
+                                                    <td><?php echo number_format($row['price_subscription_'])?></td>
+                                                    <td><?php echo $users->timeAgo($row['date_subscription_'])?></td>
+                                                </tr>
+                                <?php } ?>
+
+                                    </tbody>
+                                </table>
+
+                                <?php }else { ?>
+
                                 <div class="tabbable">
                                     <div class="ads-cont-wrapper">
                                     <div class="empty_state">
@@ -125,6 +173,8 @@
                                     </div>
                                     </div>				
                                 </div>
+
+                                <?php } ?>
                                 
                             </div>
                         </div>
@@ -234,7 +284,7 @@
                                         <div class="col-md-6">
                                             <div class="wow_form_fields">
                                                 <label for="paypal_email">Email</label>  
-                                                <input id="paypal_email" name="paypal_email" type="text" class="form-control input-md" value="sh@yahoo.com" autocomplete="off">
+                                                <input id="paypal_email" name="paypal_email" type="text" class="form-control input-md" value="<?php echo $_SESSION['email']; ?>" autocomplete="off">
                                                 <span class="help-block checking"></span>
                                             </div>
                                         </div>
@@ -246,7 +296,8 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-main btn-mat btn-mat-raised add_wow_loader">Request withdrawal</button>
+                                        <button type="submit" class="btn main-active btn-mat btn-mat-raised add_wow_loader">Request withdrawal</button>
+                                        <!-- <button type="submit" class="btn btn-main btn-mat btn-mat-raised add_wow_loader">Request withdrawal</button> -->
                                     </div>
                                 </form> 
                             </div>
@@ -256,6 +307,109 @@
                             <div class="card-footer text-muted">
                             </div> <!-- /.card_footer -->
                         </div><!-- /.card -->
+
+                        <div class="card mt-3">
+                            <div class="card-header py-0">
+                            <p class="bold">Your Fundraising Donation</p>
+                            </div>
+                            <div class="card-body">
+                                
+                                <?php 
+
+                                $sql0= "SELECT * FROM fundraising WHERE user_id2 = $user_id ORDER BY created_on2 DESC ";
+                                $query= $db->query($sql0);
+                                if ($query->num_rows > 0) { 
+                                    $i=1;
+                                    while($tweet= $query->fetch_array()) { 
+                                        // var_dump($row); 
+                                    ?>
+
+                                <div class="col-12 mb-2 bg-light shadow-sm pb-3 ">
+                                     <p class="text-center"><?php echo '------------------------ ('.$i++.') --------------------------';?></p>
+                                    
+                                    <div class="text-muted mb-1">Fundraising Donation
+                                        <span class="text-success px-1 float-right" style="border-radius:3px;font-size:11px;"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</span>
+                                    </div>
+                                    <div class="card-text">
+                                    <!-- 40,000 -->
+                                        <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
+                                        Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo $home->count_month($tweet['created_on2']);?> 
+                                        <span class="float-right"><?php echo $home->donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
+                                        <!-- 40 -->
+                                    </div>
+                                    <div class="progress clear-float " style="height: 10px;">
+                                        <?php echo $home->Users_donationMoneyRaising($tweet['money_raising'],$tweet['money_to_target']); ?>
+                                    </div>
+                                    
+                                    <div class="clear-float">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <span class="text-muted"><?php echo $home->timeAgo($tweet['created_on2']); ?></span>
+                                        <span class="text-muted float-right text-right">out of <?php echo number_format($tweet['money_to_target']).' Frw'; ?></span>
+                                        <!-- 13 days Left -->
+                                    </div>
+
+                                    <span class="response_coins"></span>
+                                    <input type="button" name="reward_coins" value="Request withdrawal This Donation" <?php echo (!empty($_SESSION['key']))?'data-fund_id="'.$tweet['fund_id'].'" class="btn btn-primary btn-md btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+                                </div><!-- col -->
+                                <hr>
+
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+
+                        <div class="card mt-3">
+                            <div class="card-header py-0">
+                            <p class="bold">Your irangiro Tweet Donation</p>
+                            </div>
+                            <div class="card-body">
+                                
+                                <?php 
+
+                                $sql0= "SELECT * FROM tweets WHERE tweetBy = $user_id and coins !='' and retweet_id = 0 OR 
+                                tweetBy = $user_id and coins !='' and retweet_id not in (SELECT tweet_id FROM tweets WHERE tweetBy = $user_id)
+                                  ORDER BY posted_on DESC ";
+                                $query= $db->query($sql0);
+                                if ($query->num_rows > 0) { 
+                                    $i=1;
+                                    while($tweet= $query->fetch_array()) { 
+                                        // var_dump($row); 
+                                    ?>
+
+                                <div class="col-12 mb-2 bg-light shadow-sm pb-3 ">
+                                     <p class="text-center"><?php echo '------------------------ ('.$i++.') --------------------------';?></p>
+                                    
+                                    <div class="text-muted mb-1">Tweet Donation
+                                        <span class="text-success px-1 float-right" style="border-radius:3px;font-size:11px;"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</span>
+                                    </div>
+                                    <div class="card-text">
+                                    <!-- 40,000 -->
+                                        <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
+                                        Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo $home->count_month($tweet['posted_on']);?> 
+                                        <span class="float-right"><?php echo $home->donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
+                                        <!-- 40 -->
+                                    </div>
+                                    <div class="progress clear-float " style="height: 10px;">
+                                        <?php echo $home->Users_donationMoneyRaising($tweet['money_raising'],$tweet['money_to_target']); ?>
+                                    </div>
+                                    
+                                    <div class="clear-float">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <span class="text-muted"><?php echo $home->timeAgo($tweet['posted_on']); ?></span>
+                                        <span class="text-muted float-right text-right">out of <?php echo number_format($tweet['money_to_target']).' Frw'; ?></span>
+                                        <!-- 13 days Left -->
+                                    </div>
+
+                                    <span class="response_coins"></span>
+                                    <input type="button" name="reward_coins" value="Request withdrawal This Donation" <?php echo (!empty($_SESSION['key']))?'data-tweet_id="'.$tweet['tweet_id'].'" class="btn btn-primary btn-md btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+                                </div><!-- col -->
+                                <hr>
+
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+                        </div>
 
                     </div><!-- /.tab-pane -->
 

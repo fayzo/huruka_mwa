@@ -93,19 +93,19 @@ class Gud
                 return 'now'; 
             }else {
                 # code...
-                return $second.'s remain'; 
+                return $second.'s ago'; 
             }
 
         }elseif ($minute <= 60) {
             # code...
-            return $minute.'m remain'; 
+            return $minute.'m ago '; 
         }elseif ($hour <= 24 ) {
             # code...
-            return $hour.'h remain'; 
+            return $hour.'h ago'; 
 
         }elseif ($week == 1 ) {
             # code...
-            return  'yesterday'; 
+            return  '1 day ago'; 
         }elseif ($week <= 7) {
             # code...
             return  $interval->format('%a days').' ago'; 
@@ -120,16 +120,55 @@ class Gud
 
     }
     
-    
   }
+
+    public function subscription_deadline($date,$subscription){
+     
+        // $date = date('Y-m-d', strtotime('+ 1weeks'));
+        // $date = date('Y-m-d', strtotime('+' +$subscription));
+        // $datetime= date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s').'+ 1'+$subscription));
+        $datetime= date('Y-m-d H:i:s', strtotime($date.'+ 1'.$subscription));
+        
+        # code...
+        $time= strtotime($datetime);
+        $current= time($datetime);
+        if ($time > $current) {
+            # code...
+            return true;
+        }else {
+            # code...
+            return false; 
+
+        }
+        
+        // echo date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s').'+ 1day')).'</br>';
+        // echo '--------------</br>';
+        // echo date('Y-m-d H:i:s', strtotime('+ 1day')).'</br>';
+        // echo '--------------</br>';
+        // echo date('Y-m-d H:i:s', strtotime('+ 5day')).'</br>';
+        // echo date('Y-m-d H:i:s', strtotime('+ 4weeks')).'</br>';
+        // echo date('Y-m-d H:i:s', strtotime('+ 1months')).'</br>';
+        // echo date('Y-m-d H:i:s', strtotime('+ 1years')).'</br>';
+
+    }
+
 }
 
 $gud = new Gud();
 
-$date = date('Y-m-d', strtotime('+ 1weeks'));
+$date = date('Y-m-d', strtotime(date('2021-04-23 07:07:12').'+ 1weeks'));
 
 echo $gud->timeDeadiline($date);
 echo $gud->dayRemain($date);
+// echo $gud->subscription_deadline($date,'weeks');
+$date = date('2021-04-23 07:07:12');
 
+if ($gud->subscription_deadline($date,'weeks') == true) {
+    # code...
+    echo 'true';
+}else {
+    # code...
+    echo 'false';
 
+}
 ?>

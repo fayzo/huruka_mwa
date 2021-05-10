@@ -6,6 +6,7 @@ if (isset($_POST['key']) == 'textarea'){
 
 	$user_id= $users->test_input($_POST['id']);
 	$status= $users->test_input($_POST['status']);
+    $datetime = date('Y-m-d H-i-s');
 
     if (!empty($_POST['title_name'])) {
         $title_name= $users->test_input($_POST['title_name']);
@@ -44,9 +45,11 @@ if (isset($_POST['key']) == 'textarea'){
     if (!empty($_POST['donation_payment'])) {
         $money_to_target= $users->test_input($_POST['money_to_target']);
         $donation_payment=  $users->test_input($_POST['donation_payment']);
+        $coins=  $users->test_input($_POST['donation_payment']);
     }else {
         $donation_payment='';
         $money_to_target= '';
+        $coins= '';
     }
 
     if (!empty($status)) {
@@ -65,6 +68,7 @@ if (isset($_POST['key']) == 'textarea'){
                         'status' => $status, 
                         'title_name' => $title_name, 
                         'tweet_image' => $donation_payment, 
+                        'coins' => $coins, 
                         'money_to_target' => $money_to_target, 
                         'youtube' => $youtube, 
                         'tweetBy' => $user_id, 
@@ -76,7 +80,20 @@ if (isset($_POST['key']) == 'textarea'){
         }
         
         $home->addmention($status,$user_id,$tweet_id);
+
+        // $row= json_encode($db->insert_id);
+        if (!empty($_POST['donation_payment'])) {
+  
+            $users->insertQuery('transfer_tweet',array(
+            
+                    'tweet_id_transfer' => $tweet_id, 
+                    'user_id_transfer' => $user_id, 
+                    'money_to_target' => $money_to_target, 
+                    'created_on3' => $datetime 
         
+              ));
+        }
+
 		if($tweet_id){
                 exit('<div class="alert alert-success alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
@@ -97,6 +114,8 @@ if (isset($_POST['key']) == 'textarea'){
 }else{
 	# code...
 	$user_id= $users->test_input($_POST['id_posts']);
+    $datetime = date('Y-m-d H-i-s');
+
 	// $title_name= $users->test_input($_POST['title_name']);
 
     if (!empty($_POST['title_name'])) {
@@ -171,9 +190,11 @@ if (!empty($_POST['photo-Title5'])) {
 if (!empty($_POST['donation_payment'])) {
        $donation_payment=  $users->test_input($_POST['donation_payment']);
         $money_to_target= $users->test_input($_POST['money_to_target']);
+        $coins=  $users->test_input($_POST['donation_payment']);
 }else {
         $donation_payment='';
         $money_to_target= '';
+        $coins= '';
 }
 
 	if (!empty($status) || !empty(array_filter($files['name'])) ) {
@@ -207,6 +228,7 @@ if (!empty($_POST['donation_payment'])) {
                         'tweet_image' => $tweetimages, 
                         'tweet_image' => $tweetimages.$equal.$donation_payment, 
                         'youtube' => $youtube, 
+                        'coins' => $coins, 
                         'donation_payment' => $donation_payment, 
                         'money_to_target' => $money_to_target, 
                         'tweet_image_size' => $tweetSize, 
@@ -219,6 +241,19 @@ if (!empty($_POST['donation_payment'])) {
 		}
 
 		$home->addmention($status,$user_id,$tweet_id);
+
+        if (!empty($_POST['donation_payment'])) {
+
+            $users->insertQuery('transfer_tweet',array(
+            
+                'tweet_id_transfer' => $tweet_id, 
+                'user_id_transfer' => $user_id, 
+                'money_to_target' => $money_to_target, 
+                'created_on3' => $datetime 
+    
+            ));
+        }
+  
 
 		if($tweet_id){
                 exit('<div class="alert alert-success alert-dismissible fade show text-center">

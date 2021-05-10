@@ -65,18 +65,45 @@
        <div class="control-sidebar-bg"></div>
   </div>
   <!-- ./wrapper -->
-  <div class="popupTweet"></div>
+  <!-- Button trigger modal -->
+  <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#check">
+    Launch
+  </button> -->
+  
+  <!-- Modal -->
+<div class="popupTweet"></div>
 
+  <div class="modal fade" id="checkOUT" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header d-none">
+                  <!-- <h5 class="modal-title">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+              </div>
+              <div class="modal-body text-center">
+                  <i id="change-check" class="fa fa-check-circle-o" style="font-size:200px;color: green;" aria-hidden="true"></i>
+                 <p id="html-check"></p>
+            </div>
+          </div>
+      </div>
+  </div>
+  
   <!-- jQuery 3 -->
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.min.js"></script>
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.form.js"></script>
   <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/popper.min.js"></script>
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/bootstrap.min.js"></script>
+  <!-- <script src="< ?php echo BASE_URL_LINK ;?>dist/js/bootstrap.bundle.min.js"></script> -->
+
   <!-- SlimScroll -->
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.slimscroll.min.js"></script>
   <script src="<?php echo BASE_URL_LINK;?>dist/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo BASE_URL_LINK;?>dist/js/bootstrap4.min.js"></script>
+  <!-- <script src="< ?php echo BASE_URL_LINK;?>plugin/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="< ?php echo BASE_URL_LINK;?>plugin/datatables-responsive/js/responsive.bootstrap4.min.js"></script> -->
   <!-- FastClick -->
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/fastclick.js"></script>
   <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.Jcrop.min.js"></script>
@@ -192,6 +219,22 @@
     });
 
     $(function () {
+
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+
       $(".demo1").bootstrapNews({
         newsPerPage: 4,
         autoplay: true,
@@ -205,42 +248,42 @@
       });
     });
 
-    $(function() {
+    // $(function() {
 
-        $('form.setting-general-form').ajaxForm({
-            url: 'http://localhost/irangiro_social_site/withdraw.php' + '?f=request_payment',
-            // url: window.location.pathname + '?f=request_payment',
-            // url: window.location.href + '?&f=request_payment',
-            beforeSend: function() {
-            $('.settings_page').find('.add_wow_loader').addClass('btn-loading');
-            },
-            success: function(data) {
-                scrollToTop();
-                if (data.status == 200) {
-                    $('.setting-general-alert').html('<div class="alert alert-success">' + data.message + '</div>');
-                    $('.alert-success').fadeIn('fast');
-                } else if (data.errors) {
-                    var errors = data.errors.join("<br>");
-                    $('.setting-general-alert').html('<div class="alert alert-danger">' + errors + '</div>');
-                    $('.alert-danger').fadeIn(300);
-                }
-                $('.settings_page').find('.add_wow_loader').removeClass('btn-loading');
-            }
-        });
+    //     $('form.setting-general-form').ajaxForm({
+    //         url: 'http://localhost/irangiro_social_site/withdraw.php' + '?f=request_payment',
+    //         // url: window.location.pathname + '?f=request_payment',
+    //         // url: window.location.href + '?&f=request_payment',
+    //         beforeSend: function() {
+    //         $('.settings_page').find('.add_wow_loader').addClass('btn-loading');
+    //         },
+    //         success: function(data) {
+    //             scrollToTop();
+    //             if (data.status == 200) {
+    //                 $('.setting-general-alert').html('<div class="alert alert-success">' + data.message + '</div>');
+    //                 $('.alert-success').fadeIn('fast');
+    //             } else if (data.errors) {
+    //                 var errors = data.errors.join("<br>");
+    //                 $('.setting-general-alert').html('<div class="alert alert-danger">' + errors + '</div>');
+    //                 $('.alert-danger').fadeIn(300);
+    //             }
+    //             $('.settings_page').find('.add_wow_loader').removeClass('btn-loading');
+    //         }
+    //     });
 
 
-        // scroll to top function
-        function scrollToTop() {
-            verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
-            element = $('html');
-            offset = element.offset();
-            offsetTop = offset.top;
-            $('html, body').animate({
-                scrollTop: offsetTop
-            }, 300, 'linear');
-        }
+    //     // scroll to top function
+    //     function scrollToTop() {
+    //         verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
+    //         element = $('html');
+    //         offset = element.offset();
+    //         offsetTop = offset.top;
+    //         $('html, body').animate({
+    //             scrollTop: offsetTop
+    //         }, 300, 'linear');
+    //     }
 
-    });
+    // });
 
     // $(document).ready(function() {
     //     $("#content-slider").lightSlider({

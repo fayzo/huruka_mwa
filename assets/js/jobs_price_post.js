@@ -14,7 +14,7 @@ $(document).ready(function () {
             }, success: function (response) {
                 $(".popupTweet").html(response);
                 $(".close-imagePopup").click(function () {
-                    $(".jobs-popup").hide();
+                    $(".promote-popup").hide();
                 });
                 // console.log(response);
             }
@@ -32,7 +32,7 @@ $(document).ready(function () {
             }, success: function (response) {
                 $(".popupTweet").html(response);
                 $(".close-imagePopup").click(function () {
-                    $(".jobs-popup").hide();
+                    $(".promote-popup").hide();
                 });
                 // console.log(response);
             }
@@ -50,7 +50,7 @@ $(document).ready(function () {
             }, success: function (response) {
                 $(".popupTweet").html(response);
                 $(".close-imagePopup").click(function () {
-                    $(".jobs-popup").hide();
+                    $(".promote-popup").hide();
                 });
                 // console.log(response);
             }
@@ -73,7 +73,7 @@ $(document).ready(function () {
             }, success: function (response) {
                 $(".popupTweet").html(response);
                 $(".close-imagePopup").click(function () {
-                    $(".jobs-popup").hide();
+                    $(".promote-popup").hide();
                 });
                 // console.log(response);
             }
@@ -96,7 +96,7 @@ $(document).ready(function () {
             }, success: function (response) {
                 $(".popupTweet").html(response);
                 $(".close-imagePopup").click(function () {
-                    $(".jobs-popup").hide();
+                    $(".promote-popup").hide();
                 });
                 // console.log(response);
             }

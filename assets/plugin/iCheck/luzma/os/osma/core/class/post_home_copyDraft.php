@@ -14,27 +14,27 @@ class Posts_copyDraft extends Posts_home {
         # code...
             $sql="SELECT * FROM tweets T 
             LEFT JOIN users U ON T. tweetBy= U. user_id 
-            LEFT JOIN comment C ON T. tweet_id = C. comment_on 
-            LEFT JOIN likes L ON T. tweet_id = L. like_on 
+            -- LEFT JOIN comment C ON T. tweet_id = C. comment_on 
+            -- LEFT JOIN likes L ON T. tweet_id = L. like_on 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
-            GROUP BY 
-                CASE WHEN C. comment_on != '' THEN C. comment_on END,
-                CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
+            -- GROUP BY 
+            --     CASE WHEN C. comment_on != '' THEN C. comment_on END,
+            --     CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
 
             ORDER BY T. tweet_id DESC LIMIT $limit";
         } else {
             $sql="SELECT * FROM tweets T 
             LEFT JOIN users U ON T. tweetBy= U. user_id 
-            LEFT JOIN comment C ON T. tweet_id = C. comment_on 
-            LEFT JOIN likes L ON T. tweet_id = L. like_on 
+            -- LEFT JOIN comment C ON T. tweet_id = C. comment_on 
+            -- LEFT JOIN likes L ON T. tweet_id = L. like_on 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
             OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
-            GROUP BY 
-                CASE WHEN C. comment_on != '' THEN C. comment_on END,
-                CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
+            -- GROUP BY 
+            --     CASE WHEN C. comment_on != '' THEN C. comment_on END,
+            --     CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
             ORDER BY 
                 CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
                 CASE WHEN  T. marketing != '' THEN T. marketing END DESC ,
@@ -64,7 +64,7 @@ class Posts_copyDraft extends Posts_home {
                                      # code... 
                                     //  echo var_dump($retweet['retweet_Msg']).'<br>';
                                      
-                                if($this->isClosed($tweet['tweetBy']) == true) {
+                                if($this->isClosed($tweet['tweetBy']) != true) {
                                     continue;
                                 }
 
@@ -714,7 +714,7 @@ class Posts_copyDraft extends Posts_home {
 
                                                     <div class="col-md-6 col-sm-12">
                                                             <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
-                                                            <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                                                            <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"],$tweet); ?>
                                                     </div><!-- col -->
 
                                                 </div><!-- row -->
@@ -862,11 +862,11 @@ class Posts_copyDraft extends Posts_home {
                                            <?php if($user_id != $tweet['user_id']) { ?> 
                                                 <ul><li>
                                                     <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
-                                                    <!-- <ul><li>< ?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id']); ?></li></ul> -->
+                                                    <!-- <ul><li>< ?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id'],$tweet); ?></li></ul> -->
                                                     <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
                                                     <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
                                                     <?php $user_key =(!empty($_SESSION['key']))? $_SESSION['key']: '1' ;?> 
-                                                    <ul><li><?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id'],$user_key,$username,$tweet['tweet_id']); ?></li></ul>
+                                                    <ul><li><?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id'],$user_key,$username,$tweet['tweet_id'],$tweet); ?></li></ul>
                                                     </li>
                                                 </ul>
                                                 <?php }else{ ?>
@@ -1631,7 +1631,7 @@ class Posts_copyDraft extends Posts_home {
                                 <div class="row mb-2">
                                     <div class="col-12">
                                         <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
-                                        <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                                        <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"],$tweet); ?>
                                     </div>
                                 </div>
                                 <?php } 

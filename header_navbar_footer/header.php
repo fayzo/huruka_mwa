@@ -7,6 +7,7 @@
   <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>dist/css/dataTables.bootstrap4.min.css">
+  <!-- <link rel="stylesheet" href="< ?php echo BASE_URL_LINK;?>plugin/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
   <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>dist/css/ui.totop.css" >
 
   <!-- Font Awesome -->
@@ -196,19 +197,19 @@
                 }
             }
         };
-          xhr.addEventListener('progress',function(e){
-             var progress= Math.round((e.loaded/e.total)*100);
-             $('.progress-navbar').show();
-             $('#progress_width').css('width',progress +'%');
-             $('#progress_width').html(progress +'%');
-         }, false);
+        //   xhr.addEventListener('progress',function(e){
+        //      var progress= Math.round((e.loaded/e.total)*100);
+        //      $('.progress-navbar').show();
+        //      $('#progress_width').css('width',progress +'%');
+        //      $('#progress_width').html(progress +'%');
+        //  }, false);
 
-        xhr.addEventListener('load', function (e) { 
-            $('.progress-bar').removeClass('bg-info').addClass('bg-danger').html('<span> completed  <span class="fa fa-check"></span></span>');
-            setInterval(function () {
-                $(".progress-navbar").fadeOut();
-            }, 2000);
-        }, false);
+        // xhr.addEventListener('load', function (e) { 
+        //     $('.progress-bar').removeClass('bg-info').addClass('bg-danger').html('<span> completed  <span class="fa fa-check"></span></span>');
+        //     setInterval(function () {
+        //         $(".progress-navbar").fadeOut();
+        //     }, 2000);
+        // }, false);
     }
 
     
@@ -259,19 +260,19 @@
                 }
             }
         };
-          xhr.addEventListener('progress',function(e){
-             var progress= Math.round((e.loaded/e.total)*100);
-             $('.progress-navbar').show();
-             $('#progress_width').css('width',progress +'%');
-             $('#progress_width').html(progress +'%');
-         }, false);
+        //   xhr.addEventListener('progress',function(e){
+        //      var progress= Math.round((e.loaded/e.total)*100);
+        //      $('.progress-navbar').show();
+        //      $('#progress_width').css('width',progress +'%');
+        //      $('#progress_width').html(progress +'%');
+        //  }, false);
 
-        xhr.addEventListener('load', function (e) { 
-            $('.progress-bar').removeClass('bg-info').addClass('bg-danger').html('<span> completed  <span class="fa fa-check"></span></span>');
-            setInterval(function () {
-                $(".progress-navbar").fadeOut();
-            }, 2000);
-        }, false);
+        // xhr.addEventListener('load', function (e) { 
+        //     $('.progress-bar').removeClass('bg-info').addClass('bg-danger').html('<span> completed  <span class="fa fa-check"></span></span>');
+        //     setInterval(function () {
+        //         $(".progress-navbar").fadeOut();
+        //     }, 2000);
+        // }, false);
     }
     
 
@@ -968,7 +969,7 @@ if (isset($_SESSION['key']) && $result === '' ){ ?>
   <!-- Site wrapper skin-blue -->
 <?php }else if (isset($_SESSION['key']) && $self === 'profile.php' || isset($_SESSION['key']) && $self === 'hashtag.php' || 
  isset($_SESSION['key']) && $self === 'balance.php' || isset($_SESSION['key']) && $self ==='profileEdit.php' || 
- isset($_SESSION['key']) && $self === 'profile_close_account.php' || isset($_SESSION['key']) && $self === 'markenting_ads.php' ||
+ isset($_SESSION['key']) && $self === 'profile_close_account.php' || isset($_SESSION['key']) && $self === 'marketing_ads.php' ||
  isset($_SESSION['key']) && $self === 'newsfeeds.php' || isset($_SESSION['key']) && $self === 'events.php'){ ?>
   
   <!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
@@ -1001,6 +1002,9 @@ if (isset($_SESSION['key']) && $result === '' ){ ?>
 <?php if($device_type == 'phone') { ?>
 <div class="content-wrapper">
 <?php } 
+
 if($device_type == 'computer') { ?>
 <div class="content-wrapper <?php echo (!empty($user['background']))? $user['background'] :'chair'; ?> ">
 <?php } ?>
+
+<?php echo (isset($_SESSION['key']))? ($users->irangiro_subscription($_SESSION['key']) == true)? '': $users->irangiro_subscription($_SESSION['key']) :'' ;?>

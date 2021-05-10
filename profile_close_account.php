@@ -122,15 +122,71 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
 
                     <div class="col-md-12 mb-4">
                         <!-- Box Comment -->
-                        <div class="card card-profile card1">
-                            <div class="card-body">
-                                <h4>User Closed This Account </h4>
-                                 No one can see Thier posts.
-                                <a href="<?php echo HOME ;?>"> Click here to Go Back.</a>
+                        <?php echo $home->isClosed($_SESSION['key']); ?>
+                        
+                        <div class="card borders-tops mb-3"> 
+                            <div class="card-body message-color">
+                            <div class="post">
+
+                            <!-- <div class="user-block">
+                                <div class="user-blockImgBorder">
+                                <div class="user-blockImg">
+                                    <img src="< ?php echo BASE_URL_LINK."image/users_profile_cover/irangiro.png" ;?>" alt="User Image">
+                                </div>
+                                </div>
+                                <span class="username">
+                                    <a href="< ?php echo PROFILE ;?>">Irangiro </a>
+                                    <span><img src="< ?php echo BASE_URL_LINK.'image/img/verified-light.png' ; ?>" width="15px"></span>
+                                    < ?php echo self::followBtns(1,$user_id,1); ?>
+                                </span>
+                                <span class="description">Public Figure | Content Creator</span>
+                            </div> -->
+                            <!-- /.user-block -->
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <h3 >Welcome To irangiro</h3>
+                                            <div>Meet People <br> & <br> Explore new connection</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <img class="img-fluid"
+                                                src="<?php echo BASE_URL_LINK."image/users_cover_profile/coming-soon.png" ;?>" alt="Photo">
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+                                </div>
+                                <!-- /.col -->
                             </div>
-                            <!-- /.card-body -->
+                            <!-- /.row -->
+                            <!-- <p>
+                                <a href="#" class="link-black text-sm mr-2"><i class="fa fa-share mr-1"></i>
+                                    Share</a>
+                                <a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up mr-1"></i>
+                                    Like</a>
+                                <span class="float-right">
+                                    <a href="#" class="link-black text-sm">
+                                        <i class="fa fa-comments-o mr-1"></i> Comments ()
+                                    </a>
+                                </span>
+                            </p>
+
+                            <div class="input-group">
+                                <input class="form-control form-control-sm" type="text"
+                                    placeholder="Type a comment">
+                                <div class="input-group-append">
+                                    <span class="input-group-text btn" onclick="#" aria-label="Username"
+                                        aria-describedby="basic-addon1"><i
+                                            class="fa fa-arrow-right text-muted"></i></span>
+                                </div>
+                            </div> -->
+
+                            </div>
                         </div>
-                        <!-- /.card -->
+                        </div>
+                        <!-- /.post -->
+
                     </div>
                     <!-- /.col -->
 

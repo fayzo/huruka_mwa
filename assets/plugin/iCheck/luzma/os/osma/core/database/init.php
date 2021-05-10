@@ -89,7 +89,7 @@ define('NETWORK_RESPONSIVE', BASE_URL_PUBLIC.'network_responsive');
 define('BUSINESS_POST_JOBS', BASE_URL_PUBLIC.'business_jobPost');
 define('INDIVIDUAL_POST_JOBS', BASE_URL_PUBLIC.'individual_jobPost');
 define('FRIEND_REQUEST', BASE_URL_PUBLIC.'friend_request');
-define('PROMOTE_ADS', BASE_URL_PUBLIC.'markenting_ads');
+define('PROMOTE_ADS', BASE_URL_PUBLIC.'marketing_ads');
 define('NEWSFEED', BASE_URL_PUBLIC.'newsfeeds');
 
 
@@ -135,4 +135,28 @@ Tel : (250)787384312 / (250)787384312
 E-mail : shemafaysal@gmail.com
 
 */
+
+// return true or false
+// 	Expression      | empty($x)
+// ----------------+--------
+// $x = "";        | true    
+// $x = null       | true    
+// var $x;         | true    
+// $x is undefined | true    
+// $x = array();   | true    
+// $x = false;     | true    
+// $x = true;      | false   
+// $x = 1;         | false   
+// $x = 42;        | false   
+// $x = 0;         | true    
+// $x = -1;        | false   
+// $x = "1";       | false   
+// $x = "0";       | true    
+// $x = "-1";      | false   
+// $x = "php";     | false   
+// $x = "true";    | false   
+// $x = "false";   | false   
+
+
+
 ?>

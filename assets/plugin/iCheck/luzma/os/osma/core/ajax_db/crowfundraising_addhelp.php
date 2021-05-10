@@ -324,7 +324,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                     <strong>The text is too long !!!</strong> </div>');
 		}
 
-	$users->Postsjobscreates('crowfundraising',array( 
+	$users->creates('crowfundraising',array( 
 	'firstname1'=> $firstname, 
 	'middlename1'=> $middlename, 
 	'money_to_target'=> $money_raising, 
@@ -349,7 +349,31 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
   'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
   'user_id2'=> $user_id,
   'created_on2'=> $datetime ));
+  
+  $row= json_encode($db->insert_id);
+  
+  $query = $users->insertQuery('transfer_crowfundraising',array(
+    
+          'fund_id_transfer' => $row, 
+          'user_id_transfer' => $user_id, 
+          'money_to_target' => $money_raising, 
+          'created_on3' => $datetime 
+        ));
 
-    // 'deadline'=> $deadline,
+        if($query){
+              exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                      <button class="close" data-dismiss="alert" type="button">
+                          <span>&times;</span>
+                      </button>
+                      <strong>SUCCESS</strong> </div>');
+        }else{
+                exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                    <button class="close" data-dismiss="alert" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <strong>Fail input try again !!!</strong>
+                </div>');
+        }
+        
     }
 } ?> 

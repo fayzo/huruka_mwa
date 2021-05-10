@@ -219,7 +219,7 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                 </div>
                                 </div>
                                 <span class="username">
-                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['lastname'] ;?> | Created  on <?php echo $users->timeAgo($user['created_on2']) ;?></a>
+                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?> | Created  on <?php echo $users->timeAgo($user['created_on2']) ;?></a>
                                     <!-- //Jonathan Burke Jr. -->
                                 </span>
                                 <span class="description" ><span <?php if(isset($_SESSION['key'])){ echo 'class="people-message more"'; }else{ echo 'id="login-please" class="more" data-login="1"'; } ?> data-user="<?php echo $user['user_id2'];?>"><i style="font-size: 20px;" class="fa fa-envelope-o"></i> Message </span> | <i class="fa fa-tag mr-1"></i><?php echo $user['categories_crowfundraising'] ;?></span>
@@ -245,7 +245,7 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                         </div>
                                         </div>
                                         <span class="username">
-                                            <a href="<?php echo BASE_URL_PUBLIC.$donate['username'] ;?>"><?php echo number_format($donate['money_donate']); ?> Frw </a> <span class="float-right mr-2"><i class="fa fa-heart" ></i></span>
+                                            <a href="<?php echo (isset($_SESSION['approval']))? BASE_URL_PUBLIC.$donate['username']:"javascript:void(0)" ;?>"><?php echo number_format($donate['price_donate']); ?> Frw </a> <span class="float-right mr-2"><i class="fa fa-heart" ></i></span>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"><?php echo $donate['comment']; ?> </span>
@@ -271,7 +271,7 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                         </div>
                                         </div>
                                         <span class="username">
-                                            <a href="<?php echo BASE_URL_PUBLIC.$donate['username'] ;?>"><?php echo number_format($donate['money_donate'],2); ?> Frw <span class="float-right mr-2"><i class="fa fa-heart" ></i></span></a>
+                                            <a href="<?php echo BASE_URL_PUBLIC.$donate['username'] ;?>"><?php echo number_format($donate['price_donate'],2); ?> Frw <span class="float-right mr-2"><i class="fa fa-heart" ></i></span></a>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"><?php echo $donate['comment']; ?> </span>
@@ -306,7 +306,7 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                         <?php } ?>
                                         <!-- //Jonathan Burke Jr. -->
                                     </span>
-                                    <span class="description"> nice to donate keep up </span>
+                                    <span class="description"> Funding </span>
                                 </div> <!-- /.user-block -->
 
                                 <div class="input-group mt-2">

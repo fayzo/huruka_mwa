@@ -2,6 +2,12 @@
 <!-- < ?php include "header_navbar_footer/header_if_login.php"?> -->
 <?php include "header_navbar_footer/Get_usernameProfile.php"?>
 <title>Jobs</title>
+
+<?php if($home->isClosed($user['user_id']) != true) {
+    header('location: '.BASE_URL_PUBLIC.$user['username'].'.profile_close_account');
+    // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
+} ?>
+
 <?php include "header_navbar_footer/header.php"?>
       <header class="blog-header py-2 bg-light">
         <div class="row flex-nowrap justify-content-between align-items-center">
@@ -11,9 +17,13 @@
         </div>
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-          <?php if (isset($_SESSION['job_user'])) { ?>
-            <button type="button" class="btn btn-light" id="addPostsjobs" > + Add jobs </button>
-           <?php } ?>
+          <button type="button"  
+          <?php 
+            echo (isset($_SESSION['key']))?
+             (!empty($subscription['job_subscription']) && $users->subscription_deadline($subscription['job_date_pay'],$subscription['job_subscription']) == true )?
+             'class="btn btn-light" id="addPostsjobs"':'class="btn btn-light price-jobs" data-pricejob="job"' 
+             :' class="btn btn-light" id="login-please" data-login="1"';
+            ?> > + Add jobs </button>
           </div>
           <div class="col-4 text-center">
             <a class="blog-header-logo text-dark" href="#">Job</a>
@@ -38,7 +48,12 @@
                     <li class="breadcrumb-item"><span id="messagePopup" class="more" data-user="<?php echo $user['user_id'];?>"><a href="javascript:void(0);" ><i class="fa fa-envelope-o"></i> Message </a></span></li>
                     <li class="breadcrumb-item active"><i><a href="javascript:void(0);" onclick="location.href='<?php echo BASE_URL_PUBLIC.$user['username'] ;?>'">Profile</a></i></li>
                     <?php } } ?>
-                    <li class="breadcrumb-item active"><i><a href="javascript:void(0);" <?php echo (isset($_SESSION['key']))?(!empty($user['subscription_job']))?'class="post_as" data-post_as="1"':'class="price-jobs" data-pricejob="1"' :'id="login-please" data-login="1"';?>> Post a jobs</a></i></li>
+                    <li class="breadcrumb-item active"><i><a href="javascript:void(0);" 
+                    <?php echo 
+                    (isset($_SESSION['key']))?
+                    (!empty($subscription['job_subscription']) && $users->subscription_deadline($subscription['job_date_pay'],$subscription['job_subscription']) == true )?
+                    'class="post_as" data-post_as="1"':'class="price-jobs" data-pricejob="job"' 
+                    :'id="login-please" data-login="1"';?>> Post a jobs</a></i></li>
                     <!-- <li class="breadcrumb-item active"><i><a href="javascript:void(0);" class="price-jobs" data-pricejob="1"> Post a jobs</a></i></li> -->
                 </ol>
             </div>

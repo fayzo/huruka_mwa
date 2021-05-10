@@ -6,9 +6,14 @@
         </div>
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4">
-          <?php if (isset($_SESSION['key'])) { ?>
-            <button type="button" class="btn btn-light" id="add_crowfund" data-crowfund="<?php echo $_SESSION['key']; ?>" > + Add Startup </button>
-           <?php } ?>
+          <button type="button"  
+          <?php 
+            echo (isset($_SESSION['key']))?
+             (!empty($subscription['crowfund_subscription']) && $users->subscription_deadline($subscription['crowfund_date_pay'],$subscription['crowfund_subscription']) == true )?
+             'class="btn btn-light" id="add_crowfund" data-crowfund="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="crowfunding"' 
+             :' class="btn btn-light" id="login-please" data-login="1"';
+            ?> > + add Startup </button>
+            <!-- <button type="button" class="btn btn-light" id="add_crowfund" data-crowfund="<?php echo $_SESSION['key']; ?>" > + Add Startup </button> -->
           </div>
           <div class="col-4 text-center">
             <a class="blog-header-logo text-dark" href="#">Gushora Startup</a>

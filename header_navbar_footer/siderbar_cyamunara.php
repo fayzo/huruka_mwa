@@ -6,9 +6,15 @@
         </div>
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-          <?php if (isset($_SESSION['key'])) { ?>
-            <button type="button" class="btn btn-light" id="add_icyamunara" data-icyamunara="<?php echo $_SESSION['key']; ?>" > + Add Icyamunara </button>
-           <?php } ?>
+            <button type="button"  
+          <?php 
+            echo (isset($_SESSION['key']))?
+             (!empty($subscription['icyamunara_subscription']) && $users->subscription_deadline($subscription['icyamunara_date_pay'],$subscription['icyamunara_subscription']) == true )?
+             'class="btn btn-light" id="add_icyamunara" data-icyamunara="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="icyamunara"' 
+             :' class="btn btn-light" id="login-please" data-login="1"';
+            ?> > + Add icyamunara </button>
+
+            <!-- <button type="button" class="btn btn-light" id="add_icyamunara" data-icyamunara="< ?php echo $_SESSION['key']; ?>" > + Add Icyamunara </button> -->
           </div>
           <div class="col-4 text-center">
             <a class="blog-header-logo text-dark" href="#">Icyamunara</a>

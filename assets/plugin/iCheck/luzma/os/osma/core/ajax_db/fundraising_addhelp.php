@@ -287,7 +287,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
     $cell = $users->test_input($_POST['codecell']);
     $sector =  $users->test_input($_POST['sectorcode']);
     $village =  $users->test_input($_POST['CodeVillage']);
-    $price =  $users->test_input($_POST['money_raising']);
+    $money_raising =  $users->test_input($_POST['money_raising']);
     $additioninformation = $users->test_input($_POST['additioninformation']);
     $categories_fundraising=  $users->test_input($_POST['categories_fundraising']);
     // $deadline = $users->test_input($_POST['deadline']);
@@ -300,7 +300,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
       $other_photo_ = $home->uploadFundraisingFile($other_photo);
 		}
 
-		if (strlen($additioninformation ) > 400) {
+		if (strlen($additioninformation ) > 5000) {
 			exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>
@@ -308,31 +308,57 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                     <strong>The text is too long !!!</strong> </div>');
 		}
 
-	$users->Postsjobscreates('fundraising',array( 
-	'firstname1'=> $firstname, 
-	'middlename1'=> $middlename, 
-	'lastname1'=> $lastname,
-	'email1'=> $email, 
-	'address1'=> $address,
-	'country1'=> $country,
-	'city'=> $city,
-	'province'=> $province,
-	'districts'=> $districts,
-	'sector'=> $sector,
-	'cell'=> $cell,
-	'village'=> $village,
-  'telephone1'=> $telephone, 
-	'photo'=> $photo_, 
-	'money_to_target'=> $price, 
-	'other_photo'=> $other_photo_, 
-	'video'=> $video_, 
-	'youtube'=> $youtube, 
-  'text'=> $additioninformation,
-  'categories_fundraising'=> $categories_fundraising,
-  'photo_Title_main'=> $photo_Titleo,
-  'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
-  'user_id2'=> $user_id,
-  'created_on2'=> $datetime ));
+    $row=  $users->creates('fundraising',array( 
+          'firstname1'=> $firstname, 
+          'middlename1'=> $middlename, 
+          'lastname1'=> $lastname,
+          'email1'=> $email, 
+          'address1'=> $address,
+          'country1'=> $country,
+          'city'=> $city,
+          'province'=> $province,
+          'districts'=> $districts,
+          'sector'=> $sector,
+          'cell'=> $cell,
+          'village'=> $village,
+          'telephone1'=> $telephone, 
+          'photo'=> $photo_, 
+          'money_to_target'=> $money_raising, 
+          'other_photo'=> $other_photo_, 
+          'video'=> $video_, 
+          'youtube'=> $youtube, 
+          'text'=> $additioninformation,
+          'categories_fundraising'=> $categories_fundraising,
+          'photo_Title_main'=> $photo_Titleo,
+          'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
+          'user_id2'=> $user_id,
+          'created_on2'=> $datetime ));
+
+  // $row= json_encode($db->insert_id);
+  
+  $query = $users->insertQuery('transfer_fundraising',array(
+    
+          'fund_id_transfer' => $row, 
+          'user_id_transfer' => $user_id, 
+          'money_to_target' => $money_raising, 
+          'created_on3' => $datetime 
+
+        ));
+
+        if($query){
+              exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                      <button class="close" data-dismiss="alert" type="button">
+                          <span>&times;</span>
+                      </button>
+                      <strong>SUCCESS</strong> </div>');
+        }else{
+                exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                    <button class="close" data-dismiss="alert" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <strong>Fail input try again !!!</strong>
+                </div>');
+        }
 
     // 'deadline'=> $deadline,
     }

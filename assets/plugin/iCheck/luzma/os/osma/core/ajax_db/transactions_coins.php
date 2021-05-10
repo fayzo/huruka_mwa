@@ -33,6 +33,9 @@ if (isset($_POST['user_id'])) {
 
         $comment_coins = $_POST['comment_coins'];
         $datetime= date('Y-m-d H-i-s');
+        $donate_counts= 1;
+        $tweet_id= $_POST['tweet_id'];
+        $coins= $_POST['coins'];
 
             $users->creates('transaction_coins',array( 
             'username_coins_to'=>  $username_coins_to,
@@ -44,15 +47,41 @@ if (isset($_POST['user_id'])) {
             'comment_coins'=> $comment_coins,
             'datetime'=> $datetime));
 
-            $users->updateQuery_money('users',array( 
-                'amount_coins'=> 'amount_coins + '.$amount_coins,
-                'amount_francs'=> 'amount_francs + '.$amount_francs)
-                ,array('user_id'=> $user_id_coins_to));
+
+            if (!empty($coins)) {
+                # code...
+                $users->updateQuery_money('tweets',array( 
+                    'donate_counts'=> 'donate_counts + '.$donate_counts,
+                    'money_raising'=> 'money_raising + '.$amount_francs)
+                    ,array('tweet_id'=> $tweet_id));
+    
+                $users->updateQuery_money('tweets',array( 
+                    'donate_counts'=> 'donate_counts + '.$donate_counts,
+                    'money_raising'=> 'money_raising + '.$amount_francs)
+                    ,array('retweet_id'=> $tweet_id));
+
+                $users->updateQuery_money('transfer_tweet',array( 
+                    'donate_counts'=> 'donate_counts + '.$donate_counts,
+                    'money_raising'=> 'money_raising + '.$amount_francs)
+                    ,array(
+                    'tweet_id_transfer' => $tweet_id,
+                    'user_id_transfer'=>  $user_id_coins_to
+                ));
+            }
+
+            if ($user_id_coins_to != $_SESSION['key']) {
+                # code...
+                $users->updateQuery_money('users',array( 
+                    'amount_coins'=> 'amount_coins + '.$amount_coins,
+                    'amount_francs'=> 'amount_francs + '.$amount_francs)
+                    ,array('user_id'=> $user_id_coins_to));
+            }
 
             $result= $users->updateQuery_money('users',array( 
                 'amount_coins'=> 'amount_coins - '.$amount_coins,
                 'amount_francs'=> 'amount_francs - '.$amount_francs)
                 ,array('user_id'=> $user_id_coins_from));
+
 
             if($result){
                 exit('<div class="alert alert-success alert-dismissible fade show text-center">

@@ -5,7 +5,10 @@ $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpat
 
 if (isset($_POST['promote_post']) && !empty($_POST['promote_post'])) {
     $user_id= $_SESSION['key'];
+    $user= $home->userData($_SESSION['key']);
+
      ?>
+
 
 <div class="promote-popup">
 
@@ -33,13 +36,15 @@ if (isset($_POST['promote_post']) && !empty($_POST['promote_post'])) {
                             <h4 class="my-0 font-weight-normal">Basic</h4>
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title pricing-card-title">$10 <small class="text-muted">/ mo</small></h3>
+                            <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'marketplace\'' ;?>
+                            <h3 class="card-title pricing-card-title">$10 <small class="text-muted">/ we</small></h3>
                             <ul class="list-unstyled mt-3 mb-4">
-                              <li>1 Post last 2 week</li>
+                              <li>1 Post last 2 weeks</li>
                               <li>Reach 5,000 people</li>
                               <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-user="<?php echo $user_id; ?>">Get started </button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,'weeks',<?php echo $details ;?>)">Get started </button>
+                            <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-user="< ?php echo $user_id; ?>">Get started </button> -->
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -53,7 +58,7 @@ if (isset($_POST['promote_post']) && !empty($_POST['promote_post'])) {
                                 <li>Reach 10,000 people</li>
                                 <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-user="<?php echo $user_id; ?>">Get started</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(37000,'months',<?php echo $details ;?>)">Get started</button>
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -67,7 +72,7 @@ if (isset($_POST['promote_post']) && !empty($_POST['promote_post'])) {
                                 <li>Reach 50,000 people</li>
                                 <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-user="<?php echo $user_id; ?>">Get started</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(120000,'months',<?php echo $details ;?>)">Get started</button>
                         </div>
                         </div>
                     </div>

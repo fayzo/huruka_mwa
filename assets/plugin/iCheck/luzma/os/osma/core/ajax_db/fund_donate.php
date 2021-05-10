@@ -4,47 +4,47 @@ $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpat
 
 if(isset($_POST['key'])){
 
- if ($_POST['key'] == 'donation') {
+ if ($_POST['key'] == 'fund_donation') {
     
      $datetime= date('Y-m-d H-i-s'); // last_login 
      $date_registry= date('Y-m-d'); // date_registry 
-     $firstname =  $users->test_input($_POST['firstname']);
-     $lastname = $users->test_input($_POST['lastname']);
+     $name = $users->test_input($_POST['name']);
+     $email = $users->test_input($_POST['email']);
+     $subscription = $users->test_input($_POST['subscription']);
+
     //  $donate =  $users->test_input(number_format($_POST['donate'],2));
-     $donate =  $users->test_input($_POST['donate']);
+     $donate =  $users->test_input($_POST['amount']);
      $number =  $users->test_input($_POST['number']);
-     $Sendby_firstname =  $users->test_input($_POST['Sendby_firstname']);
-     $Sendby_lastname =  $users->test_input($_POST['Sendby_lastname']);
      $sent_to_user_id =  $users->test_input($_POST['sent_to_user_id']);
      $sentby_user_id =  $users->test_input($_POST['sentby_user_id']);
      $fund_id =  $users->test_input($_POST['fund_id']);
      $comment =  $users->test_input($_POST['comment']);
+     $donate_counts = 1;
 
-     if(!preg_match("/^[a-zA-Z ]*$/", $Sendby_firstname)){
-        exit('<div class="alert alert-danger alert-dismissible fade show text-center">
-                    <button class="close" data-dismiss="alert" type="button">
-                        <span>&times;</span>
-                    </button>
-                    <strong>Only letters and white space allowed</strong> </div>');
-    }else if(!preg_match("/^[a-zA-Z ]*$/", $Sendby_lastname)){
-        exit('<div class="alert alert-danger alert-dismissible fade show text-center">
-                    <button class="close" data-dismiss="alert" type="button">
-                        <span>&times;</span>
-                    </button>
-                    <strong>Only letters and white space allowed</strong> </div>');
-    }else {
+    //   $fundraising->fundraising_donateUpdate($donate,$fund_id);
 
-      $fundraising->fundraising_donateUpdate($donate,$fund_id);
+      $users->updateQuery_money('fundraising',array( 
+        'donate_counts'=> 'donate_counts + '.$donate_counts,
+        'money_raising'=> 'money_raising + '.$donate)
+        ,array('fund_id'=> $fund_id));
+
+      $users->updateQuery_money('transfer_fundraising',array( 
+        'donate_counts'=> 'donate_counts + '.$donate_counts,
+        'money_raising'=> 'money_raising + '.$donate)
+        ,array(
+        'fund_id_transfer' => $fund_id,
+        'user_id_transfer'=>  $sent_to_user_id
+        ));
+
 
       $users->Postsjobscreates('fundraising_donation',
       array(
-            'firstname' => $firstname, 
-            'lastname' => $lastname, 
-            'money_donate' => $donate, 
-            'number_to_send' => $number, 
-            'Sendby_firstname' => $Sendby_firstname, 
-            'Sendby_lastname' => $Sendby_lastname, 
-            'date_donate' => $date_registry, 
+
+            'name_fund' => $name, 
+            'email_fund' => $email, 
+            'price_donate' => $donate, 
+            'number_sent' => $number, 
+            'fund_subscription' => $subscription, 
             'created_on3' => $datetime,
             'sent_to_user_id' => $sent_to_user_id,
             'sentby_user_id' => $sentby_user_id,
@@ -52,7 +52,6 @@ if(isset($_POST['key'])){
             'comment' => $comment,
       ));
 
-     } 
   }
 }
 
@@ -69,7 +68,7 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
         	<button class="close-imagePopup"><i class="fa fa-times" aria-hidden="true"></i></button>
         </span>
         <div class="wrap6Pophide" onclick="togglePopup( )"></div>
-           <div class="img-popup-wrap"  id="popupEnd">
+           <div class="img-popup-wrap"  id="popupEnd" style="max-width: 500px;">
         	<div class="img-popup-body">
 
 
@@ -91,13 +90,8 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                             value="<?php echo $sentby_user_id;?>" style="display:none" />
                                          <input type="hidden" name="fund_id" id="fund_id"
                                             value="<?php echo $fund_id;?>" style="display:none" />
-                                            <input type="hidden" class="form-control" name="firstname" id="firstname"
-                                                aria-describedby="helpId" value="<?php echo $user['firstname']; ?>" placeholder="Firstname">
-                                    </div>
-                                    <div class="col">
-                                        <!-- <label for="lastname">Lastname :</label> -->
-                                            <input type="hidden" class="form-control" name="lastname" id="lastname"
-                                                aria-describedby="helpId" value="<?php echo $user['lastname']; ?>"  placeholder="Lastname">
+                                         <input type="hidden" name="email" id="email"
+                                            value="<?php echo $user0['email'];?>" style="display:none" />
                                     </div>
                                 </div>
 
@@ -113,28 +107,21 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                                 aria-describedby="helpId"   placeholder="donate ">
                                         </div>
                                     </div>
-
-                                    <div class="col-md-12 col-sm-12">
-                                        <!-- <label for="lastname">Send Mobile money to This number :</label> -->
-                                            <input type="hidden" class="form-control" name="number" id="number"
-                                                aria-describedby="helpId" value="flutterwave" readonly>
-                                    </div>
                                 </div>
 
-                                <!-- <div class="h4 mt-3">Send By </div> -->
                                 <div class="form-row mt-2 mb-2">
 
                                     <div class="col">
-                                        <!-- <label for="firstname">Firstname :</label> -->
                                             <input type="hidden" class="form-control" name="Sendby_firstname" id="sendby_firstname"
                                                 aria-describedby="helpId" value="<?php echo $user0['firstname']; ?>" placeholder="Firstname">
                                     </div>
                                     <div class="col">
-                                        <!-- <label for="lastname">Lastname :</label> -->
                                             <input type="hidden" class="form-control" name="Sendby_lastname" id="sendby_lastname"
                                                 aria-describedby="helpId" value="<?php echo $user0['lastname']; ?>"  placeholder="Lastname">
                                     </div>
                                 </div>
+
+                                <!-- <div class="h4 mt-3">Send By </div> -->
                                  <div class="form-row mt-2 mb-2">
                                     <div class="col">
                                         <label for="lastname">Comment :</label>
@@ -150,7 +137,7 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                 </div>
                                     <div id="response"></div>
 
-                                    <button type="button" onclick="donateCrowfund('donation');" class="btn main-active btn-block"><b>Submit</b></button>
+                                    <button type="button" onclick="donateCrowfund('fund_donation');" class="btn main-active btn-block"><b>Submit</b></button>
                                     <div class="mb-2" id="respone-success"></div>
                             </form>
                         </div><!-- card-body -->
@@ -166,10 +153,8 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
 <script>
 
  function donateCrowfund(key) {
-        var firstname = $("#firstname");
-        var lastname = $("#lastname");
         var donate = $("#donate");
-        var number = $("#number");
+        var email = $("#email");
         var Sendby_firstname = $("#sendby_firstname");
         var Sendby_lastname = $("#sendby_lastname");
         var sent_to_user_id = $("#sent_to_user_id");
@@ -178,40 +163,100 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
         var comment = $("#Comment");
         //   use 1 or second method to validaton
 
-        if (isEmpty(firstname) && isEmpty(lastname) && isEmpty(donate) && isEmpty(number) &&
-         isEmpty(Sendby_firstname) && isEmpty(Sendby_lastname) && isEmpty(comment)) {
+        if (isEmpty(donate) && isEmpty(comment)) {
             //    alert("complete register");
             $.ajax({
                 url: "core/ajax_db/fund_donate.php",
+                // url: 'core/ajax_db/test',
                 method: "POST",
                 dataType: "text",
                 data: {
+                    pay: 'pay',
                     key: key,
-                    firstname: firstname.val(),
-                    lastname: lastname.val(),
-                    donate: donate.val(),
-                    number: number.val(),
-                    Sendby_firstname: Sendby_firstname.val(),
-                    Sendby_lastname: Sendby_lastname.val(),
+                    subscription: key,
+                    description: key,
+                    month: 'day',
+                    number: '',
+                    amount: donate.val(),
+                    name: Sendby_firstname.val() +' '+ Sendby_lastname.val(),
+                    email: email.val(),
+                    user_id: sentby_user_id.val(),
+
                     sent_to_user_id: sent_to_user_id.val(),
                     sentby_user_id: sentby_user_id.val(),
+
                     fund_id: fund_id.val(),
                     comment: comment.val(),
                 },
                 success: function(response) {
-                           console.log(response);
+                        console.log(response);
+                        $(".donate-popup").hide();
                     if (response.indexOf('SUCCESS') >= 0) {
                         $("#response").html(response);
-                        setInterval(() => {
-                            // window.location = 'include/login.php';
-                        }, 2000);
+                        // setInterval(() => {
+                        //     // window.location = 'include/login.php';
+                        // }, 2000);
+                        $.ajax({
+                            // url: 'flutter/pay',
+                            url: 'core/ajax_db/test',
+                            method: 'POST',
+                            dataType : "text",
+                            // contentType: "application/json",
+                            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                            data: {
+                                pay: 'pay',
+                                subscription: key,
+                                description: key,
+                                month: 'day',
+                                amount: donate.val(),
+                                name: Sendby_firstname.val() +' '+ Sendby_lastname.val(),
+                                email: email.val(),
+                                user_id: sentby_user_id.val(),
+                            },
+                            success: function (response) {
+                                // var  objJSON = JSON.parse(response);
+                                // console.log(objJSON.status,objJSON.data.link);
+                                // if (objJSON.status == "success") {
+                                $(".promote-popup").hide();
+
+                                if (response.indexOf('SUCCESS') >= 0) {
+                                    // window.open(objJSON.data.link, '_blank');
+                                    // window.location.href = objJSON.data.link;
+                                    // window.location = objJSON.data.link;
+                                    // location.reload();
+                                    $("#checkOUT").modal('show');
+                                    $("#checkOUT").delay(2000).fadeOut(450);
+                                    setTimeout(() => {
+                                        $("#checkOUT").modal('hide');
+                                    }, 1500);
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 2000);
+                                    console.log(response);
+                                    
+                                } else{
+
+                                    $("#checkOUT").modal('show');
+                                    $('#change-check').removeClass('fa fa-check-circle-o')
+                                    .addClass('fa fa-times').css({"color":"red","font-size":"200px"});
+                                    $('#html-check').html('We can not process your payment').css({"text-align":"center"});
+                                    $("#checkOUT").delay(2000).fadeOut(450);
+                                    setTimeout(() => {
+                                        $("#checkOUT").modal('hide');
+                                    }, 1500);
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 2000);
+                                }
+                            }
+                        });
                         //  setInterval(() => {
                         //     location.reload();
                         // }, 2000);
                     }else if (response.indexOf('Fail') >= 0) {
                         $("#response").html(response);
                     }else{
-                        isEmptys(Sendby_firstname) || isEmptys(Sendby_lastname)
+                        isEmptys(donate) || isEmptys(comment)
                     }
                 }
             });

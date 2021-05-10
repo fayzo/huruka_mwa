@@ -433,7 +433,7 @@ class Follow extends Home
     }
 
     // static public function tooltipProfile($whoTofollow,$user_id,$follow_id)
-    static public function tooltipProfile($whoTofollow,$user_id,$follow_id,$user_key_coins,$username_keycoins,$tweet_id)
+    static public function tooltipProfile($whoTofollow,$user_id,$follow_id,$user_key_coins,$username_keycoins,$tweet_id,$tweet)
     {
         $mysqli= self::$databases;
         $sql="SELECT * FROM users WHERE user_id = '{$follow_id}' ";
@@ -481,7 +481,7 @@ class Follow extends Home
                             </div><!-- info body name end-->
                         </div><!-- info in body end-->
                         <div class="info-in-footer">
-                        <?php echo self::coins_recharge_tweet($user['user_id'],$user_key_coins,$username_keycoins,$user['username'],$tweet_id); ?>
+                        <?php echo self::coins_recharge_tweet_tooltip($user['user_id'],$user_key_coins,$username_keycoins,$user['username'],$tweet_id,$tweet); ?>
                                 
                             <div class="number-wrapper">
                                 <div class="num-box">
@@ -559,7 +559,7 @@ class Follow extends Home
         
     <?php }
 
-    static public function coins_recharge_tweet($user_id,$user_key,$username_key,$username,$tweet_id)
+    static public function coins_recharge_tweet_tooltip($user_id,$user_key,$username_key,$username,$tweet_id,$tweet)
     {
         $mysqli= self::$databases;
         $sql="SELECT * FROM users WHERE user_id = '{$user_id}' ";
@@ -576,6 +576,8 @@ class Follow extends Home
             <form method="post" class="form-coins<?php echo $tweet_id;?>">
 
             <input type="hidden" name="user_id" value="<?php echo $user_key; ?>">
+            <input type="hidden" name="coins" value="<?php echo $tweet['coins']; ?>">
+            <input type="hidden" name="tweet_id" value="<?php echo ($tweet['retweet_id'] != 0)?$tweet['retweet_id']:$tweet['tweet_id']; ?>">
             <input type="hidden" name="user_id_coins_to" value="<?php echo $user_id; ?>">
             <input type="hidden" name="username_coins_to" value="<?php echo $username; ?>">
             <input type="hidden" name="user_id_coins_from" value="<?php echo $user_key; ?>">
@@ -606,6 +608,81 @@ class Follow extends Home
         
     <?php }
 
+    static public function coins_recharge_tweet($user_id,$user_key,$username_key,$username,$tweet_id,$tweet)
+    {
+        $mysqli= self::$databases;
+        $sql="SELECT * FROM users WHERE user_id = '{$user_id}' ";
+        $query= $mysqli->query($sql);
+        $user= $query->fetch_assoc(); ?>
+
+         <div  class="container retweetcolor p-4 shadow-sm border">
+            <div class="">
+                <img class="img-donate-coins" src="<?php echo BASE_URL_LINK; ?>image/background_image/donate_coins.png">
+            </div>
+         
+            <form method="post" class="form-coins<?php echo $tweet_id;?>">
+            <div  class="row">
+            <div class="col-md-12">
+
+            <input type="hidden" name="user_id" value="<?php echo $user_key; ?>">
+            <input type="hidden" name="coins" value="<?php echo $tweet['coins']; ?>">
+            <input type="hidden" name="tweet_id" value="<?php echo ($tweet['retweet_id'] != 0)?$tweet['retweet_id']:$tweet['tweet_id']; ?>">
+            <input type="hidden" name="user_id_coins_to" value="<?php echo $user_id; ?>">
+            <input type="hidden" name="username_coins_to" value="<?php echo $username; ?>">
+            <input type="hidden" name="user_id_coins_from" value="<?php echo $user_key; ?>">
+            <input type="hidden" name="username_coins_from" value="<?php echo $username_key; ?>">
+
+                <label for="exampleFormControlInput1">Send Reward <i class="fas fa-coins text-warning"></i> Coins to <?php echo $username;?>
+                    <!-- <img class="img-donate-coins" src="< ?php echo BASE_URL_LINK; ?>image/background_image/coinsAsset.png"> -->
+                </label>
+                <div class="form-group">
+                    <select class="form-control amount_coins" id="amount_coins<?php echo $tweet_id;?>" name="amount_coins" style="background:none">
+                    <option value="">Select Coins</option>
+                    <option value='35=>500'>35 coins    =>    500 Frw</option>
+                    <option value='70=>1000'>70 coins    =>    1,000 Frw</option>
+                    <option value='350=>5000'>350 coins   =>    5,000 Frw </option>
+                    <option value='1400=>21000'>1400 coins  =>    21,000 Frw </option>
+                    <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control comment_coins" name="comment_coins" id="comment_coins<?php echo $tweet_id;?>" placeholder="Comment to <?php echo $username ;?>" style="background:none">
+                </div>
+            </div><!-- col -->
+
+            <div class="col-12 mb-2">
+                
+                <div class="text-muted mb-1">Donation
+                    <span class="text-success px-1 float-right" style="border-radius:3px;font-size:11px;"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</span>
+                </div>
+                <div class="card-text">
+                <!-- 40,000 -->
+                    <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
+                    Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo self::count_month($tweet['posted_on']);?> 
+                    <span class="float-right"><?php echo self::donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
+                    <!-- 40 -->
+                </div>
+                <div class="progress clear-float " style="height: 10px;">
+                    <?php echo self::Users_donationMoneyRaising($tweet['money_raising'],$tweet['money_to_target']); ?>
+                </div>
+                
+                <div class="clear-float">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    <span class="text-muted"><?php echo self::timeAgo($tweet['posted_on']); ?></span>
+                    <span class="text-muted float-right text-right">out of <?php echo number_format($tweet['money_to_target']).' Frw'; ?></span>
+                    <!-- 13 days Left -->
+                </div>
+
+                <span class="response_coins"></span>
+                <input type="button" name="reward_coins" value="Send Donation" <?php echo (!empty($_SESSION['key']))?'data-tweet_id="'.$tweet['tweet_id'].'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+            </div><!-- col -->
+        </div><!-- row -->
+        </form>
+
+        </div><!-- container -->
+        
+    <?php }
+
     static public function donate_recharge_tweet($user_id,$user_key,$username_key,$tweet)
     {
         $mysqli= self::$databases;
@@ -624,6 +701,8 @@ class Follow extends Home
             <div class="col-12">
 
             <input type="hidden" name="user_id" value="<?php echo $user_key; ?>">
+            <input type="hidden" name="coins" value="<?php echo $tweet['coins']; ?>">
+            <input type="hidden" name="tweet_id" value="<?php echo ($tweet['retweet_id'] != 0)?$tweet['retweet_id']:$tweet['tweet_id']; ?>">
             <input type="hidden" name="user_id_coins_to" value="<?php echo $user_id; ?>">
             <input type="hidden" name="username_coins_to" value="<?php echo $tweet['username']; ?>">
             <input type="hidden" name="user_id_coins_from" value="<?php echo $user_key; ?>">
@@ -655,7 +734,7 @@ class Follow extends Home
                 <div class="card-text">
                 <!-- 40,000 -->
                     <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
-                    Raised
+                    Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo self::count_month($tweet['posted_on']);?> 
                     <span class="float-right"><?php echo self::donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
                     <!-- 40 -->
                 </div>

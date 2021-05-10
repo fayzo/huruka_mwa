@@ -62,6 +62,7 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                 <div class="card-body">
                    <div class="row reusercolor p-2">
                        <div class="col-md-6">
+                       <div class=" pr-5">
                            <div id="jssor_1"  style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:980px;overflow:hidden;visibility:hidden;">
                                 <!-- Loading Screen -->
                                 <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
@@ -111,7 +112,27 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                           Helps <?php echo $user['lastname1']." ". $user['photo_Title_main']; ?>
                        </i></h4>
                        <div class="mt-2">
-                           <?php echo $user['text']; ?>
+                          <div id="link_" class="show-read-more">
+                            <?php 
+
+                                if (strlen($user["text"]) > 200) {
+                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                $tweettext = substr($user["text"], 0, 200);
+                                $tweetstatus = substr($user["text"], 0, strrpos($tweettext, ' ')).'
+                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$user["fund_id"].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                echo $home->getTweetLink($tweetstatus);
+                                }else{
+                                echo $home->getTweetLink($user["text"]);
+                                }  
+
+                                if (strlen($user["text"]) > 200) {
+                                    // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
+                                    $tweettext = substr($user["text"], 0, 200);
+                                    $tweetstatus = substr($user["text"], strrpos($tweettext, ' '));
+                                    echo '<span style="display: none;" class="more-text view-more-text'.$user["fund_id"].'">'.$home->getTweetLink($tweetstatus).'</span>';
+                                }  
+                                ?>
+                            </div>
                        </div>
                        <?php 
                         $expodefile = explode("=",$user['other_photo']); 
@@ -200,13 +221,15 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                <?php } ?>
 
                      </div> <!-- col-md-6  -->
-                     <div class="col-md-6 pl-5">
+                     </div> <!-- col-md-6  -->
+                     <div class="col-md-6">
                             <span><?php echo number_format($user['money_raising']).' Frw Raised out of<span class="float-right text-right"> '.number_format($user['money_to_target']).' Frw <span class="text-success">Goal </span></span>'; ?>  </span>
                             <div class="progress " style="height: 6px;">
                                   <?php echo $users->Users_donationMoneyRaising($user['money_raising'],$user['money_to_target']); ?>
                                 <!-- <div class="progress-bar  bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
                             </div>
-                            <p>Raised by <?php echo $user['donate_counts']; ?> people in 30 months <span class="float-right text-right"><?php echo $users->donationPercetangeMoneyRaimaing($user['money_raising'],$user['money_to_target']); ?> /100 %</span></p>
+                            <!-- 30 months -->
+                            <p>Raised by <?php echo $user['donate_counts']; ?> people in <?php echo $users->count_month($user['created_on2']);?> <span class="float-right text-right"><?php echo $users->donationPercetangeMoneyRaimaing($user['money_raising'],$user['money_to_target']); ?> /100 %</span></p>
                             <button type="button"  <?php if(isset($_SESSION['key'])){ echo 'class="btn btn-primary donation-fundraising-btn"'; }else{ echo 'class="btn btn-primary" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $user['user_id']; ?>" data-fund="<?php echo $user['fund_id']; ?>">Donate Now</button><br>
                             
                             <div class="user-block mt-3">
@@ -246,7 +269,7 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                                         </div>
                                         </div>
                                         <span class="username">
-                                            <a href="<?php echo BASE_URL_PUBLIC.$donate['username'] ;?>"><?php echo number_format($donate['money_donate']); ?> Frw </a> <span class="float-right mr-2"><i class="fa fa-heart" ></i></span>
+                                            <a href="<?php echo BASE_URL_PUBLIC.$donate['username'] ;?>"><?php echo number_format($donate['price_donate']); ?> Frw </a> <span class="float-right mr-2"><i class="fa fa-heart" ></i></span>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"><?php echo $donate['comment']; ?> </span>
@@ -272,7 +295,7 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                                         </div>
                                         </div>
                                         <span class="username">
-                                            <a href="<?php echo BASE_URL_PUBLIC.$donate['username'] ;?>"><?php echo number_format($donate['money_donate'],2); ?> Frw <span class="float-right mr-2"><i class="fa fa-heart" ></i></span></a>
+                                            <a <?php echo (isset($_SESSION['approval']) && $_SESSION['approval'] === 'on')? 'href="javascript:void(0)"':'href="'.BASE_URL_PUBLIC.$donate['username'].'"';?> ><?php echo number_format($donate['price_donate'],2); ?> Frw <span class="float-right mr-2"><i class="fa fa-heart" ></i></span></a>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"><?php echo $donate['comment']; ?> </span>
@@ -306,7 +329,7 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                                         <?php } ?>
                                         <!-- //Jonathan Burke Jr. -->
                                     </span>
-                                    <span class="description"> nice to donate keep up </span>
+                                    <span class="description"> donate </span>
                                 </div> <!-- /.user-block -->
                          
                                 <div class="input-group mt-2">

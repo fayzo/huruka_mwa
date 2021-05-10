@@ -2,6 +2,11 @@ $(document).ready(function () {
     
     $(document).on('click','.t-show-popup',function () {
         var tweet_id= $(this).data('tweet');
+        $('.form-coins'+tweet_id).removeClass();
+        $('#amount_coins'+tweet_id).removeAttr('id');
+        $('#comment_coins'+tweet_id).removeAttr('id');
+        $(".response_coins").removeClass();
+        
           $.ajax({
                     url: 'core/ajax_db/popupPost',
                     method: 'POST',

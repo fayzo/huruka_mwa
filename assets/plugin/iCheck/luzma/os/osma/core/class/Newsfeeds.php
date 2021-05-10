@@ -33,9 +33,10 @@ class Newsfeeds extends Fundraising {
                                 # code... 
                             //  echo var_dump($retweet['retweet_Msg']).'<br>';
                             
-                        if($this->isClosed($tweet['tweetBy']) == true) {
+                        if($this->isClosed($tweet['tweetBy']) != true) {
                             continue;
                         } ?>
+
                         <div class="col-12 ">
                         <div class="card mb-3" id="userComment_<?php echo $tweet["tweet_id"]; ?>"> 
                         <div class="card-body message-color">
@@ -831,7 +832,7 @@ class Newsfeeds extends Fundraising {
                         <div class="row mb-2">
                             <div class="col-12">
                                 <?php $username =(!empty($_SESSION['username']))? $_SESSION['username']: 'irangiro' ;?> 
-                                <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"]); ?>
+                                <?php echo Follow::coins_recharge_tweet($tweet['user_id'],$user_id,$username,$tweet['username'],$tweet["tweet_id"],$tweet); ?>
                             </div>
                         </div>
                         <?php } ?>
@@ -1258,13 +1259,15 @@ class Newsfeeds extends Fundraising {
 
                         </td>
                         <td>
-
                        <?php
                         if (strlen($tweet['status']) > 95) {
                             // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                             $tweettext = substr($tweet['status'], 0, 95);
                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                            <a class="t-show-popup more" href="javascript:void(0)" data-tweet="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a>';
+                            <a href="javascript:void(0)"'
+                            .((isset($_SESSION['key']))?
+                            'class="t-show-popup more" data-tweet="'.$tweet['tweet_id'].'"':'id="login-please" data-login="1"').
+                            'style"font-weight: 500 !important;font-size:8px">... Read more...</a>';
                             echo $this->getTweetLink($tweetstatus);
                         }else{
                         echo $this->getTweetLink($tweet['status']);

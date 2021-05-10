@@ -30,10 +30,16 @@ class Fundraising extends Events
                     <div class="card borders-bottoms more" >
                         <img class="card-img-top" width="242px" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>" height="160px" src="<?php echo BASE_URL_PUBLIC ;?>uploads/fundraising/<?php echo $row['photo'] ;?>" >
                         <div class="card-body">
-                            <div class="p-0 font-weight-bold">Fundraising 
+                            <div class="p-0"> <span class="font-weight-bold"> Fundraising </span>
 
                                 <?php if(isset($_SESSION['key']) && $user_id == $row['user_id2']){ ?>
                                 <ul class="list-inline mb-0  float-right" style="list-style-type: none;">  
+
+                                    <li  class="list-inline-item"><button class="comments-btn text-sm" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>" >
+                                        <i class="fa fa-comments-o mr-1"></i> (<?php echo $this->count_fund($row['fund_id']) ;?>)
+                                        <!-- Comments -->
+                                    </button>
+                                    </li>
 
                                     <li  class=" list-inline-item">
                                         <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
@@ -52,11 +58,10 @@ class Fundraising extends Events
                                 <?php } ?>
 
                                 <?php if($likes['like_on'] == $row['fund_id']){ ?>
-                                            <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2" data-login="1" '; } ?> style="font-size:16px;" data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>"><span class="likescounter "><?php echo $row['likes_counts'] ;?></span> <i class="fa fa-heart"  ></i></span>
+                                            <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2" data-login="1" '; } ?> data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>"><span class="likescounter "><?php echo $row['likes_counts'] ;?></span> <i class="fa fa-heart"  ></i> Like</span>
                                 <?php }else{ ?>
-                                    <span <?php if(isset($_SESSION['key'])){ echo 'class="like-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2"  data-login="1" '; } ?> style="font-size:16px;" data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>" ><span class="likescounter"> <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> <i class="fa fa-heart-o" ></i> </span>
+                                    <span <?php if(isset($_SESSION['key'])){ echo 'class="like-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2"  data-login="1" '; } ?> data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>" ><span class="likescounter"> <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> <i class="fa fa-heart-o" ></i> Like</span>
                                 <?php } ?>
-                            
                             </div>
 
                             <hr>
@@ -354,6 +359,19 @@ class Fundraising extends Events
       echo $total_Comment;
     }
 
+    
+    public function count_fund($fund_id)
+    {
+        $db =$this->database;
+        $query= "SELECT COUNT(*) FROM comment_funding C LEFT JOIN fundraising F ON C. comment_on= F.fund_id  WHERE C. comment_on = $fund_id ";
+        $sql= $db->query($query);
+        $row_unapproval = $sql->fetch_array();
+        $total_unapprovalcomm= array_shift($row_unapproval);
+        $array= array(0,$total_unapprovalcomm);
+        $total_unapproval= array_sum($array);
+        return $total_unapproval;
+    }
+
     public function fundraisingcountPOSTS($categories)
     {
       $db =$this->database;
@@ -396,10 +414,17 @@ class Fundraising extends Events
                 <div class="card borders-bottoms more" >
                         <img class="card-img-top" width="242px" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>" height="160px" src="<?php echo BASE_URL_PUBLIC ;?>uploads/fundraising/<?php echo $row['photo'] ;?>" >
                         <div class="card-body">
-                            <div class="p-0 font-weight-bold">Fundraising 
+                        <div class="p-0"> <span class="font-weight-bold"> Fundraising </span>
 
                                 <?php if(isset($_SESSION['key']) && $user_id == $row['user_id2']){ ?>
+                                
                                 <ul class="list-inline mb-0  float-right" style="list-style-type: none;">  
+
+                                    <li  class="list-inline-item"><button class="comments-btn text-sm" id="fund-readmore" data-fund="<?php echo $row['fund_id'] ;?>" >
+                                        <i class="fa fa-comments-o mr-1"></i> (<?php echo $this->count_fund($row['fund_id']) ;?>)
+                                        <!-- Comments -->
+                                    </button>
+                                    </li>
 
                                     <li  class=" list-inline-item">
                                         <ul class="deleteButt" style="list-style-type: none; margin:0px;" >

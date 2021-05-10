@@ -3,7 +3,7 @@
 <?php include "header_navbar_footer/Get_usernameProfile.php"?>
 <title><?php echo $profileData['username'].' your profile'; ?></title>
 
-<?php if($home->isClosed($profileData['user_id']) == true) {
+<?php if($home->isClosed($profileData['user_id']) != true) {
     header('location: '.BASE_URL_PUBLIC.$profileData['username'].'.profile_close_account');
     // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
 } ?>

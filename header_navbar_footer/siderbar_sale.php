@@ -6,9 +6,16 @@
         </div>
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4">
-          <?php if (isset($_SESSION['key']) && $_SESSION['approval'] === 'on') { ?>
-            <button type="button" class="btn btn-light" id="add_sale" data-sale="<?php echo $_SESSION['key']; ?>" > + Add sale </button>
-           <?php } ?>
+          <button type="button"  
+          <?php 
+          // && $_SESSION['approval'] === 'on'
+            echo (isset($_SESSION['key']) )?
+             (!empty($subscription['marketplace_subscription']) && $users->subscription_deadline($subscription['marketplace_date_pay'],$subscription['marketplace_subscription']) == true )?
+             'class="btn btn-light" id="add_sale" data-sale="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="marketplace"' 
+             :' class="btn btn-light" id="login-please" data-login="1"';
+            ?> > + Add sale </button>
+
+            <!-- <button type="button" class="btn btn-light" id="add_sale" data-sale="< ?php echo $_SESSION['key']; ?>" > + Add sale </button> -->
           </div>
           <div class="col-4 text-center">
             <a class="blog-header-logo text-dark" href="#">Shopping Items</a>

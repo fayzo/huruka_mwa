@@ -2,6 +2,10 @@
 <?php include "header_navbar_footer/header_if_login.php"?>
 <!-- < ?php include "header_navbar_footer/Get_usernameProfile.php"?> -->
 <title><?php echo $user['username'].' your Profile-edit'; ?></title>
+<?php if($home->isClosed($user['user_id']) != true) {
+    header('location: '.BASE_URL_PUBLIC.$user['username'].'.profile_close_account');
+    // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
+} ?>
 <?php include "header_navbar_footer/header.php"?>
 
 
