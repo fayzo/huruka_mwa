@@ -350,10 +350,9 @@ class Follow extends Home
            echo '
                 <li>
                      '.((!empty($following['profile_img']))?
-                     ' <img class="rounded-circle"
-                          src="'.BASE_URL_LINK."image/users_profile_cover/".$following['profile_img'].'">'
+                     ' <img class="rounded-circle" src="'.BASE_URL_LINK."image/users_profile_cover/".$following['profile_img'].'">'
                     :' <img class="rounded-circle" src="'.BASE_URL_LINK.NO_PROFILE_IMAGE_URL.'" />' ).'
-                     <a class="users-list-name" href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['lastname'].'</a>
+                     <a class="users-list-name" href="'.BASE_URL_PUBLIC.$following['username'].'">'.$following['username'].'</a>
                      <!-- <span class="users-list-date">Today</span> -->
                 </li> ';
          } ?>
@@ -540,11 +539,15 @@ class Follow extends Home
                 <div class="form-group">
                     <select class="form-control amount_coins" id="amount_coins" name="amount_coins">
                     <option value="">Select Coins</option>
-                    <option value='35=>500'>35 coins    =>    500 Frw</option>
-                    <option value='70=>1000'>70 coins    =>    1,000 Frw</option>
-                    <option value='350=>5000'>350 coins   =>    5,000 Frw </option>
-                    <option value='1400=>21000'>1400 coins  =>    21,000 Frw </option>
-                    <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option>
+                        <option value='0.5=>50'>0.5 coins    =>    50 Frw</option>
+                        <option value='1=>100'>1 coins    =>    100 Frw</option>
+                        <option value='5=>500'>5 coins    =>    500 Frw</option>
+                        <option value='10=>1000'>10 coins    =>    1,000 Frw</option>
+                        <option value='50=>5000'>50 coins    =>    5,000 Frw</option>
+                        <option value='100=>10000'>100 coins    =>    10,000 Frw</option>
+                        <option value='250=>25000'>250 coins    =>    25,000 Frw</option>
+                        <option value='500=>50000'>500 coins   =>    50,000 Frw </option>
+                        <option value='1000=>100000'>1000 coins  =>    100,000 Frw </option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -589,11 +592,20 @@ class Follow extends Home
                 <div class="form-group">
                     <select class="form-control amount_coins" id="amount_coins<?php echo $tweet_id;?>" name="amount_coins" style="background:none">
                     <option value="">Select Coins</option>
-                    <option value='35=>500'>35 coins    =>    500 Frw</option>
+                        <option value='0.5=>50'>0.5 coins    =>    50 Frw</option>
+                        <option value='1=>100'>1 coins    =>    100 Frw</option>
+                        <option value='5=>500'>5 coins    =>    500 Frw</option>
+                        <option value='10=>1000'>10 coins    =>    1,000 Frw</option>
+                        <option value='50=>5000'>50 coins    =>    5,000 Frw</option>
+                        <option value='100=>10000'>100 coins    =>    10,000 Frw</option>
+                        <option value='250=>25000'>250 coins    =>    25,000 Frw</option>
+                        <option value='500=>50000'>500 coins   =>    50,000 Frw </option>
+                        <option value='1000=>100000'>1000 coins  =>    100,000 Frw </option>
+                    <!-- <option value='35=>500'>35 coins    =>    500 Frw</option>
                     <option value='70=>1000'>70 coins    =>    1,000 Frw</option>
                     <option value='350=>5000'>350 coins   =>    5,000 Frw </option>
                     <option value='1400=>21000'>1400 coins  =>    21,000 Frw </option>
-                    <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option>
+                    <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option> -->
                     </select>
                 </div>
                 <div class="form-group">
@@ -638,11 +650,20 @@ class Follow extends Home
                 <div class="form-group">
                     <select class="form-control amount_coins" id="amount_coins<?php echo $tweet_id;?>" name="amount_coins" style="background:none">
                     <option value="">Select Coins</option>
-                    <option value='35=>500'>35 coins    =>    500 Frw</option>
-                    <option value='70=>1000'>70 coins    =>    1,000 Frw</option>
-                    <option value='350=>5000'>350 coins   =>    5,000 Frw </option>
-                    <option value='1400=>21000'>1400 coins  =>    21,000 Frw </option>
-                    <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option>
+                        <option value='0.5=>50'>0.5 coins    =>    50 Frw</option>
+                        <option value='1=>100'>1 coins    =>    100 Frw</option>
+                        <option value='5=>500'>5 coins    =>    500 Frw</option>
+                        <option value='10=>1000'>10 coins    =>    1,000 Frw</option>
+                        <option value='50=>5000'>50 coins    =>    5,000 Frw</option>
+                        <option value='100=>10000'>100 coins    =>    10,000 Frw</option>
+                        <option value='250=>25000'>250 coins    =>    25,000 Frw</option>
+                        <option value='500=>50000'>500 coins   =>    50,000 Frw </option>
+                        <option value='1000=>100000'>1000 coins  =>    100,000 Frw </option>
+                        <!-- <option value='35=>500'>35 coins    =>    500 Frw</option>
+                        <option value='70=>1000'>70 coins    =>    1,000 Frw</option>
+                        <option value='350=>5000'>350 coins   =>    5,000 Frw </option>
+                        <option value='1400=>21000'>1400 coins  =>    21,000 Frw </option>
+                        <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option> -->
                     </select>
                 </div>
                 <div class="form-group">
@@ -658,7 +679,7 @@ class Follow extends Home
                 <div class="card-text">
                 <!-- 40,000 -->
                     <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
-                    Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo self::count_month($tweet['posted_on']);?> 
+                    Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo self::timeAgo($tweet['posted_on']);?> 
                     <span class="float-right"><?php echo self::donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
                     <!-- 40 -->
                 </div>
@@ -714,11 +735,20 @@ class Follow extends Home
                 <div class="form-group">
                     <select class="form-control amount_coins" id="amount_coins<?php echo $tweet['tweet_id'];?>" name="amount_coins" style="background:none">
                     <option value="">Select Coins</option>
-                    <option value='35=>500'>35 coins    =>    500 Frw</option>
+                        <option value='0.5=>50'>0.5 coins    =>    50 Frw</option>
+                        <option value='1=>100'>1 coins    =>    100 Frw</option>
+                        <option value='5=>500'>5 coins    =>    500 Frw</option>
+                        <option value='10=>1000'>10 coins    =>    1,000 Frw</option>
+                        <option value='50=>5000'>50 coins    =>    5,000 Frw</option>
+                        <option value='100=>10000'>100 coins    =>    10,000 Frw</option>
+                        <option value='250=>25000'>250 coins    =>    25,000 Frw</option>
+                        <option value='500=>50000'>500 coins   =>    50,000 Frw </option>
+                        <option value='1000=>100000'>1000 coins  =>    100,000 Frw </option>
+                    <!-- <option value='35=>500'>35 coins    =>    500 Frw</option>
                     <option value='70=>1000'>70 coins    =>    1,000 Frw</option>
                     <option value='350=>5000'>350 coins   =>    5,000 Frw </option>
                     <option value='1400=>21000'>1400 coins  =>    21,000 Frw </option>
-                    <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option>
+                    <option value='3500=>54000'>3500 coins  =>    54,000 Frw </option> -->
                     </select>
                 </div>
                 <div class="form-group">
@@ -734,7 +764,7 @@ class Follow extends Home
                 <div class="card-text">
                 <!-- 40,000 -->
                     <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
-                    Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo self::count_month($tweet['posted_on']);?> 
+                    Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo self::timeAgo($tweet['posted_on']);?> 
                     <span class="float-right"><?php echo self::donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
                     <!-- 40 -->
                 </div>

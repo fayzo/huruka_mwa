@@ -36,7 +36,7 @@ if (isset($_POST['promote_post']) && !empty($_POST['promote_post'])) {
                             <h4 class="my-0 font-weight-normal">Basic</h4>
                         </div>
                         <div class="card-body">
-                            <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'marketplace\'' ;?>
+                            <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'campain\'' ;?>
                             <h3 class="card-title pricing-card-title">$10 <small class="text-muted">/ we</small></h3>
                             <ul class="list-unstyled mt-3 mb-4">
                               <li>1 Post last 2 weeks</li>

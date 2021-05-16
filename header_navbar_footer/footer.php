@@ -47,7 +47,7 @@
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.01
       </div>
-      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro IRG</a>.</strong> All rights
+      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro</a>.</strong> All rights
       reserved.
     </footer>
 

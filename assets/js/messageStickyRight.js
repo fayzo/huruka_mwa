@@ -184,7 +184,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 getmessages();
-                $("#msg").val('');
+                $("#msg1").val('');
                 // console.log(response);
             }
         });

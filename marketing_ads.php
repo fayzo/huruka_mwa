@@ -15,6 +15,7 @@
 
         <div class="row">
           <div class="col-md-3 mb-3 d-none d-md-block">
+             <div class="sticky-top">
 
                 <div class="card mb-3">
                     <div class="ads_mini_wallet main-active m-0">
@@ -42,7 +43,7 @@
                            <li>
                                <a href="javascript:void(0)"  <?php 
                                echo (isset($_SESSION['key']))?
-                                (!empty($subscription['marketplace_subscription'])  && $users->subscription_deadline($subscription['marketplace_date_pay'],$subscription['marketplace_subscription']) == true )?
+                                (!empty($subscription['campain_subscription'])  && $users->subscription_deadline($subscription['campain_date_pay'],$subscription['campain_subscription']) == true )?
                                 'class="promote_forms " ' :
                                 'class="promote-post" data-promote="payment" ':
                                 'id="login-please" data-login="1"'
@@ -60,9 +61,10 @@
             } ?>
             
         </div>
+        </div>
         <div class="col-sm-12 col-md-6 mb-4">
             <div <?php echo (isset($_SESSION['key']))?
-            (!empty($subscription['marketplace_subscription'])  && $users->subscription_deadline($subscription['marketplace_date_pay'],$subscription['marketplace_subscription']) == true )?
+            (!empty($subscription['campain_subscription'])  && $users->subscription_deadline($subscription['campain_date_pay'],$subscription['campain_subscription']) == true )?
                 'class="promote_forms main-active dot-container more mb-3" ' :
                 'class="promote-post main-active dot-container more mb-3" data-promote="payment" ':
                 'id="login-please" data-login="1"';?>>
@@ -81,7 +83,7 @@
         <!-- /.col-md-6 -->
 
         <div class="col-md-3">
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
+            <div class="sticky-top">
                 <?php echo $home->options(); ?>
             </div>
         </div>

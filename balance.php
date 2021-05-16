@@ -33,12 +33,17 @@
 
         <div class="col-md-3 mb-3 d-none d-md-block">
             
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
+            <div class="sticky-top">
 
                 <div class="card">
                     <div class="ads_mini_wallet main-active m-0">
                         <p>Current balance</p>
-                        <div class="h1">$0.00</div>
+                        <div style="font-size:17px"> 
+                        <i class="fas fa-coins text-warning"></i>
+                        <?php echo number_format($user['amount_coins']); ?> Coins </div>
+                        <div class="h1">
+                        <?php echo number_format($user['amount_francs']); ?> Frw</div>
+                        <!-- $0.00 -->
                     </div>
                     <div class="card-body">
                         <div class="ads-cont-wrapper">
@@ -88,10 +93,14 @@
                         <div class="card mb-3">
                             <div class="card-body">
 
-                                <p class="bold">Current balance</p>
+                                <p class="bold">Current balance
+                                <i class="fas fa-coins text-warning"></i>
+                                <?php echo number_format($user['amount_coins']); ?> Coins </p>
+
                                 <div class="my_wallet wow_mini_wallets">
                                     <div>
-                                        <h5 style="font-size:30px">$0.00</h5>
+                                        <h5 style="font-size:30px"><?php echo number_format($user['amount_francs']); ?> Frw </h5>
+                                        <!-- $0.00 -->
                                     </div>
                                     <div class="wow_mini_wallets_btns">
                                         <button data-toggle="modal" data-target="#send_money_modal" class="btn btn-default btn-mat">
@@ -103,11 +112,13 @@
 
                                 <div class="wow_add_money_hid_form text-center">
                                     <form class="form" id="replenish-user-account">
-                                        <p class="bold">Replenish my balance</p>
-                                        <div class="add-amount">
-                                            <h5>$<input type="number" placeholder="0.00" min="1.00" max="1000" name="amount" id="amount"></h5>
+                                        <!-- <p class="bold">Replenish my balance</p> -->
+                                        <p class="bold">Deposit in my Account </p>
+                                        <div class="add-amount"><!-- $ -->
+                                            <h5>Frw<input type="number" placeholder="0" min="1" max="100000" name="amount" id="amount"></h5>
                                         </div>
-                                        <button type="submit" class="btn main-active btn-mat btn-mat-raised">
+                                        <?php $details= '\'day\',\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'buy_coins\'' ;?>
+                                        <button type="button" class="btn main-active btn-mat btn-mat-raised"  onclick="coins($('#amount').val(),<?php echo $details ;?>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z"></path></svg> Continue					</button>
                                     </form>
                                 </div>
@@ -185,7 +196,7 @@
 
                         <div class="form-group">
                             <label>Your Coins Balance is: </label> <i class="fa fa-money text-success"></i>
-                            <i class="fas fa-coins text-warning"></i> 15,000 coins
+                            <i class="fas fa-coins text-warning"></i>  <?php echo number_format($user['amount_coins']); ?> coins
                         </div>
 
                         <label for="inputEmail" >Click any coins you wish to deposit in your account <i class="fa fa-check-circle text-success"></i></label>
@@ -201,18 +212,16 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td> <i class="fas fa-coins text-warning"></i> 40 coins</td>
+                                        <td> <i class="fas fa-coins text-warning"></i> 5 coins</td>
                                         <td></td>
                                         <td>
-                                            <?php 
-                                            // $user= $home->userData($_SESSION['key']);
-                                            $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'buy_coins\'' ;?>
+                                        <?php $details= '\'day\',\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'buy_coins\'' ;?>
                                             <button type="button" onclick="coins(500,<?php echo $details ;?>)" class="btn btn-sm btn-danger">500 Frw</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td><i class="fas fa-coins text-warning"></i> 70 coins</td>
+                                        <td><i class="fas fa-coins text-warning"></i> 10 coins</td>
                                         <td></td>
                                         <td>
                                             <button type="button" onclick="coins(1000,<?php echo $details ;?>)" class="btn btn-sm btn-danger">1,000 Frw</button>
@@ -220,7 +229,7 @@
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td><i class="fas fa-coins text-warning"></i> 350 coins</td>
+                                        <td><i class="fas fa-coins text-warning"></i> 50 coins</td>
                                         <td></td>
                                         <td>
                                             <button type="button" onclick="coins(5000,<?php echo $details ;?>)" class="btn btn-sm btn-danger">5,000 Frw</button>
@@ -228,18 +237,34 @@
                                     </tr>
                                     <tr>
                                         <td>4</td>
-                                        <td><i class="fas fa-coins text-warning"></i> 1400 coins</td>
+                                        <td><i class="fas fa-coins text-warning"></i> 150 coins</td>
                                         <td></td>
                                         <td>
-                                            <button type="button" onclick="coins(21000,<?php echo $details ;?>)" class="btn btn-sm btn-danger">21,000 Frw</button>
+                                            <button type="button" onclick="coins(15000,<?php echo $details ;?>)" class="btn btn-sm btn-danger">15,000 Frw</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
-                                        <td><i class="fas fa-coins text-warning"></i> 3500 coins</td>
+                                        <td><i class="fas fa-coins text-warning"></i> 250 coins</td>
                                         <td></td>
                                         <td>
-                                            <button type="button" onclick="coins(54000,<?php echo $details ;?>)" class="btn btn-sm btn-danger">54,000 Frw</button>
+                                            <button type="button" onclick="coins(25000,<?php echo $details ;?>)" class="btn btn-sm btn-danger">25,000 Frw</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td><i class="fas fa-coins text-warning"></i> 500 coins</td>
+                                        <td></td>
+                                        <td>
+                                            <button type="button" onclick="coins(50000,<?php echo $details ;?>)" class="btn btn-sm btn-danger">50,000 Frw</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td><i class="fas fa-coins text-warning"></i> 1500 coins</td>
+                                        <td></td>
+                                        <td>
+                                            <button type="button" onclick="coins(150000,<?php echo $details ;?>)" class="btn btn-sm btn-danger">150,000 Frw</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -257,7 +282,7 @@
 
                                 <div class="avatar_set">
 
-                                    <div class="avatar-holder">
+                                    <div class="avatar-holder"  style="background: url('<?php echo (!empty($user['cover_img'])? BASE_URL_LINK."image/users_cover_profile/".$user['cover_img'] : BASE_URL_LINK.NO_COVER_IMAGE_URL) ;?>')no-repeat center center;background-size:cover;">
                                         <?php if (!empty($user['profile_img'])) {?>
                                             <img class="rounded-circle avatar" src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $user['profile_img'];?>" alt="User Avatar">
                                         <?php  }else{ ?>
@@ -265,20 +290,21 @@
                                         <?php } ?>
                                         <div class="infoz">
                                             <h5 title="shema"><a href="<?php echo BASE_URL_PUBLIC.$user['username']; ?>" ><?php echo $user['username']; ?></a></h5>
-                                            <p>Current balance $0</p>
+                                            <p>Current balance  <?php echo number_format($user['amount_francs']); ?> Frw</p>
                                         </div>
                                     </div>
 
 
                                     <div class="alert alert-dangers" style="background:#fcf8e3;">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12" y2="17"></line></svg>
-                                        Your balance is $0, minimum withdrawal request is $50	
+                                        Your balance is  <?php echo number_format($user['amount_francs']); ?> Frw, minimum withdrawal request is 5,000 Frw	
+                                        <!-- Your balance is $0, minimum withdrawal request is $50	 -->
                                     </div>
 
 
                                 </div>
                                 
-                                <form class="setting-general-form form-horizontal" method="post">
+                                <form class="setting-general-form form-horizontal" id="withdraw-money-form" method="post">
                                     <div class="setting-general-alert setting-update-alert"></div>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -291,16 +317,71 @@
                                         <div class="col-md-6">
                                             <div class="wow_form_fields">
                                                 <label for="amount">Amount</label>  
-                                                <input name="amount" id="amount" type="text" class="form-control input-md" value="0">
+                                                <input name="amount" id="amount-withdraw-money" type="text" class="form-control input-md">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn main-active btn-mat btn-mat-raised add_wow_loader">Request withdrawal</button>
+                                        <input type="hidden" name="month" value="day">
+                                        <input type="hidden" name="subscription" value="withdraw_coins">
+                                        <input type="hidden" name="withdraw" value="withdraw_coins">
+                                        <input type="hidden" id="amount_available_" name="amount_available_" value="<?php echo $user['amount_francs'];?>">
+                                        <input type="hidden" name="name" value="<?php echo $user['firstname'].' '.$user['lastname'];?>">
+                                        <input type="hidden" name="email" value="<?php echo $user['email'];?>">
+                                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['key'];?>">
+                                        <!-- < ?php $details= '\'day\',\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'withdraw_coins\'' ;?> -->
+                                        <!-- onclick="withdraw_coins($('#amount_request').val(),< ?php echo $details ;?>)" -->
+                                        <button type="button" class="btn main-active btn-mat btn-mat-raised submit-form-withdraw-money" >
+                                        Request withdrawal</button>
                                         <!-- <button type="submit" class="btn btn-main btn-mat btn-mat-raised add_wow_loader">Request withdrawal</button> -->
                                     </div>
                                 </form> 
                             </div>
+
+                            <?php 
+                                $sql= "SELECT * FROM withdraw_money WHERE user_id_withdraw = $user_id ORDER BY withdraw_date DESC ";
+                                $query= $db->query($sql);
+                                if ($query->num_rows > 0) {  ?>
+
+                                <!-- <table class="table table-striped table-bordered table-responsive-sm table-hover table_admin1"> -->
+                                <table id="example2" class="table table-striped table-bordered table-hover table-inverse table-responsive-sm table-responsive" >
+                                        <thead class="main-active thead-inverse">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Description</th>
+                                                <!-- <th>Name</th>
+                                                <th>email</th> -->
+                                                <th>status</th>
+                                                <th>Price</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody>
+                                <?php
+                                    $i=1;
+                                    while($row= $query->fetch_array()) { 
+                                        // var_dump($row); 
+                                    ?>
+                                                <tr>
+                                                    <td><?php echo $i++ ?></td>
+                                                    <td><?php echo $row['withdraw']?></td>
+                                                    <!-- <td>< ?php echo $row['name_subscription_']?></td>
+                                                    <td>< ?php echo $row['email_subscription_']?></td> -->
+                                                    <?php echo ($row['status_withdraw'] == 'pending')?'
+                                                    <td class="text-danger">'.$row['status_withdraw'].'</td>
+                                                    ':'
+                                                    <td class="text-success">'.$row['status_withdraw'].'</td>
+                                                    '?>
+                                                    <td><?php echo number_format($row['withdraw_price'])?></td>
+                                                    <td><?php echo $users->timeAgo($row['withdraw_date'])?></td>
+                                                </tr>
+                                <?php } ?>
+
+                                    </tbody>
+                                </table>
+
+                                <?php } ?> 
+
 
                             </div>
                                 <!-- /.card_body -->
@@ -308,19 +389,22 @@
                             </div> <!-- /.card_footer -->
                         </div><!-- /.card -->
 
+                        <?php 
+
+                        $sql0= "SELECT * FROM fundraising WHERE user_id2 = $user_id ORDER BY created_on2 DESC ";
+                        $query= $db->query($sql0);
+                        if ($query->num_rows > 0) {  ?>
+    
                         <div class="card mt-3">
                             <div class="card-header py-0">
                             <p class="bold">Your Fundraising Donation</p>
                             </div>
                             <div class="card-body">
                                 
-                                <?php 
-
-                                $sql0= "SELECT * FROM fundraising WHERE user_id2 = $user_id ORDER BY created_on2 DESC ";
-                                $query= $db->query($sql0);
-                                if ($query->num_rows > 0) { 
-                                    $i=1;
-                                    while($tweet= $query->fetch_array()) { 
+                               
+                            <?php   
+                            $i=1;
+                            while($tweet= $query->fetch_array()) { 
                                         // var_dump($row); 
                                     ?>
 
@@ -333,7 +417,7 @@
                                     <div class="card-text">
                                     <!-- 40,000 -->
                                         <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
-                                        Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo $home->count_month($tweet['created_on2']);?> 
+                                        Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo $home->timeAgo($tweet['created_on2']);?> 
                                         <span class="float-right"><?php echo $home->donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
                                         <!-- 40 -->
                                     </div>
@@ -349,15 +433,23 @@
                                     </div>
 
                                     <span class="response_coins"></span>
-                                    <input type="button" name="reward_coins" value="Request withdrawal This Donation" <?php echo (!empty($_SESSION['key']))?'data-fund_id="'.$tweet['fund_id'].'" class="btn btn-primary btn-md btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+                                    <?php $details= '\'day\',\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$tweet['fund_id'].','.$user['user_id'].',\'fundraising withdraw\'' ;?>
+                                    <input type="button" onclick="withdraw_money(<?php echo $tweet['money_raising'].','.$details ;?>)" value="Request withdrawal This Donation"  class="btn btn-primary btn-md btn-block mt-2" >
                                 </div><!-- col -->
                                 <hr>
 
                                     <?php } ?>
-                                <?php } ?>
                             </div>
                         </div>
+                        <?php } ?>
 
+                        <?php 
+
+                        $sql0= "SELECT * FROM tweets WHERE tweetBy = $user_id and coins !='' and retweet_id = 0 OR 
+                        tweetBy = $user_id and coins !='' and retweet_id not in (SELECT tweet_id FROM tweets WHERE tweetBy = $user_id)
+                        ORDER BY posted_on DESC ";
+                        $query= $db->query($sql0);
+                        if ($query->num_rows > 0) { ?>
 
                         <div class="card mt-3">
                             <div class="card-header py-0">
@@ -365,15 +457,11 @@
                             </div>
                             <div class="card-body">
                                 
-                                <?php 
-
-                                $sql0= "SELECT * FROM tweets WHERE tweetBy = $user_id and coins !='' and retweet_id = 0 OR 
-                                tweetBy = $user_id and coins !='' and retweet_id not in (SELECT tweet_id FROM tweets WHERE tweetBy = $user_id)
-                                  ORDER BY posted_on DESC ";
-                                $query= $db->query($sql0);
-                                if ($query->num_rows > 0) { 
+                             
+                                  
+                                  <?php  
                                     $i=1;
-                                    while($tweet= $query->fetch_array()) { 
+                                  while($tweet= $query->fetch_array()) { 
                                         // var_dump($row); 
                                     ?>
 
@@ -386,7 +474,7 @@
                                     <div class="card-text">
                                     <!-- 40,000 -->
                                         <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
-                                        Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo $home->count_month($tweet['posted_on']);?> 
+                                        Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo $home->timeAgo($tweet['posted_on']);?> 
                                         <span class="float-right"><?php echo $home->donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
                                         <!-- 40 -->
                                     </div>
@@ -402,14 +490,15 @@
                                     </div>
 
                                     <span class="response_coins"></span>
-                                    <input type="button" name="reward_coins" value="Request withdrawal This Donation" <?php echo (!empty($_SESSION['key']))?'data-tweet_id="'.$tweet['tweet_id'].'" class="btn btn-primary btn-md btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+                                    <?php $details= '\'day\',\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$tweet['tweet_id'].','.$user['user_id'].',\'tweet withdraw\'' ;?>
+                                    <input type="button" onclick="withdraw_money(<?php echo $tweet['money_raising'].','.$details ;?>)" value="Request withdrawal This Donation"  class="btn btn-primary btn-md btn-block mt-2" >
                                 </div><!-- col -->
                                 <hr>
 
                                     <?php } ?>
-                                <?php } ?>
                             </div>
                         </div>
+                        <?php } ?>
 
                     </div><!-- /.tab-pane -->
 
@@ -424,7 +513,7 @@
             <!-- whoTofollow: user whoTofollow style 1 -->
             <!-- < ?php $follow->whoTofollow($user['user_id'],$user['user_id'])?> -->
 
-            <div class="sticky-top" style="top: 52px;z-index:1000;">
+            <div class="sticky-top">
                 <?php echo $home->options(); ?>
             </div>
         </div>
@@ -443,16 +532,12 @@
                     </div>
                     <div class="modal-body">
                         <form class="form" id="send-money-form" autocomplete="off">
+                        
                             <div id="send-money-form-alert">
-                                    <div class="alert alert-warnings" style="background:#fcf8e3;">
-                                        Your current wallet balance is: 0, please top up your wallet to continue. <br>
-                                        <a style="color:black;" href="http://localhost/facebook//wallet/">Top up</a>
-                                    </div>
-                                                    </div>-
-                            <div class="wow_snd_money_form text-center">
-                                <p class="bold">Amount</p>
-                                <div class="add-amount">
-                                    <h5>$<input type="number" placeholder="0.00" min="1.00" max="1000" name="amount" id="amount"></h5>
+                                <div class="alert alert-warnings" style="background:#fcf8e3;">
+                                    Your current wallet balance is: <?php echo number_format($user['amount_francs']); ?> Frw
+                                    <!-- , please top up your wallet to continue. <br> -->
+                                    <!-- <a style="color:black;" href="http://localhost/facebook//wallet/">Top up</a> -->
                                 </div>
                             </div>
                             
@@ -461,7 +546,8 @@
                                 <div class="col-md-8">
                                     <div class="wow_form_fields">
                                         <label for="search">To who you want to send?</label>
-                                        <input id="search" type="text" placeholder="Search by username or email">
+                                        <input id="status-send-money" type="text" name="username" class="status" placeholder="Search by username Type @">
+                                        <div class="hash-box"><ul></ul></div>
                                         <div class="dropdown">
                                             <ul class="dropdown-menu money-recipients-list"></ul>
                                         </div>
@@ -469,12 +555,23 @@
                                 </div>
                                 <div class="col-md-2"></div>
                             </div>
-                            <p></p>
+                            
+                            <div class="wow_snd_money_form text-center">
+                                <p class="bold">Amount</p>
+                                <div class="add-amount">
+                                    <h5>Frw<input type="number" placeholder="0" min="1" max="100000" name="amount" id="amount-send-money"></h5>
+                                    <!-- <h5>Frw<input type="number" placeholder="0.00" min="1.00" max="1000" name="amount" id="amount"></h5> -->
+                                </div>
+                            </div>
+                            
+                            <p id="response-send-money"></p>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-main btn-mat btn-mat-raised add_wow_loader" disabled="">
+                                <button type="button" id="submit-form-send-money" class="btn btn-main btn-mat btn-mat-raised add_wow_loader" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z"></path></svg> Continue						</button>
                             </div>
-                            <input type="hidden" id="recipient_user_id" name="user_id">
+                            <input type="hidden" id="send-money" name="send-money" value="<?php echo $_SESSION['key']; ?>">
+                            <input type="hidden" id="recipient_user_id" name="user_id" value="<?php echo $_SESSION['key']; ?>">
+                            <input type="hidden" id="amount_available" name="amount_available" value="<?php echo $user['amount_francs']; ?>">
                         </form>
                         <div class="clear"></div>
                     </div>

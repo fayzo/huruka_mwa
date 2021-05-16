@@ -205,7 +205,7 @@ $(document).ready(function (e) {
         });
     });
 
-        $(document).on('click', '.deleteComment', function (e) {
+    $(document).on('click', '.deleteComment', function (e) {
         e.preventDefault();
         var tweet_id = $(this).data('tweet');
         var comment_id = $(this).data('comment');

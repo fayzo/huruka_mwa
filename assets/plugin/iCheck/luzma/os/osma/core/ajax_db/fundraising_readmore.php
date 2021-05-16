@@ -229,7 +229,7 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                                 <!-- <div class="progress-bar  bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
                             </div>
                             <!-- 30 months -->
-                            <p>Raised by <?php echo $user['donate_counts']; ?> people in <?php echo $users->count_month($user['created_on2']);?> <span class="float-right text-right"><?php echo $users->donationPercetangeMoneyRaimaing($user['money_raising'],$user['money_to_target']); ?> /100 %</span></p>
+                            <p>Raised by <?php echo $user['donate_counts']; ?> people in <?php echo $users->timeAgo($user['created_on2']);?> <span class="float-right text-right"><?php echo $users->donationPercetangeMoneyRaimaing($user['money_raising'],$user['money_to_target']); ?> /100 %</span></p>
                             <button type="button"  <?php if(isset($_SESSION['key'])){ echo 'class="btn btn-primary donation-fundraising-btn"'; }else{ echo 'class="btn btn-primary" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $user['user_id']; ?>" data-fund="<?php echo $user['fund_id']; ?>">Donate Now</button><br>
                             
                             <div class="user-block mt-3">

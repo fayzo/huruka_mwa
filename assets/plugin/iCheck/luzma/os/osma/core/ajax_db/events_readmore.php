@@ -170,8 +170,10 @@ if (isset($_POST['events_id']) && !empty($_POST['events_id'])) {
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#e91e63" d="M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z"></path></svg>
                                     <span>End date</span>
+                                    <input type="hidden" name="date-events" id="date-events" value="<?php echo $user['end_events']; ?>">
                                     <?php echo date('M j, Y', strtotime($user['end_events'])); ?> --  <i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $user['end_time']; ?>			
                                 </div>
+                                
 
                             </div>
 
@@ -309,8 +311,10 @@ var second = 1000,
       minute = second * 60,
       hour = minute * 60,
       day = hour * 24;
+var date = document.getElementById('date-events').value;
 
-    var countDown = new Date('05/12/21 02:13').getTime(),
+    var countDown = new Date(date).getTime(),
+    // var countDown = new Date('05/12/21 02:13').getTime(),
     x = setInterval(function() {
 
       var now = new Date().getTime(),

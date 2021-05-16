@@ -27,8 +27,9 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                     <?php }else{ ?>
                         <div class="widget-user-header text-white"
                             style="background: url('<?php echo BASE_URL_LINK.NO_COVER_IMAGE_URL ;?>')no-repeat center center;background-size:cover;">
-                  <?php  } ?>
-                        <div class="widget-user-desc"><i class="fas fa-coins text-warning"></i> 35 Coins</div>
+                  <?php  } if (isset( $_SESSION['key']) && $profileData['user_id'] == $_SESSION['key']) { ?>
+                        <div class="widget-user-desc"><i class="fas fa-coins text-warning"></i>  <?php echo number_format($profileData['amount_coins']); ?> coins</div>
+                  <?php } ?>
                         <h3 class="widget-user-username"><?php echo $profileData['username'] ;?></h3> <!-- Elizabeth Pierce -->
                         <?php $workname = $profileData['workname']; echo (!empty($workname)?'<h5 class="widget-user-desc">'.$workname.'</h5>
                                  ':'<h5 class="widget-user-desc">Member</h5>');?>
@@ -111,7 +112,7 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                     </span>
                     </i>
                     </li>
-                    <li class="breadcrumb-item"><a href="<?php echo BALANCE ;?>" ><i class="fas fa-money-check"></i> Withdraw </a></li>
+                    <!-- <li class="breadcrumb-item"><a href="< ?php echo BALANCE ;?>" ><i class="fas fa-money-check"></i> Withdraw </a></li> -->
                 </ol>
           </div>
       </div>

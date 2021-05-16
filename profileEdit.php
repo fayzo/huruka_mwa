@@ -218,7 +218,7 @@
             <!-- /.card -->
 
             <!-- About Me Box -->
-            <div class="card card-primary mb-3 sticky-top" style="top: 52px;">
+            <div class="card card-primary mb-3 sticky-top">
                 <div class="card-header main-active p-1">
                     <h5 class="card-title text-center"><i> About Me</i></h5>
                 </div>

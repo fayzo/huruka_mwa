@@ -21,6 +21,93 @@ if (isset($_POST['subscription'])) {
     var_dump('ERROR: Could not able to execute'. $result.mysqli_error($db));
     var_dump($result);
 
+    if ($_POST['subscription'] == 'buy_coins') {
+        # code...
+        // 1 coins = 14.28571428571428 Frw;
+        // 35 coins = 14.28571428571428 Frw x 35coins =500 frw;
+        
+        // 1 coins = 100 Frw;
+        // 35 coins = 100 Frw x 35coins =3500 frw;
+        
+        $amount_coins = $price/100;
+        
+        $users->updateQuery_money('users',array( 
+          'amount_coins'=> 'amount_coins + '.$amount_coins,
+          'amount_francs'=> 'amount_francs + '.$price ),
+          array(
+            'user_id'=> $user_id,
+        ));
+
+        $users->updateQuery_coins('subscription',array( 
+          'subscription'=> $_POST['subscription'],
+          'user_id_subscription'=> $user_id,
+          'name_subscription'=> $name,
+          'email_subscription'=> $email,
+
+          'coins_subscription'=> $month,
+          'coins_price_pay'=> $price,
+          'coins_date_pay'=> $datetime ),
+          array(
+            'user_id_subscription'=> $user_id,
+        ));
+        
+        // var_dump($va);
+    }
+
+    if ($_POST['subscription'] == 'withdraw_coins') {
+        # code...
+        
+        // 1 coins = 14.28571428571428 Frw;
+        // 35 coins = 14.28571428571428 Frw x 35coins =500 frw;
+        
+        // 1 coins = 100 Frw;
+        // 35 coins = 100 Frw x 35coins =3500 frw;
+        
+        $amount_coins = $price/100;
+        
+        if ($_POST['withdraw'] == 'withdraw_coins') {
+          # code...
+          $users->updateQuery_money('users',array( 
+            'amount_coins'=> 'amount_coins - '.$amount_coins,
+            'amount_francs'=> 'amount_francs - '.$price ),
+            array(
+              'user_id'=> $user_id,
+          ));
+        }
+
+        $insert=  $users->insertQuery('withdraw_money',array( 
+          'withdraw'=> $_POST['withdraw'],
+          'month'=> $month,
+          'user_id_withdraw'=> $user_id,
+          'name_withdraw'=> $name,
+          'email_withdraw'=> $email,
+          'status_withdraw'=> 'pending',
+
+          'withdraw_coins'=> $amount_coins,
+          'withdraw_price'=> $price,
+          'withdraw_date'=> $datetime ),
+          array(
+            'user_id_withdraw'=> $user_id,
+        ));
+
+      if($insert){
+          exit('<div class="alert alert-success alert-dismissible fade show text-center">
+              <button class="close" data-dismiss="alert" type="button">
+                  <span>&times;</span>
+              </button>
+              <strong>SUCCESS</strong> </div>');
+      }else{
+          exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+              <button class="close" data-dismiss="alert" type="button">
+                  <span>&times;</span>
+              </button>
+              <strong>Fail input try again !!!</strong>
+          </div>');
+      }
+        
+        // var_dump($va);
+    }
+
     if ($_POST['subscription'] == 'job') {
         # code...
         $users->updateQuery_coins('subscription',array( 
@@ -272,6 +359,85 @@ if (isset($_POST['subscription'])) {
 
 }
 
+
+if (isset($_POST['send-money'])) {
+      # code...
+         // 1 coins = 100 Frw;
+        // 35 coins = 100 Frw x 35coins =3500 frw;
+      $user_id= $_SESSION['key'];
+      $datetime= date('Y-m-d H-i-s');
+      $username= str_replace('@','',$_POST['username']);
+      $price= $_POST['amount'];
+
+      // var_dump($username,$_SESSION['username']);
+
+      if ($_SESSION['username'] != $username && substr($_POST['username'],0,1) == '@' ) {
+          # code...
+
+      $amount_coins = $price/100 ;
+
+      $row = $home->selects_coins('users',array(
+        'username'=> $username),
+        array(
+          'username'=> $username,
+      ));
+
+      if ($row != false ) {
+
+          $home->updateQuery_money('users',array(
+            'amount_coins'=> 'amount_coins - '.$amount_coins,
+            'amount_francs'=> 'amount_francs - '.$price ),
+            array(
+              'user_id'=> $user_id,
+          ));
+
+          $insert = $home->updateQuery_money('users',array(
+            'amount_coins'=> 'amount_coins + '.$amount_coins,
+            'amount_francs'=> 'amount_francs + '.$price ),
+            array(
+              'username'=> $username,
+          ));
+
+          // var_dump($insert,$amount_coins,$price,$username);
+
+          if($insert){
+              exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                  <button class="close" data-dismiss="alert" type="button">
+                      <span>&times;</span>
+                  </button>
+                  <strong>SUCCESS</strong> </div>');
+          }else{
+              exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                  <button class="close" data-dismiss="alert" type="button">
+                      <span>&times;</span>
+                  </button>
+                  <strong>Fail input try again !!!</strong>
+              </div>');
+          }
+
+      }else{
+
+        exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong>Fail input try again !!!</strong>
+             </div>');
+      }
+
+    }else{
+
+      exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+              <button class="close" data-dismiss="alert" type="button">
+                  <span>&times;</span>
+              </button>
+              <strong>You can not send back money to you Fail!!!</strong>
+           </div>');
+    }
+
+
+
+}
     // `subscription_id`,
     // `user_id_subscription`,
 

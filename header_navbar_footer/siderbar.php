@@ -67,6 +67,7 @@
             <ul class="treeview-menu">
               <li><a href="dashboard.php"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
               <li><a href="dashboard_monetize.php"><i class="fa fa-circle-o"></i> Monetize v2</a></li>
+              <li><a href="dashboard_withdraw.php"><i class="fa fa-circle-o"></i> Transfer v2</a></li>
             </ul>
           </li>
 
@@ -82,7 +83,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo BALANCE; ?>"><i class="fa fa-circle-o"></i>Your Balance : 15,000 coins</a></li>
+              <li><a href="<?php echo BALANCE; ?>"><i class="fa fa-circle-o"></i>Your Balance :  <?php echo number_format($user['amount_coins']); ?> coins</a></li>
               <li><a href="<?php echo BALANCE; ?>"><i class="fa fa-circle-o"></i>Check Your Balance</a></li>
             </ul>
           </li>

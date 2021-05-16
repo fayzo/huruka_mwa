@@ -664,7 +664,7 @@ class Users{
         $query = "UPDATE ".$table." SET ".$colvalSet.$whereSql;
         $update = $mysqli->query($query);
         // return $update?$mysqli->affected_rows:false;
-         var_dump($query,$update);
+        //  var_dump($query,$update);
         // var_dump('ERROR: Could not able to execute'. $update.mysqli_error($mysqli));
 
         }
@@ -763,7 +763,7 @@ class Users{
             $i = 0;
             foreach($conditions as $key => $value){
                 $pre = ($i > 0)?' AND ':'';
-                $whereSql .= $pre.$key." = ".$value."";
+                $whereSql .= $pre.$key." = '".$value."'";
                 $i++;
             }
         }
@@ -1599,11 +1599,12 @@ class Users{
         $sql= $mysqli->query("SELECT user_id, amount_coins FROM users WHERE user_id ='{$user_id}'");
         $rows= $sql->fetch_assoc();
         // coins => FRW
-        $amount = array('35','70', '350','1400','3500');
+        // $amount_coins = array('1','5', '10','50','100');
+        // $amount_coins = array('35','70', '350','1400','3500');
 
         $amount_coin = $rows['amount_coins'] - $amount_coins;
         // var_dump($amount_coin,'true');
-        if ($amount_coin >= 35 ) {
+        if ($amount_coin >= 0.5 ) {
             return true;
         }else {
             return false;
@@ -1963,24 +1964,6 @@ class Users{
         // echo date('Y-m-d H:i:s', strtotime('+ 1months')).'</br>';
         // echo date('Y-m-d H:i:s', strtotime('+ 1years')).'</br>';
 
-    }
-
-    public function count_month($datetime){
-        $time= strtotime($datetime);
-        $current= time($datetime);
-        $Date  = date('Y-m-d', $time);
-        $now  = date('Y-m-d');
-        $datetime1 = new DateTime($Date);
-        $datetime2 = new DateTime($now);
-        $interval = $datetime1->diff($datetime2);
-        $months = (($interval->y) *12) + ($interval->m);
-        if ($months == 0) {
-            # code...
-            $months = (($interval->y) *12) + ($interval->m) + ($interval->d);
-            return $months." days";
-        }else{
-            return $months." months";
-        }
     }
 
     public function formatSizeUnits($bytes)

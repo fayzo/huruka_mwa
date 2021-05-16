@@ -33,7 +33,8 @@ class Message extends Home
                                 $message;
                             } 
 
-                            $sent_by = ($row_latest['message_to'] == $user_id) ? "<span style='color:#9a9af5f7;'>They said: </span>".$message : "<span style='color:#d47a7a;'>You said: </span>".$message ;
+                            $sent_by = ($row_latest['message_to'] == $user_id) ? "<span style='color:#9a9af5f7;'>They said: </span>".$message : "<span style='color:#d47a7a;'>Me: </span>".$message ;
+                            // $sent_by = ($row_latest['message_to'] == $user_id) ? "<span style='color:#9a9af5f7;'>They said: </span>".$message : "<span style='color:#d47a7a;'>You said: </span>".$message ;
                             // array_push($row, array( 'message' => $sent_by ));
                             if (isset($row['message'])) {
                                     // echo 'true';
@@ -78,7 +79,8 @@ class Message extends Home
                                     $message;
                                 } 
 
-                                $sent_by = ($row_latest['message_to'] == $user_id) ? "<span style='color:#9a9af5f7;'>They said: </span>".$message : "<span style='color:#d47a7a;'>You said: </span>".$message ;
+                                $sent_by = ($row_latest['message_to'] == $user_id) ? "<span style='color:#9a9af5f7;'>They said: </span>".$message : "<span style='color:#d47a7a;'>Me: </span>".$message ;
+                                // $sent_by = ($row_latest['message_to'] == $user_id) ? "<span style='color:#9a9af5f7;'>They said: </span>".$message : "<span style='color:#d47a7a;'>You said: </span>".$message ;
                                 // array_push($row, array( 'message' => $sent_by ));
                                 if (isset($row['message'])) {
                                         // echo 'true';

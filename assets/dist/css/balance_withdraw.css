@@ -240,7 +240,7 @@
 .wow_add_money_hid_form {display: none;}
 .wow_add_money_hid_form .add-amount, .wow_snd_money_form .add-amount {margin: 15px 0 25px;}
 .wow_add_money_hid_form .add-amount h5, .wow_snd_money_form .add-amount h5 {margin: 0 auto;font-size: 42px;font-family: "Lato", sans-serif;width: 130px;padding: 4px 0;border-bottom: 2px solid #ddd;}
-.wow_add_money_hid_form .add-amount h5 input, .wow_snd_money_form .add-amount h5 input {width: 105px;border: 0;outline: none;}
+.wow_add_money_hid_form .add-amount h5 input, .wow_snd_money_form .add-amount h5 input {width: 155px;border: 0;outline: none;}
 .wow_add_money_hid_form form {padding: 20px 0;border-top: 1px solid #ececec;}
 
 .wowonder-well {

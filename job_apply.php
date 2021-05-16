@@ -166,7 +166,7 @@
                                             <!-- hidden-xs -->
                                             <div class="float-right text-right ">
                                                 <span <?php if(isset($_SESSION['key'])){ echo 'class="people-message more"'; }else{ echo 'class="more" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $row['email_sent_from_id'];?>"><i class="fa fa-envelope-o text-danger"></i> Message </span><br>
-                                                <span <?php if(isset($_SESSION['key'])){ echo 'class=emailSent more"'; }else{ echo 'class="more" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $row['email_sent_from_id'];?>">@Mail</span><br>
+                                                <span <?php if(isset($_SESSION['key'])){ echo 'class="emailSent more"'; }else{ echo 'class="more" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $row['email_sent_from_id'];?>">@Mail</span><br>
                                                 <?php if (isset($_SESSION['key']) && $_SESSION['approval'] === 'on') { ?>
                                                  <span><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $row['telephone']; ?> </span><br>
                                                 <?php  }else{ ?>

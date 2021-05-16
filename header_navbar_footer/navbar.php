@@ -252,7 +252,7 @@
                   <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" class="user-image rounded-circle" alt="User Image">
                 <?php } ?>
                 <span class="hidden-xs"><span id="welcome-json"></span> <?php echo $_SESSION['username'];?></span>
-                <span class="hidden-xs" style="font-size:10px"><i class="fas fa-coins text-warning"></i> 35 coins</span>
+                <span class="hidden-xs" style="font-size:10px"><i class="fas fa-coins text-warning"></i>  <?php echo number_format($user['amount_coins']); ?> coins</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
