@@ -5,6 +5,8 @@ $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpat
 if(isset($_POST['key'])){
 
  if ($_POST['key'] == 'fund_donation') {
+
+    $user_id= $_SESSION['key'];
     
      $datetime= date('Y-m-d H-i-s'); // last_login 
      $date_registry= date('Y-m-d'); // date_registry 
@@ -21,38 +23,78 @@ if(isset($_POST['key'])){
      $comment =  $users->test_input($_POST['comment']);
      $donate_counts = 1;
 
-    //   $fundraising->fundraising_donateUpdate($donate,$fund_id);
+    $amount_coins = $donate/100;
 
-      $users->updateQuery_money('fundraising',array( 
-        'donate_counts'=> 'donate_counts + '.$donate_counts,
-        'money_raising'=> 'money_raising + '.$donate)
-        ,array('fund_id'=> $fund_id));
+     if ($users->coins_Available($user_id,$amount_coins) == false) {
 
-      $users->updateQuery_money('transfer_fundraising',array( 
-        'donate_counts'=> 'donate_counts + '.$donate_counts,
-        'money_raising'=> 'money_raising + '.$donate)
-        ,array(
-        'fund_id_transfer' => $fund_id,
-        'user_id_transfer'=>  $sent_to_user_id
-        ));
+        echo '  <div class="alert alert-danger alert-dismissible fade show text-center">
+                    <button class="close" data-dismiss="alert" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <strong>No coins available in your account please deposit coins in your account and try again !!!</strong>
+                </div>
+                <a href="'.BALANCE.'" class="btn btn-primary btn-lg btn-block mb-2">Recharge Coins</a>
+                
+                ';
+
+    }else {
+
+        if (!empty($_POST['visa']) && $_POST['visa'] == 'coins') {
+
+            $query = "INSERT INTO subscription_statement (`subscription`,`user_id_subscription`, `name_subscription_`, `email_subscription_`, `month_subscription_`, `price_subscription_`, `date_subscription_`) 
+            VALUES ('{$subscription}','{$user_id}','{$name}','{$email}','month','{$donate}','{$datetime}')";
+            $result = $db->query($query);
+
+                //   $fundraising->fundraising_donateUpdate($donate,$fund_id);
+                
+            $amount_coins= $donate/100 ;
+
+            $result= $users->updateQuery_money('users',array( 
+                'amount_coins'=> 'amount_coins - '.$amount_coins,
+                'amount_francs'=> 'amount_francs - '.$donate)
+                ,array('user_id'=> $_SESSION['key']));
+
+            # code...
+            $users->updateQuery_money('fundraising',array( 
+                'donate_counts'=> 'donate_counts + '.$donate_counts,
+                'money_raising'=> 'money_raising + '.$donate)
+                ,array('fund_id'=> $fund_id));
+
+            $users->updateQuery_money('transfer_fundraising',array( 
+                'donate_counts'=> 'donate_counts + '.$donate_counts,
+                'money_raising'=> 'money_raising + '.$donate)
+                ,array(
+                'fund_id_transfer' => $fund_id,
+                'user_id_transfer'=>  $sent_to_user_id
+                ));
+
+            $users->Postsjobscreates('fundraising_donation',
+            array(
+
+                    'name_fund' => $name, 
+                    'email_fund' => $email, 
+                    'price_donate' => $donate, 
+                    'number_sent' => $number, 
+                    'fund_subscription' => $subscription, 
+                    'created_on3' => $datetime,
+                    'sent_to_user_id' => $sent_to_user_id,
+                    'sentby_user_id' => $sentby_user_id,
+                    'fund_id0' => $fund_id,
+                    'comment' => $comment,
+            ));
+
+        }else {
+            echo '  <div class="alert alert-danger alert-dismissible fade show text-center">
+                        <button class="close" data-dismiss="alert" type="button">
+                            <span>&times;</span>
+                        </button>
+                        <strong>Choose Any Type Of Payment you want To Donate !!!</strong>
+                    </div>  ';
+        }
 
 
-      $users->Postsjobscreates('fundraising_donation',
-      array(
-
-            'name_fund' => $name, 
-            'email_fund' => $email, 
-            'price_donate' => $donate, 
-            'number_sent' => $number, 
-            'fund_subscription' => $subscription, 
-            'created_on3' => $datetime,
-            'sent_to_user_id' => $sent_to_user_id,
-            'sentby_user_id' => $sentby_user_id,
-            'fund_id0' => $fund_id,
-            'comment' => $comment,
-      ));
-
-  }
+        }
+    }
 }
 
 if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
@@ -61,6 +103,8 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
     $user = $home->userData($user_id);
     $sentby_user_id = $_SESSION['key'];
     $user0 = $home->userData($sentby_user_id);
+    $fund = $crowfund->fundFecthReadmore($fund_id,$user_id);
+
 ?>
 <div class="donate-popup">
     <div class="wrap6" id="disabler">
@@ -77,7 +121,7 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                     <div class="card">
                         <div class="card-header text-center">
                             <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button>
-                            <h4 class="card-title">Donate to Mr(s) <?php echo $user['lastname']; ?></h4>
+                            <h4 class="card-title">Donate to Mr(s) <?php echo $user['username']; ?></h4>
                         </div>
                         <div class="card-body">
                             <form method="post">
@@ -95,6 +139,55 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                     </div>
                                 </div>
 
+                                <span><?php echo number_format($fund['money_raising']).' Frw Raised out of<span class="float-right text-right"> '.number_format($fund['money_to_target']).' Frw <span class="text-success">Goal </span></span>'; ?>  </span>
+                                <div class="progress " style="height: 10px;">
+                                    <?php echo $users->Users_donationMoneyRaising($fund['money_raising'],$fund['money_to_target']); ?>
+                                    <!-- <div class="progress-bar  bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
+                                </div>
+                                <p>Raised by <?php echo $fund['donate_counts']; ?> people in <?php echo $users->timeAgo($fund['created_on2']);?> <span class="float-right text-right"><?php echo $users->donationPercetangeMoneyRaimaing($fund['money_raising'],$fund['money_to_target']); ?> /100 %</span></p>
+                                <hr>
+                                
+                                <div class="text-center mb-3"> <span class="mb-2"> Choose Type Of Payment you want To Donate </span><br>
+                                <hr>
+                                        <span style="font-size:13px;margin-top:10px">
+                                        <i class="fas fa-coins text-warning"></i> You have
+                                        <?php echo number_format($user0['amount_coins']); ?> coins ~ 
+                                        <?php echo number_format($user0['amount_francs']); ?> Frw
+                                    </span>
+                                </div>
+                                <hr>
+                                <script>
+                                    $('input[type="checkbox"]').on('change', function() {
+                                        $('input[type="checkbox"]').not(this).prop('checked', false).attr('id','').attr('name','');
+                                        $(this).prop('checked', true).attr('id','visa').attr('name','visa');
+                                    });
+                                </script>
+                                <div class="row mb-3 text-center">
+                                    <div class="col-4">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input ml-1" type="checkbox" name="visa" id="visa" value="coins"> 
+                                        <!-- <i class="fas fa-coins" style="font-size:100px;"></i> -->
+                                        <span class="fa" style="margin-top: 10px;font-weight: 800;background: #333333;color: white;font-family: sans-serif;border-radius: 10px;padding: 20px 10px;font-size: 30px;">Coins</span>
+                                        <!-- <i class="fas fa-donate" style="font-size:100px;"></i> -->
+                                    </label>
+                                    </div>
+                                    <div class="col-4">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input ml-1" type="checkbox" name="visa" id="visa" value="visa"> 
+                                        <!-- <i class="fab fa-cc-visa" style="font-size:100px;"></i> -->
+                                        <span class="fa" style="margin-top: 10px;font-weight: 800;background: #333333;color: white;font-family: sans-serif;border-radius: 10px;padding: 20px 10px;font-size: 30px;">Visa</span>
+                                        <!-- <i class="fab fa-cc-mastercard" style="font-size:100px;"></i> -->
+                                    </label>
+                                    </div>
+                                    <div class="col-4">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input ml-1" type="checkbox" name="visa" id="visa" value="visa"> 
+                                        <span class="fa" style="margin-top: 10px;font-weight: 800;background: #333333;color: white;font-family: sans-serif;border-radius: 10px;padding: 20px 10px;font-size: 30px;">MTN</span>
+                                        <!-- <i class="fab fa-cc-mastercard" style="font-size:100px;"></i> -->
+                                    </label>
+                                    </div>
+                                </div>
+                                        
                                 <div class="form-row mt-2">
                                     <div class="col-md-12 col-sm-12">
                                         <label for="donate">How much you will donate :</label>
@@ -138,7 +231,7 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                     <div id="response"></div>
 
                                     <button type="button" onclick="donateCrowfund('fund_donation');" class="btn main-active btn-block"><b>Submit</b></button>
-                                    <div class="mb-2" id="respone-success"></div>
+                                    <div class="mb-2 response  mt-1" id="recharge-coins"></div>
                             </form>
                         </div><!-- card-body -->
                     </div><!-- card -->
@@ -161,6 +254,10 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
         var sentby_user_id = $("#sentby_user_id");
         var fund_id = $("#fund_id");
         var comment = $("#Comment");
+        // var visa = $("#visa").is(":checked");
+        // var visa = $("#visa").prop("checked");
+        var visa = $("input[name='visa']:checked");
+
         //   use 1 or second method to validaton
 
         if (isEmpty(donate) && isEmpty(comment)) {
@@ -180,85 +277,54 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                     amount: donate.val(),
                     name: Sendby_firstname.val() +' '+ Sendby_lastname.val(),
                     email: email.val(),
-                    user_id: sentby_user_id.val(),
+                    // user_id: sentby_user_id.val(),
 
                     sent_to_user_id: sent_to_user_id.val(),
                     sentby_user_id: sentby_user_id.val(),
 
                     fund_id: fund_id.val(),
                     comment: comment.val(),
+                    visa: visa.val(),
                 },
                 success: function(response) {
                         console.log(response);
-                        $(".donate-popup").hide();
                     if (response.indexOf('SUCCESS') >= 0) {
-                        $("#response").html(response);
-                        // setInterval(() => {
-                        //     // window.location = 'include/login.php';
-                        // }, 2000);
-                        $.ajax({
-                            // url: 'flutter/pay',
-                            url: 'core/ajax_db/test',
-                            method: 'POST',
-                            dataType : "text",
-                            // contentType: "application/json",
-                            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                            data: {
-                                pay: 'pay',
-                                subscription: key,
-                                description: key,
-                                month: 'day',
-                                amount: donate.val(),
-                                name: Sendby_firstname.val() +' '+ Sendby_lastname.val(),
-                                email: email.val(),
-                                user_id: sentby_user_id.val(),
-                            },
-                            success: function (response) {
-                                // var  objJSON = JSON.parse(response);
-                                // console.log(objJSON.status,objJSON.data.link);
-                                // if (objJSON.status == "success") {
+                        
+                            $('#recharge-coins').html(response);
+
+                            $(".response_coins").html(response).css({"color":"red"});;
+
+                            setTimeout(() => {
+                                $(".donate-popup").hide();
                                 $(".promote-popup").hide();
+                                $("#checkOUT").modal('show');
+                                $("#checkOUT").delay(2000).fadeOut(450);
+                            }, 2000);
+                            setTimeout(() => {
+                                $("#checkOUT").modal('hide');
+                            }, 3500);
+                            setTimeout(() => {
+                                location.reload();
+                            }, 4000);
+                            console.log(response);
+                            
+                        } else{
 
-                                if (response.indexOf('SUCCESS') >= 0) {
-                                    // window.open(objJSON.data.link, '_blank');
-                                    // window.location.href = objJSON.data.link;
-                                    // window.location = objJSON.data.link;
-                                    // location.reload();
-                                    $("#checkOUT").modal('show');
-                                    $("#checkOUT").delay(2000).fadeOut(450);
-                                    setTimeout(() => {
-                                        $("#checkOUT").modal('hide');
-                                    }, 1500);
-                                    setTimeout(() => {
-                                        location.reload();
-                                    }, 2000);
-                                    console.log(response);
-                                    
-                                } else{
+                            isEmptys(visa)  || isEmptys(donate) || isEmptys(comment);
 
-                                    $("#checkOUT").modal('show');
-                                    $('#change-check').removeClass('fa fa-check-circle-o')
-                                    .addClass('fa fa-times').css({"color":"red","font-size":"200px"});
-                                    $('#html-check').html('We can not process your payment').css({"text-align":"center"});
-                                    $("#checkOUT").delay(2000).fadeOut(450);
-                                    setTimeout(() => {
-                                        $("#checkOUT").modal('hide');
-                                    }, 1500);
-                                    setTimeout(() => {
-                                        location.reload();
-                                    }, 2000);
-                                }
-                            }
-                        });
-                        //  setInterval(() => {
-                        //     location.reload();
-                        // }, 2000);
-                    }else if (response.indexOf('Fail') >= 0) {
-                        $("#response").html(response);
-                    }else{
-                        isEmptys(donate) || isEmptys(comment)
+                            $('#recharge-coins').html(response);
+
+                            $("#checkOUT").modal('show').css({"z-index":"20000"});
+                            $('#change-check').removeClass('fa fa-check-circle-o')
+                            .addClass('fa fa-times').css({"color":"red","font-size":"200px"});
+                            $('#html-check').html('We can not process your payment is to low !!!').css({"text-align":"center"});
+                            $("#checkOUT").delay(2000).fadeOut(450);
+                            setTimeout(() => {
+                                $("#checkOUT").modal('hide');
+                            }, 3500);
+
+                        }
                     }
-                }
             });
         }
     }

@@ -3,10 +3,10 @@
 <!-- < ?php include "header_navbar_footer/Get_usernameProfile.php"?> -->
 <title><?php echo $user['username'].' Marketing Place'; ?></title>
 
-<?php if($home->isClosed($user['user_id']) != true) {
+<!-- < ?php if($home->isClosed($user['user_id']) != true) {
     header('location: '.BASE_URL_PUBLIC.$user['username'].'.profile_close_account');
     // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
-} ?>
+} ?> -->
 
 <?php include "header_navbar_footer/header.php"?>
 
@@ -20,7 +20,14 @@
                 <div class="card mb-3">
                     <div class="ads_mini_wallet main-active m-0">
                         <p>Current balance</p>
-                        <div class="h1">$0.00</div>
+                        <div style="font-size:17px"> 
+                            <i class="fas fa-coins text-warning"></i>
+                            <?php echo number_format($user['amount_coins']); ?> Coins 
+                        </div>
+                        <div class="h1">
+                            <?php echo number_format($user['amount_francs']); ?> Frw
+                        </div>
+                        <!-- $0.00 -->
                     </div>
                     <div class="card-body">
                         

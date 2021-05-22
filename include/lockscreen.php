@@ -197,7 +197,7 @@ if (isset($_POST['key']) == 'lockscreen') {
                     <div class="input-group">
                         <input type="password" id="Password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
-                            <span class="input-group-text btn" onclick="lockscreen('lockscreen')" aria-label="Username"
+                            <span class="input-group-text btn" id="myBtn-lock" onclick="lockscreen('lockscreen')" aria-label="Username"
                                 aria-describedby="basic-addon1"><i class="fa fa-arrow-right text-muted"></i></span>
                         </div>
                     </div>
@@ -238,6 +238,19 @@ if (isset($_POST['key']) == 'lockscreen') {
     <script src="<?php echo BASE_URL_LINK ;?>js/adminlte.js"></script>
 
     <script>
+     // on send text field (textarea) keypress do this
+     $('#Password').keypress(function (e) {
+        if (e.keyCode == 13) {
+            // on [shift + enter] pressed do this
+            if (e.shiftKey) {
+                return true;
+            }
+            // on enter button pressed do this
+            document.getElementById("myBtn-lock").click();
+            return false;
+        }
+    });
+
     function lockscreen(key) {
         var password = $("#Password");
         //   use 1 or second method to validaton

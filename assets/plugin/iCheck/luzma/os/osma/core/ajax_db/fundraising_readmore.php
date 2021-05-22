@@ -15,7 +15,7 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
     $uprofileId= $home->usersNameId($username);
     $profileData= $home->userData($uprofileId['user_id']);
     $user_id= $profileData['user_id'];
-    echo $user_id;
+    // echo $user_id;
     }
     $fund_id = $_POST['fund_id'];
     $user= $fundraising->fundFecthReadmore($fund_id);
@@ -134,91 +134,125 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                                 ?>
                             </div>
                        </div>
-                       <?php 
-                        $expodefile = explode("=",$user['other_photo']); 
+                      
+                <?php 
+                        $expodefile = explode("=",$user['photo']."=".$user['other_photo']); 
+                        $photo_title=  explode("=",$user["photo_Title"]);
+
                         $fileActualExt= array();
-                         for ($i=0; $i < count($expodefile); ++$i) { 
-                             $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-                         }
-                         $allower_ext = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
-             if (array_diff($fileActualExt,$allower_ext) == false) {
+                        for ($i=0; $i < count($expodefile); ++$i) { 
+                            $fileActualExt[]= strtolower(substr($expodefile[$i],strrpos($expodefile[$i],'.')+1));
+                        }
+                        $image= array('jpg','jpeg','png','gif'); // valid extensions
+                        $allower_ext= array('jpg','jpeg','png','gif'); // valid extensions
 
-                        $expode = explode("=",$user['other_photo']); 
-                        $count = count($expode); ?>
+                    if (array_diff($fileActualExt,$allower_ext) == false) { 
+                            # code...
+                                
+                            $fileActualExt_image =array_intersect($fileActualExt,$image);
+                            $count_image =count(array_intersect($fileActualExt_image,$image));
+                            $filePathinfo_image=array();
 
-               <?php if ($count === 1) { ?>
+                            
+                    if(!empty($fileActualExt_image)) { 
+                            
+                        foreach ($expodefile as $file_image) {
+                            # code...
+                            $filePathinfo = pathinfo($file_image);
 
-                       <div class="mt-2">
-                            <?php 
-                               $file = $user['other_photo'];
-                               $photo_title=  explode("=",$user["photo_Title"]);
-                               $expode = explode("=",$file); ?>
-                             <div class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>">
-                                <img src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$expode[0] ;?>"
-                                    alt="Photo" >
-                             </div>
-                             <div class="h5"><i><?php echo $photo_title[0]; ?></i></div>
-                       </div>
+                            if (in_array($filePathinfo['extension'],$fileActualExt_image)) {
+                                # code...
+                                $filePathinfo_image[]= $filePathinfo['basename'];
+                            }
+                        }
 
-               <?php }else if ($count === 2) { ?>
+                    if ($count_image === 1) { ?>
 
-                         <?php 
-                               $file = $user['other_photo'];
-                               $photo_title=  explode("=",$user["photo_Title"]);
-                               $explode = explode("=",$file);
-                               $splice= array_splice($explode,0,2);
-                               for ($i=0; $i < count($splice); ++$i) { 
-                                   ?>
-                                   <div class="mt-2">
-                                         <div class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>">
-                                         <img src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$splice[$i] ;?>"
-                                             alt="Photo" >
-                                         </div>
+                        <div class="row mb-1">
+                                <?php $expode = $filePathinfo_image; ?>
+                            <div class="col-12 more">
+                                <img style="width: 100%;height: auto;" class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>"
+                                    src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$expode[0] ;?>" >
+                                    <div class="h5"><i><?php echo $photo_title[0]; ?></i></div>
+                            </div>
+                        </div>
+
+                    <?php
+                        }else if($count_image === 2){?>
+                        <div class="row mb-2 more">
+                                <?php $expode = $filePathinfo_image;
+                                    $splice= array_splice($expode,0,2);
+                                    for ($i=0; $i < count($splice); ++$i) { 
+                                    ?>
+                            <div class="col-12 mb-2">
+                                <img style="width: 100%;height: auto;" class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>"
+                                    src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$splice[$i] ;?>" >
+                                    
+                                    <div class="h5"><i><?php echo $photo_title[$i]; ?></i></div>
+                            </div>
+                                <?php }?>
+                        </div>
+
+                    <?php }else if($count_image === 3 || $count_image > 3){?>
+                        <div class="row mb-2 more">
+                            <?php $expode = $filePathinfo_image;
+                                $splice= array_splice($expode,0,1);
+                                ?>
+                        <div class="col-6">
+                            <img style="width: 100%;height: auto;" class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>"
+                                src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$splice[0] ;?>" >
+                                <div><i><?php echo $photo_title[0]; ?></i></div>
+                        </div>
+                        <!-- /.col -->
+
+                        <div class="col-6">
+                            <div class="row mb-2 more">
+                                    <?php 
+                                    $expode = $filePathinfo_image;
+                                    // var_dump($expode);
+                                    $splice= array_splice($expode,1,2);
+                                    // var_dump($splice);
+                                        for ($i=0; $i < count($splice); ++$i) { ?>
+                                <div class="col-6">
+                                    <img style="width: 100%;height: auto;" class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>"
+                                        src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$splice[$i] ;?>" >
+                                     <div class="h5"><i><?php echo $photo_title[$i]; ?></i></div>
+                                
+                                </div>
+                                    <?php }?>
+
+                            </div>
+                            <!-- /.row -->
+                            <div class="row more">
+                                    <?php 
+                                    $expode = $filePathinfo_image;
+                                    $splice= array_splice($expode,3,2);
+                                        for ($i=0; $i < count($splice); ++$i) { ?>
+                                <div class="col-6">
+                                   <img style="width: 100%;height: auto;" class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>"
+                                        src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$splice[$i] ;?>" >
+                                        
                                         <div class="h5"><i><?php echo $photo_title[$i]; ?></i></div>
-                                   </div>
-                             <?php } ?>
+                                
+                                </div>
+                                    <?php }?>
 
-               <?php }else if ($count === 3) { ?>
-
-                         <?php 
-                               $file = $user['other_photo'];
-                               $photo_title=  explode("=",$user["photo_Title"]);
-                               $explode = explode("=",$file);
-                               $splice= array_splice($explode,0,3);
-                               for ($i=0; $i < count($splice); ++$i) { 
-                                   ?>
-                                   <div class="mt-2">
-                                         <div class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>">
-                                         <img src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$splice[$i] ;?>"
-                                             alt="Photo" >
-                                         </div>
-                                        <div class="h5"><i><?php echo $photo_title[$i]; ?></i></div>
-                                   </div>
-                             <?php } ?>
-
-                  <?php }else if ($count > 3) { ?>
-
-                            <?php 
-                               $file = $user['other_photo'];
-                               $photo_title=  explode("=",$user["photo_Title"]);
-                               $explode = explode("=",$file);
-                               $splice= array_splice($explode,0,4);
-                               for ($i=0; $i < count($splice); ++$i) { 
-                                   ?>
-                                   <div class="mt-2">
-                                         <div class="imageFundViewPopup more"  data-fund="<?php echo $user["fund_id"] ;?>">
-                                         <img src="<?php echo BASE_URL_PUBLIC."uploads/fundraising/".$splice[$i] ;?>"
-                                             alt="Photo" >
-                                         </div>
-                                        <div class="h5"><i><?php if(!empty($user["photo_Title"])){ echo $photo_title[$i];} ?></i></div>
-                                   </div>
-                             <?php } ?>
-
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    
+                        <!-- /.row -->
+                    <div class="row">
+                        <div class="col-12">
                             <span class="btn btn-primary imageFundViewPopup  float-right" data-fund="<?php echo $user["fund_id"] ;?>" > View More photo  <i class="fa fa-picture-o"></i> >>> </span>
-
-                  <?php } ?>
-                  
-               <?php } ?>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                        
+                    <?php }  } } ?>
 
                      </div> <!-- col-md-6  -->
                      </div> <!-- col-md-6  -->
@@ -250,9 +284,30 @@ if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
                                 <span class="description"><i class="fa fa-map-marker mr-1"></i> <?php echo $user['country1'] ;?> | <?php echo $user['city'] ;?> | <?php echo $user['namedistrict'] ;?>  </span>
                             </div> <!-- /.user-block -->
 
+                            
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="input-group-text btn btn-default" onclick="copyText()" data-toggle="tooltip" title="Contacts" data-original-title="Contacts" id="basic-addon2">Copy Link</button>
+                                </div>
+                                <input type="text" id="mycopyText" class="form-control" value="<?php echo BASE_URL_PUBLIC ;?>fundraising_donation?fund_id=<?php echo $_POST['fund_id'] ;?>" readonly>
+                            </div>
+
+                            <a class="btn btn-sm btn-primary mt-2" href="<?php echo BASE_URL_PUBLIC ;?>fundraising_donation?fund_id=<?php echo $_POST['fund_id'] ;?>"> Redirect to the link</a>
+
+                            <script>
+                                function copyText() {
+                                    var copyText = document.getElementById('mycopyText');
+                                    copyText.select();
+                                    copyText.setSelectionRange(0,99999);
+                                    document.execCommand('copy');
+                                    alert('Copied a Url link: ' + copyText.value);
+                                }
+                            </script>
+
                             <h5 class="mt-3"> Recent Donation (<?php echo $fundraising->CountFundraisingRaising($user['fund_id']); ?>)</h5>
                             <div class=" row mt-1">
-                               <?php if (count($donates) > 6) { ?>
+
+                               <?php if (count($donates) > 6) {  ?>
                                 
                                 <div class="col-md-12">
                                 <div style="height:380px;" class="large-2">

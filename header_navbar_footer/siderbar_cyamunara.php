@@ -10,7 +10,7 @@
           <?php 
             echo (isset($_SESSION['key']))?
              (!empty($subscription['icyamunara_subscription']) && $users->subscription_deadline($subscription['icyamunara_date_pay'],$subscription['icyamunara_subscription']) == true )?
-             'class="btn btn-light" id="add_icyamunara" data-icyamunara="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="icyamunara"' 
+             'class="btn btn-light" id="add_icyamunara" data-icyamunara="'.$_SESSION['key'].'"':'class="btn btn-light price-post" data-pricejob="icyamunara"' 
              :' class="btn btn-light" id="login-please" data-login="1"';
             ?> > + Add icyamunara </button>
 

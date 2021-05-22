@@ -3,10 +3,10 @@
 <!-- < ?php include "header_navbar_footer/Get_usernameProfile.php"?> -->
 <title><?php echo $user['username'].' Your Balance'; ?></title>
 
-<?php if($home->isClosed($user['user_id']) != true) {
+<!-- < ?php if($home->isClosed($user['user_id']) != true) {
     header('location: '.BASE_URL_PUBLIC.$user['username'].'.profile_close_account');
     // header('location: '.PROFILE_CLOSE_ACCOUNT.'');
-} ?>
+} ?> -->
 
 <?php include "header_navbar_footer/header.php"?>
 
@@ -40,7 +40,7 @@
                         <p>Current balance</p>
                         <div style="font-size:17px"> 
                         <i class="fas fa-coins text-warning"></i>
-                        <?php echo number_format($user['amount_coins']); ?> Coins </div>
+                        <?php echo number_format($user['amount_coins'],2); ?> Coins </div>
                         <div class="h1">
                         <?php echo number_format($user['amount_francs']); ?> Frw</div>
                         <!-- $0.00 -->
@@ -95,7 +95,7 @@
 
                                 <p class="bold">Current balance
                                 <i class="fas fa-coins text-warning"></i>
-                                <?php echo number_format($user['amount_coins']); ?> Coins </p>
+                                <?php echo number_format($user['amount_coins'],2); ?> Coins </p>
 
                                 <div class="my_wallet wow_mini_wallets">
                                     <div>
@@ -132,9 +132,9 @@
                                 Payment History
                             </div>
                             <div class="card-body">
-                                
+                                <button type="button" class="float-right btn btn-outline-primary delete-all-subscription-statement"  data-user="<?php echo $_SESSION['key'] ;?>"> Clear All Data</button>
                                 <p class="bold">Transactions</p>
-
+                                <div class="response"></div>
                                 <?php 
 
                                 $sql= "SELECT * FROM subscription_statement WHERE user_id_subscription = $user_id ORDER BY date_subscription_ DESC ";
@@ -295,9 +295,9 @@
                                     </div>
 
 
-                                    <div class="alert alert-dangers" style="background:#fcf8e3;">
+                                    <div class="alert alert-danger text-center" style="background:#fcf8e3;">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12" y2="17"></line></svg>
-                                        Your balance is  <?php echo number_format($user['amount_francs']); ?> Frw, minimum withdrawal request is 5,000 Frw	
+                                        Your balance is  <?php echo number_format($user['amount_francs']); ?> Frw, <br> Minimum withdrawal request is 5,000 Frw	
                                         <!-- Your balance is $0, minimum withdrawal request is $50	 -->
                                     </div>
 
@@ -338,10 +338,62 @@
                                 </form> 
                             </div>
 
+                            <div class="card mt-2 mb-3">
+                                <div class="card-header">
+                                    Account to Receive payment
+                                </div>
+                                <div class="card-body">
+
+                                <?php if (!empty($user['type_of_payment'])){ 
+                                    if ($user['type_of_payment'] == 'Bank') { ?>
+                                <label style="text-decoration: underline;color: green;">Bank Details</label>
+                                <div>Bank Name : <?php echo $user['type_of_payment']; ?></div> 
+                                <div>Bank Account : <?php echo $user['bank_account']; ?></div> 
+                                <div>Swift Number : <?php echo $user['swift_number']; ?></div> 
+
+                                <?php }else { ?>
+                                <label style="text-decoration: underline;color: green;">Phone Details</label>
+                                <div>SIM : <?php echo $user['sim_account']; ?></div>
+                                <div>Number : <?php echo $user['sim_number']; ?></div>
+                                <?php } } ?>
+
+                                    <form method="post" id="account-payment-form">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="wow_form_fields">
+                                                <label for="amount">Select Type Of Payment</label>  
+                                                <select class="form-control"  onchange="showPayment();" name="type_of_payment" id="type_of_payment">
+                                                    <option>Select one</option>
+                                                    <option value="Mtn&Airtel">Mtn Or Airtel</option>
+                                                    <option value="Bank">Bank</option>
+                                                </select>
+                                            </div>
+                                            <div id="payment_choice"></div>
+                                            <div class="response-account-payment"></div>
+                                            <div class="text-center">
+                                                <button type="button" class="btn main-active btn-mat btn-mat-raised submit-account-payment-form" >
+                                                Update Account</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+
+                                </div>
+                                <div class="card-footer text-muted">
+                                </div>
+                            </div>
+
+
                             <?php 
-                                $sql= "SELECT * FROM withdraw_money WHERE user_id_withdraw = $user_id ORDER BY withdraw_date DESC ";
+                                 $sql= "SELECT * FROM withdraw_money W 
+                                 LEFT JOIN users U ON W. user_id_withdraw = U. user_id
+                                WHERE W. user_id_withdraw = $user_id AND W. status_withdraw != 'block' 
+                                ORDER BY W. withdraw_date DESC ";
                                 $query= $db->query($sql);
                                 if ($query->num_rows > 0) {  ?>
+                                <div class="card-header border">
+                                    Request to be Paid
+                                </div>
 
                                 <!-- <table class="table table-striped table-bordered table-responsive-sm table-hover table_admin1"> -->
                                 <table id="example2" class="table table-striped table-bordered table-hover table-inverse table-responsive-sm table-responsive" >
@@ -349,6 +401,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Description</th>
+                                                <th>Payment Details</th>
                                                 <!-- <th>Name</th>
                                                 <th>email</th> -->
                                                 <th>status</th>
@@ -364,7 +417,15 @@
                                     ?>
                                                 <tr>
                                                     <td><?php echo $i++ ?></td>
-                                                    <td><?php echo $row['withdraw']?></td>
+                                                    <td><?php echo $row['withdraw'];?></td>
+                                                    <?php if ($row['type_of_payment'] == 'Bank') { ?>
+                                                        <td><?php echo 'Bank Name ='.$row['bank_name'];?></br>
+                                                        <?php echo 'Bank Account ='. $row['bank_account'];?></br>
+                                                        <?php echo 'Swift Number ='.$row['swift_number'];?></td>
+                                                    <?php }else { ?>
+                                                        <td><?php echo 'SIM ='.$row['sim_account'];?></br>
+                                                        <?php echo 'Number ='. $row['sim_number'];?></td>
+                                                    <?php } ?>
                                                     <!-- <td>< ?php echo $row['name_subscription_']?></td>
                                                     <td>< ?php echo $row['email_subscription_']?></td> -->
                                                     <?php echo ($row['status_withdraw'] == 'pending')?'
@@ -381,7 +442,6 @@
                                 </table>
 
                                 <?php } ?> 
-
 
                             </div>
                                 <!-- /.card_body -->

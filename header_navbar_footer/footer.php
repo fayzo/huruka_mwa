@@ -200,6 +200,26 @@
     <!-- UItoTop plugin -->
     <script src="<?php echo BASE_URL_LINK ;?>dist/js/jquery.ui.totop.js" type="text/javascript"></script>
     <!-- Starting the plugin -->
+    <script>
+          $(document).ready(function() {
+              $("#content-slider").lightSlider({
+                  loop:true,
+                  keyPress:true
+              });
+              $('#image-gallery').lightSlider({
+                  gallery:true,
+                  item:1,
+                  thumbItem:9,
+                  slideMargin: 0,
+                  speed:1500,
+                  auto:true,
+                  loop:true,
+                  onSliderLoad: function() {
+                      $('#image-gallery').removeClass('cS-hidden');
+                  }  
+              });
+          });
+      </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $().UItoTop({ easingType: 'easeOutQuart' });

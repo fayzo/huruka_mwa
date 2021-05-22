@@ -10,9 +10,9 @@
           <?php 
             echo (isset($_SESSION['key']))?
              (!empty($subscription['crowfund_subscription']) && $users->subscription_deadline($subscription['crowfund_date_pay'],$subscription['crowfund_subscription']) == true )?
-             'class="btn btn-light" id="add_crowfund" data-crowfund="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="crowfunding"' 
+             'class="btn btn-light" id="add_crowfund" data-crowfund="'.$_SESSION['key'].'"':'class="btn btn-light price-post" data-pricejob="crowfunding"' 
              :' class="btn btn-light" id="login-please" data-login="1"';
-            ?> > + add Startup </button>
+            ?> > + Add Startup Fund </button>
             <!-- <button type="button" class="btn btn-light" id="add_crowfund" data-crowfund="<?php echo $_SESSION['key']; ?>" > + Add Startup </button> -->
           </div>
           <div class="col-4 text-center">
@@ -30,7 +30,8 @@
   <div class="row">
     <div class="col-4 col-md-2 col-lg-2 py-3 px-2" >
       <div class="list-group sticky-top" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="tab" href="#list-Agriculture" role="tab" aria-controls="list-home">Agriculture</a>
+        <a class="list-group-item list-group-item-action active" id="list-Feature-list" data-toggle="tab" href="#list-Feature" role="tab" aria-controls="list-Feature">Feature</a>
+        <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="tab" href="#list-Agriculture" role="tab" aria-controls="list-home">Agriculture</a>
         <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="tab" href="#list-ubworonzi" role="tab" aria-controls="list-profile">Ubworonzi</a>
         <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="tab" href="#list-Arts" role="tab" aria-controls="list-profile">Arts</a>
         <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="tab" href="#list-Film" role="tab" aria-controls="list-settings">Film</a>
@@ -45,7 +46,12 @@
 
     <div class="col-8 col-md-10 col-lg-10 ">
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="list-Agriculture" role="tabpanel" aria-labelledby="list-home-list">
+      
+        <div class="tab-pane fade show active" id="list-Feature" role="tabpanel" aria-labelledby="list-Feature-list">
+           <?php include "siderbar_crowfund/Feature.php"?>
+        </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
+
+        <div class="tab-pane fade" id="list-Agriculture" role="tabpanel" aria-labelledby="list-home-list">
            <?php include "siderbar_crowfund/Agriculture.php"?>
         </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
 

@@ -13,7 +13,6 @@ $user = $home->userData($_SESSION['key']);
         	<div class="img-popup-body">
                   
             <div class="card borders-tops">
-                <span id="response-PostMessage"></span>
                 <div class="card-header">
                    <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button>
                     <span class="closeDelete"><button class="closeTweetPopup"><i class="fa fa-times" aria-hidden="true"></i></button></span>
@@ -39,6 +38,7 @@ $user = $home->userData($_SESSION['key']);
                             </div>
                             <textarea class="status" name="status" id="editor5"
                                 placeholder="Type Something here!" rows="4" cols="50"></textarea>
+                            <span id="response-PostMessage"></span>
                             <div class="hash-box">
                                 <ul>
                                 </ul>

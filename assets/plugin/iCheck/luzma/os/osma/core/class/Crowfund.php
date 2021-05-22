@@ -16,7 +16,15 @@ class Crowfund extends Fundraising {
             $showpages = ($pages*8)-8;
         }
         $mysqli= $this->database;
-        $query= $mysqli->query("SELECT * FROM users U Left JOIN crowfundraising C ON C. user_id2 = U. user_id  WHERE C. categories_crowfundraising ='$categories'  ORDER BY created_on2 Desc Limit $showpages,8");
+
+        if ($categories == 'Feature') {
+            # code...
+            $query= $mysqli->query("SELECT * FROM users U Left JOIN crowfundraising C ON C. user_id2 = U. user_id  WHERE C. categories_crowfundraising = C. categories_crowfundraising ORDER BY created_on2 Desc Limit $showpages,8");
+        }else {
+            # code...
+            $query= $mysqli->query("SELECT * FROM users U Left JOIN crowfundraising C ON C. user_id2 = U. user_id  WHERE C. categories_crowfundraising ='$categories'  ORDER BY created_on2 Desc Limit $showpages,8");
+        }
+
         // $query= $mysqli->query("SELECT * FROM users U Left JOIN crowfundraising C  WHERE C. categories_crowfundraising ='$categories'  ORDER BY created_on2 Desc Limit $showpages,8");
         ?>
             <div class="row mt-3">
@@ -112,8 +120,13 @@ class Crowfund extends Fundraising {
                 </div></div>'; 
         } 
 
-
-        $query1= $mysqli->query("SELECT COUNT(*) FROM users U Left JOIN crowfundraising C ON  C. user_id2 = U. user_id WHERE C. categories_crowfundraising ='$categories'  ORDER BY created_on2 Desc ");
+        if ($categories == 'Feature') {
+            $query1= $mysqli->query("SELECT COUNT(*) FROM users U Left JOIN crowfundraising C ON  C. user_id2 = U. user_id WHERE C. categories_crowfundraising = C. categories_crowfundraising ORDER BY created_on2 Desc ");
+        }else {
+            # code...
+            $query1= $mysqli->query("SELECT COUNT(*) FROM users U Left JOIN crowfundraising C ON  C. user_id2 = U. user_id WHERE C. categories_crowfundraising ='$categories'  ORDER BY created_on2 Desc ");
+        }
+        
         $row_Paginaion = $query1->fetch_array();
         $total_Paginaion = array_shift($row_Paginaion);
         $post_Perpages = $total_Paginaion/8;

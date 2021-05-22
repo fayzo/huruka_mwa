@@ -480,6 +480,7 @@ class Follow extends Home
                             </div><!-- info body name end-->
                         </div><!-- info in body end-->
                         <div class="info-in-footer">
+                        <!-- < ?php echo self::coins_recharge($user['user_id'],$user_key_coins,$username_keycoins,$user['username']); ?> -->
                         <?php echo self::coins_recharge_tweet_tooltip($user['user_id'],$user_key_coins,$username_keycoins,$user['username'],$tweet_id,$tweet); ?>
                                 
                             <div class="number-wrapper">
@@ -524,12 +525,12 @@ class Follow extends Home
         $query= $mysqli->query($sql);
         $user= $query->fetch_assoc(); ?>
 
-         <div  class="container retweetcolor p-4 shadow-sm border">
-         <div  class="row">
+         <div class="container retweetcolor p-4 shadow-sm border">
+         <div class="row">
             <div class="col-md-12">
-            <form method="post" class="form-coins">
+            <form method="post" class="form-coins<?php echo $user_id;?>">
 
-            <input type="hidden" name="user_id" value="<?php echo $user_key; ?>">
+            <input type="hidden" name="user_id" id="user_key<?php echo $user_id?>" value="<?php echo $user_key; ?>">
             <input type="hidden" name="user_id_coins_to" value="<?php echo $user_id; ?>">
             <input type="hidden" name="username_coins_to" value="<?php echo $username; ?>">
             <input type="hidden" name="user_id_coins_from" value="<?php echo $user_key; ?>">
@@ -537,7 +538,7 @@ class Follow extends Home
 
                 <label for="exampleFormControlInput1">Send Reward <i class="fas fa-coins text-warning"></i> Coins to <?php echo $username;?></label>
                 <div class="form-group">
-                    <select class="form-control amount_coins" id="amount_coins" name="amount_coins">
+                    <select class="form-control amount_coins" id="amount_coins<?php echo $user_id?>" name="amount_coins">
                     <option value="">Select Coins</option>
                         <option value='0.5=>50'>0.5 coins    =>    50 Frw</option>
                         <option value='1=>100'>1 coins    =>    100 Frw</option>
@@ -551,10 +552,10 @@ class Follow extends Home
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control comment_coins" name="comment_coins" id="comment_coins" placeholder="Comment to <?php echo $username ;?>">
+                    <input type="text" class="form-control comment_coins" name="comment_coins" id="comment_coins<?php echo $user_id;?>" placeholder="Comment to <?php echo $username ;?>">
                 </div>
                 <span class="response_coins"></span>
-                <button type="button" name="reward_coins" class="btn btn-primary btn-lg btn-block reward_coins">Send Reward</button>
+                <input type="button" name="reward_coins" value="Send Donation" <?php echo (!empty($_SESSION['key']))?'data-user_id="'.$user_id.'" class="btn btn-primary btn-lg btn-block reward_coins_user_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
             </form>
             </div><!-- col -->
         </div><!-- row -->
@@ -578,8 +579,8 @@ class Follow extends Home
             <div class="col-md-12">
             <form method="post" class="form-coins<?php echo $tweet_id;?>">
 
-            <input type="hidden" name="user_id" value="<?php echo $user_key; ?>">
-            <input type="hidden" name="coins" value="<?php echo $tweet['coins']; ?>">
+            <input type="hidden" name="user_id" id="user_key<?php echo $tweet_id ?>" value="<?php echo $user_key; ?>">
+            <!-- <input type="hidden" name="coins" value="< ?php echo $tweet['coins']; ?>"> -->
             <input type="hidden" name="tweet_id" value="<?php echo ($tweet['retweet_id'] != 0)?$tweet['retweet_id']:$tweet['tweet_id']; ?>">
             <input type="hidden" name="user_id_coins_to" value="<?php echo $user_id; ?>">
             <input type="hidden" name="username_coins_to" value="<?php echo $username; ?>">
@@ -612,7 +613,7 @@ class Follow extends Home
                     <input type="text" class="form-control comment_coins" name="comment_coins" id="comment_coins<?php echo $tweet_id;?>" placeholder="Comment to <?php echo $username ;?>" style="background:none">
                 </div>
                 <span class="response_coins"></span>
-                <input type="button" name="reward_coins" value="Send Reward" <?php echo (!empty($_SESSION['key']))?' data-tweet_id="'.$tweet_id.'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+                <input type="button" name="reward_coins" value="Send Reward" <?php echo (!empty($_SESSION['key']))?' data-tweet_id="'.$tweet_id.'" data-user_id="'.$user_id.'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id_user_id " ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
             </form>
             </div><!-- col -->
         </div><!-- row -->
@@ -636,8 +637,8 @@ class Follow extends Home
             <div  class="row">
             <div class="col-md-12">
 
-            <input type="hidden" name="user_id" value="<?php echo $user_key; ?>">
-            <input type="hidden" name="coins" value="<?php echo $tweet['coins']; ?>">
+            <input type="hidden" name="user_id"  id="user_key<?php echo $tweet_id ?>" value="<?php echo $user_key; ?>">
+            <!-- <input type="hidden" name="coins" value="< ?php echo $tweet['coins']; ?>"> -->
             <input type="hidden" name="tweet_id" value="<?php echo ($tweet['retweet_id'] != 0)?$tweet['retweet_id']:$tweet['tweet_id']; ?>">
             <input type="hidden" name="user_id_coins_to" value="<?php echo $user_id; ?>">
             <input type="hidden" name="username_coins_to" value="<?php echo $username; ?>">
@@ -669,34 +670,38 @@ class Follow extends Home
                 <div class="form-group">
                     <input type="text" class="form-control comment_coins" name="comment_coins" id="comment_coins<?php echo $tweet_id;?>" placeholder="Comment to <?php echo $username ;?>" style="background:none">
                 </div>
+
+                <span class="response_coins"></span>
+                <input type="button" name="reward_coins" value="Send Donation" <?php echo (!empty($_SESSION['key']))?'data-tweet_id="'.$tweet['tweet_id'].'"  data-user_id="'.$user_id.'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id_user_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+
             </div><!-- col -->
 
-            <div class="col-12 mb-2">
+            <!-- <div class="col-12 mb-2">
                 
                 <div class="text-muted mb-1">Donation
                     <span class="text-success px-1 float-right" style="border-radius:3px;font-size:11px;"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</span>
                 </div>
                 <div class="card-text">
-                <!-- 40,000 -->
-                    <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
-                    Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo self::timeAgo($tweet['posted_on']);?> 
-                    <span class="float-right"><?php echo self::donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
-                    <!-- 40 -->
+                < !-- 40,000 -- >
+                    <span class="font-weight-bold">< ?php echo number_format($tweet['money_raising']); ?> Frw</span>
+                    Raised by < ?php echo $tweet['donate_counts']; ?> people in < ?php echo self::timeAgo($tweet['posted_on']);?> 
+                    <span class="float-right">< ?php echo self::donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
+                    < !-- 40 -- >
                 </div>
                 <div class="progress clear-float " style="height: 10px;">
-                    <?php echo self::Users_donationMoneyRaising($tweet['money_raising'],$tweet['money_to_target']); ?>
+                    < ?php echo self::Users_donationMoneyRaising($tweet['money_raising'],$tweet['money_to_target']); ?>
                 </div>
                 
                 <div class="clear-float">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    <span class="text-muted"><?php echo self::timeAgo($tweet['posted_on']); ?></span>
-                    <span class="text-muted float-right text-right">out of <?php echo number_format($tweet['money_to_target']).' Frw'; ?></span>
-                    <!-- 13 days Left -->
+                    <span class="text-muted">< ?php echo self::timeAgo($tweet['posted_on']); ?></span>
+                    <span class="text-muted float-right text-right">out of < ?php echo number_format($tweet['money_to_target']).' Frw'; ?></span>
+                    < !-- 13 days Left -- >
                 </div>
 
-                <span class="response_coins"></span>
-                <input type="button" name="reward_coins" value="Send Donation" <?php echo (!empty($_SESSION['key']))?'data-tweet_id="'.$tweet['tweet_id'].'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
-            </div><!-- col -->
+            </div>< !-- col -- //>  
+            -->
+             
         </div><!-- row -->
         </form>
 
@@ -780,7 +785,7 @@ class Follow extends Home
                 </div>
 
                 <span class="response_coins"></span>
-                <input type="button" name="reward_coins" value="Send Donation" <?php echo (!empty($_SESSION['key']))?'data-tweet_id="'.$tweet['tweet_id'].'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
+                <input type="button" name="reward_coins" value="Send Donation" <?php echo (!empty($_SESSION['key']))?'data-tweet_id="'.$tweet['tweet_id'].'"  data-user_id="'.$user_id.'" class="btn btn-primary btn-lg btn-block reward_coins_tweet_id mt-2" ':'id="login-please" data-login="1" class="btn btn-primary btn-lg btn-block main-active"' ;?> >
             </div><!-- col -->
             </div><!-- row -->
         </form>

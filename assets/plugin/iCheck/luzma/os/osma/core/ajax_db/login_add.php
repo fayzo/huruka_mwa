@@ -214,7 +214,7 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
 
                             </div>
 
-                            <button class="redbutton myBtn_signup" onclick="signup('signup')" type="button">Sign Up</button>
+                            <button id="myBtn_signup" class="redbutton" onclick="signup('signup')" type="button">Sign Up</button>
                         </form>
                     </div>
 
@@ -234,7 +234,7 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
                             <input type="text" name="usernameoremail" id="usernameoremail" placeholder="Username or Email " />
                             <input type="password" name="passwordlogin" id="passwordlogin" placeholder="Password" />
                             <a class="alink" href="< ?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
-                            <button class="blacButton myBtn_login" onclick="manage('login')" type="button">Sign In</button>
+                            <button id="myBtn_login" class="blacButton" onclick="manage('login')" type="button">Sign In</button>
                         </form>
                     </div>
                     <div class="overlay-container">
@@ -396,7 +396,7 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
     // this is trigger button on enter
 
     var inputLogin = document.getElementById("passwordlogin");
-    var inputSign = document.getElementById("verifypassword");
+    var inputSignup = document.getElementById("verifypassword");
 
     inputLogin.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
@@ -405,7 +405,7 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
         }
     });
 
-    inputSign.addEventListener("keyup", function(event) {
+    inputSignup.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
             event.preventDefault();
             document.getElementById("myBtn_signup").click();

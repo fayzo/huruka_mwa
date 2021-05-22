@@ -7,16 +7,18 @@ if (isset($_POST['showpimage']) && !empty($_POST['showpimage'])) {
     $fund_id=$_POST['showpimage'];
     $user= $fundraising->fundFecthReadmore($fund_id); ?>
 
-    <div class="img-popup">
-      <div class="wrap6">
+<div class="img-popup">
+    <div class="wrap6" id="disabler">
         <span class="colose">
         	<button class="close-imagePopup"><i class="fa fa-times" aria-hidden="true"></i></button>
         </span>
-        <div class="img-popup-wrap">
+        <div class="wrap6Pophide" onclick="togglePopup( )"></div>
+        <div class="img-popup-wrap"  id="popupEnd">
+
           <div class="row">
            <div class="col-12">
         	<div class="img-popup-body">
-               
+
                 <div id="jssor_2" style="position:relative;margin:0 auto;top:0px;left:0px;width:960px;height:480px;overflow:hidden;visibility:hidden;background-color:#24262e;">
                     <!-- Loading Screen -->
                     <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">

@@ -237,7 +237,7 @@ if(isset($_POST['key'])){
 
                 </div>
 
-                <button class="redbutton" onclick="signup('signup')" type="button">Sign Up</button>
+                <button id="myBtn-siginup" class="redbutton" onclick="signup('signup')" type="button">Sign Up</button>
             </form>
         </div>
 
@@ -251,7 +251,7 @@ if(isset($_POST['key'])){
                 <input type="text" name="usernameoremail" id="usernameoremail" placeholder="Username or Email " />
                 <input type="password" name="passwordlogin" id="passwordlogin" placeholder="Password" />
                 <a class="alink" href="< ?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
-                <button class="blacButton" onclick="manage('login')" type="button">Sign In</button>
+                <button class="blacButton" id="myBtn-sigin" onclick="manage('login')" type="button">Sign In</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -296,6 +296,29 @@ if(isset($_POST['key'])){
     <script src="<?php echo BASE_URL_LINK ;?>js/adminlte.js"></script>
     <script src="<?php echo BASE_URL_LINK ;?>js/login.js"></script>
     <script>
+    
+    var inputLogin = document.getElementById("passwordlogin");
+    var inputSignup = document.getElementById("verifypassword");
+
+    inputSignup.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("myBtn-siginup").click();
+        }
+    });
+
+    // on send text field (textarea) keypress do this
+    $('#passwordlogin').keypress(function (e) {
+        if (e.keyCode == 13) {
+            // on [shift + enter] pressed do this
+            if (e.shiftKey) {
+                return true;
+            }
+            // on enter button pressed do this
+            document.getElementById("myBtn-sigin").click();
+            return false;
+        }
+    });
 
     function manage(key) {
         var email = $("#usernameoremail");

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $(document).on('click', '.like-fundraising-btn', function () {
         var fund_id = $(this).data('fund');
         var user_id = $(this).data('user');

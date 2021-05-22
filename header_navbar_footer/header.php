@@ -961,14 +961,14 @@ $paths=basename($_SERVER['REQUEST_URI']);
 $path=$_SERVER['REQUEST_URI'];
 $result = substr(strrchr($path,'/'),1);
 
-if (isset($_SESSION['key']) && $result === '' ){ ?>
+if (isset($_SESSION['key']) && $result === '' || isset($_SESSION['key']) && $self === 'balance.php'){ ?>
   
   <!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
   <body class="hold-transition fixed sidebar-mini-expand-feature sidebar-mini sidebar-collapse <?php echo (!empty($user['color']))? $user['color'] :'skin-blue'; ?>">
   <!-- <body class="hold-transition skin-blue fixed sidebar-collapse sidebar-mini "> -->
   <!-- Site wrapper skin-blue -->
 <?php }else if (isset($_SESSION['key']) && $self === 'profile.php' || isset($_SESSION['key']) && $self === 'hashtag.php' || 
- isset($_SESSION['key']) && $self === 'balance.php' || isset($_SESSION['key']) && $self ==='profileEdit.php' || 
+isset($_SESSION['key']) && $self ==='profileEdit.php' || 
  isset($_SESSION['key']) && $self === 'profile_close_account.php' || isset($_SESSION['key']) && $self === 'marketing_ads.php' ||
  isset($_SESSION['key']) && $self === 'newsfeeds.php' || isset($_SESSION['key']) && $self === 'events.php'){ ?>
   

@@ -146,7 +146,7 @@ class Users{
     public function irangiro_subscription($user_id)
     {
         $mysqli= $this->database;
-        $sql= $mysqli->query("SELECT irangiro_subscription,delete_subscription FROM subscription WHERE user_id_subscription ='{$user_id}' ");
+        $sql= $mysqli->query("SELECT irangiro_subscription,irangiro_date_pay,delete_subscription FROM subscription WHERE user_id_subscription ='{$user_id}' ");
         $row= $sql->fetch_assoc();
 
         if (!empty($row['delete_subscription'])) {
@@ -157,9 +157,13 @@ class Users{
         $query= $mysqli->query("SELECT * FROM users WHERE user_id= '{$user_id}' ");
         $user= $query->fetch_array();
 
-        if (!empty($row['irangiro_subscription'])) {
-            return true;
-        }else { ?>
+        $datetime= date('Y-m-d H:i:s', strtotime($row['irangiro_date_pay'].'+ 1'.$row['irangiro_subscription']));
+        $time= strtotime($datetime);
+        $current= time($datetime);
+
+        // var_dump($time > $current);
+            
+        if (empty($row['irangiro_subscription'])) { ?>
 
             <div class="promote-popup">
                 <div class="wrap6" id="disabler">
@@ -183,6 +187,8 @@ class Users{
 
                                 <div class="card-deck mb-3 text-center">
                                     <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'irangiro\'' ;?>
+                               
+                                <?php if (empty($row['irangiro_subscription'])) { ?>
 
                                     <div class="card mb-4 shadow-lg">
                                     <div class="card-header">
@@ -197,6 +203,7 @@ class Users{
                                         <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
                                     </div>
                                     </div>
+                                    <?php }else { ?>
                                     <div class="card mb-4 shadow-lg">
                                     <div class="card-header">
                                         <h4 class="my-0 font-weight-normal">Individual</h4>
@@ -210,6 +217,8 @@ class Users{
                                         <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
                                     </div>
                                     </div>
+                                    <?php } ?>
+
                                     <div class="card mb-4 shadow-lg">
                                     <div class="card-header">
                                         <h4 class="my-0 font-weight-normal">Pro</h4>
@@ -250,7 +259,110 @@ class Users{
                 </div> <!-- Wrp4 -->
             </div> <!-- apply-popup" -->
 
-        <?php }
+        <?php }else if ($time < $current) {  ?>
+        
+            <div class="promote-popup">
+                <div class="wrap6" id="disabler">
+                <div class="wrap6Pophide" onclick="togglePopup( )"></div>
+                    <span class="colose">
+                        <!-- <button class="close-imagePopup"><i class="fa fa-times" aria-hidden="true"></i></button> -->
+                        <button class="close-imagePopup"><a href="<?php echo LOGOUT ;?>"><i class="fa fa-times" aria-hidden="true"></i></a></button>
+                    </span>
+                    <div class="img-popup-wrap"  id="popupEnd">
+                        <div class="img-popup-body">
+                    
+                         <div class="card">
+                            <a href="<?php echo LOGOUT ;?>" class="btn btn-success btn-sm  float-right d-md-block d-lg-none">Close</a>
+                            <!-- <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button> -->
+                            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                                <h1 class="display-4">Pricing</h1>
+                                <p class="lead">Choose your affordable price.</p>
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="card-deck mb-3 text-center">
+                                    <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'irangiro\'' ;?>
+
+                                   
+                                <?php if (empty($row['irangiro_subscription'])) { ?>
+
+                                    <div class="card mb-4 shadow-lg">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">Free Trial</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <h1 class="card-title pricing-card-title">Free <small class="text-muted"></small></h1>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                        <li>1 month</li>
+                                        </ul>
+                                        <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
+                                    </div>
+                                    </div>
+
+                                <?php }else { ?>
+
+                                    <div class="card mb-4 shadow-lg">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">Individual</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <h1 class="card-title pricing-card-title">$10 <small class="text-muted"></small></h1>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                        <li>3 months</li>
+                                        </ul>
+                                        <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
+                                    </div>
+                                    </div>
+
+                                <?php } ?>
+
+                                    <div class="card mb-4 shadow-lg">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">Pro</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <h1 class="card-title pricing-card-title">$60 <small class="text-muted"></small></h1>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                        <li>5 months</li>
+                                        </ul>
+                                        <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="pro" data-user="< ?php echo $user_id; ?>">Get started</button> -->
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(35000,'months',<?php echo $details ;?>)" >Get started</button>
+                                    </div>
+                                    </div>
+                                    <div class="card mb-4 shadow-lg">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">Enterprise</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <h1 class="card-title pricing-card-title">$180 <small class="text-muted"></small></h1>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                        <li>12 months</li>
+                                        </ul>
+                                        <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="enterprise" data-user="< ?php echo $user_id; ?>">Get started</button> -->
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(80000,'months',<?php echo $details ;?>)" >Get started</button>
+                                    </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="card-footer text-center">
+                                <p class="mb-1"><?php echo $this->copyright(2018); ?></p>
+                            </div>
+                        </div>
+
+                    </div><!-- img-popup-body -->
+                    </div><!-- user-show-popup-box -->
+                </div> <!-- Wrp4 -->
+            </div> <!-- apply-popup" -->
+
+        <?php }else {
+            
+            return true;
+        }
     }
     
 
@@ -349,6 +461,7 @@ class Users{
     }
 
     public function isClosed($user_id) {
+        
         $mysqli= $this->database;
         // var_dump($user_id);
         $sql= $mysqli->query("SELECT close_account,delete_account FROM users WHERE user_id= '$user_id'");
@@ -366,6 +479,8 @@ class Users{
         }
 
 		if($row['close_account'] == 'yes' ){ ?>
+            
+            <?php if ($_SESSION['key'] == $user_id) { ?>
 
                 <div class="card borders-tops card-profile card1 mb-3">
                     <div class="card-body">
@@ -376,9 +491,24 @@ class Users{
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
+
+            <?php }else { ?>
+
+                <div class="card borders-tops card-profile card1 mb-3">
+                    <div class="card-body">
+                        <h4>This Account is Closed </h4>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+            <?php } ?>
+
         <?php 
 
         }else if($row['delete_account'] == 'yes'){ ?>
+
+            <?php if ($_SESSION['key'] == $user_id) { ?>
 
             <div class="promote-popup">
                 <div class="wrap6" id="disabler">
@@ -387,8 +517,8 @@ class Users{
                         <!-- <button class="close-imagePopup"><i class="fa fa-times" aria-hidden="true"></i></button> -->
                         <button class="close-imagePopup"><a href="<?php echo LOGOUT ;?>"><i class="fa fa-times" aria-hidden="true"></i></a></button>
                     </span>
-                    <div class="img-popup-wrap"  id="popupEnd">
-                        <div class="img-popup-body">
+                    <div class="img-popup-wrap"  id="popupEnd" style="max-width: 400px;">
+                        <div class="img-popup-body" >
                     
                          <div class="card">
                             <a href="<?php echo LOGOUT ;?>" class="btn btn-success btn-sm  float-right d-md-block d-lg-none">Close</a>
@@ -412,7 +542,8 @@ class Users{
                                         </ul>
                                         <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
                                         <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\'delete_account\'' ;?>
-                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(1000,'years',<?php echo $details ;?>)" >Get started </button>
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(1000,'years',<?php echo $details ;?>)" >Get started </button>
+                                        <div id="recharge-coins" class="mt-1"></div>
                                     </div>
                                     </div>
                                 </div>
@@ -427,6 +558,18 @@ class Users{
                     </div><!-- user-show-popup-box -->
                 </div> <!-- Wrp4 -->
             </div> <!-- apply-popup" -->
+            
+            <?php }else { ?>
+
+                <div class="card borders-tops card-profile card1 mb-3">
+                    <div class="card-body">
+                        <h4>This Account is Closed </h4>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+            <?php } ?>
 
         <?php }
         
@@ -591,6 +734,25 @@ class Users{
         // var_dump($query,$delete );
     }
 
+    public function deleteQuery($table, $conditions){
+        $mysqli= $this->database;
+        $whereSql = '';
+        if(!empty($conditions) && is_array($conditions)){
+            $whereSql .= ' WHERE ';
+            $i = 0;
+            foreach($conditions as $key => $value){
+                $pre = ($i > 0)?' AND ':'';
+                $whereSql .= $pre.$key." = '".$value."'";
+                $i++;
+            }
+        }
+        $query = "DELETE FROM ".$table.$whereSql;
+        $delete = $mysqli->query($query);
+        return $delete;
+        // return $delete?true:false;
+        // var_dump($query,$delete );
+    }
+
     // public function delete($table,$array)
     // {
     //     $mysqli= $this->database;
@@ -663,6 +825,7 @@ class Users{
         }
         $query = "UPDATE ".$table." SET ".$colvalSet.$whereSql;
         $update = $mysqli->query($query);
+        return $update;
         // return $update?$mysqli->affected_rows:false;
         //  var_dump($query,$update);
         // var_dump('ERROR: Could not able to execute'. $update.mysqli_error($mysqli));
@@ -771,7 +934,7 @@ class Users{
         $update = $mysqli->query($query);
         // return $update?$mysqli->affected_rows:false;
          return $update;
-        var_dump('ERROR: Could not able to execute'. $update.mysqli_error($mysqli));
+        // var_dump('ERROR: Could not able to execute'. $update.mysqli_error($mysqli));
 
         }
 

@@ -12,33 +12,61 @@ function closeNav() {
 
 function add_support_coins() {
   $('#add-support-coins').show();
+
   $("#add-support-coins").html(
 
-    '<div class="form-group">Support to be Given coins'+
+    '<div class="form-group">Support'+
     '</div>'+
     '<div class="form-group">'+
-      '<select class="custom-select" name="donation_payment" id="donation_payment">'+
+      '<select class="custom-select" name="donation_payment" id="donation_payment" onchange="donationPayment();" >'+
           '<option value="">Select one</option>' +
           '<option value="donation_coins.coins">Support by Given coins</option>'+
-          '<option value="donation_coins.donate">Donate coins</option>'+
-          '<option value="donation_card.card">Mtn & Visa paymant</option>'+
+          '<option value="donation_coins.donate">Donation or Fundraising</option>'+
       '</select>'+
   '</div>'+
-  '<div class="form-group" style="overflow: auto;width: 97%;">'+
-      '<input type="number" class="form-control" name="money_to_target" id="money_to_target" placeholder="Money to Target">'+
-  '</div>'+
-  '<div class="form-row mt-2">' +
-     '<div class="col">' +
-         '<div class="form-group">' +
-     '<label for="">' +'Youtube Link</label>' +
-           '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="IF any link of youtube video to show us">' +
-         '</div>' +
-     '</div>' +
-    '</div>'
+  '<div id="donation_payment_coins">'+'</div>'
   );
 
   $('#add-more-support-coins').attr('onclick','coinsClose()');
   $('#add-more-support-coins').attr('value','close');
+}
+
+function donationPayment() {
+  var payment = document.getElementById('donation_payment').value;
+
+  if (payment == 'donation_coins.donate') {
+
+    $("#donation_payment_coins").html(
+
+    '<div class="form-group" style="overflow: auto;width: 97%;">'+
+        '<input type="number" class="form-control" name="money_to_target" id="money_to_target" placeholder="Money to Target">'+
+    '</div>'+
+    '<div class="form-row mt-2">' +
+      '<div class="col">' +
+          '<div class="form-group">' +
+      '<label for="">' +'Youtube Link</label>' +
+            '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="If any link of youtube video to show us it Not necceassary">' +
+          '</div>' +
+      '</div>' +
+      '</div>'
+    );
+  }
+
+  if (payment == 'donation_coins.coins') {
+
+    $("#donation_payment_coins").html(
+
+    '<div class="form-row mt-2">' +
+      '<div class="col">' +
+          '<div class="form-group">' +
+      '<label for="">' +'Youtube Link</label>' +
+            '<input type="text" class="form-control" name="youtube" id="youtube" placeholder="If any link of youtube video to show us it Not necceassary">' +
+          '</div>' +
+      '</div>' +
+      '</div>'
+    );
+  }
+
 }
 
 function coinsClose() {
@@ -99,6 +127,61 @@ function AddVideo() {
     '</div>');
   $('#add-more').attr('onclick','CloseVideo()');
   $('.progress-hidez').hide();
+}
+
+function showPayment() {
+
+  // $('#payment_choice').show();
+  var payment = document.getElementById('type_of_payment').value;
+
+  if (payment == 'Bank') {
+
+    $("#payment_choice").html(
+      '<div class="form-row mt-2">' +
+         '<div class="col-12">' +
+             '<div class="form-group">' +
+         '<label for="">' +'Bank Name</label>' +
+               '<input type="text" class="form-control" name="bank_name" id="bank_name" placeholder="Bank Name">' +
+             '</div>' +
+         '</div>' +
+         '<div class="col-sm-12 col-md-6">' +
+             '<div class="form-group">' +
+         '<label for="">' +'Bank account number</label>' +
+               '<input type="text" class="form-control" name="bank_account" id="bank_account" placeholder="Bank account number">' +
+             '</div>' +
+         '</div>' +
+         '<div class="col-sm-12 col-md-6">' +
+             '<div class="form-group">' +
+         '<label for="">' +'Swift number of Bank </label>' +
+               '<input type="text" class="form-control" name="swift_number" id="swift_number" placeholder="swift number">' +
+             '</div>' +
+         '</div>' +
+        '</div>');
+
+  } 
+  
+  if(payment == 'Mtn&Airtel') {
+
+    $("#payment_choice").html(
+      '<div class="form-row mt-2">' +
+
+        '<div class="col-12 ">' +
+          '<select class="form-control" name="sim_account" id="sim_account">' +
+              '<option>Select one</option>' +
+              '<option value="Mtn">Mtn</option>' +
+              '<option value="Airtel">Airtel</option>' +
+          '</select>' +
+         '</div>' +
+
+         '<div class="col-12 ">' +
+             '<div class="form-group">' +
+         '<label for="">' +'Number</label>' +
+               '<input type="text" class="form-control" name="sim_number" id="sim_number" placeholder="Mtn or airtel number 07...">' +
+             '</div>' +
+         '</div>' +
+        '</div>');
+  }
+
 }
 
 function Addyoutube() {

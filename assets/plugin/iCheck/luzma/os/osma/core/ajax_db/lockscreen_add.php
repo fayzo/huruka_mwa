@@ -228,7 +228,7 @@ if (isset($_POST['login_id']) && !empty($_POST['login_id'])) {
                             <div class="input-group">
                                 <input type="password" id="Password" class="form-control" placeholder="Password">
                                 <div class="input-group-append">
-                                    <span class="input-group-text btn" onclick="lockscreen('lockscreen')" aria-label="Username"
+                                    <span class="input-group-text btn" id="myBtn-lock" onclick="lockscreen('lockscreen')" aria-label="Username"
                                         aria-describedby="basic-addon1"><i class="fa fa-arrow-right text-muted"></i></span>
                                 </div>
                             </div>
@@ -255,6 +255,20 @@ if (isset($_POST['login_id']) && !empty($_POST['login_id'])) {
     </div> <!-- Wrp4 -->
 </div> <!-- apply-popup" -->
 <script>
+
+    $('#Password').keypress(function (e) {
+        if (e.keyCode == 13) {
+            // on [shift + enter] pressed do this
+            if (e.shiftKey) {
+                return true;
+            }
+            // on enter button pressed do this
+            document.getElementById("myBtn-lock").click();
+            return false;
+        }
+    });
+
+
     $('.body-center1').attr("id", '_white');
      
     function lockscreen(key) {

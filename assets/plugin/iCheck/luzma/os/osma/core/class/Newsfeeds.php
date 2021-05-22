@@ -33,9 +33,9 @@ class Newsfeeds extends Fundraising {
                                 # code... 
                             //  echo var_dump($retweet['retweet_Msg']).'<br>';
                             
-                        if($this->isClosed($tweet['tweetBy']) != true) {
-                            continue;
-                        } ?>
+                        // if($this->isClosed($tweet['tweetBy']) != true) {
+                        //     continue;
+                        // } ?>
 
                         <div class="col-12 ">
                         <div class="card mb-3" id="userComment_<?php echo $tweet["tweet_id"]; ?>"> 

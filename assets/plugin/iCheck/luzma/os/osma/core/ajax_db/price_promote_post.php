@@ -43,7 +43,7 @@ if (isset($_POST['promote_post']) && !empty($_POST['promote_post'])) {
                               <li>Reach 5,000 people</li>
                               <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,'weeks',<?php echo $details ;?>)">Get started </button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(10000,'weeks',<?php echo $details ;?>)">Get started </button>
                             <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-user="< ?php echo $user_id; ?>">Get started </button> -->
                         </div>
                         </div>
@@ -58,7 +58,7 @@ if (isset($_POST['promote_post']) && !empty($_POST['promote_post'])) {
                                 <li>Reach 10,000 people</li>
                                 <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(37000,'months',<?php echo $details ;?>)">Get started</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(37000,'months',<?php echo $details ;?>)">Get started</button>
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -72,11 +72,12 @@ if (isset($_POST['promote_post']) && !empty($_POST['promote_post'])) {
                                 <li>Reach 50,000 people</li>
                                 <li>Help center access</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(120000,'months',<?php echo $details ;?>)">Get started</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(120000,'months',<?php echo $details ;?>)">Get started</button>
                         </div>
                         </div>
                     </div>
 
+                    <div id="recharge-coins" class="mt-1"></div>
 
                 </div>
                 <div class="card-footer text-center">

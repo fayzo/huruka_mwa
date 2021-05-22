@@ -124,6 +124,31 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                     <button class="btn btn-success btn-sm d-md-block d-lg-none"  onclick="togglePopup ( )">close</button>
                 </div>
 
+                <div class="col-md-3-3 p-2">
+                        
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <button type="button" class="input-group-text btn btn-default" onclick="copyText()" data-toggle="tooltip" title="Contacts" data-original-title="Contacts" id="basic-addon2">Copy Link</button>
+                        </div>
+                        <input type="text" id="mycopyText" style="width:1px" class="form-control" value="<?php echo BASE_URL_PUBLIC."career?id=".$_POST['user_id'] ;?>" readonly>
+                    </div>
+
+                    <a class="btn btn-sm btn-primary mt-2" href="<?php echo BASE_URL_PUBLIC."career?id=".$_POST['user_id'] ;?>"> Redirect to link</a>
+
+                    <script>
+                        function copyText() {
+                            var copyText = document.getElementById('mycopyText');
+                            copyText.select();
+                            copyText.setSelectionRange(0,99999);
+                            document.execCommand('copy');
+                            alert('Copied a Url link: ' + copyText.value);
+                            // alert('Copied a Url link: ' + copyText.innerHTML);
+                            // alert('Copied a Url link: ' + copyText.childNodes[0].nodeValue);
+                        }
+                    </script>
+
+                </div>
+
             </div>
         </div>
 

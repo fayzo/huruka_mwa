@@ -11,9 +11,9 @@
           // && $_SESSION['approval'] === 'on'
             echo (isset($_SESSION['key']) )?
              (!empty($subscription['marketplace_subscription']) && $users->subscription_deadline($subscription['marketplace_date_pay'],$subscription['marketplace_subscription']) == true )?
-             'class="btn btn-light" id="add_sale" data-sale="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="marketplace"' 
+             'class="btn btn-light" id="add_sale" data-sale="'.$_SESSION['key'].'"':'class="btn btn-light price-post" data-pricejob="marketplace"' 
              :' class="btn btn-light" id="login-please" data-login="1"';
-            ?> > + Add sale </button>
+            ?> > + Add Sale </button>
 
             <!-- <button type="button" class="btn btn-light" id="add_sale" data-sale="< ?php echo $_SESSION['key']; ?>" > + Add sale </button> -->
           </div>

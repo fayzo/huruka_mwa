@@ -56,6 +56,26 @@ class Trending extends Home
    
    }
 
+     public function trends_hashtag_navbar()
+    {
+       $mysqli= $this->database;
+       $query= "SELECT *, COUNT(trend_id) AS tweetycounts FROM trends INNER JOIN tweets ON status LIKE CONCAT('%#',hashtag,'%') OR retweet_Msg LIKE CONCAT('%#',hashtag,'%') GROUP BY hashtag ORDER BY trend_id Limit 1";
+       $result=$mysqli->query($query); 
+
+       if ($result->num_rows > 0 ) {
+          # code...
+       ?>
+      <?php  while ($trend= $result->fetch_array()) { ?>
+                    <!-- /.card-header -->
+                  <a class="sidebar-toggle_" href="<?php echo BASE_URL_PUBLIC.$trend['hashtag'].'.hashtag' ;?>">
+                     <i class="fa fa-hashtag"> </i>
+                     <span class="hidden-xs"> HashTag</span>
+                  </a>
+      <?php  }  ?>
+   <?php } 
+   
+   }
+
     public function getTweetsTrendbyhastag($hashtag)
     {
        $mysqli= $this->database;
@@ -91,7 +111,9 @@ class Trending extends Home
     public function getUsersHashtag($hashtag)
     {
       $mysqli = $this->database;
-      $query = "SELECT DISTINCT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id WHERE T. status LIKE '%#" . $hashtag . "%' OR T. retweet_Msg LIKE '%#" . $hashtag . "%' GROUP BY U. user_id";
+      $query = "SELECT DISTINCT * FROM tweets T 
+      LEFT JOIN users U ON T. tweetBy= U. user_id AND  U. close_account != 'yes' AND U. delete_account != 'yes'
+      WHERE T. status LIKE '%#" . $hashtag . "%' OR T. retweet_Msg LIKE '%#" . $hashtag . "%' GROUP BY U. user_id";
       $result = $mysqli->query($query);
       $users_hashtag = array();
       while ($row = $result->fetch_assoc()) {

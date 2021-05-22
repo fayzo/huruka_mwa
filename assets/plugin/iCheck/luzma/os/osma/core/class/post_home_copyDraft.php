@@ -13,7 +13,7 @@ class Posts_copyDraft extends Posts_home {
         if (isset($_SESSION['key'])) {
         # code...
             $sql="SELECT * FROM tweets T 
-            LEFT JOIN users U ON T. tweetBy= U. user_id 
+            LEFT JOIN users U ON T. tweetBy= U. user_id AND  U. close_account != 'yes' AND U. delete_account != 'yes'
             -- LEFT JOIN comment C ON T. tweet_id = C. comment_on 
             -- LEFT JOIN likes L ON T. tweet_id = L. like_on 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 

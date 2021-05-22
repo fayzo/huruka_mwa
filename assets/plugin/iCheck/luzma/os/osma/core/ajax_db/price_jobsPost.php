@@ -223,7 +223,7 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                             </ul>
                             <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
                             <?php $details= '\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$user['user_id'].',\''.$_POST['post_jobs'].'\'' ;?>
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -240,7 +240,7 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                             <li>Help center access</li>
                             </ul>
                             <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="pro" data-user="< ?php echo $user_id; ?>">Get started</button> -->
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(35000,'months',<?php echo $details ;?>)" >Get started</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(35000,'months',<?php echo $details ;?>)" >Get started</button>
                         </div>
                         </div>
                         <div class="card mb-4 shadow-lg">
@@ -257,11 +257,12 @@ if (isset($_POST['post_jobs']) && !empty($_POST['post_jobs'])) {
                             <li>Help center access</li>
                             </ul>
                             <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="enterprise" data-user="< ?php echo $user_id; ?>">Get started</button> -->
-                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins(80000,'months',<?php echo $details ;?>)" >Get started</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(80000,'months',<?php echo $details ;?>)" >Get started</button>
                         </div>
                         </div>
                     </div>
 
+                    <div id="recharge-coins" class="mt-1"></div>
 
                 </div>
                 <div class="card-footer text-center">

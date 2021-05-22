@@ -27,15 +27,26 @@ if (isset($_POST['user_id'])) {
         $user_id_coins_from = $_POST['user_id_coins_from'];
         
         $amount_coins_ = explode("=>",$_POST['amount_coins']);
-
+        // var_dump($amount_coins_,$amount_coins_[0]);
+        
         $amount_coins = $amount_coins_[0];
         $amount_francs = $amount_coins_[1];
 
         $comment_coins = $_POST['comment_coins'];
         $datetime= date('Y-m-d H-i-s');
         $donate_counts= 1;
-        $tweet_id= $_POST['tweet_id'];
-        $coins= $_POST['coins'];
+
+           
+        if (!empty($_POST['tweet_id'])) {
+            # code...
+            $tweet_id= $_POST['tweet_id'];
+        } else {
+            $tweet_id= '';
+            # code...
+        }
+
+        // $tweet_id= $_POST['tweet_id'];
+        // $coins= $_POST['coins'];
 
             $users->creates('transaction_coins',array( 
             'username_coins_to'=>  $username_coins_to,
@@ -48,7 +59,7 @@ if (isset($_POST['user_id'])) {
             'datetime'=> $datetime));
 
 
-            if (!empty($coins)) {
+            if (!empty($_POST['coins'])) {
                 # code...
                 $users->updateQuery_money('tweets',array( 
                     'donate_counts'=> 'donate_counts + '.$donate_counts,
@@ -103,5 +114,118 @@ if (isset($_POST['user_id'])) {
 
 }
 
+if (isset($_POST['type_of_payment'])) {
+    # code...
+    $user_id = $_SESSION['key'];
+    $type_of_payment = $_POST['type_of_payment'];
 
+    if($type_of_payment == 'Bank') {
+
+        $bank_name = $_POST['bank_name'];
+        $bank_account = $_POST['bank_account'];
+        $swift_number = $_POST['swift_number'];
+
+        $update = $users->updateQuery('users',array( 
+            'type_of_payment' => $type_of_payment,
+            'bank_name' => $bank_name,
+            'bank_account' => $bank_account,
+            'swift_number' => $swift_number,
+        ), array( 
+            'user_id'=> $user_id
+        ));
+
+        if($update){
+            exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong>SUCCESS</strong> </div>');
+        }else{
+            exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong>Fail input try again !!!</strong>
+            </div>');
+        }
+    }
+
+    if($type_of_payment == 'Mtn&Airtel') {
+        
+        $sim_account = $_POST['sim_account'];
+        $sim_number = $_POST['sim_number'];
+
+        $update = $users->updateQuery('users',array( 
+            'type_of_payment' => $type_of_payment,
+            'sim_account' => $sim_account,
+            'sim_number' => $sim_number
+        ), array( 
+            'user_id'=> $user_id
+        ));
+        // var_dump($update);
+
+        if($update){
+            exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong>SUCCESS</strong> </div>');
+        }else{
+            exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                <button class="close" data-dismiss="alert" type="button">
+                    <span>&times;</span>
+                </button>
+                <strong>Fail input try again !!!</strong>
+            </div>');
+        }
+    }
+}
+
+if (isset($_POST['withdraw_id'])) {
+    # code...
+    $withdraw_id = $_POST['withdraw_id'];
+
+    if ($_POST['status_type'] == 'update') {
+        # code...
+        $update = $users->updateQuery('withdraw_money',array( 
+            'status_withdraw ' => 'Complete'
+        ), array( 
+            'withdraw_id'=> $withdraw_id
+        ));
+        // var_dump($update);
+    }
+
+    if ($_POST['status_type'] == 'block') {
+        # code...
+        $update = $users->updateQuery('withdraw_money',array( 
+            'status_withdraw ' => 'block'
+        ), array( 
+            'withdraw_id'=> $withdraw_id
+        ));
+        // var_dump($update);
+    }
+    
+    if ($_POST['status_type'] == 'remove') {
+        # code...
+        $update = $users->deleteQuery('withdraw_money',array( 
+            'withdraw_id'=> $withdraw_id ));
+        // var_dump($update);
+    }
+    
+
+    if($update){
+        exit('<div class="alert alert-success alert-dismissible fade show text-center">
+            <button class="close" data-dismiss="alert" type="button">
+                <span>&times;</span>
+            </button>
+            <strong>SUCCESS</strong> </div>');
+    }else{
+        exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+            <button class="close" data-dismiss="alert" type="button">
+                <span>&times;</span>
+            </button>
+            <strong>Fail input try again !!!</strong>
+        </div>');
+    }
+}
 ?>

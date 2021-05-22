@@ -271,7 +271,7 @@ if($count_foreach == 4){
         if (isset($_SESSION['key'])) {
         # code...
             $sql="SELECT * FROM tweets T 
-            LEFT JOIN users U ON T. tweetBy= U. user_id 
+            LEFT JOIN users U ON T. tweetBy= U. user_id AND  U. close_account != 'yes' AND U. delete_account != 'yes'
             -- LEFT JOIN comment C ON T. tweet_id = C. comment_on 
             -- LEFT JOIN likes L ON T. tweet_id = L. like_on 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
@@ -289,7 +289,7 @@ if($count_foreach == 4){
             -- LEFT JOIN comment C ON T. tweet_id = C. comment_on 
             -- LEFT JOIN likes L ON T. tweet_id = L. like_on 
             WHERE T. tweetBy = $user_id AND T. retweet_id='0' 
-            OR  T. retweet_by = $user_id AND T. retweet_id !='0' 
+            OR  T. retweet_by = $user_id AND T. retweet_id !='0'
             OR  T. tweetBy= U. user_id AND T. tweetBy IN (SELECT receiver FROM follow WHERE sender= $user_id) 
             -- GROUP BY 
             --     CASE WHEN C. comment_on != '' THEN C. comment_on END,

@@ -100,16 +100,7 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
                     <?php } } ?>
                     <li class="breadcrumb-item"><i> <?php echo $follow->followBtn($profileData['user_id'],$user_id,$profileData['user_id']) ;?></i></li>
                     <li class="breadcrumb-item "><i>
-                    <span class="username tooltips" style="display:inline-block">
-                    <!-- < ?php if($user_id == $_SESSION['key']) { ?>  -->
-                    <?php if($user_id) { ?> 
-                            <ul><li>
-                                <a href="#" >Send Reward <i class="fas fa-coins text-warning"></i> Coins</a>
-                                <ul style="left: -100px;right: -80px;"><li><?php echo Follow::coins_recharge($profileData['user_id'],$user_id,$user['username'],$profileData['username']); ?></li></ul>
-                                </li>
-                            </ul>
-                    <?php } ?> 
-                    </span>
+                        <a href="javascript:void(0)" id="reward-coins-profile" data-user="<?php echo $profileData['user_id']; ?>" data-coins="reward-coins" >Send Reward <i class="fas fa-coins text-warning"></i> Coins</a>
                     </i>
                     </li>
                     <!-- <li class="breadcrumb-item"><a href="< ?php echo BALANCE ;?>" ><i class="fas fa-money-check"></i> Withdraw </a></li> -->

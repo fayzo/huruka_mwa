@@ -16,7 +16,14 @@ class Fundraising extends Events
             $showpages = ($pages*8)-8;
         }
         $mysqli= $this->database;
-        $query= $mysqli->query("SELECT * FROM users U Left JOIN fundraising F ON F. user_id2 = U. user_id WHERE F. categories_fundraising ='$categories'  ORDER BY created_on2 Desc Limit $showpages,8");
+
+        if ($categories == 'Feature') {
+            # code...
+            $query= $mysqli->query("SELECT * FROM users U Left JOIN fundraising F ON F. user_id2 = U. user_id WHERE F. categories_fundraising = F. categories_fundraising ORDER BY F. created_on2 Desc Limit $showpages,8");
+        }else {
+            # code...
+            $query= $mysqli->query("SELECT * FROM users U Left JOIN fundraising F ON F. user_id2 = U. user_id WHERE F. categories_fundraising ='$categories' ORDER BY created_on2 Desc Limit $showpages,8");
+        }
         ?>
             <div class="row mt-3">
           <?php
@@ -119,8 +126,14 @@ class Fundraising extends Events
                     <strong>No Record</strong>
                 </div></div>'; 
         } 
+        if ($categories == 'Feature') {
 
-        $query1= $mysqli->query("SELECT COUNT(*) FROM users U Left JOIN fundraising F ON F. user_id2 = U. user_id WHERE F. categories_fundraising ='$categories'  ORDER BY created_on2 Desc ");
+            $query1= $mysqli->query("SELECT COUNT(*) FROM users U Left JOIN fundraising F ON F. user_id2 = U. user_id WHERE F. categories_fundraising = F. categories_fundraising ORDER BY created_on2 Desc ");
+        }else {
+            # code...
+            $query1= $mysqli->query("SELECT COUNT(*) FROM users U Left JOIN fundraising F ON F. user_id2 = U. user_id WHERE F. categories_fundraising ='$categories'  ORDER BY created_on2 Desc ");
+        }
+
         $row_Paginaion = $query1->fetch_array();
         $total_Paginaion = array_shift($row_Paginaion);
         $post_Perpages = $total_Paginaion/8;
@@ -221,7 +234,6 @@ class Fundraising extends Events
         $mysqli->query($query);
 
     }
-
      
       public function Fundraisinglikes($user_id,$tweet_id)
     {
@@ -328,7 +340,7 @@ class Fundraising extends Events
         }
     }
 
-      public function fundraising_donateUpdate($donate,$fund_id)
+    public function fundraising_donateUpdate($donate,$fund_id)
     {
         $mysqli= $this->database;
         $query= "UPDATE fundraising SET donate_counts = donate_counts +1, money_raising = money_raising + $donate  WHERE fund_id= $fund_id ";
@@ -338,7 +350,7 @@ class Fundraising extends Events
     public function recentFundraisingDonate($fund_id)
     {
         $mysqli= $this->database;
-        $query= "SELECT * FROM fundraising_donation LEFT JOIN users ON sentby_user_id=user_id WHERE fund_id0 = $fund_id ORDER BY created_on3 DESC";
+        $query= "SELECT * FROM fundraising_donation F LEFT JOIN users U ON F. sentby_user_id= U. user_id WHERE F. fund_id0 = $fund_id ORDER BY F. created_on3 DESC";
         $result= $mysqli->query($query);
         $comments= array();
         while ($row= $result->fetch_assoc()) {
@@ -375,7 +387,13 @@ class Fundraising extends Events
     public function fundraisingcountPOSTS($categories)
     {
       $db =$this->database;
-      $query="SELECT COUNT(*) FROM fundraising WHERE categories_fundraising= '$categories' ";
+
+      if ($categories == 'Feature') {
+          $query="SELECT COUNT(*) FROM fundraising WHERE categories_fundraising = categories_fundraising ";
+      }else {
+          $query="SELECT COUNT(*) FROM fundraising WHERE categories_fundraising= '$categories' ";
+      }
+
       $sql= $db->query($query);
       $row_Comment = $sql->fetch_array();
       $total_Comment= array_shift($row_Comment);

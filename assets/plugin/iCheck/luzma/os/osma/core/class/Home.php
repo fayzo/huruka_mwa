@@ -89,11 +89,12 @@ class Home extends Comment {
                 <!-- <li><h5><a class="alink" href="events">Events</a></h5></li> -->
                 <li><h5><a class="alink" href="school">School</a></h5> </li>
                 <li><h5><a class="alink" href="events">Events</a></h5> </li>
-                <li><h5><a class="alink" href="house">House</a></h5></li>
                 <li><h5><a class="alink" href="crowfund">GushoraStartUp</a></h5> </li>
                 <li><h5><a class="alink" href="icyamunara">Cyamunara</a></h5></li>
                 <!-- <li><h5><a class="alink" href="food">Foodzana</a></h5></li> -->
+                <li><h5><a class="alink" href="house">House</a></h5></li>
                 <li><h5><a class="alink" href="car">Car</a></h5></li>
+                <!-- <li><h5><a class="alink" href="domestic">Domestic Helpers</a></h5></li> -->
                 <li><h5><a class="alink" href="sale">Marketplace</a></h5></li>
             </ul>
         
@@ -107,10 +108,11 @@ class Home extends Comment {
                 <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></h5> -->
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.school">School</a></h5> </li>
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></h5> </li>
-                <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.house">House</a></h5>
-                <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.icyamunara">icyamunara</a></h5>
-                <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.car">Car</a></h5>
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.crowfund">GushoraStartUp</a></h5> </li>
+                <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.icyamunara">icyamunara</a></h5>
+                <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.house">House</a></h5>
+                <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.car">Car</a></h5>
+                <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.domestic">Domestic Helpers</a></h5> -->
                 <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.sale">Sale</a></h5></li> -->
                 <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.food">Foodzana</a></h5> -->
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.sale">Marketplace</a></h5>
@@ -142,9 +144,12 @@ public function links(){ ?>
       <li class="list-inline-item"><a href="car"><i class="fa fa-car" aria-hidden="true"></i> Car</a></li>
       <!-- <li class="list-inline-item"><a href="food"><i class="fa fa-cutlery" aria-hidden="true"></i> Foodzana</a></li> -->
       <li class="list-inline-item"><a href="sale"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Marketplace</a></li>
+      <!-- <li class="list-inline-item"><a href="domestic"><i class="fa fa-user" aria-hidden="true"></i> Domestic Helpers</a></li> -->
       <li class="list-inline-item"><a href="crowfund"><i class="fa fa-money" aria-hidden="true"></i> GushoraStartUp</a></li>
     </ul>
+
     <?php }else { ?>
+
     <ul  class="list-inline link-view">
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.fundraising"> Fundraising</a></li>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.career_profession"> Professional</a> </li>
@@ -159,6 +164,7 @@ public function links(){ ?>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.car">Car</a></li>
         <!-- <li class="list-inline-item"><a href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.food">Foodzana</a></li> -->
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.sale">Marketplace</a></li>
+        <!-- <li class="list-inline-item"><a href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.domestic">Domestic Helpers</a> </li> -->
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.crowfund">GushoraStartUp</a> </li>
 
     </ul>

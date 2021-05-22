@@ -10,9 +10,9 @@
           <?php 
             echo (isset($_SESSION['key']))?
              (!empty($subscription['fundraising_subscription']) && $users->subscription_deadline($subscription['fundraising_date_pay'],$subscription['fundraising_subscription']) == true )?
-             'class="btn btn-light" id="add_for_help" data-fund="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="fundraising"' 
+             'class="btn btn-light" id="add_for_help" data-fund="'.$_SESSION['key'].'"':'class="btn btn-light price-post" data-pricejob="fundraising"' 
              :' class="btn btn-light" id="login-please" data-login="1"';
-            ?> > + add for help </button>
+            ?> > + Add Fundraising </button>
             <!-- <button type="button" class="btn btn-light" id="add_for_help" data-fund="'.$_SESSION['key'].'" value=""> + Add for help </button> -->
           </div>
           <div class="col-4 text-center">
@@ -30,7 +30,8 @@
   <div class="row">
     <div class="col-sm-12 col-md-2 col-lg-2 py-3 px-2 d-none d-md-block">
       <div class="list-group sticky-top" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="list-Business-list" data-toggle="tab" href="#list-Business" role="tab" aria-controls="list-Business">Business</a>
+        <a class="list-group-item list-group-item-action active" id="list-Feature-list" data-toggle="tab" href="#list-Feature" role="tab" aria-controls="list-Feature">Feature</a>
+        <a class="list-group-item list-group-item-action" id="list-Business-list" data-toggle="tab" href="#list-Business" role="tab" aria-controls="list-Business">Business</a>
         <a class="list-group-item list-group-item-action" id="list-Emergency-list" data-toggle="tab" href="#list-Emergency" role="tab" aria-controls="list-Emergency">Emergency</a>
         <a class="list-group-item list-group-item-action" id="list-Medical-list" data-toggle="tab" href="#list-Medical" role="tab" aria-controls="list-Medical">Medical</a>
         <a class="list-group-item list-group-item-action" id="list-Nonprofit-list" data-toggle="tab" href="#list-Nonprofit" role="tab" aria-controls="list-Nonprofit">Nonprofit</a>
@@ -48,6 +49,7 @@
     <div class="col-sm-12 col-md-10 col-lg-10">
       <div class="nav-scroller py-0 d-sm-block d-md-none main-active " style="clear:right;height:3.4rem;"> 
           <nav class="nav d-flex justify-content-between pb-0  horizontal-large-2" id="list-tab" role="tablist">
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Feature">Feature<span class="badge badge-primary"><?php echo $posts_home->fundraisingcountPOSTS('Feature');?></span></a>
             <a class="p-2" data-toggle="tab" role="tab" href="#list-Emergency">Emergency<span class="badge badge-primary"><?php echo $posts_home->fundraisingcountPOSTS('Emergency');?></span></a>
             <a class="p-2" data-toggle="tab" role="tab" href="#list-Medical">Medical<span class="badge badge-primary"><?php echo $posts_home->fundraisingcountPOSTS('Medical');?></span></a>
             <a class="p-2" data-toggle="tab" role="tab" href="#list-Agriculture">Agriculture<span class="badge badge-primary"><?php echo $posts_home->fundraisingcountPOSTS('Agriculture');?></span></a>
@@ -64,7 +66,11 @@
       </div> 
 
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="list-Business" role="tabpanel" aria-labelledby="list-Business-list">
+        <div class="tab-pane fade show active" id="list-Feature" role="tabpanel" aria-labelledby="list-Feature-list">
+           <?php include "siderbar_fundraising/Feature.php"?>
+        </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
+
+        <div class="tab-pane fade" id="list-Business" role="tabpanel" aria-labelledby="list-Business-list">
            <?php include "siderbar_fundraising/Business.php"?>
         </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
 

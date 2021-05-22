@@ -42,9 +42,14 @@ if (isset($_POST['key']) == 'textarea'){
         $youtube= '';
     }
 
-    if (!empty($_POST['donation_payment'])) {
-        $money_to_target= $users->test_input($_POST['money_to_target']);
+
+    if (!empty($_POST['donation_payment']) && $_POST['donation_payment'] == 'donation_coins.coins') {
         $donation_payment=  $users->test_input($_POST['donation_payment']);
+        $money_to_target= '';
+        $coins= '';
+    }else if (!empty($_POST['donation_payment']) && $_POST['donation_payment'] == 'donation_coins.donate') {
+        $donation_payment=  $users->test_input($_POST['donation_payment']);
+        $money_to_target= $users->test_input($_POST['money_to_target']);
         $coins=  $users->test_input($_POST['donation_payment']);
     }else {
         $donation_payment='';
@@ -82,7 +87,7 @@ if (isset($_POST['key']) == 'textarea'){
         $home->addmention($status,$user_id,$tweet_id);
 
         // $row= json_encode($db->insert_id);
-        if (!empty($_POST['donation_payment'])) {
+        if (!empty($_POST['donation_payment']) && $_POST['donation_payment'] == 'donation_coins.donate' ) {
   
             $users->insertQuery('transfer_tweet',array(
             
@@ -187,15 +192,21 @@ if (!empty($_POST['photo-Title5'])) {
 }else {
          $photo_Title5='';
 }
-if (!empty($_POST['donation_payment'])) {
-       $donation_payment=  $users->test_input($_POST['donation_payment']);
+
+
+    if (!empty($_POST['donation_payment']) && $_POST['donation_payment'] == 'donation_coins.coins') {
+        $donation_payment=  $users->test_input($_POST['donation_payment']);
+        $money_to_target= '';
+        $coins= '';
+    }else if ( !empty($_POST['donation_payment']) && $_POST['donation_payment'] == 'donation_coins.donate') {
+        $donation_payment=  $users->test_input($_POST['donation_payment']);
         $money_to_target= $users->test_input($_POST['money_to_target']);
         $coins=  $users->test_input($_POST['donation_payment']);
-}else {
+    }else {
         $donation_payment='';
         $money_to_target= '';
         $coins= '';
-}
+    }
 
 	if (!empty($status) || !empty(array_filter($files['name'])) ) {
 		if (!empty($files['name'][0])) {
@@ -225,7 +236,7 @@ if (!empty($_POST['donation_payment'])) {
                         'tweetBy' => $user_id, 
                         'photo_Title_main'=> $photo_Titleo,
                         'photo_Title'=> $photo_Title0.'='.$photo_Title1.'='.$photo_Title2.'='.$photo_Title3.'='.$photo_Title4.'='.$photo_Title5,
-                        'tweet_image' => $tweetimages, 
+                        // 'tweet_image' => $tweetimages, 
                         'tweet_image' => $tweetimages.$equal.$donation_payment, 
                         'youtube' => $youtube, 
                         'coins' => $coins, 
@@ -242,7 +253,7 @@ if (!empty($_POST['donation_payment'])) {
 
 		$home->addmention($status,$user_id,$tweet_id);
 
-        if (!empty($_POST['donation_payment'])) {
+        if (!empty($_POST['donation_payment']) && $_POST['donation_payment'] == 'donation_coins.donate' ) {
 
             $users->insertQuery('transfer_tweet',array(
             

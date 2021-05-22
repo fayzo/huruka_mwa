@@ -489,6 +489,34 @@ if (isset($_POST['showJobs1']) && !empty($_POST['showJobs1'])) {
 
 <?php }
 
+if (isset($_POST['showcoins']) && !empty($_POST['showcoins'])) {
+    $user_id= $_SESSION['key'];
+    // $tweet_id= $_POST['showMessage'];
+	$mysqli= $db;
+	$query= $mysqli->query("SELECT * FROM  users U Left JOIN transaction_coins C  ON C. user_id_coins_from = U. user_id WHERE C. user_id_coins_to = $user_id ORDER BY C. coins_id Desc LIMIT 10");
+	?>
+          <?php while($jobs= $query->fetch_array()) { ?>
+					<!--Direct Messages-->
+				
+				<li class="jobHovers more" data-coins="<?php echo $jobs['coins_id'];?>" > <!-- start message -->
+                    <a href="#">
+                      <div class="pull-left" style="position:relative;">
+						  	<?php if (!empty($jobs['profile_img'])) { ?>
+        						     <img src="<?php echo BASE_URL_LINK."image/users_profile_cover/".$jobs['profile_img'];?>"  class="rounded-circle img"  />
+							<?php }else {?>
+        						     <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>"  class="rounded-circle img" />
+							<?php } ?>
+                      </div>
+						<!-- < ?php echo !($jobs['companyname'])? '<p>'.$jobs['companyname'].'<p>' :''; ?> -->
+						<p><i class="fas fa-coins"></i> <?php echo number_format($jobs['amount_coins']); ?> coins</p>
+						<p><i class="fa fa-clock-o" aria-hidden="true"></i> sent on - <?php echo $home->timeAgo($jobs['datetime']); ?></p>
+                    </a>
+				</li> <!-- end message -->
+
+		<?php  } ?>
+
+<?php }
+
 if (isset($_POST['showFriendRequest']) && !empty($_POST['showFriendRequest'])) {
 	
 	$user_id= $_SESSION['key'];

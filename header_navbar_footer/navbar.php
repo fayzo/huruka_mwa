@@ -57,7 +57,7 @@
 
     <?php if (isset($_SESSION['key'])){ ?>
         
-        <a class="sidebar-toggle_ addPostBtn" href="#">
+        <a class="sidebar-toggle_ addPostBtn" href="javascript:void(0)">
           <i class="fa fa-pencil"></i>
           <span class="hidden-xs">Post</span>
          </a>
@@ -84,6 +84,8 @@
           <span class="hidden-xs">Network</span>
          </a>
 
+        <?php echo $trending->trends_hashtag_navbar(); ?>
+        
          <?php if(isset($_SESSION['key']) && $_SESSION['key'] === $jobs['business_id'] ||
           $_SESSION['key'] === $fundraisingV['user_id2'] ||
           $_SESSION['key'] === $crowfundV['user_id2'] || 
@@ -97,7 +99,7 @@
           </a>
 
         <?php  } ?>
-        
+
         <?php if(isset($_SESSION["cart_item"])){ ?>
           <a class="sidebar-toggle_"  style="position:relative" href="<?php echo SHOPPING ;?>">
               <i class="fa fa-shopping-cart"></i>
@@ -109,10 +111,38 @@
 
         <div class="navbar-custom-menu ml-auto">
           <ul class="nav navbar-nav">
+
+            <!-- coins-receive notification : style can be found in dropdown.less-->
+            <!-- coins-receive notification : style can be found in dropdown.less-->
+            <?php if($notific['total_coins'] > 0) { ?>
+
+            <li class="dropdown messages-menu">
+              <a href="javascript:void(0)" data-toggle="dropdown" id="coins-dropdown-menu">
+                <i class="fas fa-coins"></i>
+                <span ><?php if( $notific['total_coins'] > 0){echo '<span  class="badge badge-success">'.$notific['total_coins'].'</span>'; } ?></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header main-active">You have <span><?php if( $notific['total_coins'] > 0){echo '<span>'.$notific['total_coins'].'</span>'; }else{ echo 'no' ;} ?></span> users sent coins</li>
+                <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu large-2" id="coins-menu-view" >
+                    <!-- SOME TO BE RESPONSE HERE -->
+                    <!-- end message -->
+                  </ul>
+                </li>
+                <li class="footer"><a href="<?php echo BASE_URL_PUBLIC ;?>transaction_coins_view" >See All coins</a></li>
+              </ul>
+            </li>
+
+            <?php } ?>
+
+            <!-- coins-receive notification : style can be found in dropdown.less-->
+            <!-- coins-receive notification : style can be found in dropdown.less-->
+
             <!-- JOBS : style can be found in dropdown.less-->
             <!-- JOBS : style can be found in dropdown.less-->
             <li class="dropdown messages-menu">
-              <a href="#" data-toggle="dropdown" id="jobs-dropdown-menu">
+              <a href="javascript:void(0)" data-toggle="dropdown" id="jobs-dropdown-menu">
                 <i class="fas fa-edit"></i>
                 <span><?php if($notific['total_jobs'] > 0){echo '<span  class="badge badge-success">'.$notific['total_jobs'].'</span>'; } ?></span>
               </a>
@@ -130,7 +160,7 @@
             <!-- Messages: style can be found in dropdown.less-->
 
             <li class="dropdown messages-menu">
-              <a href="#" data-toggle="dropdown" id="messages-dropdown-menu">
+              <a href="javascript:void(0)" data-toggle="dropdown" id="messages-dropdown-menu">
                 <i class="fa fa-envelope-o"></i>
                 <span id="messages1"><?php if( $notific['totalmessage'] > 0){echo '<span  class="badge badge-success">'.$notific['totalmessage'].'</span>'; } ?></span>
               </a>
@@ -141,7 +171,7 @@
                 <ul class="menu large-2" id="messages-menu-view" >
                     <!-- <li>
                       start message
-                      <a href="#">
+                      <a href="javascript:void(0)">
                         <div class="pull-left">
                           <img src="user2-160x160.jpg" class="rounded-circle" alt="User Image">
                         </div>
@@ -155,12 +185,12 @@
                     <!-- end message -->
                   </ul>
                 </li>
-                <li class="footer"  id='messagePopup'><a href="#">See All Messages</a></li>
+                <li class="footer"  id='messagePopup'><a href="javascript:void(0)">See All Messages</a></li>
               </ul>
             </li>
             <!-- Notifications: style can be found in dropdown.less -->
             <li class="dropdown notifications-menu">
-            <a href="#" data-toggle="dropdown" id="notification-dropdown-menu">
+            <a href="javascript:void(0)" data-toggle="dropdown" id="notification-dropdown-menu">
               <i class="fa fa-bell-o"></i>
              <span id="notification1"><?php if( $notific['totalnotification'] > 0){echo '<span class="badge badge-warning navbar-badge">'.$notific['totalnotification'].'</span>'; } ?></span>
             </a>
@@ -179,7 +209,7 @@
 
             <!-- Email: style can be found in dropdown.less -->
             <li class="dropdown email-menu messages-menu">
-            <a href="#" data-toggle="dropdown" id="FriendRequest-dropdown-menu">
+            <a href="javascript:void(0)" data-toggle="dropdown" id="FriendRequest-dropdown-menu">
             <i class="fa fa-user"></i>
             <span id="email1"><?php if($notific['total_FriendRequest'] > 0){echo '<span class="badge badge-warning navbar-badge">'.$notific['total_FriendRequest'].'</span>'; } ?></span>
             </a>
@@ -190,7 +220,7 @@
               <!-- inner menu: contains the actual data -->
               <ul class="whoTofollow-list menu large-2" id="FriendRequest-menu-view">
                 <!-- <li>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i class="fa fa-users text-info"></i> 5 new members joined today
                   </a>
                 </li> -->
@@ -207,7 +237,7 @@
 
              <!-- Email: style can be found in dropdown.less -->
           <li class="dropdown email-menu messages-menu">
-            <a href="#" data-toggle="dropdown" id="email-dropdown-menu">
+            <a href="javascript:void(0)" data-toggle="dropdown" id="email-dropdown-menu">
               <i class="fa fa-telegram"></i>
              <span id="email1"><?php if($notific['total_email'] > 0){echo '<span class="badge badge-warning navbar-badge">'.$notific['total_email'].'</span>'; } ?></span>
             </a>
@@ -217,7 +247,7 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu large-2" id="email-menu-view">
                   <!-- <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i class="fa fa-users text-info"></i> 5 new members joined today
                     </a>
                   </li> -->
@@ -243,16 +273,18 @@
                 <div class="search-result"></div>
               </form>
             </li>
+
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"> -->
+              <a href="javascript:void(0)" data-toggle="dropdown">
                 <?php if (!empty($user['profile_img'])) { ?>
                 <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $user['profile_img'] ;?>" class="user-image rounded-circle" alt="User Image">
                 <?php  }else{ ?>
                   <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" class="user-image rounded-circle" alt="User Image">
                 <?php } ?>
                 <span class="hidden-xs"><span id="welcome-json"></span> <?php echo $_SESSION['username'];?></span>
-                <span class="hidden-xs" style="font-size:10px"><i class="fas fa-coins text-warning"></i>  <?php echo number_format($user['amount_coins']); ?> coins</span>
+                <span class="hidden-xs" style="font-size:10px"><i class="fas fa-coins text-warning"></i>  <?php echo number_format($user['amount_coins'],2); ?> coins</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -312,7 +344,7 @@
             <?php if(isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
 
             <li class="hidden-xs">
-              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              <a href="javascript:void(0)" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
             </li>
                  <?php } ?>
           </ul>

@@ -122,7 +122,7 @@ array('countViewin_profile' => 'countViewin_profile +1', ),$profileData['user_id
 
                     <div class="col-md-12 mb-4">
                         <!-- Box Comment -->
-                        <?php echo $home->isClosed($_SESSION['key']); ?>
+                        <?php echo $home->isClosed($profileData['user_id']); ?>
                         
                         <div class="card borders-tops mb-3"> 
                             <div class="card-body message-color">

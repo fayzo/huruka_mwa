@@ -10,9 +10,9 @@
           <?php 
             echo (isset($_SESSION['key']))?
              (!empty($subscription['school_subscription']) && $users->subscription_deadline($subscription['school_date_pay'],$subscription['school_subscription']) == true )?
-             'class="btn btn-light" id="add_school" data-school="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="school"' 
+             'class="btn btn-light" id="add_school" data-school="'.$_SESSION['key'].'"':'class="btn btn-light price-post" data-pricejob="school"' 
              :' class="btn btn-light" id="login-please" data-login="1"';
-            ?> > + add school </button>
+            ?> > + Add School </button>
             <!-- <button type="button" class="btn btn-light" id="add_school" data-school="< ?php echo $_SESSION['key']; ?>" > + Add school </button> -->
           </div>
           <div class="col-4  pt-1 text-center">

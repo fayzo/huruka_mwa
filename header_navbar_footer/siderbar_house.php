@@ -10,7 +10,7 @@
           <?php 
             echo (isset($_SESSION['key']))?
              (!empty($subscription['house_subscription']) && $users->subscription_deadline($subscription['house_date_pay'],$subscription['house_subscription']) == true )?
-             'class="btn btn-light" id="add_house" data-house="'.$_SESSION['key'].'"':'class="btn btn-light price-jobs" data-pricejob="house"' 
+             'class="btn btn-light" id="add_house" data-house="'.$_SESSION['key'].'"':'class="btn btn-light price-post" data-pricejob="house"' 
              :' class="btn btn-light" id="login-please" data-login="1"';
             ?> > + Add House </button>
             <!-- <button type="button" class="btn btn-light" id="add_house" data-house="< ?php echo $_SESSION['key']; ?>" > + Add house </button> -->
@@ -28,7 +28,7 @@
 
      <div class="row mt-4">
          <div class="col-md-3 d-none d-md-block">
-             <div class="card">
+             <div class="card mb-2">
                 <div class="card-header">
                     <div class="single-howit-works">
                         <img src="<?php echo  BASE_URL_LINK ;?>image/img/howit-works/howit-works-2.png" alt="">
@@ -43,7 +43,7 @@
                 </div> -->
             </div> <!-- card -->
 
-            <div class="card">
+            <div class="card mb-2">
                 <div class="card-header">
                     <div class="single-howit-works">
                         <img src="<?php echo  BASE_URL_LINK ;?>image/img/howit-works/howit-works-3.png" alt="">
