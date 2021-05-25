@@ -418,11 +418,18 @@ a:focus {
   .nav>li>a {
     padding: 13px 6px;
   }
+  .main-header .sidebar-toggle_ {
+    padding: 15px 6px;
+  }
+  .main-header .sidebar-toggle {
+    padding: 15px 10px;
+  }
+
   .img_size > img {
     width: 50px !important;
     height: 50px !important;
     border-radius: 10% !important;
-}
+  }
   .user-block > .text_size{
     font-size: 11px;
   }

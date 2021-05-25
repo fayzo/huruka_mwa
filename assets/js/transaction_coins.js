@@ -409,8 +409,8 @@ $(document).on('click', '#submit-form-send-money', function (e) {
 
 function coins(amount,month,firstname,lastname,email,user_id,coins) {
     $.ajax({
-        // url: 'flutter/pay',
-        url: 'core/ajax_db/test',
+        url: 'flutter/pay',
+        // url: 'core/ajax_db/test',
         method: 'POST',
         dataType : "text",
         // contentType: "application/json",
@@ -426,41 +426,56 @@ function coins(amount,month,firstname,lastname,email,user_id,coins) {
             user_id: user_id
         },
         success: function (response) {
-            // var  objJSON = JSON.parse(response);
+            var  objJSON = JSON.parse(response);
             // console.log(objJSON.status,objJSON.data.link);
-            // if (objJSON.status == "success") {
-            $(".balance-popup").hide();
-            $(".promote-popup").hide();
-            // $(".popupTweet").hide();
+            
+            if (objJSON.status == "success") {
+            // if (response.indexOf('SUCCESS') >= 0) {
 
-            if (response.indexOf('SUCCESS') >= 0) {
                 // window.open(objJSON.data.link, '_blank');
                 // window.location.href = objJSON.data.link;
                 // window.location = objJSON.data.link;
-                // location.reload();
-                $("#checkOUT").modal('show');
-                $("#checkOUT").delay(2000).fadeOut(450);
+                
+                $('#recharge-coins').html(objJSON.status);
+                $(".response_coins").html(objJSON.status).css({"color":"red"});
+                
+                // $('#recharge-coins').html(response);
+                // $(".response_coins").html(response).css({"color":"red"});
+
+                setTimeout(() => {
+
+                    $(".balance-popup").hide();
+                    // $(".promote-popup").hide();
+                    // $("#checkOUT").modal('show');
+                    // $("#checkOUT").delay(2000).fadeOut(450);
+
+                    window.open(objJSON.data.link, '_blank');
+                    // window.location = objJSON.data.link;
+                }, 2000);
                 setTimeout(() => {
                     $("#checkOUT").modal('hide');
-                }, 1500);
+                }, 3500);
                 setTimeout(() => {
                     location.reload();
-                }, 2000);
+                }, 10000);
+
                 console.log(response);
                 
             } else{
+                $('#recharge-coins').html(objJSON.status);
+                // $('#recharge-coins').html(response);
 
-                $("#checkOUT").modal('show');
+                $("#checkOUT").modal('show').css({"z-index":"20000"});
                 $('#change-check').removeClass('fa fa-check-circle-o')
                 .addClass('fa fa-times').css({"color":"red","font-size":"200px"});
-                $('#html-check').html('We can not process your payment').css({"text-align":"center"});
+                $('#html-check').html('We can not process your payment is to low !!!').css({"text-align":"center"});
                 $("#checkOUT").delay(2000).fadeOut(450);
                 setTimeout(() => {
                     $("#checkOUT").modal('hide');
                 }, 1500);
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
+                // setTimeout(() => {
+                //     location.reload();
+                // }, 2000);
             }
         }
     });

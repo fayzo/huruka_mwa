@@ -262,6 +262,9 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
 
         if (isEmpty(donate) && isEmpty(comment)) {
             //    alert("complete register");
+
+            if (visa.val() == 'coins') {
+
             $.ajax({
                 url: "core/ajax_db/fund_donate.php",
                 // url: 'core/ajax_db/test',
@@ -288,10 +291,14 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                 },
                 success: function(response) {
                         console.log(response);
-                    if (response.indexOf('SUCCESS') >= 0) {
-                        
-                            $('#recharge-coins').html(response);
+                        // if (objJSON.status == "success") {
 
+                            if (response.indexOf('SUCCESS') >= 0) {
+                            // $('#recharge-coins').html(objJSON.status);
+                        // $(".response_coins").html(objJSON.status).css({"color":"red"});
+                        
+
+                            $('#recharge-coins').html(response);
                             $(".response_coins").html(response).css({"color":"red"});;
 
                             setTimeout(() => {
@@ -299,6 +306,9 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                 $(".promote-popup").hide();
                                 $("#checkOUT").modal('show');
                                 $("#checkOUT").delay(2000).fadeOut(450);
+
+                                 // window.open(objJSON.data.link, '_blank');
+                                  // window.location = objJSON.data.link;
                             }, 2000);
                             setTimeout(() => {
                                 $("#checkOUT").modal('hide');
@@ -309,6 +319,7 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                             console.log(response);
                             
                         } else{
+                            // $('#recharge-coins').html(objJSON.status);
 
                             isEmptys(visa)  || isEmptys(donate) || isEmptys(comment);
 
@@ -326,6 +337,92 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                         }
                     }
             });
+
+            }else if (visa.val() == 'visa') {
+
+
+            $.ajax({
+                // url: "core/ajax_db/fund_donate.php",
+                url: 'flutter/pay',
+                method: "POST",
+                dataType: "text",
+                data: {
+                    pay: 'pay',
+                    key: key,
+                    subscription: key,
+                    description: key,
+                    month: 'day',
+                    number: '',
+                    amount: donate.val(),
+                    name: Sendby_firstname.val() +' '+ Sendby_lastname.val(),
+                    email: email.val(),
+                    // user_id: sentby_user_id.val(),
+
+                    sent_to_user_id: sent_to_user_id.val(),
+                    sentby_user_id: sentby_user_id.val(),
+
+                    fund_id: fund_id.val(),
+                    comment: comment.val(),
+                    visa: visa.val(),
+                },
+                success: function(response) {
+                        console.log(response);
+
+                      if (objJSON.status == "success") {
+                        // if (response.indexOf('SUCCESS') >= 0) {
+
+                            $('#recharge-coins').html(objJSON.status);
+                            $(".response_coins").html(objJSON.status).css({"color":"red"});
+                        
+
+                            // $('#recharge-coins').html(response);
+                            // $(".response_coins").html(response).css({"color":"red"});
+
+                            setTimeout(() => {
+                                // $(".donate-popup").hide();
+                                // $(".promote-popup").hide();
+                                // $("#checkOUT").modal('show');
+                                // $("#checkOUT").delay(2000).fadeOut(450);
+
+                                   window.open(objJSON.data.link, '_blank');
+                                  // window.location = objJSON.data.link;
+                            }, 2000);
+                            setTimeout(() => {
+                                $("#checkOUT").modal('hide');
+                            }, 3500);
+                            setTimeout(() => {
+                                location.reload();
+                            }, 10000);
+                            console.log(response);
+                            
+                        } else{
+                            $('#recharge-coins').html(objJSON.status);
+
+                            isEmptys(visa)  || isEmptys(donate) || isEmptys(comment);
+
+                            // $('#recharge-coins').html(response);
+
+                            $("#checkOUT").modal('show').css({"z-index":"20000"});
+                            $('#change-check').removeClass('fa fa-check-circle-o')
+                            .addClass('fa fa-times').css({"color":"red","font-size":"200px"});
+                            $('#html-check').html('We can not process your payment is to low !!!').css({"text-align":"center"});
+                            $("#checkOUT").delay(2000).fadeOut(450);
+                            setTimeout(() => {
+                                $("#checkOUT").modal('hide');
+                            }, 3500);
+
+                        }
+                    }
+            });
+            
+            }else{
+                
+                $('#recharge-coins').html(
+                '<div class="alert alert-danger alert-dismissible fade show text-center">'+
+                    '<button class="close" data-dismiss="alert" type="button"><span>&times;</span></button>'+
+                    '<strong>Choose Any Type Of Payment you want To Donate !!!</strong>'+
+                '</div>');
+            }
         }
     }
 

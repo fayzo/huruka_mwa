@@ -65,9 +65,9 @@ class Fundraising extends Events
                                 <?php } ?>
 
                                 <?php if($likes['like_on'] == $row['fund_id']){ ?>
-                                            <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2" data-login="1" '; } ?> data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>"><span class="likescounter "><?php echo $row['likes_counts'] ;?></span> <i class="fa fa-heart"  ></i> Like</span>
+                                            <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2" data-login="1" '; } ?> data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>"> <i class="fa fa-heart"></i> <span class="likescounter "><?php echo $row['likes_counts'] ;?></span> Like</span>
                                 <?php }else{ ?>
-                                    <span <?php if(isset($_SESSION['key'])){ echo 'class="like-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2"  data-login="1" '; } ?> data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>" ><span class="likescounter"> <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span> <i class="fa fa-heart-o" ></i> Like</span>
+                                    <span <?php if(isset($_SESSION['key'])){ echo 'class="like-fundraising-btn more float-right text-sm  mr-2"'; }else{ echo 'id="login-please" class="more float-right text-sm  mr-2"  data-login="1" '; } ?> data-fund="<?php echo $row['fund_id']; ?>"  data-user="<?php echo $row['user_id']; ?>" ><i class="fa fa-heart-o" ></i> <span class="likescounter"> <?php if ($row['likes_counts'] > 0){ echo $row['likes_counts'];}else{ echo '';} ?></span>  Like</span>
                                 <?php } ?>
                             </div>
 

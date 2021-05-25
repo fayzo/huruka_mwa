@@ -1602,7 +1602,7 @@ class Hashtag_GetUsers extends Follow
                                                     <div class="direct-chat-msg" id="userComment0<?php echo $comments['comment_id']; ?>">
                                                         <div class="direct-chat-info clearfix">
                                                             <span class="direct-chat-name float-left mr-1"><a href="<?php echo BASE_URL_PUBLIC.$comments["username"];?>"><?php echo $comments["username"] ;?></a> ||</span>
-                                                            <span class="direct-chat-name float-left"><?php echo $comments["workname"] ;?></span>
+                                                            <span class="direct-chat-name float-left hidden-xs"><?php echo $comments["workname"] ;?></span>
                                                             <span class="direct-chat-timestamp float-right"><?php echo $this->timeAgo($comments['comment_at']); ?></span>
                                                         </div>
                                                         <!-- /.direct-chat-info -->
@@ -1619,27 +1619,29 @@ class Hashtag_GetUsers extends Follow
                                                        
                                                         <?php if($second_likes['like_on_'] == $comments['comment_id']) { ?>
                                                                 <li  class=" list-inline-item"><button class="unlike-second-btn text-sm" data-comment="<?php echo $comments['comment_id']; ?>" data-user="<?php echo $comments['comment_by']; ?>" >
-                                                                <i class="fa fa-heart-o mr-1" style="color: red"> <span class="likescounter_"><?php echo $comments['likes_counts_'];?> </span></i> like</button></li>
+                                                                <i class="fa fa-heart-o mr-1" style="color: red"> <span class="likescounter_"><?php echo $comments['likes_counts_'];?> </span></i> 
+                                                                <span class="hidden-xs">like</span></button></li>
                                                         <?php }else{ ?>
                                                                 <li  class=" list-inline-item"><button  class="like-second-btn text-sm" data-comment="<?php echo $comments['comment_id']; ?>"  data-user="<?php echo $comments['comment_by']; ?>" >
-                                                                <i class="fa fa-heart-o mr-1" > <span class="likescounter_">  <?php if ($comments['likes_counts_'] > 0){ echo $comments['likes_counts_'];}else{ echo '';} ?></span></i> like</button></li>
+                                                                <i class="fa fa-heart-o mr-1" > <span class="likescounter_">  <?php if ($comments['likes_counts_'] > 0){ echo $comments['likes_counts_'];}else{ echo '';} ?></span></i> 
+                                                                <span class="hidden-xs">like</span></button></li>
                                                         <?php } ?>
 
                                                         <?php if($dislikes['like_on_'] == $comments['comment_id']){ ?>
                                                             <li  class=" list-inline-item"><button class="undislike-btn text-sm"  data-comment="<?php echo $comments['comment_id']; ?>" data-user="<?php echo $comments['comment_by']; ?>" >
                                                             <i class="fa fa-thumbs-o-down R mr-1" style="color: green"> <span class="dislikescounter"><?php echo $comments['dislikes_counts_'] ;?></span></i>
-                                                                unlike</button></li>
+                                                            <span class="hidden-xs">unlike</span></button></li>
                                     
                                                          <?php }else{ ?>
                                                                <li  class=" list-inline-item"> <button class="dislike-btn text-sm"  data-comment="<?php echo $comments['comment_id']; ?>" data-user="<?php echo $comments['comment_by']; ?>" >
                                                                 <i class="fa fa-thumbs-o-down R mr-1"> <span class="dislikescounter"><?php if ($comments['dislikes_counts_'] > 0){ echo $comments['dislikes_counts_'];}else{ echo '';} ?></span></i>
-                                                                    unlike</button></li>
+                                                                <span class="hidden-xs">unlike</span></button></li>
                                                          <?php } ?>
                             
                                                         <span style="float:right">
                                                                               
                                                         <li  class=" list-inline-item"><button class="comments-btn text-sm" data-target="#a<?php echo  $comments["comment_id"] ;?>" data-toggle="collapse">
-                                                            <i class="fa fa-comments-o mr-1"></i> Comments  (<?php echo $this->CountsComment_second($comments["comment_id"]); ?>)
+                                                            <i class="fa fa-comments-o mr-1"></i><span class="hidden-xs">Comments</span> (<?php echo $this->CountsComment_second($comments["comment_id"]); ?>)
                                                         </button></li>
                                                                      
                                                             <?php if ($comments["comment_by"] == $user_id){ ?>
@@ -1660,7 +1662,7 @@ class Hashtag_GetUsers extends Follow
                                                         </ul>
                                                     </div>
                                                     
-                                                    <div class="card collapse border-bottom-0 ml-5" id="a<?php echo $comments["comment_id"];?>" >
+                                                    <div class="card collapse border-bottom-0 " id="a<?php echo $comments["comment_id"];?>" >
                                                         <div class="card-header pb-0 px-0">
                                                             <div class="input-group">
                                                                 <input class="form-control form-control-sm" id="commentHomeSecond<?php echo $comments["comment_id"];?>" type="text"

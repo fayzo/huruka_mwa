@@ -157,7 +157,7 @@ if(isset($_POST['key'])){
 
     <?php if($device_type == 'computer') { ?>
   
-    <div class="containers d-none d-md-block" id="container">
+    <div class="containers d-none d-md-block" id="container" style="background:none">
         <div class="form-container sign-up-container">
             <form action="post">
                 <div id="response"></div>
@@ -241,8 +241,8 @@ if(isset($_POST['key'])){
             </form>
         </div>
 
-        <div class="form-container sign-in-container">
-            <form action="post">
+        <div class="form-container sign-in-container" style="background:none">
+            <form action="post" style="background:none">
                 <div id="responses"></div>
                 <h1 class="h10">Sign in</h1>
                 <div class="social-container">
@@ -261,7 +261,7 @@ if(isset($_POST['key'])){
                     <p class="p0">To keep connected with us please login with your personal info</p>
                     <button class="ghost redbutton" id="signIn">Sign In</button>
                 </div>
-                <div class="overlay-panel overlay-right">
+                <div class="overlay-panel overlay-right" style="background: #42383854 no-repeat 0 0 / cover;">
                     <h1 class="h10">Hello, Friend!</h1>
                     <p class="p0">Enter your personal details and start journey with us</p>
                     <button class="ghost redbutton" id="signUp">Sign Up</button>

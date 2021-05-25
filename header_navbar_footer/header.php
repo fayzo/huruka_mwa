@@ -1007,4 +1007,16 @@ if($device_type == 'computer') { ?>
 <div class="content-wrapper <?php echo (!empty($user['background']))? $user['background'] :'chair'; ?> ">
 <?php } ?>
 
-<?php echo (isset($_SESSION['key']))? ($users->irangiro_subscription($_SESSION['key']) == true)? '': $users->irangiro_subscription($_SESSION['key']) :'' ;?>
+<?php 
+if (isset($_SESSION['key'])) {
+    # code...
+
+    if(isset($_SESSION['key']) && $result === '' || isset($_SESSION['key']) && $self === 'profile.php' || isset($_SESSION['key']) && $self === 'hashtag.php' || 
+        isset($_SESSION['key']) && $self ==='profileEdit.php' ){
+            
+        echo $users->irangiro_subscription($_SESSION['key']) != true ;
+    }
+}
+
+// echo (isset($_SESSION['key']))? ($users->irangiro_subscription($_SESSION['key']) == true)? '': $users->irangiro_subscription($_SESSION['key']) :'' ;
+?>

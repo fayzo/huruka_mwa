@@ -30,6 +30,7 @@ if (isset($_POST['recharge_coins']) && !empty($_POST['recharge_coins'])) {
             </div>
 
               <label for="inputEmail" >Click any coins you wish to deposit in your account</label>
+              <div id="recharge-coins" class="m-1"></div>
               <table class="table table-hover table-inverse table-responsive">
                   <thead class="thead-inverse">
                       <tr>

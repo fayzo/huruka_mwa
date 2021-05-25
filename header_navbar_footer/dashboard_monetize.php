@@ -4,6 +4,7 @@
     <div class="col-4 col-md-2 col-lg-2 py-3 px-2" >
       <div class="list-group sticky-top" id="list-tab" role="tablist" style="top: 50px;">
         <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="tab" href="#list-Users-coins" role="tab" aria-controls="list-Users-coins">Users coins </a>
+        <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="tab" href="#list-irangiro-coins" role="tab" aria-controls="list-irangiro-coins">irangiro coins </a>
         <a class="list-group-item list-group-item-action" id="list-Jobs-list" data-toggle="tab" href="#list-Jobs" role="tab" aria-controls="list-Jobs">Jobs</a>
         <a class="list-group-item list-group-item-action" id="list-Markerting-list" data-toggle="tab" href="#list-Markerting" role="tab" aria-controls="list-Markerting">Markerting ads</a>
         <a class="list-group-item list-group-item-action" id="list-News-list" data-toggle="tab" href="#list-News" role="tab" aria-controls="list-News">News-Feeds</a>
@@ -22,6 +23,10 @@
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="list-Users-coins" role="tabpanel" aria-labelledby="list-home-list">
            <?php include "siderbar_monetize/Users-coins.php"?>
+        </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
+
+        <div class="tab-pane fade" id="list-irangiro-coins" role="tabpanel" aria-labelledby="list-home-list">
+           <?php include "siderbar_monetize/irangiro-coins.php"?>
         </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
 
         <div class="tab-pane fade" id="list-Jobs" role="tabpanel" aria-labelledby="list-Jobs-list">

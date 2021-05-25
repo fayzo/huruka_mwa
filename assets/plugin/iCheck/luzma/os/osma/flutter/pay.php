@@ -9,6 +9,13 @@ if(isset($_POST['pay']))
     $amount = $_POST['amount'];
     $description = $_POST['description'];
 
+    if (isset($_POST['sent_to_user_id'])) {
+        # code...
+        $_SESSION['sent_to_user_id'] = $_POST['sent_to_user_id'];
+        $_SESSION['fund_id'] = $_POST['fund_id'];
+        $_SESSION['comment'] = $_POST['comment'];
+    }
+
     //* Prepare our rave request
     $request = [
         'tx_ref' => time(),
