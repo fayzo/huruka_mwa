@@ -25,7 +25,7 @@ if (isset($_POST['recharge_coins']) && !empty($_POST['recharge_coins'])) {
             <h4 class="h4 mb-3  text-center font-weight-normal">Balance</h4>
             <div class="form-group">
               <label>Your Coins Balance is: </label> <i class="fa fa-money text-success"></i>
-              <i class="fas fa-coins text-warning"></i> <?php echo  number_format($user['amount_coins']);?> coins
+              <i class="fas fa-coins text-warning"></i> <?php echo  number_format($user['amount_coins'],2);?> coins
               <a href="<?php echo BALANCE ;?>" class="btn btn-default"><i class="fas fa-money-check"></i>  Deposit</a>
             </div>
 

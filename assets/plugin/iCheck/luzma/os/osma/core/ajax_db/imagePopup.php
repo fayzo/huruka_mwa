@@ -17,6 +17,11 @@ if (isset($_POST['showpimage']) && !empty($_POST['showpimage'])) {
     $tweet_likes= $home->likes($user_id,$tweet_id);
     $Retweet= $home->checkRetweet($tweet_id, $user_id);
     $user= $home->userData($tweet_id);
+
+    $users->CountViewIn_post('tweets',
+        array('counts_postview' => 'counts_postview +1', ),
+        array('tweet_id' => $tweet_id, ));
+
     // ***************************
     // ***************************
     // ***************************
@@ -178,7 +183,7 @@ if(!empty($fileActualExt_image)) {
 
             <li class="list-inline-item mx-4">
 								<div class="d-inline-block ">
-							   	<h3>	Viewers </h3> 2,030
+							   	<h3>	Viewers </h3> '.$tweet["counts_postview"].'
 						  	</div>
 						</li>
             <li class="list-inline-item mx-4">

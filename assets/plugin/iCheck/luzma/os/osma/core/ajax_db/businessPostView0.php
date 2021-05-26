@@ -98,10 +98,10 @@ if (isset($_POST['job_id']) && !empty($_POST['job_id'])) {
                                   <div class="input-group-prepend">
                                       <button type="button" class="input-group-text btn btn-default" onclick="copyText()" data-toggle="tooltip" title="Contacts" data-original-title="Contacts" id="basic-addon2">Copy Link</button>
                                   </div>
-                                  <input type="text" id="mycopyText" style="width:1px" class="form-control" value="<?php echo BASE_URL_PUBLIC."job?id=".$_POST['job_id']."&business=".$_POST['business_id'] ;?>" readonly>
+                                  <input type="text" id="mycopyText" style="width:1px" class="form-control" value="<?php echo BASE_URL_PUBLIC."job?id=".$_POST['job_id']."&Appbuss=".$_POST['business_id'] ;?>" readonly>
                               </div>
           
-                              <a class="btn btn-sm btn-primary mt-2" href="<?php echo BASE_URL_PUBLIC."job?id=".$_POST['job_id']."&business=".$_POST['business_id'] ;?>"> Redirect to link</a>
+                              <a class="btn btn-sm btn-primary mt-2" href="<?php echo BASE_URL_PUBLIC."job?id=".$_POST['job_id']."&Appbuss=".$_POST['business_id'] ;?>"> Redirect to link</a>
           
                               <script>
                                   function copyText() {

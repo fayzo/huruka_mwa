@@ -17,11 +17,15 @@ if (isset($_SESSION['keycreate'])) {
     
     // exit();
     
-    exit('<div class="alert alert-success alert-dismissible fade show text-center">
-                    <button class="close" data-dismiss="alert" type="button">
-                        <span>&times;</span>
-                    </button>
-                    <strong>CHECK YOUR EMAIL ACCOUNT </strong> </div>');
+    // exit('<div class="alert alert-success alert-dismissible fade show text-center">
+    //                 <button class="close" data-dismiss="alert" type="button">
+    //                     <span>&times;</span>
+    //                 </button>
+    //                 <strong>SUCCESS CHECK YOUR EMAIL ACCOUNT </strong> </div>');
+    
+    header('location: '.BASE_URL_PUBLIC.'include/forgotpassword_response');
+    exit();
+    // exit(file_get_contents('forgotpassword_response.php'));
 
 }
 
@@ -261,7 +265,7 @@ if(isset($_POST['key'])){
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.01
       </div>
-      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro IRG</a>.</strong> All rights
+      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro</a>.</strong> All rights
       reserved.
     </footer>
 

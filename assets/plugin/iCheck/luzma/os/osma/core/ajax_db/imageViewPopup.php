@@ -14,7 +14,10 @@ if (isset($_POST['showpimage']) && !empty($_POST['showpimage'])) {
     $tweet_id=$_POST['showpimage'];
     $getid="";
     $tweet= $home->getPopupTweet($user_id,$tweet_id,$getid); 
-
+    
+    $users->CountViewIn_post('tweets',
+        array('counts_postview' => 'counts_postview +1', ),
+        array('tweet_id' => $tweet_id, ));
   // ***************************
     // ***************************
     // ***************************
@@ -71,7 +74,7 @@ if(!empty($fileActualExt_image)) {
           <div class="row">
            <div class="col-12">
         	<div class="img-popup-body">
-                <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button>
+                <!-- <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button> -->
                
                 <div id="jssor_2" style="position:relative;margin:0 auto;top:0px;left:0px;width:960px;height:480px;overflow:hidden;visibility:hidden;background-color:#24262e;">
                     <!-- Loading Screen -->

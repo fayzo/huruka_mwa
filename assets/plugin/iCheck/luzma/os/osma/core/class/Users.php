@@ -196,10 +196,10 @@ class Users{
                                     <div class="card-body">
                                         <h1 class="card-title pricing-card-title">Free <small class="text-muted"></small></h1>
                                         <ul class="list-unstyled mt-3 mb-4">
-                                        <li>1 month</li>
+                                        <li>1 week</li>
                                         </ul>
                                         <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
-                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(1000,'weeks',<?php echo $details ;?>)" >Get started </button>
                                     </div>
                                     </div>
                                     <?php }else { ?>
@@ -208,12 +208,12 @@ class Users{
                                         <h4 class="my-0 font-weight-normal">Individual</h4>
                                     </div>
                                     <div class="card-body">
-                                        <h1 class="card-title pricing-card-title">$10 <small class="text-muted"></small></h1>
+                                        <h1 class="card-title pricing-card-title">$2 <small class="text-muted"></small></h1>
                                         <ul class="list-unstyled mt-3 mb-4">
                                         <li>3 months</li>
                                         </ul>
                                         <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
-                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(10000,'weeks',<?php echo $details ;?>)" >Get started </button>
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(2000,'weeks',<?php echo $details ;?>)" >Get started </button>
                                     </div>
                                     </div>
                                     <?php } ?>
@@ -223,12 +223,12 @@ class Users{
                                         <h4 class="my-0 font-weight-normal">Pro</h4>
                                     </div>
                                     <div class="card-body">
-                                        <h1 class="card-title pricing-card-title">$60 <small class="text-muted"></small></h1>
+                                        <h1 class="card-title pricing-card-title">$50 <small class="text-muted"></small></h1>
                                         <ul class="list-unstyled mt-3 mb-4">
                                         <li>5 months</li>
                                         </ul>
                                         <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="pro" data-user="< ?php echo $user_id; ?>">Get started</button> -->
-                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(35000,'months',<?php echo $details ;?>)" >Get started</button>
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(55000,'months',<?php echo $details ;?>)" >Get started</button>
                                     </div>
                                     </div>
                                     <div class="card mb-4 shadow-lg">
@@ -236,12 +236,12 @@ class Users{
                                         <h4 class="my-0 font-weight-normal">Enterprise</h4>
                                     </div>
                                     <div class="card-body">
-                                        <h1 class="card-title pricing-card-title">$180 <small class="text-muted"></small></h1>
+                                        <h1 class="card-title pricing-card-title">$80 <small class="text-muted"></small></h1>
                                         <ul class="list-unstyled mt-3 mb-4">
                                         <li>12 months</li>
                                         </ul>
                                         <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="enterprise" data-user="< ?php echo $user_id; ?>">Get started</button> -->
-                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(80000,'months',<?php echo $details ;?>)" >Get started</button>
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(88000,'months',<?php echo $details ;?>)" >Get started</button>
                                     </div>
                                     </div>
                                 </div>
@@ -1563,6 +1563,35 @@ class Users{
         $query= $mysqli->query($sql);
     }
     
+        public function CountViewIn_post($table,$fields=array(),$user_id=array())
+    {
+        $columns="";
+        $WHERE="";
+        $i= 1;
+        foreach ($fields as $key => $value) {
+            # code...
+            $columns .= "{$key} = {$value}";
+            if ($i++ < count($fields)) {
+                # code...
+                 $columns .= ',';
+            }
+        }
+
+        foreach ($user_id as $key => $value) {
+            # code...
+            $WHERE .= "{$key} = '{$value}'";
+            if ($i++ < count($fields)) {
+                # code...
+                 $WHERE .= 'AND';
+            }
+        }
+
+        $mysqli= $this->database;
+        $sql="UPDATE $table SET {$columns} WHERE {$WHERE}";
+        $query= $mysqli->query($sql);
+        // var_dump($query);
+    }
+
         public function CountViewIn_job_post($table,$fields=array(),$user_id=array())
     {
         $columns="";
@@ -1667,7 +1696,7 @@ class Users{
 
         $amount_coin = $rows['amount_coins'] - $amount_coins;
         // var_dump($amount_coin,'true');
-        if ($amount_coin >= 0.5 ) {
+        if ($amount_coin >= 0.00 ) {
             return true;
         }else {
             return false;

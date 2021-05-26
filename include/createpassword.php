@@ -65,6 +65,7 @@ if(isset($_POST['key'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>welcome</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo BASE_URL_PUBLIC;?>favicon_io/favicon-32x32.png">
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK ;?>dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo BASE_URL_LINK;?>plugin/fontawesome-free/css/all.min.css">
@@ -252,7 +253,7 @@ if(isset($_POST['key'])){
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.01
       </div>
-      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro IRG</a>.</strong> All rights
+      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro</a>.</strong> All rights
       reserved.
     </footer>
 

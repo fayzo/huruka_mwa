@@ -108,6 +108,8 @@ if(isset($_POST['key'])){
             'last_login' => $datetime, 
             'color' => '', 
             'approval' => 'off', 
+            'amount_coins'=> '10.00',
+            'amount_francs'=> '1000',
       ));
 
      } 
@@ -233,7 +235,7 @@ if (isset($_REQUEST['login_id']) && !empty($_REQUEST['login_id'])) {
                             <!-- <span>irangiro</span> -->
                             <input type="text" name="usernameoremail" id="usernameoremail" placeholder="Username or Email " />
                             <input type="password" name="passwordlogin" id="passwordlogin" placeholder="Password" />
-                            <a class="alink" href="< ?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
+                            <a class="alink" href="<?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
                             <button id="myBtn_login" class="blacButton" onclick="manage('login')" type="button">Sign In</button>
                         </form>
                     </div>

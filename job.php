@@ -40,7 +40,7 @@
          if (isset($_GET['id']) && !empty($_GET['id'])) {
             // $user_id= $_SESSION['key'];
             $job_id= $_GET['id']; 
-            $business_id= $_GET['business']; 
+            $business_id= $_GET['Appbuss']; 
             $user = $job->jobsviewData($business_id,$job_id);
         
             $users->CountViewIn_job_post('jobs',
@@ -136,10 +136,10 @@
                                   <div class="input-group-prepend">
                                       <button type="button" class="input-group-text btn btn-default" onclick="copyText()" data-toggle="tooltip" title="Contacts" data-original-title="Contacts" id="basic-addon2">Copy Link</button>
                                   </div>
-                                  <input type="text" id="mycopyText" style="width:1px" class="form-control" value="<?php echo BASE_URL_PUBLIC."job?id=".$_GET['id']."&business=".$_GET['business'] ;?>" readonly>
+                                  <input type="text" id="mycopyText" style="width:1px" class="form-control" value="<?php echo BASE_URL_PUBLIC."job?id=".$_GET['id']."&Appbuss=".$_GET['Appbuss'] ;?>" readonly>
                               </div>
           
-                              <!-- <a class="btn btn-sm btn-primary mt-2" href="< ?php echo BASE_URL_PUBLIC."job?id=".$_GET['id']."&business=".$_GET['business'] ;?>"> Redirect to link</a> -->
+                              <!-- <a class="btn btn-sm btn-primary mt-2" href="< ?php echo BASE_URL_PUBLIC."job?id=".$_GET['id']."&business=".$_GET['Appbuss'] ;?>"> Redirect to link</a> -->
           
                               <script>
                                   function copyText() {

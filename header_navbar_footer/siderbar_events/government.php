@@ -12,4 +12,15 @@
             </div>
 
         </div>
+        
     </section>
+
+    <div class="row">
+        <div class="col-12 col-md-12 ">
+        <div id="Government">
+            <!-- END SLIDER WITH CAPTIONS -->
+            <?php echo $events->eventsList(1,'Government',$user_id); ?>
+        </div>
+        </div> 
+        <!-- col -->
+    </div> <!-- row -->

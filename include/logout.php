@@ -14,6 +14,6 @@ session_unset($_SESSION['username']);
 session_unset($_SESSION['job_user']);
 session_destroy();
 header ('location: '.LOGIN.'');
-
+exit();
 
 ?>

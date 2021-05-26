@@ -16,6 +16,11 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
     $Retweet= $home->checkRetweet($tweet_id, $user_id);
   	$user= $home->userData($tweet_id);
 	$comment_= $comment->comments($tweet_id);
+
+    $users->CountViewIn_post('tweets',
+        array('counts_postview' => 'counts_postview +1', ),
+        array('tweet_id' => $tweet_id, ));
+
     ?>
 
 <div class="tweet-show-popup-wrap">
@@ -881,7 +886,7 @@ if (isset($_POST['showpoptweet']) && !empty($_POST['showpoptweet'])) {
 
             <li class="list-inline-item">
 								<div class="d-inline-block ">
-							   	<div>	Viewers </div> 2,030
+							   	<div>	Viewers </div> '.$tweet["counts_postview"].'
 						  	</div>
 						</li>
             <li class="list-inline-item">

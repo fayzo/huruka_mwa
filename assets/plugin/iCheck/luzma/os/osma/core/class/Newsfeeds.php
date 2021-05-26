@@ -1262,9 +1262,9 @@ class Newsfeeds extends Fundraising {
                         </td>
                         <td>
                        <?php
-                        if (strlen($tweet['status']) > 95) {
+                        if (strlen($tweet['status']) > 65) {
                             // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
-                            $tweettext = substr($tweet['status'], 0, 95);
+                            $tweettext = substr($tweet['status'], 0, 65);
                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
                             <a href="javascript:void(0)"'
                             .((isset($_SESSION['key']))?

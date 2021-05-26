@@ -25,7 +25,7 @@ class Job extends Follow {
     {
         $mysqli= $this->database;
         // $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J.turn = 'on' and J. business_id = '{$user_id}' and J. deadline > CURDATE()");
-        $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J.turn = 'on' and J. business_id = '{$user_id}' ");
+        $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J. business_id = '{$user_id}' ");
         ?>
         <div class="card">
             <div class="card-header main-active">
@@ -44,7 +44,11 @@ class Job extends Follow {
                         <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                         <?php } ?>
                     </div>
-                    <span><a href="#"> <!-- Job Title: --> <?php echo $this->htmlspecialcharss($jobs['job_title']) ;?></a></span><br>
+                    <span><a href="#"> <!-- Job Title: --> <?php echo $this->htmlspecialcharss($jobs['job_title']) ;?></a></span>
+                     <?php echo ($jobs["turn"] == 'on')?
+                     '<span class="bg-success rounded text-white px-1"> Job Online</span>' 
+                     :'<span class="bg-danger rounded text-white px-1"> Job Offline</span>' ;?>
+                     <br>
                     <span class="description description-job">
                         <?php echo $this->htmlspecialcharss($jobs['companyname']); ?> || 
                         <i style="font-size:12px" class="flag-icon flag-icon-<?php echo strtolower( $jobs['location']) ;?> h4 mb-0"

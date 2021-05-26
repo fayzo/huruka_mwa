@@ -13,3 +13,14 @@
 
         </div>
     </section>
+
+
+    <div class="row">
+    <div class="col-12 col-md-12 ">
+      <div id="Memorial">
+          <!-- END SLIDER WITH CAPTIONS -->
+         <?php echo $events->eventsList(1,'Memorial',$user_id); ?>
+      </div>
+    </div> 
+    <!-- col -->
+</div> <!-- row -->

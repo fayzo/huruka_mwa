@@ -7,13 +7,12 @@ $mail->isSMTP();        // Set mailer to use SMTP IF UR USING IN LOCOHOST TURN I
 // $mail->SMTPDebug = 3;                               // Enable verbose debug output
 // $mail->Debugoutput = 'html';
 // $mail->Host = 'smtp.gmail.com;smtp2.example.com';  // Specify main and backup SMTP servers
-$mail->SMTPOptions = array(
-    'ssl' => array(
-    'verify_peer' => false,
-    'verify_peer_name' => false,
-    'allow_self_signed' => true
-    )
-    );
+// $mail->SMTPOptions = array(
+//     'ssl' => array(
+//     'verify_peer' => false,
+//     'verify_peer_name' => false,
+//     'allow_self_signed' => true
+//     ));
 // $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 // $mail->SMTPAuth = true;                               // Enable SMTP authentication
 // $mail->Username = 'irangiroltd@gmail.com';                 // SMTP username
@@ -25,8 +24,7 @@ $mail->SMTPOptions = array(
 //     'verify_peer' => false,
 //     'verify_peer_name' => false,
 //     'allow_self_signed' => true
-//     )
-//     );
+//     ));
 // $mail->Host = 'iragiro.com';  // Specify main and backup SMTP servers
 // $mail->SMTPAuth = true;                               // Enable SMTP authentication
 // $mail->Username = 'admin@iragiro.com';                 // SMTP username

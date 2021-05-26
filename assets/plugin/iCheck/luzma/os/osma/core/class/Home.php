@@ -1548,8 +1548,8 @@ public function links(){ ?>
         $stmt->bind_param('i',$retweet_id);
         $stmt->execute();
 
-        $query= "INSERT INTO tweets (status,title_name,photo_Title_main,photo_Title, tweetBy, retweet_id, retweet_by,pin_tweet,pin_retweet_by,newsfeeds,marketing,donation_payment, donate_counts, money_raising, money_to_target, tweet_image,tweet_image_size,youtube,coins, likes_counts, retweet_counts, posted_on, retweet_Msg) 
-        SELECT status,title_name,photo_Title_main,photo_Title, tweetBy, ?, ?,?,pin_retweet_by,?,?,donation_payment, donate_counts, money_raising, money_to_target, tweet_image,tweet_image_size,youtube,coins, likes_counts, retweet_counts, ? , ?  FROM tweets WHERE tweet_id= ? ";
+        $query= "INSERT INTO tweets (status,title_name,photo_Title_main,photo_Title, tweetBy, retweet_id, retweet_by,pin_tweet,pin_retweet_by,newsfeeds,marketing,donation_payment, donate_counts, money_raising, money_to_target, tweet_image,tweet_image_size,youtube,counts_postview,coins, likes_counts, retweet_counts, posted_on, retweet_Msg) 
+        SELECT status,title_name,photo_Title_main,photo_Title, tweetBy, ?, ?,?,pin_retweet_by,?,?,donation_payment, donate_counts, money_raising, money_to_target, tweet_image,tweet_image_size,youtube,counts_postview,coins, likes_counts, retweet_counts, ? , ?  FROM tweets WHERE tweet_id= ? ";
         $stmt->prepare($query);
         $time = date('Y-m-d H-i-s');
         $null = null; 

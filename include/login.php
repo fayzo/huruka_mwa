@@ -107,6 +107,8 @@ if(isset($_POST['key'])){
             'last_login' => $datetime, 
             'color' => '', 
             'approval' => 'off', 
+            'amount_coins'=> '10.00',
+            'amount_francs'=> '1000',
         ));
 
      } 
@@ -121,6 +123,7 @@ if(isset($_POST['key'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>welcome</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo BASE_URL_PUBLIC;?>favicon_io/favicon-32x32.png">
     <link href="<?php echo BASE_URL_LINK ;?>dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL_LINK ;?>dist/css/login.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -250,7 +253,7 @@ if(isset($_POST['key'])){
                 </div>
                 <input type="text" name="usernameoremail" id="usernameoremail" placeholder="Username or Email " />
                 <input type="password" name="passwordlogin" id="passwordlogin" placeholder="Password" />
-                <a class="alink" href="< ?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
+                <a class="alink" href="<?php echo FORGET_PASSPOWRD ;?>">Forgot your password?</a>
                 <button class="blacButton" id="myBtn-sigin" onclick="manage('login')" type="button">Sign In</button>
             </form>
         </div>
@@ -283,7 +286,7 @@ if(isset($_POST['key'])){
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.01
       </div>
-      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro IRG</a>.</strong> All rights
+      <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="https://irangiro.com">irangiro</a>.</strong> All rights
       reserved.
     </footer>
 
