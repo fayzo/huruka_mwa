@@ -366,12 +366,19 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                     visa: visa.val(),
                 },
                 success: function(response) {
-                        console.log(response);
+                    var objJSON = JSON.parse(response);
+                    // console.log(objJSON.status,objJSON.data.link);
+                    // console.log(response);
 
                       if (objJSON.status == "success") {
                         // if (response.indexOf('SUCCESS') >= 0) {
 
-                            $('#recharge-coins').html(objJSON.status);
+                            $('#recharge-coins').html('<div class="alert alert-success alert-dismissible fade show text-center">'+
+                            '<button class="close" data-dismiss="alert" type="button">'+
+                            '<span>&times;</span>'+
+                            '</button>'+
+                            '<strong>SUCCESS REDIRECT TO ANOTHER PAGE</strong> </div>');
+
                             $(".response_coins").html(objJSON.status).css({"color":"red"});
                         
 
@@ -393,14 +400,19 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                             setTimeout(() => {
                                 location.reload();
                             }, 10000);
-                            console.log(response);
+                            // console.log(response);
                             
                         } else{
-                            $('#recharge-coins').html(objJSON.status);
+                            // $('#recharge-coins').html(response);
+                            // $('#recharge-coins').html(objJSON.status);
+                            
+                            $('#recharge-coins').html('<div class="alert alert-success alert-dismissible fade show text-center">'+
+                            '<button class="close" data-dismiss="alert" type="button">'+
+                            '<span>&times;</span>'+
+                            '</button>'+
+                            '<strong>FAIL TO REDIRECT TRY AGAIN</strong> </div>');
 
                             isEmptys(visa)  || isEmptys(donate) || isEmptys(comment);
-
-                            // $('#recharge-coins').html(response);
 
                             $("#checkOUT").modal('show').css({"z-index":"20000"});
                             $('#change-check').removeClass('fa fa-check-circle-o')

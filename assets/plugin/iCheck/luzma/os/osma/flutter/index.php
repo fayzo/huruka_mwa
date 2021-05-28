@@ -1,3 +1,5 @@
+<?php include('../core/init.php'); ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +11,7 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <form action="http://localhost/irangiro_social_site/flutter/pay.php" method="POST">
+        <form action='<?php echo BASE_URL_PUBLIC ;?>flutter/pay.php' method="POST">
 
         <label>Email</label>
         <input type="email" name="email">

@@ -7,7 +7,7 @@ if (isset($_POST['name_detail']) && !empty($_POST['name_detail'])) {
     $user_id= $_SESSION['key'];
     $user= $home->userData($_SESSION['key']);
 
-     ?>
+?>
 
 
 <div class="promote-popup">
@@ -37,7 +37,7 @@ if (isset($_POST['name_detail']) && !empty($_POST['name_detail'])) {
                         <div class="card-body">
                             <h1 class="card-title pricing-card-title">$10 <small class="text-muted">/ day</small></h1>
                             <ul class="list-unstyled mt-3 mb-4">
-                              <li>1 Post</li>
+                              <li>1 Daily Post</li>
                               <li>Email support</li>
                               <li>Help center access</li>
                             </ul>
@@ -53,7 +53,7 @@ if (isset($_POST['name_detail']) && !empty($_POST['name_detail'])) {
                         <div class="card-body">
                             <h1 class="card-title pricing-card-title">$30 <small class="text-muted">/ week</small></h1>
                             <ul class="list-unstyled mt-3 mb-4">
-                                <li>6 Post</li>
+                                <li>1 Week Post</li>
                                 <li>Email support</li>
                                 <li>Help center access</li>
                             </ul>

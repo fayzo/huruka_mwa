@@ -4,6 +4,10 @@ $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpat
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
+session_unset($sent_to_user_id);
+session_unset($fund_id);
+session_unset($comment);
+
 if (isset($_POST['fund_id']) && !empty($_POST['fund_id'])) {
     if (isset($_SESSION['key'])) {
         # code...

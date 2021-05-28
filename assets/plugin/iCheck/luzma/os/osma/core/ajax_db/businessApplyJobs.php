@@ -106,7 +106,7 @@ if (isset($_POST['apply_id']) && !empty($_POST['business_id'])) {
                            </div> 
                         </div>
 
-                        <div class="col">
+                        <!-- <div class="col">
                              <div class="form-group">
                                <div class="btn btn-defaults btn-file">
                                    <i class="fa fa-paperclip"></i> Attachment
@@ -121,7 +121,7 @@ if (isset($_POST['apply_id']) && !empty($_POST['business_id'])) {
                                 </span>
                                <small class="help-block">Max. 10MB</small>
                            </div> 
-                        </div>
+                        </div> -->
                       </div>
                       <div class="row">
                         <div class="col-6" id="add-photo00">
@@ -164,7 +164,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
     $email_to_business = $users->test_input($_POST['email_to']);
 
     $uploadcv= $_FILES['uploadcv'];
-    $uploadcertificates= $_FILES['uploadcertificates'];
+    // $uploadcertificates= $_FILES['uploadcertificates'];
 
     $subject_composer = $users->test_input($_POST['subjectcomposer']);
     $firstname = $users->test_input($_POST['firstname']);
@@ -179,8 +179,9 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
     $additioninformation = $users->test_input($_POST['additioninformation']);
     // $deadline = $users->test_input($_POST['deadline']);
 
+    // || !empty(array_filter($uploadcertificates['name'])) 
 
-	if (!empty($telephone) || !empty(array_filter($uploadcv['name'])) || !empty(array_filter($uploadcertificates['name'])) ) {
+	if (!empty($telephone) || !empty(array_filter($uploadcv['name'])) ) {
 		if (!empty($uploadcv['name'][0])) {
 			# code...
       
@@ -194,8 +195,8 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
       $uploadcv_ = $home->uploadJobsFile($uploadcv);
 			$fileSize_uploadcv = $home->uploadSize($uploadcv);
 
-			$uploadcertificates_ = $home->uploadJobsFile($uploadcertificates);
-			$fileSize_certificates = $home->uploadSize($uploadcertificates);
+			// $uploadcertificates_ = $home->uploadJobsFile($uploadcertificates);
+			// $fileSize_certificates = $home->uploadSize($uploadcertificates);
 
 		}
 
@@ -216,10 +217,10 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
 	'address0'=> $address,
   'telephone'=> $telephone, 
 	'uploadfilecv'=> $uploadcv_, 
-	'uploadfilecertificates'=> $uploadcertificates_, 
+	// 'uploadfilecertificates'=> $uploadcertificates_, 
   'addition_information'=> $additioninformation,
   'cv_file_size'=> $fileSize_uploadcv,
-  'certificates_file_size'=> $fileSize_certificates,
+  // 'certificates_file_size'=> $fileSize_certificates,
   'user_id0'=> $user_id,
   'job_id0'=> $job_id,
   'business_id0'=> $business_id,

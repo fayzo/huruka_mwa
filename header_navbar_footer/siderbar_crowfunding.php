@@ -24,11 +24,12 @@
         </div>
       </header>
 
- <div class="container-fluid">
+<div class="container-fluid">
 
 <div role="tabpanel">
   <div class="row">
-    <div class="col-4 col-md-2 col-lg-2 py-3 px-2" >
+
+    <div class="col-sm-12 col-md-2 col-lg-2 py-3 px-2 d-none d-md-block">
       <div class="list-group sticky-top" id="list-tab" role="tablist">
         <a class="list-group-item list-group-item-action active" id="list-Feature-list" data-toggle="tab" href="#list-Feature" role="tab" aria-controls="list-Feature">Feature</a>
         <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="tab" href="#list-Agriculture" role="tab" aria-controls="list-home">Agriculture</a>
@@ -43,10 +44,23 @@
       </div>
     </div>
 
+    <div class="col-sm-12 col-md-10 col-lg-10">
+      <div class="nav-scroller py-0 d-sm-block d-md-none main-active " style="clear:right;height:3.4rem;"> 
+          <nav class="nav d-flex justify-content-between pb-0  horizontal-large-2" id="list-tab" role="tablist">
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Feature">Feature<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('Feature');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Agriculture">Agriculture<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('Agriculture');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Ubworonzi">Ubworonzi<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('Ubworonzi');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Arts">Arts<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('Arts');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Film">Film<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('Film');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Music">Music<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('Music');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Fashion">Fashion<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('Fashion');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Electronics">Electronics<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('electronics');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Web_apps">Web apps<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('web_apps');?></span></a>
+            <a class="p-2" data-toggle="tab" role="tab" href="#list-Phone_apps">Phone apps<span class="badge badge-primary"><?php echo $posts_home->crowfundraisingcountPOSTS('phone_apps');?></span></a>
+          </nav>
+      </div> 
 
-    <div class="col-8 col-md-10 col-lg-10 ">
       <div class="tab-content" id="nav-tabContent">
-      
         <div class="tab-pane fade show active" id="list-Feature" role="tabpanel" aria-labelledby="list-Feature-list">
            <?php include "siderbar_crowfund/Feature.php"?>
         </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->

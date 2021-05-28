@@ -158,16 +158,19 @@
                                 <?php
                                     $i=1;
                                     while($row= $query->fetch_array()) { 
-                                        // var_dump($row); 
-                                    ?>
+                                            $subect = $row['subscription'];
+                                            $replace = " ";
+                                            $searching = "_";
+                                            $subscription = str_replace($searching,$replace, $subect);
+                                        ?>
                                                 <tr>
                                                     <td><?php echo $i++ ?></td>
-                                                    <td><?php echo $row['subscription']?></td>
+                                                    <td><?php echo $subscription;?></td>
                                                     <!-- <td>< ?php echo $row['name_subscription_']?></td>
                                                     <td>< ?php echo $row['email_subscription_']?></td> -->
-                                                    <td><?php echo $row['month_subscription_']?></td>
-                                                    <td><?php echo number_format($row['price_subscription_'])?></td>
-                                                    <td><?php echo $users->timeAgo($row['date_subscription_'])?></td>
+                                                    <td><?php echo $row['month_subscription_'] ;?></td>
+                                                    <td><?php echo number_format($row['price_subscription_']) ;?></td>
+                                                    <td><?php echo $users->timeAgo($row['date_subscription_']) ;?></td>
                                                 </tr>
                                 <?php } ?>
 

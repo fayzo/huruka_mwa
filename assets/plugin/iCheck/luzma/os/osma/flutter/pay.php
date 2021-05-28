@@ -1,5 +1,5 @@
 <?php 
-// include('../core/init.php');
+include('../core/init.php');
 // $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpath($_SERVER['SCRIPT_FILENAME']));
 
 if(isset($_POST['pay']))
@@ -22,7 +22,7 @@ if(isset($_POST['pay']))
         'amount' => $amount,
         'currency' => 'RWF',
         'payment_options' => "card",
-        'redirect_url' => 'http://localhost/irangiro_social_site/flutter/process.php',
+        'redirect_url' => ''.BASE_URL_PUBLIC.'flutter/process.php',
         'customer' => [
             'email' => $email,
             'name' => $name
@@ -61,6 +61,7 @@ if(isset($_POST['pay']))
     
     $res = json_decode($response);
     exit($response);
+    // var_dump($response);
 
     // if($res->status == 'success')
     // {

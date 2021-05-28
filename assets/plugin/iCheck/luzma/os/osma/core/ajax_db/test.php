@@ -149,38 +149,6 @@ if (isset($_POST['subscription'])) {
             // var_dump($va);
         }
 
-        if ($_POST['subscription'] == 'fund_donation') {
-            # code...
-            $users->updateQuery_coins('subscription',array( 
-              'subscription'=> $_POST['subscription'],
-              'user_id_subscription'=> $user_id,
-              'name_subscription'=> $name,
-              'email_subscription'=> $email,
-
-              'fund_donation_subscription'=> $month,
-              'fund_donation_price_pay'=> $price,
-              'fund_donation_date_pay'=> $datetime ),
-              array(
-                'user_id_subscription'=> $user_id,
-            ));
-        }
-
-        if ($_POST['subscription'] == 'crowfund_donation') {
-            # code...
-            $users->updateQuery_coins('subscription',array( 
-              'subscription'=> $_POST['subscription'],
-              'user_id_subscription'=> $user_id,
-              'name_subscription'=> $name,
-              'email_subscription'=> $email,
-
-              'crowfund_donation_subscription'=> $month,
-              'crowfund_donation_price_pay'=> $price,
-              'crowfund_donation_date_pay'=> $datetime ),
-              array(
-                'user_id_subscription'=> $user_id,
-            ));
-        }
-
         if ($_POST['subscription'] == 'newsfeed') {
             # code...
             $users->updateQuery_coins('subscription',array( 

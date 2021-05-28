@@ -480,8 +480,10 @@ class Follow extends Home
                             </div><!-- info body name end-->
                         </div><!-- info in body end-->
                         <div class="info-in-footer">
+                        <!-- false -->
                         <!-- < ?php echo self::coins_recharge($user['user_id'],$user_key_coins,$username_keycoins,$user['username']); ?> -->
-                        <?php echo self::coins_recharge_tweet_tooltip($user['user_id'],$user_key_coins,$username_keycoins,$user['username'],$tweet_id,$tweet); ?>
+                        <!-- true -->
+                        <!-- < ?php echo self::coins_recharge_tweet_tooltip($user['user_id'],$user_key_coins,$username_keycoins,$user['username'],$tweet_id,$tweet); ?> -->
                                 
                             <div class="number-wrapper">
                                 <div class="num-box">

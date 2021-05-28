@@ -3,7 +3,7 @@
        header('Location: ../../404.html');
  }
 
-class Promote_home_post extends Fundraising {
+class Promote_home_post extends Crowfund {
 
     public function promote_post($user_id,$limit)
     {

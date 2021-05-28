@@ -402,8 +402,6 @@ class Fundraising extends Events
       echo $total_Comment;
     }
 
-    
-
     public function fundraisingData($user_id)
     {
         $mysqli= $this->database;

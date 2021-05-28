@@ -10,7 +10,9 @@ if ($users->jobloggedin() == 'SME' && $users->loggedin() == true) {
     $houseV= $house->houseData($_SESSION['key']);
     $carV= $car->carData($_SESSION['key']);
     $icyamunaraV= $icyamunara->icyamunaraData($_SESSION['key']);
-
+    $saleV= $sale->saleData($_SESSION['key']);
+    $subscription= $users->subscription_pay($_SESSION['key']);
+    
     $user_id= $_SESSION['key'];
     $notific= $notification->getNotificationCount($user_id,$_SESSION['email']);
 

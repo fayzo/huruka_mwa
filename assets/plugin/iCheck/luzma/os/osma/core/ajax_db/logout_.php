@@ -13,6 +13,12 @@ session_unset($_SESSION['approval']);
 session_unset($_SESSION['chat']);
 session_unset($_SESSION['username']);
 session_unset($_SESSION['job_user']);
+
+
+session_unset($sent_to_user_id);
+session_unset($fund_id);
+session_unset($comment);
+
 session_destroy();
 // header ('location: '.LOGIN.'');
 

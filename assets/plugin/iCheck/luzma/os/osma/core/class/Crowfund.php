@@ -171,6 +171,25 @@ class Crowfund extends Fundraising {
         return $row;
     }
 
+    
+    public function crowfundraisingcountPOSTS($categories)
+    {
+      $db =$this->database;
+
+      if ($categories == 'Feature') {
+          $query="SELECT COUNT(*) FROM crowfundraising WHERE categories_crowfundraising = categories_crowfundraising ";
+      }else {
+          $query="SELECT COUNT(*) FROM crowfundraising WHERE categories_crowfundraising= '$categories' ";
+      }
+
+      $sql= $db->query($query);
+      $row_Comment = $sql->fetch_array();
+      $total_Comment= array_shift($row_Comment);
+      $array= array(0,$total_Comment);
+      $total_Comment= array_sum($array);
+      echo $total_Comment;
+    }
+
       public function Crownfund_comments($tweet_id)
     {
         $mysqli= $this->database;

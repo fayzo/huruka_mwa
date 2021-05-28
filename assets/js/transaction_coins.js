@@ -459,7 +459,7 @@ function coins(amount,month,firstname,lastname,email,user_id,coins) {
                     location.reload();
                 }, 10000);
 
-                console.log(response);
+                // console.log(response);
                 
             } else{
                 $('#recharge-coins').html(objJSON.status);

@@ -28,3 +28,5 @@ RewriteRule ^i.email/?$ email.php [NC,L,QSA]
 
 php_value upload_max_filesize 40M
 php_value post_max_size 42M
+
+

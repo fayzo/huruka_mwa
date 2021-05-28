@@ -11,7 +11,8 @@ if (isset($_SESSION['keycreate'])) {
 
     $email= $_SESSION['email'];
     // $email_verified= "https://".$_SERVER['HTTP_HOST']."/email_verified?token=$email_hash";
-    $email_verified= "http://localhost/irangiro_social_site/email_verified?token=$email_hash";
+    // $email_verified= "'http://localhost/irangiro_social_site/'email_verified?token=$email_hash";
+    $email_verified= BASE_URL_PUBLIC."email_verified?token=$email_hash";
 
     require '../email_verified_thank.php';
     

@@ -3,7 +3,7 @@
        header('Location: ../../404.html');
  }
 
-class Newsfeeds extends Fundraising {
+class Newsfeeds extends Crowfund {
 
     public function NewsFeedsposts($user_id,$limit)
     {

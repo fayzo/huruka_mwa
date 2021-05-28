@@ -38,15 +38,15 @@ $(document).ready(function () {
         var address = $('#address');
         var subject = $('.subjectcomposer');
         var uploadcv = $('#upload-cv');
-        var uploadcertificates = $('#upload-certificates');
+        // var uploadcertificates = $('#upload-certificates');
         var editor1 = CKEDITOR.instances.editor1.getData();
 
         var extensions = $('#upload-cv').val().split('.').pop().toLowerCase();
-        var extensions0 = $('#upload-certificates').val().split('.').pop().toLowerCase();
+        // var extensions0 = $('#upload-certificates').val().split('.').pop().toLowerCase();
         
         if (isEmpty(firstname) && isEmpty(lastnam) && isEmpty(email) && isEmpty(address) && isEmpty(subject) &&
-        isEmpty(telephone) && isEmpty(uploadcv) && isEmpty(uploadcertificates)) {
-
+        isEmpty(telephone) && isEmpty(uploadcv) ) {
+            // && isEmpty(uploadcertificates)
             if (jQuery.inArray(extensions, ['gif', 'png', 'jpg', 'mp4', 'mp3', 'jpeg', 'bmp', 'pdf', 'doc', 'ppt', 'docx', 'xlsx', 'xls', 'zip']) == -1) {
             $("#responseSubmit").html('Invalid Image File').fadeIn();
             setInterval(function () {
@@ -54,13 +54,13 @@ $(document).ready(function () {
             }, 4000);
             $('#upload-cv').val('');
             return false;
-        }else if (jQuery.inArray(extensions0, ['gif', 'png', 'jpg', 'mp4', 'mp3', 'jpeg', 'bmp', 'pdf', 'doc', 'ppt' ,'docx', 'xlsx','xls','zip']) == -1) {
-            $("#responseSubmit").html('Invalid Image File').fadeIn();
-            setInterval(function () {
-                $("#responseSubmit").fadeOut();
-            }, 4000);
-            $('#upload-certificates').val('');
-            return false;
+        // }else if (jQuery.inArray(extensions0, ['gif', 'png', 'jpg', 'mp4', 'mp3', 'jpeg', 'bmp', 'pdf', 'doc', 'ppt' ,'docx', 'xlsx','xls','zip']) == -1) {
+        //     $("#responseSubmit").html('Invalid Image File').fadeIn();
+        //     setInterval(function () {
+        //         $("#responseSubmit").fadeOut();
+        //     }, 4000);
+        //     $('#upload-certificates').val('');
+        //     return false;
         } else {
             $.ajax({
                 url: 'core/ajax_db/businessApplyJobs',
@@ -92,7 +92,7 @@ $(document).ready(function () {
                       $("#responseSubmit").fadeOut();
                     }, 2000);
                     setInterval(function () {
-                        location.reload();
+                        // location.reload();
                     }, 2400);
                 }, error: function (response) {
                      $("#responseSubmit").html(response).fadeIn();

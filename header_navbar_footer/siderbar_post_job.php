@@ -10,6 +10,19 @@
         <a class="list-group-item list-group-item-action hidden-xs" id="list-profile-list" data-toggle="tab" href="#list-profile" role="tab" aria-controls="list-profile">About SME</a>
         <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="tab" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
         <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="tab" href="#list-Logout" role="tab" aria-controls="list-settings">Logout</a>
+        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="tab" href="#list-job-subscription" role="tab" aria-controls="list-settings"> Job subscription <br><hr>
+        <?php 
+          if (!empty($subscription['job_subscription'])) {
+
+              $date = $subscription['job_date_pay'];
+              $month = $subscription['job_subscription'];
+              $dateFROM = date('M d',strtotime($date));
+              $dateTO = date('M d', strtotime($date.'+ 1'.$month));
+
+              echo 'From '.$dateFROM.' To '.$dateTO; 
+              
+          } ?>
+        </a>
       </div>
     </div>
 
@@ -65,6 +78,45 @@
 
         <div class="tab-pane fade" id="list-Logout" role="tabpanel" aria-labelledby="list-settings-list">
             <?php include "siderbar_jobs_post/logout.php"?>
+        </div> <!-- END-OF A LINK OF logout ID=#  -->
+        <div class="tab-pane fade" id="list-job-subscription" role="tabpanel" aria-labelledby="list-settings-list">
+            <!-- Content Wrapper. Contains page content -->
+
+            <div class="container mb-5 mt-3">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="row mb-2">
+                        <div class="col-3">
+                            <h5><i>Subscription</i></h5>
+                        </div>
+                        <div class="col-9">
+                            <ol class="breadcrumb float-right">
+                                <li class="breadcrumb-item"><a href="<?php echo HOME ;?>">Home</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="card">
+                  <div class="card-header text-center">
+                    job subscription
+                  </div>
+                  <div class="card-body text-center p-4">
+                      <?php 
+                        if (!empty($subscription['job_subscription'])) {
+
+                            $date = $subscription['job_date_pay'];
+                            $month = $subscription['job_subscription'];
+                            $dateFROM = date('M d',strtotime($date));
+                            $dateTO = date('M d', strtotime($date.'+ 1'.$month));
+
+                            echo 'From '.$dateFROM.' To '.$dateTO; 
+                            
+                        } ?>
+                  </div>
+                </div>
+            </div>
+
         </div> <!-- END-OF A LINK OF logout ID=#  -->
       </div>
       

@@ -1,6 +1,9 @@
 <?php 
+header('Access-Control-Allow-Origin: *');
 session_start();
+
 include 'Mobile_Detect.php';
+
 // https://www.developer.com/mobile/creating-a-mobile-friendly-website-in-php/
 $detect = new Mobile_Detect;
 $device_type = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');

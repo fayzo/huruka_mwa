@@ -63,12 +63,21 @@ text-align: center;
   margin-left: 230px;
   z-index: 820;
 }
+
+li.arab-size {
+  font-size: 38px;
+}
+
 @media (max-width: 767px) {
+  li.arab-size {
+    font-size: 12px;
+  }
   .content-wrapper,
   .main-footer {
     margin-left: 0;
   }
 }
+
 @media (min-width: 768px) {
   .sidebar-collapse .content-wrapper,
   .sidebar-collapse .main-footer {
