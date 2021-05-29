@@ -99,7 +99,7 @@
 
                 <div class="card">
                   <div class="card-header text-center">
-                    job subscription
+                    Your Job Subscription
                   </div>
                   <div class="card-body text-center p-4">
                       <?php 

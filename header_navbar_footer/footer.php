@@ -228,7 +228,7 @@
 
     $(function () {
       CKEDITOR.plugins.addExternal('wordcount', '/irangiro_social_site/assets/plugin/ckeditor/plugins/WordCount/', 'plugin.js');
-      // CKEDITOR.plugins.addExternal('wordcount', '/assets/plugin/ckeditor/plugins/WordCount/', 'plugin.js');
+    //   CKEDITOR.plugins.addExternal('wordcount', '/assets/plugin/ckeditor/plugins/WordCount/', 'plugin.js');
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     // CKEDITOR.replace('editor1')

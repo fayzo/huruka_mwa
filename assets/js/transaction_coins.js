@@ -457,7 +457,7 @@ function coins(amount,month,firstname,lastname,email,user_id,coins) {
                 }, 3500);
                 setTimeout(() => {
                     location.reload();
-                }, 10000);
+                }, 5000);
 
                 // console.log(response);
                 
@@ -588,6 +588,8 @@ function withdraw_money(amount,month,firstname,lastname,email,fund_id,user_id,co
                 // location.reload();
                 
                 if (coins == 'fundraising withdraw') {
+
+                    if (confirm('Are you sure you want withdrawal your money??')) {
                     
                     $.ajax({
                         url: 'core/ajax_db/fund_delete',
@@ -608,9 +610,11 @@ function withdraw_money(amount,month,firstname,lastname,email,fund_id,user_id,co
                         }
 
                     });
+                    }
                 }
 
                 if (coins == 'tweet withdraw') {
+                    if (confirm('Are you sure you want withdrawal your money??')) {
                     
                         $.ajax({
 
@@ -632,9 +636,11 @@ function withdraw_money(amount,month,firstname,lastname,email,fund_id,user_id,co
                         }
 
                     });
+                    }
                 }
 
                 if (coins == 'crowfund withdraw') {
+                    if (confirm('Are you sure you want withdrawal your money??')) {
                     
                     $.ajax({
                         url: 'core/ajax_db/crowfund_delete',
@@ -655,6 +661,7 @@ function withdraw_money(amount,month,firstname,lastname,email,fund_id,user_id,co
                         }
 
                     });
+                    }
                 }
                 
                 console.log(response);

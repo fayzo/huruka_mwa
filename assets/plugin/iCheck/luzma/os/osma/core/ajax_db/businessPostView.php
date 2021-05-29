@@ -78,7 +78,9 @@ if (isset($_POST['job_id']) && !empty($_POST['job_id'])) {
             
                                     ?>
                                 </div>
-                                <div>website: <a href="<?php echo $user['website'] ;?>" target="_blank"><?php echo $user['website'] ;?></a></div>
+                                <?php if (!empty($user['website'])) { ?>
+                                  <div>website: <a href="<?php echo $user['website'] ;?>" target="_blank"><?php echo $user['website'] ;?></a></div>
+                                <?php } ?>
                               </span>
                            </div>
                       </div>
@@ -96,11 +98,11 @@ if (isset($_POST['job_id']) && !empty($_POST['job_id'])) {
                            <div><?php echo date("M j, Y",strtotime($user['deadline'])) ;?></div>
                           <hr>
                           
-                          <?php if (!empty($user['website'])) { ?>
-                            <h4 class="card-title">Apply to website: <a href="<?php echo $user['website'] ;?>"><?php echo $user['website'] ;?></a></h4>
+                          <?php if (!empty($user['website_apply']) && $user['website_apply'] != 'apply_irangiro') { ?>
+                            <h4 class="card-title">Apply to website: <a href="<?php echo $user['website_apply'] ;?>"><?php echo $user['website_apply'] ;?></a></h4>
                           <hr>
                           <?php } ?>
-                          <?php if (empty($user['website'])) { ?>
+                          <?php if (!empty($user['website_apply']) && $user['website_apply'] == 'apply_irangiro') { ?>
                             <!-- # code... -->
                             <input type="button" value="Apply"  <?php  if(isset($_SESSION['key'])){ echo '  class="btn btn-success" id="Apply" data-applyjob="'.$job_id.'" data-business="'.$business_id.'"' ; }else{ echo 'class="btn btn-success" id="login-please"  data-login="1"'; } ?> >
                           <?php } ?>

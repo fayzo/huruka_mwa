@@ -53,6 +53,10 @@ class Crowfund extends Fundraising {
                                                 <li style="list-style-type: none; margin:0px;"> 
                                                   <label class="deleteCrowfund"  data-fund="<?php echo $row["fund_id"];?>"  data-user="<?php echo $row["user_id2"];?>">Delete </label>
                                                 </li>
+                                                <li style="list-style-type: none; margin:0px;"> 
+                                                    <?php $details= '\'day\',\''.$row['firstname'].'\',\''.$row['lastname'].'\',\''.$row['email'].'\','.$row['fund_id'].','.$row['user_id'].',\'fundraising withdraw\'' ;?>
+                                                    <label onclick="withdraw_money(<?php echo $row['money_raising'].','.$details ;?>)" >Withdrawal This Donation</label>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>

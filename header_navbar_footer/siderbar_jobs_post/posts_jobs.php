@@ -290,9 +290,14 @@
                                    <!-- <textarea class="form-control textarea deadline1" id="editor11" placeholder="Deadline to submit"  rows="4"></textarea> -->
                                </div>
                                <div class="form-group">
-                                   <label for="Pages Body">Apply to website or to this site</label>
-                                   <textarea name="website1" class="form-control website1" id="editor12" placeholder="website" ></textarea>
+                                   <label for="Pages Body">Apply to website</label>
+                                     <select class="form-control website0" id="website0" name="website0"  onChange="displayWebsite(this)">
+                                       <option value="">select</option>
+                                       <option value="apply_to_irangiro">Apply to irangiro website</option>
+                                       <option value="your_website" >Your link website</option>
+                                     </select>
                                </div>
+                               <div id="display_website0" class="my-2"></div>
                                <div class="form-check">
                                    <label class="form-check-label">
                                        <input type="checkbox" class="form-check-input"   value="checkedValue" checked>

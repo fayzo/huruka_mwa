@@ -90,10 +90,20 @@ $(document).ready(function () {
                     $("#responseSubmit").html(response).fadeIn();
                     setInterval(function () {
                       $("#responseSubmit").fadeOut();
-                    }, 2000);
-                    setInterval(function () {
-                        // location.reload();
-                    }, 2400);
+                    }, 1000);
+
+                    setTimeout(() => {
+                        $(".popupTweet").hide();
+                        $("#checkOUT").modal('show').css({"z-index":"20000"});;
+                        $("#checkOUT").delay(2000).fadeOut(450);
+                    }, 2500);
+                    setTimeout(() => {
+                        $("#checkOUT").modal('hide');
+                    }, 3500);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 4000);
+
                 }, error: function (response) {
                      $("#responseSubmit").html(response).fadeIn();
                     setInterval(function () {

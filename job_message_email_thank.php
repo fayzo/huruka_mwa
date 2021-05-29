@@ -33,10 +33,10 @@ $mail->isSMTP();        // Set mailer to use SMTP IF UR USING IN LOCOHOST TURN I
 // $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
 // $mail->Port = 465;    // TCP port to connect to 465 or 587
 
-$mail->setFrom($email, 'Irangiro');
-$mail->addAddress($emailcomposer);               // Name is optional
-// $mail->addAddress('irangiroltd@gmail.com');     // Add a recipient
-$mail->addReplyTo($email);  // TCP port to connect to
+// $mail->setFrom($email, 'Irangiro');
+// $mail->addAddress($emailcomposer);               // Name is optional
+// // $mail->addAddress('irangiroltd@gmail.com');     // Add a recipient
+// $mail->addReplyTo($email);  // TCP port to connect to
 
 // $mail->addCC('cc@example.com'); // may not be interested to show all address
 // $mail->addBCC('bcc@example.com'); // may not be interested to show all address

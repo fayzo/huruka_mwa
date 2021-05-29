@@ -132,6 +132,19 @@ $(document).ready(function () {
                     if (response != "success") {
                         // alert(response);
                         $("#responseBusinessJobs1").html(response);
+                    // }else{
+                        setTimeout(() => {
+                            $(".popupTweet").hide();
+                            $("#checkOUT").modal('show').css({"z-index":"20000"});;
+                            $("#checkOUT").delay(2000).fadeOut(450);
+                        }, 2500);
+                        setTimeout(() => {
+                            $("#checkOUT").modal('hide');
+                        }, 3500);
+                        setTimeout(() => {
+                            location.reload();
+                        }, 4000);
+    
                     }
                     // console.log(response);
                 }
@@ -230,7 +243,7 @@ function ajax_requestsPostsUnemploy(key) {
                 if (response != "success") {
                     // alert(response);
                     $("#responseBusinessJobs1").html(response);
-                }else{
+                // }else{
                      Career.val("");
                      years.val("");
                      field.val("");
@@ -239,6 +252,19 @@ function ajax_requestsPostsUnemploy(key) {
                      status.val("");
                      phone.val("");
                      course.val('');
+
+                     setTimeout(() => {
+                        $(".popupTweet").hide();
+                        $("#checkOUT").modal('show').css({"z-index":"20000"});;
+                        $("#checkOUT").delay(2000).fadeOut(450);
+                    }, 2500);
+                    setTimeout(() => {
+                        $("#checkOUT").modal('hide');
+                    }, 3500);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 4000);
+
                 }
             }
         });

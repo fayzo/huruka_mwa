@@ -78,7 +78,7 @@ class Job extends Follow {
     public function jobsfetch()
     {
         $mysqli= $this->database;
-        $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J.turn = 'on' and J. deadline > CURDATE() ORDER BY rand() LIMIT 6 ");
+        $query= $mysqli->query("SELECT * FROM  users U Left JOIN  jobs J ON J. business_id = U. user_id WHERE J.turn = 'on' and J. deadline > CURDATE() ORDER BY rand() LIMIT 4 ");
         if ($query->num_rows > 0) {
         ?>
         <div class="card card-primary mb-3 ">

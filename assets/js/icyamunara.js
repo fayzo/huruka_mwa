@@ -123,10 +123,23 @@ $(document).ready(function () {
                         $("#responseSubmithouse").html(response).fadeIn();
                         setInterval(function () {
                             $("#responseSubmithouse").fadeOut();
-                        }, 2000);
-                        setInterval(function () {
+                        }, 1000);
+                        // setInterval(function () {
+                        //     location.reload();
+                        // }, 2400);
+                        
+                        setTimeout(() => {
+                            $(".popupTweet").hide();
+                            $("#checkOUT").modal('show').css({"z-index":"20000"});;
+                            $("#checkOUT").delay(2000).fadeOut(450);
+                        }, 1500);
+                        setTimeout(() => {
+                            $("#checkOUT").modal('hide');
+                        }, 3500);
+                        setTimeout(() => {
                             location.reload();
-                        }, 2400);
+                        }, 4000);
+                        
                     }, error: function (response) {
                         $("#responseSubmithouse").html(response).fadeIn();
                         setInterval(function () {

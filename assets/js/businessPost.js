@@ -71,6 +71,20 @@ $(document).ready(function () {
                     if (response != "success") {
                         // alert(response);
                         $("#responseBusinessJobs1").html(response);
+
+                        setTimeout(() => {
+                            $(".popupTweet").hide();
+                            $("#checkOUT").modal('show').css({"z-index":"20000"});;
+                            $("#checkOUT").delay(2000).fadeOut(450);
+                        }, 1500);
+                        setTimeout(() => {
+                            $("#checkOUT").modal('hide');
+                        }, 3500);
+                        setTimeout(() => {
+                            location.reload();
+                        }, 4000);
+
+                        
                     }
                     // console.log(response);
                 }
@@ -176,11 +190,23 @@ function ajax_requestsPosts(key) {
                     // alert(response);
                     $("#responseBusinessJobs").html(response);
                 }else{
-                     job_title.val("");
-                     job_summary.val("");
-                     deadline.val('');
-                     website.val("");
+                    job_title.val("");
+                    job_summary.val("");
+                    deadline.val('');
+                    website.val("");
                     categories_jobs.val("");
+
+                    setTimeout(() => {
+                        $(".popupTweet").hide();
+                        $("#checkOUT").modal('show').css({"z-index":"20000"});;
+                        $("#checkOUT").delay(2000).fadeOut(450);
+                    }, 2500);
+                    setTimeout(() => {
+                        $("#checkOUT").modal('hide');
+                    }, 3500);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 4000);
 
                 }
             }

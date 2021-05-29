@@ -506,6 +506,61 @@
                         </div>
                         <?php } ?>
 
+
+                        <?php 
+
+                        $sql0= "SELECT * FROM crowfundraising WHERE user_id2 = $user_id ORDER BY created_on2 DESC ";
+                        $query= $db->query($sql0);
+                        if ($query->num_rows > 0) {  ?>
+    
+                        <div class="card mt-3">
+                            <div class="card-header py-0">
+                            <p class="bold">Your CrowFundraising Donation</p>
+                            </div>
+                            <div class="card-body">
+                                
+                               
+                            <?php   
+                            $i=1;
+                            while($tweet= $query->fetch_array()) { 
+                                        // var_dump($row); 
+                                    ?>
+
+                                <div class="col-12 mb-2 bg-light shadow-sm pb-3 ">
+                                     <p class="text-center"><?php echo '------------------------ ('.$i++.') --------------------------';?></p>
+                                    
+                                    <div class="text-muted mb-1">crowfundraising Donation
+                                        <span class="text-success px-1 float-right" style="border-radius:3px;font-size:11px;"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</span>
+                                    </div>
+                                    <div class="card-text">
+                                    <!-- 40,000 -->
+                                        <span class="font-weight-bold"><?php echo number_format($tweet['money_raising']); ?> Frw</span>
+                                        Raised by <?php echo $tweet['donate_counts']; ?> people in <?php echo $home->timeAgo($tweet['created_on2']);?> 
+                                        <span class="float-right"><?php echo $home->donationPercetangeMoneyRaimaing($tweet['money_raising'],$tweet['money_to_target']); ?> %</span>
+                                        <!-- 40 -->
+                                    </div>
+                                    <div class="progress clear-float " style="height: 10px;">
+                                        <?php echo $home->Users_donationMoneyRaising($tweet['money_raising'],$tweet['money_to_target']); ?>
+                                    </div>
+                                    
+                                    <div class="clear-float">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <span class="text-muted"><?php echo $home->timeAgo($tweet['created_on2']); ?></span>
+                                        <span class="text-muted float-right text-right">out of <?php echo number_format($tweet['money_to_target']).' Frw'; ?></span>
+                                        <!-- 13 days Left -->
+                                    </div>
+
+                                    <span class="response_coins"></span>
+                                    <?php $details= '\'day\',\''.$user['firstname'].'\',\''.$user['lastname'].'\',\''.$user['email'].'\','.$tweet['fund_id'].','.$user['user_id'].',\'crowfund withdraw\'' ;?>
+                                    <input type="button" onclick="withdraw_money(<?php echo $tweet['money_raising'].','.$details ;?>)" value="Request withdrawal This Donation"  class="btn btn-primary btn-md btn-block mt-2" >
+                                </div><!-- col -->
+                                <hr>
+
+                                    <?php } ?>
+                            </div>
+                        </div>
+                        <?php } ?>
+
                         <?php 
 
                         $sql0= "SELECT * FROM tweets WHERE tweetBy = $user_id and coins !='' and retweet_id = 0 OR 

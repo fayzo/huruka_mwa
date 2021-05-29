@@ -794,7 +794,7 @@ public function links(){ ?>
                 $fileTmpName = $file["tmp_name"];
                 $dz= $this->thumbnail($fileTmpName[$key],$targetDir,$targetDir, 480, 400 , $file['type'][$key]);
                 move_uploaded_file($fileTmpName[$key], $targetFilePath);
-                Var_dump($dz);
+                // Var_dump($dz);
             }
         }
         
@@ -837,7 +837,7 @@ public function links(){ ?>
                 
                 $dz= $this->thumbnail($fileTmpName[$key],$targetDir,$targetDir, 480, 400 , $file['type'][$key]);
                 move_uploaded_file($fileTmpName[$key], $targetFilePath);
-                Var_dump($dz);
+                // Var_dump($dz);
             }
         }
         
@@ -916,7 +916,7 @@ public function links(){ ?>
                   
                 $dz= $this->thumbnail($fileTmpName[$key],$targetDir,$targetDir, 480, 400 , $file['type'][$key]);
                 move_uploaded_file($fileTmpName[$key], $targetFilePath);
-                Var_dump($dz);
+                // Var_dump($dz);
             }
         }
         
@@ -959,7 +959,7 @@ public function links(){ ?>
                   
                 $dz= $this->thumbnail($fileTmpName[$key],$targetDir,$targetDir, 480, 400 , $file['type'][$key]);
                 move_uploaded_file($fileTmpName[$key], $targetFilePath);
-                Var_dump($dz);
+                // Var_dump($dz);
             }
         }
         
@@ -1002,7 +1002,7 @@ public function links(){ ?>
                 
                 $dz= $this->thumbnail($fileTmpName[$key],$targetDir,$targetDir, 480, 400 , $file['type'][$key]);
                 move_uploaded_file($fileTmpName[$key], $targetFilePath);
-                Var_dump($dz);
+                // Var_dump($dz);
             }
         }
         
@@ -1117,7 +1117,7 @@ public function links(){ ?>
                 
                 $dz= $this->thumbnail($fileTmpName[$key],$targetDir,$targetDir, 480, 400 , $file['type'][$key]);
                 move_uploaded_file($fileTmpName[$key], $targetFilePath);
-                Var_dump($dz);
+                // Var_dump($dz);
             }
         }
         

@@ -20,7 +20,6 @@ if (isset($_POST['fund_view']) && !empty($_POST['fund_view'])) {
                 <script src="<?php echo BASE_URL_LINK ;?>dist/js/country_login_ajax-db.js"></script>
 
             <div class="card">
-                <span id="responseSubmithelp"></span>
                 <div class="card-header">
                      <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button>
                     <h5 class="card-text">Fundraiser</h5>
@@ -201,6 +200,7 @@ if (isset($_POST['fund_view']) && !empty($_POST['fund_view'])) {
                  </div><!-- card-body end-->
                 <div class="card-footer text-center">
                     <button type="button" id="submit-help-fund" class="btn btn-primary btn-lg btn-block text-center">Submit</button>
+                    <span id="responseSubmithelp"></span>
                 </div><!-- card-footer -->
                </form>
             </div><!-- card end-->

@@ -16,7 +16,7 @@ if (isset($_POST['key'])) {
 				// 'qualifications_skills'=> 'qualifications_skills', 
 				// 'conditions'=> 'conditions', 
 				'deadline'=> 'deadline', 
-		  		'website'=> 'website', 
+		  		'website_apply' => 'website_apply', 
 		    	'categories_jobs' => 'categories_jobs',
 				'business_id'=> 'business_id', 
 				'created_on'=> 'created_on', 
@@ -33,7 +33,7 @@ if (isset($_POST['key'])) {
                 // 'qualifications_skills'=> $data['qualifications_skills'],
                 // 'conditions'=> $data['conditions'],
                 'deadline'=> $data['deadline'],
-                'website'=> $data['website'],
+                'website' => $data['website_apply'],
                 'categories_jobs'=> $data['categories_jobs'],
                 'created_on'=> $data['created_on'],
 			);
@@ -155,7 +155,7 @@ if (isset($_POST['key'])) {
 			// 'conditions'=> $conditions,
 			'deadline'=> $deadline, 
 			'categories_jobs' => $categories_jobs,
-            'website'=> $website,
+            'website_apply' => $website,
             'business_id'=> $businessID,
             'created_on'=> $datetime ),array('job_id' => $rowID));
 
@@ -174,7 +174,7 @@ if (isset($_POST['key'])) {
 			'location'=> 'RW',
 			'job_user_'=> $_SESSION['job_user'], 
 			'deadline'=> $deadline, 
-            'website'=> $website,
+            'website_apply' => $website,
 			'business_id'=> $businessID,
 			'categories_jobs' => $categories_jobs,
             'turn'=> 'on',

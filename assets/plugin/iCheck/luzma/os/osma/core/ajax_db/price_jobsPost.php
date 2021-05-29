@@ -109,7 +109,7 @@ if (isset($_POST['loginTerms']) && !empty($_POST['loginTerms'])) {
               <label for="inputPassword" class="sr-only">Password</label>
               <input type="text" id="inputPassword" class="form-control mb-3" placeholder="Password" >
 
-            <button class="btn btn-lg btn-primary btn-block mb-3" onclick="jobsLogin('SME');" type="button">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block mb-3" id="myBtn-sigin" onclick="jobsLogin('SME');" type="button">Sign in</button>
             <!-- or <button class="btn btn-lg btn-primary btn-sm mb-1" id="helper-family" type="button">Sign up</button>  -->
             <div class=" text-center h4" id='response'></div>
             <p class="mt-5 mb-3  text-center  text-muted"><?php echo $users->copyright(2018); ?></p>
@@ -123,7 +123,21 @@ if (isset($_POST['loginTerms']) && !empty($_POST['loginTerms'])) {
     </div> <!-- Wrp4 -->
 </div> <!-- apply-popup" -->
 
+<script>
+   // on send text field (textarea) keypress do this
+   $('#inputPassword').keypress(function (e) {
+        if (e.keyCode == 13) {
+            // on [shift + enter] pressed do this
+            if (e.shiftKey) {
+                return true;
+            }
+            // on enter button pressed do this
+            document.getElementById("myBtn-sigin").click();
+            return false;
+        }
+    });
 
+</script>
 <?php }
 
 if (isset($_POST['loginTerms0']) && !empty($_POST['loginTerms0'])) {
