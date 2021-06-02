@@ -10,7 +10,7 @@ class Posts_home extends Promote_home_post {
     {
         $mysqli= $this->database;
         
-        if($count_foreach == 4){ ?>
+        if($count_foreach == 4 && isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on' || $count_foreach == 4 && isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
 
             <div class="main-active dot-container h5">
                 <a href="<?php echo BASE_URL_PUBLIC."marketing_ads";?>">View more Promotion >>> </a> 
@@ -24,7 +24,7 @@ class Posts_home extends Promote_home_post {
 
         <?php } 
 
-        if($count_foreach == 6){ ?>
+        if($count_foreach == 6 && isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on' || $count_foreach == 6 && isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
 
             <div class="main-active dot-container h5">
                 <a href="<?php echo EVENTS;?>">View more Events >>> </a> 

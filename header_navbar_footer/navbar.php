@@ -342,6 +342,11 @@
                     <a href="javascript:void(0)" id="logout-please" class="btn btn-danger btn-sm ">Sign out</a>
                   </div>
                 </li>
+                <li class="user-footer main-active d-sm-block d-md-block">
+                  <div class="text-center">
+                    <a href="<?php echo BALANCE;?>" style="font-size:13px"><i class="fas fa-coins text-warning"></i>  <?php echo number_format($user['amount_coins'],2); ?> coins</a>
+                  </div>
+                </li>
               </ul>
             </li>
             <!-- Control Sidebar Toggle Button -->

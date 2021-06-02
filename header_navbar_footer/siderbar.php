@@ -88,6 +88,7 @@
               <li><a href="<?php echo BALANCE; ?>"><i class="fa fa-circle-o"></i>Check Your Balance</a></li>
             </ul>
           </li>
+        <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
 
           <li>
             <a href="<?php echo NEWSFEED; ?>">
@@ -112,6 +113,7 @@
             </a>
           </li>
 
+        
           <li>
             <a href="<?php echo EVENTS; ?>">
               <!-- <i class="fas fa-dollar-sign"></i><span class="more"> -->
@@ -125,8 +127,7 @@
             </a>
           </li>
 
-
-          <?php } ?>
+          <?php }  } ?>
 
           <li class="treeview">
             <a href="#">

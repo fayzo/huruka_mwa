@@ -25,16 +25,17 @@ $mail->isSMTP();        // Set mailer to use SMTP IF UR USING IN LOCOHOST TURN I
 //     'verify_peer_name' => false,
 //     'allow_self_signed' => true
 //     ));
-// $mail->Host = 'iragiro.com';  // Specify main and backup SMTP servers
+// $mail->Host = 'irangiro.com';  // Specify main and backup SMTP servers
 // $mail->SMTPAuth = true;                               // Enable SMTP authentication
-// $mail->Username = 'admin@iragiro.com';                 // SMTP username
-// $mail->Password = '';                         // SMTP passwordrwanda1234@z
+// $mail->Username = 'irangiro@irangiro.com';                 // SMTP username
+// $mail->Password = 'rwanda1234@';                         // SMTP passwordrwanda1234@z
 // $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
 // $mail->Port = 465;    // TCP port to connect to 465 or 587
 
-// $mail->setFrom('admin@iragiro.com', 'Irangiro');
+// $mail->setFrom('irangiro@irangiro.com', 'Irangiro');
 // $mail->addAddress($email);               // Name is optional
 // $mail->addAddress('irangiroltd@gmail.com');     // Add a recipient
+// $mail->addAddress('irangiro@irangiro.com');     // Add a recipient
 // $mail->addReplyTo('irangiroltd@gmail.com');  // TCP port to connect to
 
 // $mail->addCC('cc@example.com');
