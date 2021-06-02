@@ -81,6 +81,8 @@ include('../core/init.php');
               curl_close($curl);
               
               $res = json_decode($response);
+            //   var_dump($res);
+
               if($res->status == 'success')
               {
                 $amountPaid = $res->data->charged_amount;
@@ -94,32 +96,32 @@ include('../core/init.php');
                                 </div>
                                 <div class="col-md-6 ">
                                 
-                                    <div class="card">
+                                    <div class="card mb-3">
                                         <div class="card-body text-center">
                                             <i id="change-check" class="fa fa-check-circle-o" style="font-size:200px;color: green;" aria-hidden="true"></i>
                                             <p id="html-check">SUCCESS Payment </p>
                                         </div>
                                     </div>
-                        
-                                </div>
-                                <div class="col-md-3 d-none d-md-block">
-                                    
-                                </div>
-                                
-                            </div>
-                        </div>';
+                               ';
 
                         //  var_dump($res);
 
                         $name= $res->data->customer->name;
                         $email= $res->data->customer->email;
-                        $subscription = $res->data->customizations->description;
-                        $title = $res->data->customizations->title;
+                        $subscription = $_SESSION['description'];
+                        // $subscription = $res->data->customizations->description;
+                        // $title = $res->data->customizations->title;
                         $price = $res->data->meta->price;
                         $amount_coins = $price/100;
                         
                         // $subscription = 'buy_coins';
-                        $user_id= $_SESSION['key'];
+                        if (isset($_SESSION['key'])) {
+                            # code...
+                            $user_id= $_SESSION['key'];
+                        }else{
+                            $user_id = 1;
+                        }
+                        
                         $datetime= date('Y-m-d H-i-s');
                         $month= 'day';
 
@@ -131,6 +133,10 @@ include('../core/init.php');
                         if ($subscription == 'buy_coins') {
                           
                             # code...
+                            $query = "INSERT INTO subscription_statement (`subscription`,`user_id_subscription`, `name_subscription_`, `email_subscription_`, `month_subscription_`, `price_subscription_`, `date_subscription_`) 
+                            VALUES ('{$subscription}','{$user_id}','{$name}','{$email}','day','{$price}','{$datetime}')";
+                            $result = $db->query($query);
+
                             $users->updateQuery_money('users',array( 
                             'amount_coins'=> 'amount_coins + '.$amount_coins,
                             'amount_francs'=> 'amount_francs + '.$price ),
@@ -150,6 +156,8 @@ include('../core/init.php');
                             array(
                                 'user_id_subscription'=> $user_id,
                             ));
+
+                            session_unset($subscription);
 
                         }
 
@@ -171,7 +179,7 @@ include('../core/init.php');
                             $result= $users->updateQuery_money('users',array( 
                                 'amount_coins'=> 'amount_coins - '.$amount_coins,
                                 'amount_francs'=> 'amount_francs - '.$donate)
-                                ,array('user_id'=> $_SESSION['key']));
+                                ,array('user_id'=> $user_id));
             
             
                             //  $fundraising->fundraising_donateUpdate($donate,$fund_id);
@@ -211,7 +219,7 @@ include('../core/init.php');
                 
                         }
 
-                        if ($subscription == 'crowfund_donation') {
+                        if ($subscription == 'fund_donation') {
 
                             $query = "INSERT INTO subscription_statement (`subscription`,`user_id_subscription`, `name_subscription_`, `email_subscription_`, `month_subscription_`, `price_subscription_`, `date_subscription_`) 
                             VALUES ('{$subscription}','{$user_id}','{$name}','{$email}','month','{$donate}','{$datetime}')";
@@ -227,7 +235,7 @@ include('../core/init.php');
                             $result= $users->updateQuery_money('users',array( 
                                 'amount_coins'=> 'amount_coins - '.$amount_coins,
                                 'amount_francs'=> 'amount_francs - '.$donate)
-                                ,array('user_id'=> $_SESSION['key']));
+                                ,array('user_id'=> $user_id));
                 
                             # code...
                             $users->updateQuery_money('fundraising',array( 
@@ -263,13 +271,21 @@ include('../core/init.php');
                             session_unset($sent_to_user_id);
                             session_unset($fund_id);
                             session_unset($comment);
+                            session_unset($subscription);
                         }
                           
+                echo ' </div>
+                        <div class="col-md-3 d-none d-md-block">
+                            
+                        </div>
+                    </div>
+                </div>';
+
                     //* Continue to give item to the user
 
-                    echo "<script> setTimeout(() => {
-                        window.close();
-                    }, 5000);</script>";
+                    // echo "<script> setTimeout(() => {
+                    //     window.close();
+                    // }, 5000);</script>";
                 }
                 else
                 {
@@ -294,6 +310,11 @@ include('../core/init.php');
                                     
                                 </div>
                             </div>';
+
+                            session_unset($sent_to_user_id);
+                            session_unset($fund_id);
+                            session_unset($comment);
+                            session_unset($subscription);
                 }
               }
               
@@ -321,6 +342,11 @@ include('../core/init.php');
                               
                           </div>
                       </div>';
+
+                      session_unset($sent_to_user_id);
+                      session_unset($fund_id);
+                      session_unset($comment);
+                      session_unset($subscription);
             }
     }
 ?>

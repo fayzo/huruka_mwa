@@ -91,7 +91,7 @@ class Newsfeeds extends Crowfund {
                                     // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                 $tweettext = substr($tweet['status'], 0, 200);
                                 $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                 echo $this->getTweetLink($tweetstatus);
                                 }else{
                                 echo $this->getTweetLink($tweet['status']);
@@ -1203,7 +1203,7 @@ class Newsfeeds extends Crowfund {
         $sql="SELECT * FROM tweets T LEFT JOIN users U ON T. tweetBy= U. user_id 
         WHERE T. tweetBy = U. user_id AND T. retweet_id='0' AND T. newsfeeds != ''
         OR  T. retweet_by = U. user_id AND T. retweet_id !='0' AND T. newsfeeds != ''
-        ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , T. tweet_id DESC  LIMIT 5";
+        ORDER BY CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC , T. tweet_id DESC  LIMIT 4";
 
         $query= $mysqli->query($sql);
         $tweets=array();
@@ -1358,7 +1358,9 @@ class Newsfeeds extends Crowfund {
           </div>
         </div>
 
-    <?php }
+    <?php 
+           echo $this->options_short();
+        }
      }
     
 }

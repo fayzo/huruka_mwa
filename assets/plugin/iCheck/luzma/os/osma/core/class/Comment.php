@@ -69,6 +69,28 @@ class Comment extends Post_like
       return $total_Comment;
     }
 
+    public function delete_all($table)
+    {
+        $mysqli= $this->database;
+        $query= "DELETE FROM $table";
+        $result= $mysqli->query($query);
+
+        if($result){
+                exit('<div class="alert alert-success alert-dismissible fade show text-center">
+                    <button class="close" data-dismiss="alert" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <strong>SUCCESS DELETE</strong> </div>');
+        }else{
+                exit('<div class="alert alert-danger alert-dismissible fade show text-center">
+                    <button class="close" data-dismiss="alert" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <strong>Fail to delete !!!</strong>
+                </div>');
+        }
+    }
+
     public function delete($table,$array)
     {
         $mysqli= $this->database;

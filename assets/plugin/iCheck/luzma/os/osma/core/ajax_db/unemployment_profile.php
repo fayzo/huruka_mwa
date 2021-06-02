@@ -8,6 +8,7 @@ if (isset($_POST['key']) && $_POST['key'] == 'Unemployment') {
     $user_id = $users->test_input($_POST['user_id1']);
     $Career = $users->test_input($_POST['Career']);
     $years = $users->test_input($_POST['years']);
+    $education = $users->test_input($_POST['education']);
     $field = $users->test_input($_POST['field']);
     $diploma = $users->test_input($_POST['diploma']);
     $age = $users->test_input($_POST['age']);
@@ -20,6 +21,7 @@ if (isset($_POST['key']) && $_POST['key'] == 'Unemployment') {
     $users->update('users',array( 
     'career'=> $Career, 
     'years' => $years,
+    'education' => $education, 
     'field' => $field, 
     'categories_fields' => $field, 
     'diploma' => $diploma,
@@ -68,7 +70,13 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
                         <?php  } ?>
                                 <!-- <h3 class="widget-user-username">Elizabeth Pierce</h3>  -->
                                 <h3 class="widget-user-username"><?php echo $user['username']; ?></h3> 
-                                <h5 class="widget-user-desc"><?php echo $user['categories_fields']; ?></h5>
+                                <?php 
+                                        $subect = $user['categories_fields'];
+                                        $replace = " ";
+                                        $searching = "_";
+                                        $categories= str_replace($searching,$replace, $subect);
+                                        ?>
+                                <h5 class="widget-user-desc"><?php echo $categories; ?></h5>
                                 <!-- web developers -->
                             </div>
 
@@ -220,6 +228,7 @@ if (isset($_POST['key']) && $_POST['key'] == 'edit') {
     array(
         'career'=> 'career', 
         'years'=> 'years', 
+        'education'=> 'education', 
         'field'=> 'field', 
         'categories_fields'=> 'categories_fields', 
         'diploma'=> 'diploma', 
@@ -237,6 +246,7 @@ if (isset($_POST['key']) && $_POST['key'] == 'edit') {
     $jsonArrays = array(
         'career' => $data['career'],
         'years' => $data['years'],
+        'education' => $data['education'],
         'field' => $data['field'],
         'categories_fields' => $data['categories_fields'],
         'diploma' => $data['diploma'],

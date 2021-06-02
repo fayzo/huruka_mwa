@@ -28,6 +28,10 @@ $(document).ready(function() {
     //   "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]]
     // });
   
+    $(".content-wrapper").on('click', function () {
+       $('.control-sidebar').removeClass('control-sidebar-open')
+    });
+
     $(".table_admin").DataTable({
       "lengthChange": true,
       "pageLength":10,

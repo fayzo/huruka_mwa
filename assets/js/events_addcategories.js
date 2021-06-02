@@ -114,9 +114,9 @@ $(document).ready(function () {
                         setInterval(function () {
                             $("#responseSubmitevents").fadeOut();
                         }, 1000);
-                        // setInterval(function () {
-                        //     location.reload();
-                        // }, 2400);
+                        setInterval(function () {
+                            location.reload();
+                        }, 2400);
                         
                         setTimeout(() => {
                             $(".popupTweet").hide();

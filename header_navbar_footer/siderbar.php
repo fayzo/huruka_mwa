@@ -68,6 +68,7 @@
               <li><a href="dashboard.php"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
               <li><a href="dashboard_monetize.php"><i class="fa fa-circle-o"></i> Monetize v2</a></li>
               <li><a href="dashboard_withdraw.php"><i class="fa fa-circle-o"></i> Transfer v2</a></li>
+              <li><a href="dashboard_delete.php"><i class="fa fa-circle-o"></i> Delete Transaction v2</a></li>
             </ul>
           </li>
 
@@ -207,6 +208,20 @@
               </span>
             </a>
           </li>
+
+          <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
+          
+          <li>
+            <a href="javascript:void(0)" data-toggle="control-sidebar">
+            <i class="fa fa-gears"></i><span class="more">Skin Theme</span> 
+              <span class="pull-right-container" style="margin-right: 10px;">
+                <small class="label pull-right"> <i class="fa fa-level-up"></i></small>
+              </span>
+            </a>
+          </li>
+          
+          <?php } ?>
+
           <li>
             <a href="javascript:void()">
               <i class="fab fa-facebook-messenger mr-1"></i><span class="people-message more" data-user="1">

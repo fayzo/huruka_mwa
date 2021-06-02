@@ -16,7 +16,14 @@ class Events extends Follow{
             $showpages = ($pages*8)-8;
         }
         $mysqli= $this->database;
-         $query= $mysqli->query("SELECT * FROM events LEFT JOIN users ON user_id= user_id3 WHERE categories_events ='$categories' AND events_post != 'posted' ORDER BY created_on3 Desc Limit $showpages,8");
+
+        if ($categories == 'Feature') {
+            # code...
+            $query= $mysqli->query("SELECT * FROM events LEFT JOIN users ON user_id= user_id3 WHERE events_post != 'posted' ORDER BY created_on3 Desc Limit $showpages,8");
+        }else {
+            $query= $mysqli->query("SELECT * FROM events LEFT JOIN users ON user_id= user_id3 WHERE categories_events ='$categories' AND events_post != 'posted' ORDER BY created_on3 Desc Limit $showpages,8");
+            # code...
+        }
         ?>
           <div class="row">
 
@@ -124,7 +131,13 @@ class Events extends Follow{
                 </div></div>'; 
         } 
 
-        $query1= $mysqli->query("SELECT COUNT(*) FROM events WHERE categories_events ='$categories' ORDER BY created_on3 Desc ");
+        if ($categories == 'Feature') {
+            $query1= $mysqli->query("SELECT COUNT(*) FROM events ORDER BY created_on3 Desc ");
+        }else {
+            # code...
+            $query1= $mysqli->query("SELECT COUNT(*) FROM events WHERE categories_events ='$categories' ORDER BY created_on3 Desc ");
+        }
+
         $row_Paginaion = $query1->fetch_array();
         $total_Paginaion = array_shift($row_Paginaion);
         $post_Perpages = $total_Paginaion/8;
@@ -460,25 +473,11 @@ class Events extends Follow{
         $rows= $result->fetch_assoc();
 
         if(!empty($rows['photo'])){
-            $photo=$rows['photo'];
-            $expodefile = explode("=",$photo);
-            $fileActualExt= array();
-            for ($i=0; $i < count($expodefile); ++$i) { 
-                $fileActualExt[]= strtolower(substr($expodefile[$i],-3));
-            }
-            $allower_ext = array('jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf' , 'doc' , 'ppt'); // valid extensions
-            if (array_diff($fileActualExt,$allower_ext) == false) {
-                $expode = explode("=",$photo);
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'].'/Blog_nyarwanda_CMS/uploads/events/';
-                for ($i=0; $i < count($expode); ++$i) { 
-                      unlink($uploadDir.$expode[$i]);
-                }
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp4') {
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'].'/Blog_nyarwanda_CMS/uploads/events/';
-                      unlink($uploadDir.$photo);
-            }else if (array_diff($fileActualExt,$allower_ext)[0] == 'mp3') {
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'].'/Blog_nyarwanda_CMS/uploads/events/';
-                      unlink($uploadDir.$photo);
+            $photo=$rows['photo'].'='.$rows['other_photo'];
+            $expode = explode("=",$photo);
+            $uploadDir = DOCUMENT_ROOT.'/uploads/events/';
+            for ($i=0; $i < count($expode); ++$i) { 
+                    unlink($uploadDir.$expode[$i]);
             }
         }
 

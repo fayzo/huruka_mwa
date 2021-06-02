@@ -3,12 +3,20 @@
       <!-- Create the tabs -->
       <!-- <ul class="nav nav-tabs nav-justified control-sidebar-tabs"> -->
       <ul class="nav nav-tabs nav-justified ">
+
+        <li style="width:0;"><a href="#control-sidebar-home-tab-click" data-toggle="tab"></a></li>
+        <?php if(isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
         <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
         <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        <?php } ?>
+      
       </ul>
       <!-- Tab panes -->
       <div class="tab-content control-sidebar-home">
         <!-- Home tab content -->
+
+        <div class="tab-pane" id="control-sidebar-home-tab-click"></div>
+        <?php if(isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
         <div class="tab-pane" id="control-sidebar-home-tab">
           <h3 class="control-sidebar-heading">Recent Activity</h3>
                 <div class="dropdown">
@@ -210,6 +218,9 @@
             </div>
             <!-- /.form-group -->
           </form>
+
+        <?php } ?>
+
         </div>
         <!-- /.tab-pane -->
       </div>

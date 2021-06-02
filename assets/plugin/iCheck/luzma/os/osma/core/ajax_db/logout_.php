@@ -13,6 +13,7 @@ session_unset($_SESSION['approval']);
 session_unset($_SESSION['chat']);
 session_unset($_SESSION['username']);
 session_unset($_SESSION['job_user']);
+session_unset($_SESSION['approval_user_ui']);
 
 
 session_unset($sent_to_user_id);

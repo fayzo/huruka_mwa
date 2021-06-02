@@ -436,7 +436,13 @@ function coins(amount,month,firstname,lastname,email,user_id,coins) {
                 // window.location.href = objJSON.data.link;
                 // window.location = objJSON.data.link;
                 
-                $('#recharge-coins').html(objJSON.status);
+                // $('#recharge-coins').html(objJSON.status);
+                $('#recharge-coins').html('<div class="alert alert-success alert-dismissible fade show text-center">'+
+                '<button class="close" data-dismiss="alert" type="button">'+
+                '<span>&times;</span>'+
+                '</button>'+
+                '<strong>SUCCESS</strong> </div>');
+
                 $(".response_coins").html(objJSON.status).css({"color":"red"});
                 
                 // $('#recharge-coins').html(response);
@@ -451,13 +457,13 @@ function coins(amount,month,firstname,lastname,email,user_id,coins) {
 
                     window.open(objJSON.data.link, '_blank');
                     // window.location = objJSON.data.link;
-                }, 2000);
+                }, 1000);
                 setTimeout(() => {
                     $("#checkOUT").modal('hide');
                 }, 3500);
                 setTimeout(() => {
                     location.reload();
-                }, 5000);
+                }, 8000);
 
                 // console.log(response);
                 

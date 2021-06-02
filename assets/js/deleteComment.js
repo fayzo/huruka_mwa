@@ -327,3 +327,43 @@ $(document).ready(function (e) {
    
         });
 });
+
+function delete_all(delete_all,number){
+
+    if (confirm('Are you sure you want to delete??')) {
+
+        $.ajax({
+            url: 'core/ajax_db/dashboard_delete_all',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                delete_all: delete_all,
+            }, success: function (response) {
+                $("#responseDelete"+number).html(response);
+                setInterval(function() {
+                    location.reload();
+                }, 1100);
+                console.log(response);
+            }
+
+        });
+    }
+}
+
+function approval_user_ui(rowID,approval,number) {
+    if (confirm('Are you sure??')) {
+        $.ajax({
+            url: 'core/ajax_db/dashboard_delete_all',
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                key: approval,
+                rowID: rowID
+            }, success: function (response) {
+                $("#responseDelete"+number).html(response);
+                $("#title"+number).html(approval);
+                alert(response);
+            }
+        });
+    }
+}

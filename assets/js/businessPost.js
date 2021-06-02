@@ -128,6 +128,7 @@ function PostsEdits(rowID, businessID, type) {
                 $(".view-body").fadeOut();
                 $("#id_posts").val(rowID);
                 $("#businessID_posts").val(businessID);
+                $(".categories_jobsx").val(response.categories_jobs);
                 $(".job-title").val(response.job_title);
                 // $(".job-summary").val(response.job_summary);
                 CKEDITOR.instances.editor4.setData(response.job_summary,function(){
@@ -153,17 +154,15 @@ function ajax_requestsPosts(key) {
     }
     var id = $("#id_posts");
     var job_title= $(".job-title");
-    var job_summary= $(".job-summary");
     var businessID = $("#businessID_posts");
     var job_title=  $(".job-title");
-    var job_summary=  $(".job-summary");
+    // var job_summary=  $(".job-summary");
     var deadline= $(".deadline");
     var website = $(".website");
     var categories_jobs = $("#categories_jobs");
     var editor4 = CKEDITOR.instances.editor4.getData();
 
-    if (isEmpty(categories_jobs) && isEmpty(job_title) && isEmpty(job_summary) &&
-        isEmpty(conditions) && isEmpty(deadline)) {
+    if (isEmpty(categories_jobs) && isEmpty(job_title) && isEmpty(deadline)) {
 
         $.ajax({
             url: 'core/ajax_db/businessPosts_db',
@@ -177,7 +176,7 @@ function ajax_requestsPosts(key) {
                 rowID: id.val(),
                 categories_jobs: categories_jobs.val(),
                 businessID: businessID.val(),
-                editor2: editor4,
+                job_summary: editor4,
 
             }, 
             beforeSubmit: function(){
@@ -189,13 +188,6 @@ function ajax_requestsPosts(key) {
                 if (response != "success") {
                     // alert(response);
                     $("#responseBusinessJobs").html(response);
-                }else{
-                    job_title.val("");
-                    job_summary.val("");
-                    deadline.val('');
-                    website.val("");
-                    categories_jobs.val("");
-
                     setTimeout(() => {
                         $(".popupTweet").hide();
                         $("#checkOUT").modal('show').css({"z-index":"20000"});;
@@ -207,6 +199,13 @@ function ajax_requestsPosts(key) {
                     setTimeout(() => {
                         location.reload();
                     }, 4000);
+
+                }else{
+                    job_title.val("");
+                    job_summary.val("");
+                    deadline.val('');
+                    website.val("");
+                    categories_jobs.val("");
 
                 }
             }

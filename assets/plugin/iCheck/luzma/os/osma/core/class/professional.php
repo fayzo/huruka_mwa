@@ -131,7 +131,13 @@ class Employment extends Home {
                             <span> <?php echo $row['username']; ?> </span><br> <!-- Names: -->
                             <span><?php echo $row['education']; ?> </span><br><!-- education:  -->
                             <span><?php echo $row['diploma']; ?> </span><br><!-- diploma:  -->
-                            <span ><?php echo $row['categories_fields']; ?> </span><!-- study:  -->
+                            <?php 
+                                        $subect = $row['categories_fields'];
+                                        $replace = " ";
+                                        $searching = "_";
+                                        $categories = str_replace($searching,$replace, $subect);
+                                        ?>
+                            <span ><?php echo $categories; ?> </span><!-- study:  -->
                         </div>
                         <!-- hidden-xs -->
                         <div class="float-right text-right ">

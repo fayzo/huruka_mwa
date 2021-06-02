@@ -69,7 +69,7 @@ $user = $home->userData($_SESSION['key']);
                             </div>
                             <div class="t-fo-right">
                                 <span class="counts-ckeditor" id="count">1000</span>
-                                <input type="submit" class="btn main-active"  id="addpost" name="addpost" value="Post">
+                                <input type="button" class="btn main-active"  id="submit-popupForm" name="addpost" value="Post">
                             </div>
                             <div id="add-photo0" class="row">
                             </div>

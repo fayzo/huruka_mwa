@@ -300,15 +300,16 @@
                                     <div class="user-block mt-3">
                                     <div class="user-blockImgBorder">
                                         <div class="user-blockImg">
-                                            <?php if (!empty($donate['profile_img'])) {?>
-                                            <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $donate['profile_img'] ;?>" alt="User Image">
+                                            <?php if (!empty($donate['profile_img']) && $donate['username'] != 'irangiro') {?>
+                                            <!-- <img src="< ?php echo BASE_URL_LINK ;?>image/users_profile_cover/< ?php echo $donate['profile_img'] ;?>" alt="User Image"> -->
+                                                <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                             <?php  }else{ ?>
                                                 <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                             <?php } ?>
                                         </div>
                                         </div>
                                         <span class="username">
-                                            <a href="<?php echo (isset($_SESSION['approval']))? BASE_URL_PUBLIC.$donate['username']:"javascript:void(0)" ;?>"><?php echo number_format($donate['price_donate']); ?> Frw </a> <span class="float-right mr-2"><i class="fa fa-heart" ></i></span>
+                                            <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$donate['username'] :'javascript:void(0)';?>"> <?php echo number_format($donate['price_donate']); ?> Frw </a> <span class="float-right mr-2"><i class="fa fa-heart" ></i></span>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"><?php echo $donate['comment']; ?> </span>
@@ -318,7 +319,6 @@
                                     <?php } ?>
                                   </div><!-- /.col --> 
                                 </div><!-- /.col --> 
-
                             <?php  }else{ ?>
 
                              <div class="col-md-12">
@@ -327,15 +327,16 @@
                                 <div class="user-block mt-3">
                                     <div class="user-blockImgBorder">
                                         <div class="user-blockImg">
-                                            <?php if (!empty($donate['profile_img'])) {?>
-                                            <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $donate['profile_img'] ;?>" alt="User Image">
+                                            <?php if (!empty($donate['profile_img']) && $donate['username'] != 'irangiro') {?>
+                                            <!-- <img src="< ?php echo BASE_URL_LINK ;?>image/users_profile_cover/< ?php echo $donate['profile_img'] ;?>" alt="User Image"> -->
+                                                <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                             <?php  }else{ ?>
                                                 <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                             <?php } ?>
                                         </div>
                                         </div>
                                         <span class="username">
-                                            <a href="<?php echo BASE_URL_PUBLIC.$donate['username'] ;?>"><?php echo number_format($donate['price_donate'],2); ?> Frw <span class="float-right mr-2"><i class="fa fa-heart" ></i></span></a>
+                                            <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$donate['username'] :'javascript:void(0)';?>"> <?php echo number_format($donate['price_donate'],2); ?> Frw <span class="float-right mr-2"><i class="fa fa-heart" ></i></span></a>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"><?php echo $donate['comment']; ?> </span>
@@ -361,7 +362,7 @@
                                     </div>
                                     </div>
                                     <span class="username">
-                                        <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"> <?php echo $user['username']; ?> comment on - <?php echo $users->timeAgo($user['created_on2']) ;?></a>
+                                        <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$user['username'] :'javascript:void(0)';?>"> <?php echo $user['username']; ?> comment on - <?php echo $users->timeAgo($user['created_on2']) ;?></a>
                                         <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                         <?php if($likes['like_on'] == $user['fund_id']){ ?>
                                             <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-crowfundraising-btn more float-right text-sm  mr-1"'; }else{ echo 'id="login-please" class="more float-right" data-login="1"'; } ?> data-fund="<?php echo $user['fund_id']; ?>"  data-user="<?php echo $user['user_id']; ?>"><span class="likescounter "><?php echo $user['likes_counts'] ;?></span> <i class="fa fa-heart"  ></i></span>
@@ -397,15 +398,16 @@
                                             <div class="user-block mt-3" id="userComment<?php echo $user['comment_id']; ?>">
                                                 <div class="user-blockImgBorder">
                                                 <div class="user-blockImg">
-                                                        <?php if (!empty($user['profile_img'])) {?>
-                                                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $user['profile_img'] ;?>" alt="User Image">
+                                                        <?php if (!empty($user['profile_img']) && $user['username'] != 'irangiro') {?>
+                                                        <!-- <img src="< ?php echo BASE_URL_LINK ;?>image/users_profile_cover/< ?php echo $user['profile_img'] ;?>" alt="User Image"> -->
+                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                                         <?php  }else{ ?>
                                                         <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                                         <?php } ?>
                                                 </div>
                                                 </div>
                                                 <span class="username">
-                                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"> <?php echo $user['username']; ?> comment on - <?php echo $users->timeAgo($user['comment_at']) ;?></a>
+                                                    <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$user['username'] :'javascript:void(0)';?>"> motivater comment on - <?php echo $users->timeAgo($user['comment_at']) ;?></a>
                                                     <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                                      <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                                     <?php if($likes['like_on_'] == $user['comment_id']){ ?>
@@ -414,7 +416,7 @@
                                                         <span <?php if(isset($_SESSION['key'])){ echo 'class="like-crowfundraisingUser-btn more float-right text-sm mr-1"'; }else{ echo 'id="login-please" class="more float-right"  data-login="1"'; } ?> data-comment="<?php echo $user['comment_id']; ?>"  data-user="<?php echo $user['user_id']; ?>" ><span class="likescounter"> <?php if ($user['likes_counts_'] > 0){ echo $user['likes_counts_'];}else{ echo '';} ?></span> <i class="fa fa-heart-o" ></i> </span>
                                                     <?php } ?>
 
-                                                    <?php if($user["comment_by"] === $user_id){ ?>
+                                                    <?php if(isset($_SESSION['key']) && $user["comment_by"] === $user_id){ ?>
                                                         <span class="deleteCrowFundraisingComment more" data-fund="<?php echo $user["fund_id"]; ?>" data-comment="<?php echo $user["comment_id"]; ?>" ><i class="fa fa-trash" aria-hidden="true"></i></span>
                                                     <?php }else { echo ''; } ?>
                                                     <!-- //Jonathan Burke Jr. -->
@@ -435,15 +437,16 @@
                                             <div class="user-block mt-3" id="userComment<?php echo $user['comment_id']; ?>">
                                                 <div class="user-blockImgBorder">
                                                 <div class="user-blockImg">
-                                                        <?php if (!empty($user['profile_img'])) {?>
-                                                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $user['profile_img'] ;?>" alt="User Image">
+                                                        <?php if (!empty($user['profile_img']) && $user['username'] != 'irangiro') {?>
+                                                        <!-- <img src="< ?php echo BASE_URL_LINK ;?>image/users_profile_cover/< ?php echo $user['profile_img'] ;?>" alt="User Image"> -->
+                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                                         <?php  }else{ ?>
                                                         <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                                         <?php } ?>
                                                 </div>
                                                 </div>
                                                 <span class="username">
-                                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"> <?php echo $user['username']; ?> comment on - <?php echo $users->timeAgo($user['comment_at']) ;?></a>
+                                                    <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$user['username'] :'javascript:void(0)';?>"> motivater comment on - <?php echo $users->timeAgo($user['comment_at']) ;?></a>
                                                     <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                                      <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                                     <?php if($likes['like_on_'] == $user['comment_id']){ ?>
@@ -452,7 +455,7 @@
                                                         <span <?php if(isset($_SESSION['key'])){ echo 'class="like-crowfundraisingUser-btn more float-right text-sm mr-1"'; }else{ echo 'id="login-please" class="more float-right"  data-login="1"'; } ?> data-comment="<?php echo $user['comment_id']; ?>"  data-user="<?php echo $user['user_id']; ?>" ><span class="likescounter"> <?php if ($user['likes_counts_'] > 0){ echo $user['likes_counts_'];}else{ echo '';} ?></span> <i class="fa fa-heart-o" ></i> </span>
                                                     <?php } ?>
 
-                                                    <?php if($user["comment_by"] === $user_id){ ?>
+                                                    <?php if(isset($_SESSION['key']) && $user["comment_by"] === $user_id){ ?>
                                                         <span class="deleteCrowFundraisingComment more" data-fund="<?php echo $user["fund_id"]; ?>" data-comment="<?php echo $user["comment_id"]; ?>" ><i class="fa fa-trash" aria-hidden="true"></i></span>
                                                     <?php }else { echo ''; } ?>
                                                     <!-- //Jonathan Burke Jr. -->

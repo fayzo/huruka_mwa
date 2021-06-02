@@ -117,6 +117,7 @@ if (isset($_POST['events_view']) && !empty($_POST['events_view'])) {
                                     <option value="Networking">Networking </option>
                                     <option value="Trade_Shows">Trade Shows</option>
                                     <option value="Conferences">Conferences</option>
+                                    <option value="Sports">Sports</option>
                                     <option value="Party">Party</option>
                                     <option value="Training">Training</option>
                                     <option value="Anime-Series">Education</option>

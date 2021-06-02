@@ -272,7 +272,7 @@ if (isset($_POST['user_id']) && !empty($_POST['user_id'])) {
       $other_photo_ = $home->uploadcarFile($other_photo);
 		}
 
-		if (strlen($additioninformation ) > 800) {
+		if (strlen($additioninformation ) > 10000) {
 			exit('<div class="alert alert-danger alert-dismissible fade show text-center">
                     <button class="close" data-dismiss="alert" type="button">
                         <span>&times;</span>

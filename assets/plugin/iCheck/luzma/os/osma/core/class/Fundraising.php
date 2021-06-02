@@ -305,10 +305,11 @@ class Fundraising extends Events
     public function deleteLikesfund($tweet_id,$user_id)
     {
         $mysqli= $this->database;
-        $query="DELETE C , L , F ,R FROM fundraising C 
+        $query="DELETE C , L , F ,R ,D FROM fundraising C 
                         LEFT JOIN fund_like L ON L. like_on = C. fund_id 
                         LEFT JOIN comment_funding R ON R. comment_on = C. fund_id 
                         LEFT JOIN fundraising_comment_like F ON F. like_on_ = R. comment_id 
+                        LEFT JOIN fundraising_donation D ON D. fund_id0 = C. fund_id 
                         WHERE C. fund_id = '{$tweet_id}' and C. user_id2 = '{$user_id}' ";
 
         $query1="SELECT * FROM fundraising WHERE fund_id = $tweet_id and user_id2 = $user_id ";

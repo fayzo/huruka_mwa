@@ -60,10 +60,13 @@
                                 data-toggle="tab">Jobs</a> </li>
                             <li class="nav-item"><a class="nav-link" href="#fundraisings"
                                 data-toggle="tab">Fundraisings</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#Crowfundraising"
-                                data-toggle="tab">Crowfundraising</a></li>
                             <li class="nav-item"><a class="nav-link" href="#Events"
                                 data-toggle="tab">Events</a></li>
+                                
+            <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on'){ ?>
+
+                            <li class="nav-item"><a class="nav-link" href="#Crowfundraising"
+                                data-toggle="tab">Crowfundraising</a></li>
                             <li class="nav-item"><a class="nav-link" href="#House"
                                 data-toggle="tab">House</a></li>
                             <li class="nav-item"><a class="nav-link" href="#car"
@@ -72,6 +75,8 @@
                                 data-toggle="tab">icyamunara</a></li>
                             <li class="nav-item"><a class="nav-link" href="#sale"
                                 data-toggle="tab">Sale</a></li>
+            <?php } ?>
+
                         </ul>
                 </div>
                 <div class="card-body">
@@ -140,7 +145,6 @@
                     </div>
                        <div class="modal-body">
                          <div class="edit-body">
-                           <span id="responseBusinessJobs"></span>
                            <form method="post">
                              <!-- <input type="hidden" id="editor1" value="0"> -->
                              <input type="hidden" id="id_posts" value="0">
@@ -149,7 +153,7 @@
                               <div class="form-group">
                                     <select class="form-control" name="categories_jobs" id="categories_jobs">
                                       <option class="categories_jobsx" value="">Select what types of jobs</option>
-                                      <option value="Featured">Featured</option>
+                                      <option value="Featured">job</option>
                                       <option value="Tenders">Tenders</option>
                                       <option value="Consultancy">Consultancy</option>
                                       <option value="Internships">Internships</option>
@@ -206,6 +210,8 @@
                             <p class="card-title website0">Explaination of Apply to website: </p>
                           <hr>
                          </div><!-- THiS IS A vIew body --> 
+
+                         <div id="responseBusinessJobs"></div>
                        </div> <!-- THiS IS A MODAL BODY -->
                        <div class="modal-footer">
                            <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">

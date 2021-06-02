@@ -18,7 +18,6 @@ if (isset($_POST['crowfund_view']) && !empty($_POST['crowfund_view'])) {
         	<div class="img-popup-body">
 
             <div class="card">
-                <span id="responseSubmithelp"></span>
                 <div class="card-header">
                     <button class="btn btn-success btn-sm  float-right d-md-block d-lg-none"  onclick="togglePopup ( )">close</button>
                     <h5 class="card-text">crowfundraiser</h5>
@@ -215,6 +214,7 @@ if (isset($_POST['crowfund_view']) && !empty($_POST['crowfund_view'])) {
 
                  </div><!-- card-body end-->
                 <div class="card-footer text-center">
+                    <div id="responseSubmithelp"></div>
                     <button type="button" id="submit-help-crowfund" class="btn btn-primary btn-lg btn-block text-center">Submit</button>
                 </div><!-- card-footer -->
                </form>

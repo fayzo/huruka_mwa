@@ -54,7 +54,9 @@ define('BASE_URL_LINK', 'http://localhost/irangiro_social_site/assets/');
 // UPLOAD PHOTO
 define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'].'/irangiro_social_site');
 // define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
-// UPLOAD PHOTO
+$irangiro = $home->irangiroData();
+$_SESSION['approval_user_ui'] = $irangiro['approval_user_ui'];
+// UI
 
 define('F_INDEX', BASE_URL_PUBLIC.'irangiro.home');
 define('HOME', BASE_URL_PUBLIC);

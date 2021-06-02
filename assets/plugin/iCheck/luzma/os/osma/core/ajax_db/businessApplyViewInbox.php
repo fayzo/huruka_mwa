@@ -1,6 +1,8 @@
 <?php 
 include('../init.php');
 $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpath($_SERVER['SCRIPT_FILENAME']));
+ini_set('display_errors', 1); 
+error_reporting(E_ALL);
 
 if (isset($_POST['cv_id'])) {
     $user_id= $_SESSION['key'];

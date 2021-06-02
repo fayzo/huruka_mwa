@@ -179,7 +179,7 @@
                               <div class="form-group">
                                     <select class="form-control" name="categories_jobs" id="categories_jobs">
                                       <option class="categories_jobsx" value="">Select what types of jobs</option>
-                                      <option value="Featured">Featured</option>
+                                      <option value="Featured">job</option>
                                       <option value="Tenders">Tenders</option>
                                       <option value="Consultancy">Consultancy</option>
                                       <option value="Internships">Internships</option>

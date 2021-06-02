@@ -35,10 +35,12 @@
 <div role="tabpanel">
       <div class="nav-scroller py-1 mb-2 bg-light">
         <nav class="nav d-flex justify-content-between" id="list-tab" role="tablist">
+           <a class="p-2 text-muted" data-toggle="tab" href="#list-Feature" role="tab" aria-controls="list-Feature">Feature</a>
            <a class="p-2 text-muted" data-toggle="tab" href="#list-Workshops" role="tab" aria-controls="list-Workshops">Workshops</a>
            <a class="p-2 text-muted" data-toggle="tab" href="#list-Networking" role="tab" aria-controls="list-Networking">Networking</a>
            <a class="p-2 text-muted" data-toggle="tab" href="#list-Trade_Shows" role="tab" aria-controls="list-Trade_Shows">Trade Shows</a>
            <a class="p-2 text-muted" data-toggle="tab" href="#list-Conferences" role="tab" aria-controls="list-Conferences">Conferences</a>
+           <a class="p-2 text-muted" data-toggle="tab" href="#list-Sports" role="tab" aria-controls="list-Sports">Sports</a>
            <a class="p-2 text-muted" data-toggle="tab" href="#list-Party" role="tab" aria-controls="list-Party">Party</a>
            <a class="p-2 text-muted" data-toggle="tab" href="#list-Training" role="tab" aria-controls="list-Training">Training</a>
            <a class="p-2 text-muted" data-toggle="tab" href="#list-Memorial" role="tab" aria-controls="list-Memorial">Memorial</a>
@@ -48,10 +50,14 @@
         </nav>
       </div>
 
-   <div class="container-fluid mb-5">
+   <div class="container-fluid">
 
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="list-Workshops" role="tabpanel" aria-labelledby="list-Workshops-list">
+        <div class="tab-pane fade show active" id="list-Feature" role="tabpanel" aria-labelledby="list-Feature-list">
+           <?php include "siderbar_events/Feature.php"?>
+        </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
+
+        <div class="tab-pane fade show" id="list-Workshops" role="tabpanel" aria-labelledby="list-Workshops-list">
            <?php include "siderbar_events/Workshops.php"?>
         </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
 
@@ -69,6 +75,10 @@
 
         <div class="tab-pane fade show " id="list-Party" role="tabpanel" aria-labelledby="list-Party-list">
            <?php include "siderbar_events/Party.php"?>
+        </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
+
+        <div class="tab-pane fade show " id="list-Sports" role="tabpanel" aria-labelledby="list-Sports-list">
+           <?php include "siderbar_events/sports.php"?>
         </div> <!-- END-OF A LINK OF DASH_BOARD ID=#  -->
 
         <div class="tab-pane fade" id="list-Training" role="tabpanel" aria-labelledby="list-Training-list">

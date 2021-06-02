@@ -8,6 +8,7 @@ if(isset($_POST['pay']))
     $email = $_POST['email'];
     $amount = $_POST['amount'];
     $description = $_POST['description'];
+    $_SESSION['description'] = $_POST['description'];
 
     if (isset($_POST['sent_to_user_id'])) {
         # code...

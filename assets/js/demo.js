@@ -184,15 +184,16 @@ $(function () {
             + '</a>')
 
     // Add the tab button to the right sidebar tabs
-    $('[href="#control-sidebar-home-tab"]')
+    $('[href="#control-sidebar-home-tab-click"]')
         .parent()
         .before($tabButton)
 
     // Create the menu
     var $demoSettings = $('<div />')
+    var $demoSettings_ = $('#nothing_to_add')
 
     // Layout options
-    $demoSettings.append(
+    $demoSettings_.append(
         '<h4 class="control-sidebar-heading">'
         + 'Layout Options'
         + '</h4>'
@@ -383,7 +384,7 @@ $(function () {
     $demoSettings.append($skinsList)
 
     $tabPane.append($demoSettings)
-    $('#control-sidebar-home-tab').after($tabPane)
+    $('#control-sidebar-home-tab-click').after($tabPane)
 
     setup()
 

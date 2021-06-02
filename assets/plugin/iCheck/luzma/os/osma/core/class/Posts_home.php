@@ -160,7 +160,7 @@ class Posts_home extends Promote_home_post {
                                 <?php if (strlen($row["text"]) > 80) {
                                         $tweettext = substr($row["text"], 0, 80);
                                         $tatus = substr($row["text"], 0, strrpos($tweettext, ' ')).'
-                                        <span class="mb-0"><a href="javascript:void(0)" id="fund-readmore" data-fund="'.$row['fund_id'].'" class="text-muted" style"font-weight: 500 !important;font-size:8px">read more...</a></span>';
+                                        <span class="mb-0"><a href="javascript:void(0)" id="fund-readmore" data-fund="'.$row['fund_id'].'" class="text-muted" style"font-weight: 500 !important;font-size:8px">Read more...</a></span>';
                                         echo $tatus;
                                         }else{
                                         echo $row["text"];
@@ -498,7 +498,7 @@ if($count_foreach == 4){
                                             // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                         $tweettext = substr($tweet['status'], 0, 200);
                                         $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                         echo $this->getTweetLink($tweetstatus);
                                         }else{
                                         echo $this->getTweetLink($tweet['status']);
@@ -603,7 +603,7 @@ if($count_foreach == 4){
                                             // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                         $tweettext = substr($tweet['status'], 0, 200);
                                         $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                         echo $this->getTweetLink($tweetstatus);
                                         }else{
                                         echo $this->getTweetLink($tweet['status']);
@@ -694,7 +694,7 @@ if($count_foreach == 4){
                                             // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                         $tweettext = substr($tweet['status'], 0, 200);
                                         $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                         echo $this->getTweetLink($tweetstatus);
                                         }else{
                                         echo $this->getTweetLink($tweet['status']);
@@ -782,7 +782,7 @@ if($count_foreach == 4){
                                                     // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                 $tweettext = substr($tweet['status'], 0, 200);
                                                 $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                 echo $this->getTweetLink($tweetstatus);
                                                 }else{
                                                 echo $this->getTweetLink($tweet['status']);
@@ -878,7 +878,7 @@ if($count_foreach == 4){
                                                     // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                 $tweettext = substr($tweet['status'], 0, 200);
                                                 $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                 echo $this->getTweetLink($tweetstatus);
                                                 }else{
                                                 echo $this->getTweetLink($tweet['status']);
@@ -951,7 +951,7 @@ if($count_foreach == 4){
                                                     // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                 $tweettext = substr($tweet['status'], 0, 200);
                                                 $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                 echo $this->getTweetLink($tweetstatus);
                                                 }else{
                                                 echo $this->getTweetLink($tweet['status']);
@@ -1012,7 +1012,7 @@ if($count_foreach == 4){
                                                         // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                     $tweettext = substr($tweet['status'], 0, 200);
                                                     $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                    <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                    <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                     echo $this->getTweetLink($tweetstatus);
                                                     }else{
                                                     echo $this->getTweetLink($tweet['status']);
@@ -1069,7 +1069,7 @@ if($count_foreach == 4){
                                                             // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                         $tweettext = substr($tweet['status'], 0, 200);
                                                         $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                         echo $this->getTweetLink($tweetstatus);
                                                         }else{
                                                         echo $this->getTweetLink($tweet['status']);
@@ -1139,7 +1139,7 @@ if($count_foreach == 4){
                             // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                         $tweettext = substr($tweet['status'], 0, 200);
                         $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                        <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                         echo $this->getTweetLink($tweetstatus);
                         }else{
                         echo $this->getTweetLink($tweet['status']);

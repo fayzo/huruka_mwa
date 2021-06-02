@@ -57,7 +57,11 @@
 
     <?php if (isset($_SESSION['key'])){ ?>
         
-        <a class="sidebar-toggle_ addPostBtn" href="javascript:void(0)">
+        <a class="sidebar-toggle_ addPostBtnNocreditor d-sm-block d-md-none d-lg-none" href="javascript:void(0)">
+          <i class="fa fa-pencil"></i>
+          <span class="hidden-xs">Post</span>
+         </a>
+        <a class="sidebar-toggle_ addPostBtn d-none d-md-block" href="javascript:void(0)">
           <i class="fa fa-pencil"></i>
           <span class="hidden-xs">Post</span>
          </a>
@@ -341,12 +345,14 @@
               </ul>
             </li>
             <!-- Control Sidebar Toggle Button -->
-            <?php if(isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
+            <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
+            <!-- < ?php if(isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?> -->
 
             <li class="hidden-xs">
               <a href="javascript:void(0)" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
             </li>
-                 <?php } ?>
+            
+            <?php } ?>
           </ul>
         </div>
           <?php }else{ ?>

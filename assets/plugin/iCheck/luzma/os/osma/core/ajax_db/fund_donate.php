@@ -6,7 +6,13 @@ if(isset($_POST['key'])){
 
  if ($_POST['key'] == 'fund_donation') {
 
-    $user_id= $_SESSION['key'];
+    // $user_id= $_SESSION['key'];
+    if (isset($_SESSION['key'])) {
+        # code...
+        $user_id= $_SESSION['key'];
+    }else{
+        $user_id = 1;
+    }
     
      $datetime= date('Y-m-d H-i-s'); // last_login 
      $date_registry= date('Y-m-d'); // date_registry 
@@ -52,7 +58,7 @@ if(isset($_POST['key'])){
             $result= $users->updateQuery_money('users',array( 
                 'amount_coins'=> 'amount_coins - '.$amount_coins,
                 'amount_francs'=> 'amount_francs - '.$donate)
-                ,array('user_id'=> $_SESSION['key']));
+                ,array('user_id'=> $user_id));
 
             # code...
             $users->updateQuery_money('fundraising',array( 
@@ -98,10 +104,17 @@ if(isset($_POST['key'])){
 }
 
 if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
+    if (isset($_SESSION['key'])) {
+        # code...
+        $user_id= $_SESSION['key'];
+    }else{
+        $user_id = 1;
+    }
+
     $fund_id = $_REQUEST['fund_id'];
     $user_id = $_REQUEST['user_id'];
     $user = $home->userData($user_id);
-    $sentby_user_id = $_SESSION['key'];
+    $sentby_user_id = $user_id;
     $user0 = $home->userData($sentby_user_id);
     $fund = $crowfund->fundFecthReadmore($fund_id,$user_id);
 
@@ -163,6 +176,8 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                     });
                                 </script>
                                 <div class="row mb-3 text-center">
+
+                                <?php if (isset($_SESSION['key'])) { ?>
                                     <div class="col-4">
                                     <label class="form-check-label">
                                         <input class="form-check-input ml-1" type="checkbox" name="visa" id="visa" value="coins"> 
@@ -171,6 +186,8 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                         <!-- <i class="fas fa-donate" style="font-size:100px;"></i> -->
                                     </label>
                                     </div>
+                                <?php } ?>
+                                
                                     <div class="col-4">
                                     <label class="form-check-label">
                                         <input class="form-check-input ml-1" type="checkbox" name="visa" id="visa" value="visa"> 
@@ -393,13 +410,13 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
 
                                    window.open(objJSON.data.link, '_blank');
                                   // window.location = objJSON.data.link;
-                            }, 2000);
+                            }, 1000);
                             setTimeout(() => {
                                 $("#checkOUT").modal('hide');
                             }, 3500);
                             setTimeout(() => {
                                 location.reload();
-                            }, 10000);
+                            }, 8000);
                             // console.log(response);
                             
                         } else{

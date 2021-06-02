@@ -92,6 +92,7 @@ $(document).ready(function () {
         var user_id1 = $("#user_id1");
         var Career = $("#Career");
         var years = $("#years");
+        var education = $("#education");
         var field = $("#field");
         var diploma = $("#diploma");
         var age = $("#age");
@@ -101,7 +102,7 @@ $(document).ready(function () {
         var editor1 = CKEDITOR.instances.editor1.getData();
         // if (isEmpty(categories_jobs) && isEmpty(job_title) && isEmpty(job_summary) && isEmpty(responsibilities_duties) && isEmpty(qualifications_skills) &&
         //     isEmpty(conditions) && isEmpty(deadline)) {
-        if (isEmpty(Career) && isEmpty(years) && isEmpty(field) && isEmpty(diploma) && 
+        if (isEmpty(Career) && isEmpty(years) && isEmpty(education) && isEmpty(field) && isEmpty(diploma) && 
             isEmpty(age) && isEmpty(status) && isEmpty(phone) && isEmpty(course)) {
 
             $.ajax({
@@ -114,6 +115,7 @@ $(document).ready(function () {
                     user_id1: user_id1.val(),
                     Career: Career.val(),
                     years: years.val(),
+                    education: education.val(),
                     field: field.val(),
                     diploma: diploma.val(),
                     age: age.val(),
@@ -175,6 +177,7 @@ function unemploymentEdits(user_id) {
                 $(".edit-body").fadeIn();
                 $("#Career").val(response.career);
                 $("#years").val(response.years);
+                $("#education").val(response.education);
                 $("#field").val(response.field);
                 $("#diploma").val(response.diploma);
                 $("#age").val(response.age);
@@ -203,6 +206,7 @@ function ajax_requestsPostsUnemploy(key) {
     var user_id1 = $("#user_id1");
     var Career = $("#Career");
     var years = $("#years");
+    var education = $("#education");
     var field = $("#field");
     var diploma = $("#diploma");
     var age = $("#age");
@@ -212,7 +216,7 @@ function ajax_requestsPostsUnemploy(key) {
     var editor1 = CKEDITOR.instances.editor1.getData();
     // if (isEmpty(categories_jobs) && isEmpty(job_title) && isEmpty(job_summary) && isEmpty(responsibilities_duties) && isEmpty(qualifications_skills) &&
     //     isEmpty(conditions) && isEmpty(deadline)) {
-    if (isEmpty(Career) && isEmpty(years) && isEmpty(field) && isEmpty(diploma) && 
+    if (isEmpty(Career) && isEmpty(years) && isEmpty(education) && isEmpty(field) && isEmpty(diploma) && 
         isEmpty(age) && isEmpty(status) && isEmpty(phone) && isEmpty(course)) {
 
         $.ajax({
@@ -225,6 +229,7 @@ function ajax_requestsPostsUnemploy(key) {
                 user_id1: user_id1.val(),
                 Career: Career.val(),
                 years: years.val(),
+                education: education.val(),
                 field: field.val(),
                 diploma: diploma.val(),
                 age: age.val(),
@@ -246,6 +251,7 @@ function ajax_requestsPostsUnemploy(key) {
                 // }else{
                      Career.val("");
                      years.val("");
+                     education.val("");
                      field.val("");
                      diploma.val("");
                      age.val("");

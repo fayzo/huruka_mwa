@@ -162,7 +162,7 @@ class Hashtag_GetUsers extends Follow
                                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                             $tweettext = substr($tweet['status'], 0, 200);
                                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                             echo $this->getTweetLink($tweetstatus);
                                                             }else{
                                                             echo $this->getTweetLink($tweet['status']);
@@ -268,7 +268,7 @@ class Hashtag_GetUsers extends Follow
                                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                             $tweettext = substr($tweet['status'], 0, 200);
                                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                             echo $this->getTweetLink($tweetstatus);
                                                             }else{
                                                             echo $this->getTweetLink($tweet['status']);
@@ -360,7 +360,7 @@ class Hashtag_GetUsers extends Follow
                                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                             $tweettext = substr($tweet['status'], 0, 200);
                                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                             echo $this->getTweetLink($tweetstatus);
                                                             }else{
                                                             echo $this->getTweetLink($tweet['status']);
@@ -449,7 +449,7 @@ class Hashtag_GetUsers extends Follow
                                                                         // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                                     $tweettext = substr($tweet['status'], 0, 200);
                                                                     $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                                     echo $this->getTweetLink($tweetstatus);
                                                                     }else{
                                                                     echo $this->getTweetLink($tweet['status']);
@@ -546,7 +546,7 @@ class Hashtag_GetUsers extends Follow
                                                                         // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                                     $tweettext = substr($tweet['status'], 0, 200);
                                                                     $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                                     echo $this->getTweetLink($tweetstatus);
                                                                     }else{
                                                                     echo $this->getTweetLink($tweet['status']);
@@ -620,7 +620,7 @@ class Hashtag_GetUsers extends Follow
                                                                         // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                                     $tweettext = substr($tweet['status'], 0, 200);
                                                                     $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                                     echo $this->getTweetLink($tweetstatus);
                                                                     }else{
                                                                     echo $this->getTweetLink($tweet['status']);
@@ -678,7 +678,7 @@ class Hashtag_GetUsers extends Follow
                                                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                                             $tweettext = substr($tweet['status'], 0, 200);
                                                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                                             echo $this->getTweetLink($tweetstatus);
                                                                             }else{
                                                                             echo $this->getTweetLink($tweet['status']);
@@ -748,7 +748,7 @@ class Hashtag_GetUsers extends Follow
                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                             $tweettext = substr($tweet['status'], 0, 200);
                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... read more...</a></span>';
+                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                             echo $this->getTweetLink($tweetstatus);
                                             }else{
                                             echo $this->getTweetLink($tweet['status']);

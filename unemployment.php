@@ -118,7 +118,6 @@
                       <button class="close" data-dismiss="modal">&times;</button>
                     </div>
                         <div class="modal-body" id="edit-body">
-                         <span id="responseBusinessJobs1"></span>
                              <!-- <input type="hidden" name="key" value="create"> -->
                              <input type="hidden" id="id_posts1" name="id_posts1" value="0">
                              <input type="hidden" id="user_id1" name="user_id1" value="<?php echo $_SESSION['key'] ;?>">
@@ -145,6 +144,19 @@
                                       <option value="9">9</option>
                                       <option value="10">10+</option>
                                     </select>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="education"><i class="fa fa-book mr-1"></i> Education:</label>
+                                  <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon2"><i class="fa fa-book"></i>
+                                          </span>
+                                      </div>
+                                      <input type="text" class="form-control" name="education" id="education"
+                                          aria-describedby="helpId" 
+                                          placeholder="High school or College or University ">
+                                  </div>
                               </div>
 
                               <div class="form-group">
@@ -187,9 +199,9 @@
                               <div class="form-group">
                                     <select class="form-control" name="diploma" id="diploma">
                                       <option value="">Select Diploma you obtain</option>
-                                      <option value="High School Diploma">High School Diploma</option>
+                                      <option value="High Diploma">High School Diploma</option>
                                       <option value="Certificate">Certificate</option>
-                                      <option value="Advance">Advance diploma</option>
+                                      <option value="Advance Diploma">Advance diploma</option>
                                       <option value="Degree">Degree</option>
                                       <option value="Master">Master</option>
                                       <option value="Phd">Phd</option>
@@ -229,6 +241,7 @@
                                 </label>
                             </div>
                                
+                            <div id="responseBusinessJobs1"></div>
                        </div> <!-- THiS IS A MODAL BODY -->
                        <div class="modal-footer">
                            <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">

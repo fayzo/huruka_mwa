@@ -4,9 +4,9 @@ $users->preventUsersAccess($_SERVER['REQUEST_METHOD'],realpath(__FILE__),realpat
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
-session_unset($sent_to_user_id);
-session_unset($fund_id);
-session_unset($comment);
+// session_unset($sent_to_user_id);
+// session_unset($fund_id);
+// session_unset($comment);
 
 if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
     if (isset($_SESSION['key'])) {
@@ -246,7 +246,8 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                 <!-- <div class="progress-bar  bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
                             </div>
                             <p>Raised by <?php echo $user['donate_counts']; ?> people in <?php echo $users->timeAgo($user['created_on2']);?> <span class="float-right text-right"><?php echo $users->donationPercetangeMoneyRaimaing($user['money_raising'],$user['money_to_target']); ?> /100 %</span></p>
-                            <button type="button" <?php if(isset($_SESSION['key'])){ echo 'class="btn btn-primary donation-crowfund-btn"'; }else{ echo 'class="btn btn-primary" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $user['user_id']; ?>" data-fund="<?php echo $user['fund_id']; ?>">Invest Now</button><br>
+                            <!-- <button type="button" < ?php if(isset($_SESSION['key'])){ echo 'class="btn btn-primary donation-crowfund-btn"'; }else{ echo 'class="btn btn-primary" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $user['user_id']; ?>" data-fund="<?php echo $user['fund_id']; ?>">Invest Now</button><br> -->
+                            <button type="button" class="btn btn-primary donation-crowfund-btn"  data-user="<?php echo $user['user_id']; ?>"  data-fund="<?php echo $user['fund_id']; ?>">Invest Now</button><br>
                             
                             <div class="user-block mt-3">
                                <div class="user-blockImgBorder">
@@ -259,7 +260,7 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                 </div>
                                 </div>
                                 <span class="username">
-                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?> | Created  on <?php echo $users->timeAgo($user['created_on2']) ;?></a>
+                                    <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$user['username'] :'javascript:void(0)';?>"><?php echo $user['username'] ;?> | Created  on <?php echo $users->timeAgo($user['created_on2']) ;?></a>
                                     <!-- //Jonathan Burke Jr. -->
                                 </span>
                                 <span class="description" ><span <?php if(isset($_SESSION['key'])){ echo 'class="people-message more"'; }else{ echo 'id="login-please" class="more" data-login="1"'; } ?> data-user="<?php echo $user['user_id2'];?>"><i style="font-size: 20px;" class="fa fa-envelope-o"></i> Message </span> | <i class="fa fa-tag mr-1"></i><?php echo $user['categories_crowfundraising'] ;?></span>
@@ -295,15 +296,16 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                     <div class="user-block mt-3">
                                     <div class="user-blockImgBorder">
                                         <div class="user-blockImg">
-                                            <?php if (!empty($donate['profile_img'])) {?>
-                                            <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $donate['profile_img'] ;?>" alt="User Image">
+                                            <?php if (!empty($donate['profile_img']) && $donate['username'] != 'irangiro') {?>
+                                            <!-- <img src="< ?php echo BASE_URL_LINK ;?>image/users_profile_cover/< ?php echo $donate['profile_img'] ;?>" alt="User Image"> -->
+                                                <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                             <?php  }else{ ?>
                                                 <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                             <?php } ?>
                                         </div>
                                         </div>
                                         <span class="username">
-                                            <a href="<?php echo (isset($_SESSION['approval']))? BASE_URL_PUBLIC.$donate['username']:"javascript:void(0)" ;?>"><?php echo number_format($donate['price_donate']); ?> Frw </a> <span class="float-right mr-2"><i class="fa fa-heart" ></i></span>
+                                            <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$donate['username'] :'javascript:void(0)';?>"> <?php echo number_format($donate['price_donate']); ?> Frw </a> <span class="float-right mr-2"><i class="fa fa-heart" ></i></span>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"><?php echo $donate['comment']; ?> </span>
@@ -321,15 +323,16 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                 <div class="user-block mt-3">
                                     <div class="user-blockImgBorder">
                                         <div class="user-blockImg">
-                                            <?php if (!empty($donate['profile_img'])) {?>
-                                            <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $donate['profile_img'] ;?>" alt="User Image">
+                                            <?php if (!empty($donate['profile_img']) && $donate['username'] != 'irangiro') {?>
+                                            <!-- <img src="< ?php echo BASE_URL_LINK ;?>image/users_profile_cover/< ?php echo $donate['profile_img'] ;?>" alt="User Image"> -->
+                                                <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                             <?php  }else{ ?>
                                                 <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                             <?php } ?>
                                         </div>
                                         </div>
                                         <span class="username">
-                                            <a href="<?php echo BASE_URL_PUBLIC.$donate['username'] ;?>"><?php echo number_format($donate['price_donate'],2); ?> Frw <span class="float-right mr-2"><i class="fa fa-heart" ></i></span></a>
+                                            <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$donate['username'] :'javascript:void(0)';?>"> <?php echo number_format($donate['price_donate'],2); ?> Frw <span class="float-right mr-2"><i class="fa fa-heart" ></i></span></a>
                                             <!-- //Jonathan Burke Jr. -->
                                         </span>
                                         <span class="description"><?php echo $donate['comment']; ?> </span>
@@ -355,7 +358,7 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                     </div>
                                     </div>
                                     <span class="username">
-                                        <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"> <?php echo $user['username']; ?> comment on - <?php echo $users->timeAgo($user['created_on2']) ;?></a>
+                                        <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$user['username'] :'javascript:void(0)';?>"> <?php echo $user['username']; ?> comment on - <?php echo $users->timeAgo($user['created_on2']) ;?></a>
                                         <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                         <?php if($likes['like_on'] == $user['fund_id']){ ?>
                                             <span <?php if(isset($_SESSION['key'])){ echo 'class="unlike-crowfundraising-btn more float-right text-sm  mr-1"'; }else{ echo 'id="login-please" class="more float-right" data-login="1"'; } ?> data-fund="<?php echo $user['fund_id']; ?>"  data-user="<?php echo $user['user_id']; ?>"><span class="likescounter "><?php echo $user['likes_counts'] ;?></span> <i class="fa fa-heart"  ></i></span>
@@ -391,15 +394,16 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                             <div class="user-block mt-3" id="userComment<?php echo $user['comment_id']; ?>">
                                                 <div class="user-blockImgBorder">
                                                 <div class="user-blockImg">
-                                                        <?php if (!empty($user['profile_img'])) {?>
-                                                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $user['profile_img'] ;?>" alt="User Image">
+                                                        <?php if (!empty($user['profile_img']) && $user['username'] != 'irangiro') {?>
+                                                        <!-- <img src="< ?php echo BASE_URL_LINK ;?>image/users_profile_cover/< ?php echo $user['profile_img'] ;?>" alt="User Image"> -->
+                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                                         <?php  }else{ ?>
                                                         <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                                         <?php } ?>
                                                 </div>
                                                 </div>
                                                 <span class="username">
-                                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"> <?php echo $user['username']; ?> comment on - <?php echo $users->timeAgo($user['comment_at']) ;?></a>
+                                                    <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$user['username'] :'javascript:void(0)';?>"> motivater comment on - <?php echo $users->timeAgo($user['comment_at']) ;?></a>
                                                     <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                                      <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                                     <?php if($likes['like_on_'] == $user['comment_id']){ ?>
@@ -429,15 +433,16 @@ if (isset($_POST['crowfund_id']) && !empty($_POST['crowfund_id'])) {
                                             <div class="user-block mt-3" id="userComment<?php echo $user['comment_id']; ?>">
                                                 <div class="user-blockImgBorder">
                                                 <div class="user-blockImg">
-                                                        <?php if (!empty($user['profile_img'])) {?>
-                                                        <img src="<?php echo BASE_URL_LINK ;?>image/users_profile_cover/<?php echo $user['profile_img'] ;?>" alt="User Image">
+                                                        <?php if (!empty($user['profile_img']) && $user['username'] != 'irangiro') {?>
+                                                        <!-- <img src="< ?php echo BASE_URL_LINK ;?>image/users_profile_cover/< ?php echo $user['profile_img'] ;?>" alt="User Image"> -->
+                                                        <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                                         <?php  }else{ ?>
                                                         <img src="<?php echo BASE_URL_LINK.NO_PROFILE_IMAGE_URL ;?>" alt="User Image">
                                                         <?php } ?>
                                                 </div>
                                                 </div>
                                                 <span class="username">
-                                                    <a href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"> <?php echo $user['username']; ?> comment on - <?php echo $users->timeAgo($user['comment_at']) ;?></a>
+                                                    <a href="<?php echo (isset($_SESSION['key']) && $_SESSION['approval'] == 'on')? BASE_URL_PUBLIC.$user['username'] :'javascript:void(0)';?>"> motivater comment on - <?php echo $users->timeAgo($user['comment_at']) ;?></a>
                                                     <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                                      <!-- <span class="float-right">44 <i class="fa fa-heart"></i></span> -->
                                                     <?php if($likes['like_on_'] == $user['comment_id']){ ?>

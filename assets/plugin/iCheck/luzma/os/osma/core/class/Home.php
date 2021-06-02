@@ -20,6 +20,14 @@ class Home extends Comment {
         $row= $query->fetch_array();
         return $row;
     }
+
+        public function irangiroData()
+    {
+        $mysqli= $this->database;
+        $query= $mysqli->query("SELECT * FROM users WHERE user_id= 1 ");
+        $row= $query->fetch_array();
+        return $row;
+    }
         
         function htmlspecialcharss($string)
     {
@@ -32,36 +40,44 @@ class Home extends Comment {
         <?php if (isset($_SESSION['key'])) { ?>
 
                 <li><a href="jobs"><i class="fa fa-circle-o text-yellow"></i> Job</a></li>
+                <li><a href="fundraising"><i class="fa fa-heartbeat"></i>Fundraising</a></li>
                 <li><a href="career_profession"><i class="fa fa-circle-o text-aqua"></i>Professional</a></li>
                 <li><a href="unemployment"><i class="fa fa-circle-o text-aqua"></i>unemployment</a></li>
+                <li><a href="school"><i class="fa fa-building"></i>School</a></li>
+                <li><a href="events"><i class="fas fa-calendar mr-2"></i>Events</a></li>
+                <?php if($_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
+
                 <li><a href="sale"><i class="fa fa-shopping-basket "></i>Marketplace</a></li>
-                <!-- <li><a href="blog"><i class="fa fa-circle-o text-red"></i>Blog</a></li> -->
-                <!-- <li><a href="events"><i class="fa fa-circle-o text-red"></i>Events</a></li> -->
-                <li><a href="crowfund"><i class="fa fa-money "></i> gushoraStartUp</a></li>
-                <li><a href="fundraising"><i class="fa fa-heartbeat"></i>Fundraising</a></li>
+                <li><a href="crowfund"><i class="fa fa-money "></i> GushoraStartUp</a></li>
                 <!-- <li><a href="food"><i class="fa fa-cutlery"></i>Foodzana</a></li> -->
                 <!-- <li><a href="sale"><i class="fa fa-shopping-cart"></i>Sale</a></li> -->
                 <li><a href="icyamunara"><i class="fa fa-shopping-basket"></i>Cyamunara</a></li>
                 <li><a href="house"><i class="fa fa-home"></i>House</a></li>
                 <li><a href="car"><i class="fa fa-car"></i>Car</a></li>
-                <li><a href="school"><i class="fa fa-building"></i>School</a></li>
+                <?php } ?>
+
+                <li><a href="religion"><i class="fas fa-praying-hands mr-2"></i>Religion</a></li>
                 
         <?php }else { ?>
 
                 <li><a href="irangiro.jobs"><i class="fa fa-circle-o text-yellow"></i> Job</a></li>
+                <li><a href="irangiro.fundraising"><i class="fa fa-heartbeat text-red"></i>Fundraising</a></li>
                 <li><a href="irangiro.career_profession"><i class="fa fa-circle-o text-aqua"></i>Professional</a></li>
                 <li><a href="irangiro.unemployment"><i class="fa fa-circle-o text-aqua"></i>unemployment</a></li>
-                <li><a href="irangiro.sale"><i class="fa fa-shopping-basket text-red"></i>Marketplace</a></li>
-                <!-- <li><a href="irangiro.blog"><i class="fas fa-edit text-aqua"></i>Blog</a></li> -->
-                <!-- <li><a href="irangiro.events"><i class="fa fa-circle-o text-red"></i>Events</a></li> -->
-                <li><a href="irangiro.crowfund"><i class="fa fa-money text-aqua"></i> gushoraStartUp</a></li>
-                <li><a href="irangiro.fundraising"><i class="fa fa-heartbeat text-red"></i>Fundraising</a></li>
+                <li><a href="irangiro.school"><i class="fa fa-building "></i>School</a></li>
+                <li><a href="irangiro.events"><i class="fas fa-calendar fa"></i>Events</a></li>
+                <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
+                
                 <!-- <li><a href="irangiro.food"><i class="fa fa-cutlery"></i>Foodzana</a></li> -->
+                <li><a href="irangiro.crowfund"><i class="fa fa-money text-aqua"></i> GushoraStartUp</a></li>
+                <li><a href="irangiro.sale"><i class="fa fa-shopping-basket text-red"></i>Marketplace</a></li>
                 <!-- <li><a href="irangiro.sale"><i class="fa fa-shopping-cart text-red"></i>Sale</a></li> -->
                 <li><a href="irangiro.icyamunara"><i class="fa fa-shopping-basket"></i>Cyamunara</a></li>
                 <li><a href="irangiro.house"><i class="fa fa-home"></i>House</a></li>
                 <li><a href="irangiro.car"><i class="fa fa-car "></i>Car</a></li>
-                <li><a href="irangiro.school"><i class="fa fa-building "></i>School</a></li>
+                <?php } ?>
+
+                <li><a href="irangiro.religion"><i class="fas fa-praying-hands mr-2"></i>Religion</a></li>
 
         <?php } ?>
     <?php }
@@ -89,6 +105,8 @@ class Home extends Comment {
                 <!-- <li><h5><a class="alink" href="events">Events</a></h5></li> -->
                 <li><h5><a class="alink" href="school">School</a></h5> </li>
                 <li><h5><a class="alink" href="events">Events</a></h5> </li>
+                 <?php if($_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
+
                 <li><h5><a class="alink" href="crowfund">GushoraStartUp</a></h5> </li>
                 <li><h5><a class="alink" href="icyamunara">Cyamunara</a></h5></li>
                 <!-- <li><h5><a class="alink" href="food">Foodzana</a></h5></li> -->
@@ -96,6 +114,8 @@ class Home extends Comment {
                 <li><h5><a class="alink" href="car">Car</a></h5></li>
                 <!-- <li><h5><a class="alink" href="domestic">Domestic Helpers</a></h5></li> -->
                 <li><h5><a class="alink" href="sale">Marketplace</a></h5></li>
+                <?php } ?>
+
                 <li><h5><a class="alink" href="religion">Religion</a></h5></li>
             </ul>
         
@@ -109,6 +129,8 @@ class Home extends Comment {
                 <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></h5> -->
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.school">School</a></h5> </li>
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></h5> </li>
+                <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
+              
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.crowfund">GushoraStartUp</a></h5> </li>
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.icyamunara">icyamunara</a></h5>
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.house">House</a></h5>
@@ -117,8 +139,33 @@ class Home extends Comment {
                 <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.sale">Sale</a></h5></li> -->
                 <!-- <li><h5><a class="alink" href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.food">Foodzana</a></h5> -->
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.sale">Marketplace</a></h5>
+                <?php } ?>
+                
                 <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.religion">Religion</a></h5>
             
+            </ul>
+            <?php } ?>
+        </div>
+    </div>
+
+    <?php }
+
+    public function options_short(){ ?>
+
+    <div class="card text-center">
+        <div class="card-header main-active p-1">
+        <h5 class="card-title"><i> Options</i></h5>
+        </div>
+        <div class="card-body options-list message-color">
+
+        <?php if (isset($_SESSION['key'])) { ?>
+            <ul>
+                <li><h5><a class="alink" href="fundraising"><i class="fa fa-heartbeat" aria-hidden="true"></i> Fundraising</a></h5></li>
+            </ul>
+        
+        <?php }else { ?>
+        <ul>
+                <li><h5><a class="alink" href="<?php echo BASE_URL_PUBLIC; ?>irangiro.fundraising"><i class="fa fa-heartbeat" aria-hidden="true"></i> Fundraising</a></h5></li>
             </ul>
             <?php } ?>
         </div>
@@ -131,15 +178,16 @@ public function links(){ ?>
     <?php if (isset($_SESSION['key'])) { ?>
  <ul class="list-inline link-view">
       <li class="list-inline-item"><a href="fundraising"><i class="fa fa-heartbeat" aria-hidden="true"></i> Fundraising</a></li>
-            <?php if($_SESSION['approval'] === 'on'){ ?>
+            <!-- < ?php if($_SESSION['approval'] === 'on'){ ?> -->
       <li class="list-inline-item"><a href="unemployment"><i class="fa fa-briefcase"></i> Unemployment</a></li>
-            <?php } ?>
+            <!-- < ?php } ?> -->
       <li class="list-inline-item"><a href="career_profession"><i class="fa fa-briefcase"></i>  Professional</a></li>
       <!-- <li class="list-inline-item"><a href="sale"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Sale</a></li> -->
       <!-- <li class="list-inline-item"><a href="blog"><i class="fas fa-edit"></i> Blog</a></li> -->
       <li class="list-inline-item"><a href="jobs"><i class="fas fa-newspaper    "></i> Jobs</a></li>
       <li class="list-inline-item"><a href="school"><i class="fas fa-school    "></i> School</a></li>
       <li class="list-inline-item"><a href="events"><i class="fas fa-calendar    "></i> Events</a></li>
+        <?php if($_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
       <!-- <li class="list-inline-item"><a href="events"><i class="fas fa-envelope-open-text    "></i> Events</a></li> -->
       <li class="list-inline-item"><a href="house"><i class="fas fa-house-damage    "></i> House</a></li>
       <li class="list-inline-item"><a href="icyamunara"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Cyamunara</a></li>
@@ -148,6 +196,7 @@ public function links(){ ?>
       <li class="list-inline-item"><a href="sale"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Marketplace</a></li>
       <!-- <li class="list-inline-item"><a href="domestic"><i class="fa fa-user" aria-hidden="true"></i> Domestic Helpers</a></li> -->
       <li class="list-inline-item"><a href="crowfund"><i class="fa fa-money" aria-hidden="true"></i> GushoraStartUp</a></li>
+            <?php } ?>
       <li class="list-inline-item"><a href="religion"><i class="fas fa-praying-hands" aria-hidden="true"></i> Religion</a></li>
     </ul>
 
@@ -162,6 +211,8 @@ public function links(){ ?>
         <!-- <li class="list-inline-item"><a href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></li> -->
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.school">School</a> </li>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.events">Events</a></li>
+        <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on' || isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
+       
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.house">House</a></li>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.icyamunara">Cyamunara</a></li>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.car">Car</a></li>
@@ -169,6 +220,8 @@ public function links(){ ?>
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.sale">Marketplace</a></li>
         <!-- <li class="list-inline-item"><a href="< ?php echo BASE_URL_PUBLIC; ?>irangiro.domestic">Domestic Helpers</a> </li> -->
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.crowfund">GushoraStartUp</a> </li>
+        <?php } ?>
+       
         <li class="list-inline-item"><a href="<?php echo BASE_URL_PUBLIC; ?>irangiro.religion">Religion</a> </li>
 
     </ul>
@@ -1618,6 +1671,18 @@ public function links(){ ?>
     {
         $mysqli= $this->database;
         $query= "SELECT COUNT('like_id') AS TotalLikes FROM likes WHERE like_by = $user_id";
+        $sql =$mysqli->query($query);
+        $row = $sql->fetch_array();
+        $total= array_shift($row);
+        $array= array(0,$total);
+        $totals= array_sum($array);
+        return $totals;
+    }
+
+     public function total_counts($table)
+    {
+        $mysqli= $this->database;
+        $query= "SELECT COUNT(*) AS TotalLikes FROM $table";
         $sql =$mysqli->query($query);
         $row = $sql->fetch_array();
         $total= array_shift($row);

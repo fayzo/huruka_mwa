@@ -102,7 +102,7 @@ if (isset($_POST['school_id']) && !empty($_POST['school_id'])) {
 
                         <h4 class="mt-2"><i>School Info</i></h4>
 
-                        <div><i class="h5"> Seller: <?php echo $user['author_']; ?></i>
+                        <div><i class="h5"> Contacts: <?php echo $user['author_']; ?></i>
                         <span <?php if(isset($_SESSION['key'])){ echo 'class="btn-sm btn-primary people-message more"'; }else{ echo 'class="more" id="login-please"  data-login="1"'; } ?> data-user="<?php echo $user['user_id'];?>"><i class="fa fa-envelope-o"></i> Message </span><br>
                         </div>
 

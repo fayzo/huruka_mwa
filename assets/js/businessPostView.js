@@ -70,7 +70,7 @@ $(document).ready(function () {
         // e.stopPropagation();
         var cv_id = $(this).data('cv_id');
         $.ajax({
-            url: 'core/ajax_db/businessApplyViewinbox',
+            url: 'core/ajax_db/businessApplyViewInbox',
             method: 'POST',
             dataType: 'text',
             data: {
