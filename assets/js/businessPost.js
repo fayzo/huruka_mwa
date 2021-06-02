@@ -158,7 +158,7 @@ function ajax_requestsPosts(key) {
     var job_title=  $(".job-title");
     // var job_summary=  $(".job-summary");
     var deadline= $(".deadline");
-    var website = $(".website");
+    var website = $(".website02");
     var categories_jobs = $("#categories_jobs");
     var editor4 = CKEDITOR.instances.editor4.getData();
 

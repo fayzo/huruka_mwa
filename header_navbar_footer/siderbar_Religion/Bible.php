@@ -15,7 +15,7 @@
     </section>
 
   <div id="Bible">
-    <a type="button" href="https://www.bible.com/bible/" target="__blank"  class="btn btn-primary btn-md btn-block">Read Bible >>> </a>
+    <a type="button" href="https://www.bible.com/bible/" target="__blank"  class="btn btn-primary main-active btn-md btn-block">Read Bible >>> </a>
     
     <div class="card mb-3">
         <div class="card-header text-center">

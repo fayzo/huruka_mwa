@@ -87,7 +87,7 @@ function displayWebsite(params) {
     );
   }
 
-  if (website == 'apply_to_irangiro') {
+  if (website == 'apply_irangiro') {
 
     $("#display_website0").html(
 
@@ -96,6 +96,42 @@ function displayWebsite(params) {
           '<div class="form-group">' +
       '<label for="">' +'Website Link</label>' +
             '<input type="hidden" class="form-control website1" name="website1" id="website1" value="apply_irangiro">' +
+            '<input type="text" class="form-control" placeholder="https://irangiro.com/Apply_job" readonly>' +
+          '</div>' +
+      '</div>' +
+      '</div>'
+    );
+  }
+
+}
+
+function displayWebsite_() {
+  var website = document.getElementById('website01').value;
+  
+  if (website == 'your_website') {
+
+    $("#display_website01").html(
+
+    '<div class="form-row mt-2">' +
+      '<div class="col">' +
+          '<div class="form-group">' +
+      '<label for="">' +'Website Link</label>' +
+            '<input type="text" class="form-control website02" name="website02" id="website02" placeholder="You website link https:// ....../com">' +
+          '</div>' +
+      '</div>' +
+      '</div>'
+    );
+  }
+
+  if (website == 'apply_irangiro') {
+
+    $("#display_website01").html(
+
+    '<div class="form-row mt-2">' +
+      '<div class="col">' +
+          '<div class="form-group">' +
+      '<label for="">' +'Website Link</label>' +
+            '<input type="hidden" class="form-control website02" name="website02" id="website02" value="apply_irangiro">' +
             '<input type="text" class="form-control" placeholder="https://irangiro.com/Apply_job" readonly>' +
           '</div>' +
       '</div>' +

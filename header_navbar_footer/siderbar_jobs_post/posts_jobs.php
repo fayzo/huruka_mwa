@@ -170,7 +170,6 @@
                     </div>
                        <div class="modal-body">
                          <div class="edit-body">
-                           <span id="responseBusinessJobs"></span>
                            <form method="post">
                              <!-- <input type="hidden" id="editor1" value="0"> -->
                              <input type="hidden" id="id_posts" value="0">
@@ -200,10 +199,19 @@
                                     <label for="Pages Body">Deadline to submit</label>
                                     <input type="date" class="form-control deadline" placeholder="Deadline to submit">
                                </div>
-                               <div class="form-group">
+                               <!-- <div class="form-group">
                                    <label for="Pages Body">Apply to website</label>
                                    <input class="form-control website" id="editor6" placeholder="website" >
+                               </div> -->
+                               <div class="form-group">
+                                   <label for="Pages Body">Apply to website</label>
+                                     <select class="form-control website" id="website01" onChange="displayWebsite_()">
+                                       <option value="">select</option>
+                                       <option value="apply_irangiro">Apply to irangiro website</option>
+                                       <option value="your_website" >Your link website</option>
+                                     </select>
                                </div>
+                               <div id="display_website01" class="my-2"></div>
                                <div class="form-check">
                                    <label class="form-check-label">
                                        <input type="checkbox" class="form-check-input"   value="checkedValue" checked>
@@ -235,7 +243,9 @@
                             <h4 class="card-title">Apply to website: </h4>
                             <p class="card-title website0">Explaination of Apply to website: </p>
                           <hr>
-                         </div><!-- THiS IS A vIew body --> 
+                         </div><!-- THiS IS A vIew body -->
+                          
+                         <div id="responseBusinessJobs"></div>
                        </div> <!-- THiS IS A MODAL BODY -->
                        <div class="modal-footer">
                            <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
@@ -293,7 +303,7 @@
                                    <label for="Pages Body">Apply to website</label>
                                      <select class="form-control website0" id="website0" name="website0"  onChange="displayWebsite(this)">
                                        <option value="">select</option>
-                                       <option value="apply_to_irangiro">Apply to irangiro website</option>
+                                       <option value="apply_irangiro">Apply to irangiro website</option>
                                        <option value="your_website" >Your link website</option>
                                      </select>
                                </div>

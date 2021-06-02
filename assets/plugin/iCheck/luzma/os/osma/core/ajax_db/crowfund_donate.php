@@ -162,11 +162,14 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                 
                                 <div class="text-center mb-3"> <span class="mb-2"> Choose Type Of Payment you want To Donate </span><br>
                                 <hr>
+                                <?php if (isset($_SESSION['key'])) { ?>
+                                
                                     <span style="font-size:13px;margin-top:10px">
                                         <i class="fas fa-coins text-warning"></i> You have
                                         <?php echo number_format($user0['amount_coins']); ?> coins ~ 
                                         <?php echo number_format($user0['amount_francs']); ?> Frw
                                     </span>
+                                <?php } ?>
                                 </div>
                                 <hr>
 

@@ -63,7 +63,7 @@
                             <li class="nav-item"><a class="nav-link" href="#Events"
                                 data-toggle="tab">Events</a></li>
                                 
-            <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on'){ ?>
+            <?php if(isset($_SESSION['approval_user_ui']) && $_SESSION['approval_user_ui'] === 'on'|| isset($_SESSION['approval']) && $_SESSION['approval'] === 'on'){ ?>
 
                             <li class="nav-item"><a class="nav-link" href="#Crowfundraising"
                                 data-toggle="tab">Crowfundraising</a></li>
@@ -174,16 +174,26 @@
                                     <label for="Pages Body">Deadline to submit</label>
                                     <input type="date" class="form-control deadline" placeholder="Deadline to submit">
                                </div>
-                               <div class="form-group">
+                               <!-- <div class="form-group">
                                    <label for="Pages Body">Apply to website</label>
                                    <input class="form-control website" id="editor6" placeholder="website" >
+                               </div> -->
+                               <div class="form-group">
+                                   <label for="Pages Body">Apply to website</label>
+                                     <select class="form-control website" id="website01" onChange="displayWebsite_()">
+                                       <option value="">select</option>
+                                       <option value="apply_irangiro">Apply to irangiro website</option>
+                                       <option value="your_website" >Your link website</option>
+                                     </select>
                                </div>
+                               <div id="display_website01" class="my-2"></div>
                                <div class="form-check">
                                    <label class="form-check-label">
                                        <input type="checkbox" class="form-check-input"   value="checkedValue" checked>
                                        Publish
                                    </label>
                                </div>
+                              <!-- <div id="responseBusinessJobs"></div> -->
                           </form>  
                           </div> <!-- edit-body END -->
 

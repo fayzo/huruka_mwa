@@ -17,7 +17,7 @@
 
   <div id="Quran">
     <div id="Quran_response"></div>
-    <a type="button" href="https://alquran.cloud/surah/1" target="__blank" class="btn btn-primary btn-md btn-block">Read Quran >>></a>
+    <a type="button" href="https://alquran.cloud/surah/1" target="__blank" class="btn btn-primary btn-md btn-block main-active">Read Quran >>></a>
 
     <div class="card mb-3">
         <div class="card-header text-center">
