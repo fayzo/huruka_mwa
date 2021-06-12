@@ -96,6 +96,7 @@ define('INDIVIDUAL_POST_JOBS', BASE_URL_PUBLIC.'individual_jobPost');
 define('FRIEND_REQUEST', BASE_URL_PUBLIC.'friend_request');
 define('PROMOTE_ADS', BASE_URL_PUBLIC.'marketing_ads');
 define('NEWSFEED', BASE_URL_PUBLIC.'newsfeeds');
+define('DONATION', BASE_URL_PUBLIC.'donation');
 
 
 // TWITTER SOCIAL MEDIA 

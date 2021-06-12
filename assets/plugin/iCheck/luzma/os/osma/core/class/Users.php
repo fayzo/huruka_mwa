@@ -210,7 +210,7 @@ class Users{
                                     <div class="card-body">
                                         <h1 class="card-title pricing-card-title">$2 <small class="text-muted"></small></h1>
                                         <ul class="list-unstyled mt-3 mb-4">
-                                        <li>3 months</li>
+                                        <li>1 months</li>
                                         </ul>
                                         <!-- <button type="button" class="btn btn-lg btn-block btn-primary payment-job" data-promo="individual" data-user="< ?php echo $user_id; ?>">Get started </button> -->
                                         <button type="button" class="btn btn-lg btn-block btn-primary" onclick="coins_recharge(2000,'weeks',<?php echo $details ;?>)" >Get started </button>
@@ -2035,6 +2035,7 @@ class Users{
         // $date = date('Y-m-d', strtotime('+ 1weeks'));
         // $date = date('Y-m-d', strtotime('+' +$subscription));
         // $datetime= date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s').'+ 1'+$subscription));
+        // $datetime= date('Y-m-d H:i:s', strtotime($date.'+ '.$subscription));
         $datetime= date('Y-m-d H:i:s', strtotime($date.'+ 1'.$subscription));
         # code...
         $time= strtotime($datetime);

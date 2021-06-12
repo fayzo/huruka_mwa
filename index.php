@@ -91,13 +91,13 @@
             <!-- card -->
           <?php } ?>
 
-          <?php if (!isset($_SESSION['key'])) { ?>
+          <!-- < ?php if (!isset($_SESSION['key'])) { ?>
               <div class="card mb-3">
                 <div class="card-body main-active">
                   <a class="text-light" href="https://flutterwave.com/pay/irangirogtxt" target='_blank'>>>> CLICK HERE TO SUPPORT US TO KEEP WORKING THIS SITE IRANGIRO</a>
                 </div>
               </div>
-            <?php } ?>
+            < ?php } ?> -->
 
           <!-- < ?php if(isset($_SESSION['key']) && $home->isClosed($_SESSION['key']) != true) { 
                     echo $home->isClosed($_SESSION['key']);

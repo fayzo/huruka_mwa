@@ -232,8 +232,21 @@
               </span>
             </a>
           </li>
-         
+
         <?php } ?>
+
+        <!-- < ?php if (!isset($_SESSION['key'])) { ?> -->
+        
+          <li>
+            <a href="<?php echo DONATION; ?>">
+              <i class="fa fa-heartbeat mr-1"></i><span>Donate Us </span> 
+              <span class="pull-right-container" style="margin-right: 10px;">
+                <small class="label pull-right"> <i class="fa fa-level-up"></i></small>
+              </span>
+            </a>
+          </li>
+
+        <!-- < ?php } ?> -->
 
         </ul>
       </section>

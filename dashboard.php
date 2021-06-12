@@ -5,7 +5,7 @@
 <?php include "header_navbar_footer/header.php"?>
 
       <!-- Main content -->
-    <div class="container-fluid mb-5">
+    <div class="container-fluid ">
       <?php include "header_navbar_footer/siderbar_jobs.php"?>
     </div>
 
