@@ -245,7 +245,8 @@
   position:absolute; 
   top:-80px;
   width: 120px; 
-  height: auto;
+  height: 120px; 
+  /* height: auto; */
   border: 3px solid #ffffff;
 }
 
@@ -305,6 +306,7 @@
   .unemploy-profile img{
     top: -80px;
     width: 70px;
+    height: 70px;
     left: 1%;
   }
 }

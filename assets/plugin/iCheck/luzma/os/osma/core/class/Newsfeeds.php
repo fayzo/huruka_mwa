@@ -1359,7 +1359,7 @@ class Newsfeeds extends Crowfund {
         </div>
 
     <?php 
-           echo $this->options_short();
+        //    echo $this->options_short();
         }
      }
     
