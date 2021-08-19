@@ -38,7 +38,7 @@ class Posts_home extends Promote_home_post {
 
         <?php } 
 
-        if (isset($_SESSION['key'])) {
+        if (isset($_SESSION['key']) || !isset($_SESSION['key'])) {
             # code...
         if($count_foreach == 2){
             $query= "SELECT * FROM users WHERE user_id != $user_id AND user_id NOT IN (SELECT receiver FROM follow WHERE sender = $user_id ) ORDER BY rand() LIMIT 0,12";

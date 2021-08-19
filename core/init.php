@@ -26,10 +26,11 @@ include('class/Events.php');
 include('class/Fundraising.php');
 include('class/Crowfund.php');
 include('class/Promote_home_post.php');
-include('class/Home_GetUsers.php');
+
 include('class/Hashtag_GetUsers.php');
 include('class/Notification_body.php');
 include('class/Posts_home.php');
+include('class/Home_GetUsers.php');
 include('class/post_home_copyDraft.php');
 include('class/Newsfeeds.php');
 // include('class/pathinfo_docx_Post_home.php');
@@ -47,9 +48,9 @@ include('class/Email_notification.php');
 define('BASE_URL_PUBLIC', 'http://localhost/irangiro_social_site/');
 define('BASE_URL_LINK', 'http://localhost/irangiro_social_site/assets/');
 
-// define('BASE_URL','https://irangiro.com/');
-// define('BASE_URL_PUBLIC', 'https://irangiro.com/');
-// define('BASE_URL_LINK', 'https://irangiro.com/assets/');
+define('BASE_URL','https://irangiro.com/');
+define('BASE_URL_PUBLIC', 'https://irangiro.com/');
+define('BASE_URL_LINK', 'https://irangiro.com/assets/');
 
 // UPLOAD PHOTO
 define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'].'/irangiro_social_site');

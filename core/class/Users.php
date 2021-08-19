@@ -2316,8 +2316,8 @@ class Users{
             // elseif ($n > 1000000) return round(($n/1000000), 2).' million';
             // elseif ($n > 1000) return round(($n/1000), 2).' thousand';
 
-            return number_format($n);
-            // return $n;
+            // return number_format($n);
+            return $n;
         }
 
 } 

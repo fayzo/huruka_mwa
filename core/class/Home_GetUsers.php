@@ -4,43 +4,97 @@
  }
 
 
-class Hashtag_GetUsers extends Follow
+// class GetUsers extends Follow
+class GetUsers extends Posts_home
 {
     
-    public function hasshtag($user_id,$data)
+    public function getUserTweet($user_id,$user_idSession)
     {
-        if(!empty($data)){
+        $mysqli= $this->database;
+        $stmt = $mysqli->stmt_init();
+        $query= "SELECT * FROM tweets T
+        LEFT JOIN users U ON T. tweetBy = U. user_id AND  U. close_account != 'yes' AND U. delete_account != 'yes' 
+        -- LEFT JOIN comment C ON T. tweet_id = C. comment_on 
+        -- LEFT JOIN likes L ON T. tweet_id = L. like_on 
+        WHERE T. tweetBy = $user_id AND T. retweet_id = 0 OR T. retweet_by= $user_id  
+        -- GROUP BY 
+        --     CASE WHEN C. comment_on != '' THEN C. comment_on END,
+        --     CASE WHEN L. like_on != '' THEN L. like_on ELSE NULL END
+        ORDER BY 
+            CASE WHEN T. pin_tweet !='' THEN T. pin_tweet END DESC ,
+            CASE WHEN  T. marketing != '' THEN T. marketing END DESC ,
+            T. tweet_id DESC";
 
-                    foreach ($data as $tweet) {
+        $sql = $mysqli->query($query);
+        $all_tweet=array();
+        while ($row = $sql->fetch_array()) {
+            $data[] = $row;
+            /* TABLE OF tweety */
+        }
+        if(!empty($data)){
+            $count_foreach=0;
+
+                             foreach ($data as $tweet) {
                                 $likes= $this->likes($user_id,$tweet['tweet_id']);
                                 // $retweet= $this->checkRetweet($tweet['tweet_id'],$user_id);
                                 $retweet= $this->checkRetweet($tweet['tweet_id'],$tweet['retweet_by']);
                                 $user= $this->userData($tweet['retweet_by']);
                                 $comment= $this->comments($tweet['tweet_id']);
+                                $commentRET= $this->comments_shared($tweet['tweet_id']);
+                                $likeRET= $this->like_shared($tweet['tweet_id']);
                                      # code... 
                                     //  echo var_dump($retweet['retweet_Msg']).'<br>';
-                                 
+                                                    
                                 if($this->isClosed($tweet['tweetBy']) != true) {
                                     continue;
                                 }
                                 ?>
-                               <div class="card borders-tops mb-3" id="userComment_<?php echo $tweet["tweet_id"]; ?>"> 
-                                    <div class="card-body message-color">
+                                <!-- <div class="card mb-3"> -->
+                                    <!-- <div class="card-body"> -->
                                    
-                                    <div class="post">
-
-                                    <?php if ($tweet['newsfeeds'] == 'yes') { ?>
-                                        <div class="float-right" data-toggle="tooltip" data-original-title="News-feed"><i class="fas fa-globe"></i></div>
-                                    <?php } ?>
+                                <div class="post ">
 
                                     <?php 
-                                     if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
-                                      <span class="t-show-banner">
-                                          <div class="t-show-banner-inner">
-                                              <span><i class="fa fa-retweet "></i></span><span><?php echo $user['username'].' Shared';?></span>
-                                          </div>
-                                      </span>
-                                     <?php } else{ echo '';}?>
+                                    if ($tweet['pin_tweet'] == 'pin') { ?>
+                                        <div class="float-right" data-toggle="tooltip" data-original-title="pin"><i class="fa fa-flag"></i></div>
+                                    <?php }
+
+                                    if ($tweet['newsfeeds'] == 'yes') { ?>
+                                        <div class="float-right" data-toggle="tooltip" data-original-title="News-feed"><i class="fas fa-globe"></i></div>
+                                    <?php }
+
+                                    $this->slick_tweets($user_id,2,$tweet,$count_foreach,$user);
+                                    ++$count_foreach;
+
+                                    if($likeRET['like_on'] == $tweet["tweet_id"]){ ?>
+                                    <span class="t-show-banner" style="display:inline-block; margin-right: 5px;">
+                                        <div class="t-show-banner-inner">
+                                            <span><i class="fa fa-heart-o"></i></span> 
+                                            <span><?php echo $likeRET['username'].' like ';?></span>
+                                        </div>
+                                    </span>
+                                    <?php } else{ echo '';}
+
+                                    if($commentRET['comment_on'] == $tweet["tweet_id"]){ ?>
+                                    <span class="t-show-banner" style="display:inline-block;">
+                                        <div class="t-show-banner-inner">
+                                            <span><i class="fa fa-comments-o"></i></span> <span><?php echo $commentRET['username'].' comment';?></span>
+                                        </div>
+                                    </span>
+                                    <?php } else{ echo '';}
+
+                                    if ($commentRET['comment_on'] == $tweet["tweet_id"] && $tweet["retweet_id"] > 0) {
+                                        echo '<span> to </span>';
+                                    }
+
+                                    if($retweet['retweet_id'] == $tweet["tweet_id"] || $tweet["retweet_id"] > 0){ ?>
+                                    <span class="t-show-banner"  style="display:inline-block;">
+                                        <div class="t-show-banner-inner">
+                                            <span><i class="fa fa-retweet "></i></span><span><?php echo $user['username'].' Shared';?></span>
+                                        </div>
+                                    </span>
+                                    <?php } else{ echo '';}?>
+
 
                                <?php if(!empty($retweet['retweet_Msg']) && $tweet["tweet_id"] == $retweet["retweet_id"] || $tweet["retweet_id"] > 0){ ?> 
                                     <div class="user-block">
@@ -54,17 +108,18 @@ class Hashtag_GetUsers extends Follow
                                          </div>
                                          </div>
                                         <span class="username">
-                                            <a style="float:left;padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
+                                            <a style="float:left;padding-right:3px;" href="<?php echo PROFILEBASE_URL_PUBLIC.$user['username'] ;?>"><?php echo $user['username'] ;?></a>
                                             <?php echo $this->bot_light($user['bot'],$user['followers']) ;?>
-                                            
+
                                             <!-- //Jonathan Burke Jr. -->
-                                            <span class="description">Shared public - <?php echo $this->timeAgo($retweet['posted_on']); ?></span>
                                         </span>
+                                        <span class="description">Shared public - <?php echo $this->timeAgo($retweet['posted_on']); ?></span>
                                         <span class="description"><?php echo $this->getTweetLink($retweet['retweet_Msg']); ?></span>
                                     </div>
 
                                     <div class="card retweetcolor t-show-popup more" data-tweet="<?php echo $tweet["tweet_id"];?>">
                                       <div class="card-body">
+                                    <span id="responseDeletePin<?php echo $tweet['tweet_id'] ;?>"></span>
                                          
                                       <?php 
                        
@@ -145,8 +200,8 @@ class Hashtag_GetUsers extends Follow
                                                                 <span class="username">
                                                                 <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
                                                                 <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
-                                                                    
-                                                                    <!-- //Jonathan Burke Jr. -->
+                                                                
+                                                                <!-- //Jonathan Burke Jr. -->
                                                                 </span>
                                                                 <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
                                                             </div>
@@ -162,7 +217,7 @@ class Hashtag_GetUsers extends Follow
                                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                             $tweettext = substr($tweet['status'], 0, 200);
                                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                                            <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                             echo $this->getTweetLink($tweetstatus);
                                                             }else{
                                                             echo $this->getTweetLink($tweet['status']);
@@ -250,7 +305,7 @@ class Hashtag_GetUsers extends Follow
                                                                 </div>
                                                                 <span class="username">
                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                                     <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
+                                                                    <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
                                                                     
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                 </span>
@@ -268,7 +323,7 @@ class Hashtag_GetUsers extends Follow
                                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                             $tweettext = substr($tweet['status'], 0, 200);
                                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                                            <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                             echo $this->getTweetLink($tweetstatus);
                                                             }else{
                                                             echo $this->getTweetLink($tweet['status']);
@@ -343,7 +398,7 @@ class Hashtag_GetUsers extends Follow
                                                                 <span class="username">
                                                                     <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
                                                                     <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
-                                                                   
+
                                                                     <!-- //Jonathan Burke Jr. -->
                                                                 </span>
                                                                 <span class="description">Shared publicly -  <?php echo $this->timeAgo($tweet['posted_on']); ?></span>
@@ -360,7 +415,7 @@ class Hashtag_GetUsers extends Follow
                                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                             $tweettext = substr($tweet['status'], 0, 200);
                                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                                            <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                             echo $this->getTweetLink($tweetstatus);
                                                             }else{
                                                             echo $this->getTweetLink($tweet['status']);
@@ -449,7 +504,7 @@ class Hashtag_GetUsers extends Follow
                                                                         // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                                     $tweettext = substr($tweet['status'], 0, 200);
                                                                     $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                                                    <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                                     echo $this->getTweetLink($tweetstatus);
                                                                     }else{
                                                                     echo $this->getTweetLink($tweet['status']);
@@ -546,7 +601,7 @@ class Hashtag_GetUsers extends Follow
                                                                         // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                                     $tweettext = substr($tweet['status'], 0, 200);
                                                                     $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                                                    <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                                     echo $this->getTweetLink($tweetstatus);
                                                                     }else{
                                                                     echo $this->getTweetLink($tweet['status']);
@@ -558,7 +613,7 @@ class Hashtag_GetUsers extends Follow
                                                                         echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
                                                                     }  
                                                                 ?>
-                                                                <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                                <!-- <span class="btn btn-primary btn-sm float-right" >View More >>></span> -->
                                                                 </div>
                                                             </div><!-- col -->
                                                             
@@ -602,7 +657,7 @@ class Hashtag_GetUsers extends Follow
                                                                     </div>
                                                                     <span class="username">
                                                                         <a style="padding-right:3px;" href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>"><?php echo $tweet['username'] ;?></a>
-                                                                       <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
+                                                                        <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
 
                                                                         <!-- //Jonathan Burke Jr. -->
                                                                     </span>
@@ -620,7 +675,7 @@ class Hashtag_GetUsers extends Follow
                                                                         // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                                     $tweettext = substr($tweet['status'], 0, 200);
                                                                     $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                    <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                                                    <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                                     echo $this->getTweetLink($tweetstatus);
                                                                     }else{
                                                                     echo $this->getTweetLink($tweet['status']);
@@ -632,7 +687,7 @@ class Hashtag_GetUsers extends Follow
                                                                         echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
                                                                     }  
                                                                 ?>
-                                                                <span class="btn btn-primary btn-sm float-right" >View More >>></span>
+                                                                <!-- <span class="btn btn-primary btn-sm float-right" >View More >>></span> -->
                                                                 </div>
                                                             </div><!-- col -->
                                                             
@@ -678,7 +733,7 @@ class Hashtag_GetUsers extends Follow
                                                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                                                             $tweettext = substr($tweet['status'], 0, 200);
                                                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                                                            <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmore" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                                                             echo $this->getTweetLink($tweetstatus);
                                                                             }else{
                                                                             echo $this->getTweetLink($tweet['status']);
@@ -690,9 +745,9 @@ class Hashtag_GetUsers extends Follow
                                                                                 echo '<span style="display: none;" class="more-text view-more-text'.$tweet["tweet_id"].'">'.$this->getTweetLink($tweetstatus).'</span>';
                                                                             }  
                                                                         ?>
+                                                                        </div>
                                                                         <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
 
-                                                                        </div>
                                                                     </span>
                                                             </div>
 
@@ -705,6 +760,7 @@ class Hashtag_GetUsers extends Follow
                                     </div><!-- card -->
 
                                 <?php }else { ?> 
+                                    <span id="responseDeletePin<?php echo $tweet['tweet_id'] ;?>"></span>
 
                                     <div class="user-block">
                                         <div class="user-blockImgBorder">
@@ -721,14 +777,14 @@ class Hashtag_GetUsers extends Follow
                                         <?php if($user_id != $tweet['user_id']) { ?> 
                                                 <ul><li>
                                                     <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
-                                                    <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
-
+                                                     <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
+                                                    
                                                     <!-- <ul><li>< ?php echo Follow::tooltipProfile($tweet['user_id'],$user_id,$tweet['user_id'],$tweet); ?></li></ul> -->
                                                     </li>
                                                 </ul>
                                                 <?php }else{ ?>
                                                     <a href="<?php echo BASE_URL_PUBLIC.$tweet['username'] ;?>" ><?php echo $tweet['username'] ;?></a>
-                                                    <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
+                                                     <?php echo $this->bot_light($tweet['bot'],$tweet['followers']) ;?>
 
                                                 <?php } ?> 
 
@@ -748,7 +804,7 @@ class Hashtag_GetUsers extends Follow
                                                 // $tweetstatus = substr($tweet['status'],0, strpos($tweet['status'], ' ', 200)).'
                                             $tweettext = substr($tweet['status'], 0, 200);
                                             $tweetstatus = substr($tweet['status'], 0, strrpos($tweettext, ' ')).'
-                                            <span class="readtext-tweet-readmore"><a class="link_color"  href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
+                                            <span class="readtext-tweet-readmore"><a class="link_color" href="javascript:void(0)" id="readtext-tweet-readmores" data-tweettext="'.$tweet['tweet_id'].'" style"font-weight: 500 !important;font-size:8px">... Read more...</a></span>';
                                             echo $this->getTweetLink($tweetstatus);
                                             }else{
                                             echo $this->getTweetLink($tweet['status']);
@@ -802,7 +858,7 @@ class Hashtag_GetUsers extends Follow
                                             $fileActualExt_docx =array_intersect($fileActualExt,$docx);
                                             $count_docx =count(array_intersect($fileActualExt_docx,$docx));
                                             $filePathinfo_docx=array();
-                                            
+                                              
                                             $fileActualExt_coins =array_intersect($fileActualExt,$coins);
                                             $count_coins =count(array_intersect($fileActualExt_coins,$coins));
 
@@ -811,7 +867,7 @@ class Hashtag_GetUsers extends Follow
 
                                             $fileActualExt_mp3 =array_intersect($fileActualExt,$mp3);
                                             $count_mp3 =count(array_intersect($fileActualExt_mp3,$mp3));
-                                        
+                                                            
                                     
                                         if(!empty($fileActualExt_image)) { 
                                             $expodefile = explode("=",$tweet['tweet_image']);
@@ -1493,7 +1549,7 @@ class Hashtag_GetUsers extends Follow
                                 
                                 } ?>
 
-                               <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
+                            <?php if(!empty($tweet['youtube'])){ echo $tweet['youtube']; } ?>
 
                              <!--   <p id="link_">
                                 < ?php echo $this->getTweetLink($tweet['status']) ;?>
@@ -1524,7 +1580,7 @@ class Hashtag_GetUsers extends Follow
 
                                             <?php }else{ ?>
                                                   <li  class=" list-inline-item"> <button <?php echo (isset($_SESSION['key']))?'class="like-btn text-sm"':'class="text-sm" id="login-please" data-login="1"' ;?> data-tweet="<?php echo $tweet['tweet_id']; ?>"  data-user="<?php echo $tweet['tweetBy']; ?>">
-                                                   <i class="fa fa-thumbs-o-up mr-1"> <span class="likescounter"><?php if ($tweet['likes_counts'] > 0){ echo $this->nice_number($tweet['likes_counts']) ;}else{ echo '';} ?></span></i>
+                                                   <i class="fa fa-thumbs-o-up mr-1"> <span class="likescounter"><?php if ($tweet['likes_counts'] > 0){ echo $this->nice_number($tweet['likes_counts']);}else{ echo '';} ?></span></i>
                                                        Like</button></li>
                                             <?php } ?>
                                          
@@ -1535,31 +1591,43 @@ class Hashtag_GetUsers extends Follow
                                           </button></li>
                                         
 
-                                         <?php 
-                                        //  var_dump($tweet["tweetBy"],$tweet["retweet_by"],$user_id,$tweet["retweet_by"] == $user_id);
-                                         if (isset($_SESSION['key']) && $tweet["retweet_by"] == 0 && $tweet["tweetBy"] === $user_id){ ?>
+                                         <?php if (isset($_SESSION['key']) && $tweet["retweet_by"] == 0  && $tweet["tweetBy"] == $user_idSession){ ?>
                                             <li  class=" list-inline-item">
                                                 <ul class="deleteButt" style="list-style-type: none; margin:0px;" >
                                                     <li>
                                                        <a href="javascript:void(0)" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                                                         <ul style="list-style-type: none; margin:0px;" >
 											                <li style="list-style-type: none; margin:0px;"> 
-                        					                    <label class="deleteTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" >Delete </label>
+                        					                    <label class="deleteTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </label>
                                                            </li>
+                                                            <li style="list-style-type: none; margin:0px;"> 
+                                                                <?php if ($tweet['pin_tweet'] == 'pin') { ?>
+                                                                    <label class="unpinTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> UnPin to profile</label>
+                                                                <?php } else { ?>
+                                                                    <label class="pinTweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["tweetBy"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> Pin to profile</label>
+                                                                <?php } ?>
+                                                            </li>
                                                        </ul>
                                                     </li>
                                                 </ul>
                                             </li>
-                                        <?php }else if (isset($_SESSION['key']) && $tweet["retweet_by"] === $user_id){ ?>
+                                        <?php }else if (isset($_SESSION['key']) && $tweet["retweet_by"] == $user_idSession){ ?>
                                             <li  class=" list-inline-item">
                                                 <ul class="deleteButt text-sm" style="list-style-type: none; margin:0px;" >
                                                     <li>
                                                     <a href="javascript:void(0)" class="more" ><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                                                         <ul style="list-style-type: none; margin:0px;" >
                                                             <li style="list-style-type: none; margin:0px;"> 
-                                                                <label class="delete_retweet_by" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" >Delete </label>
-                                                        </li>
-                                                    </ul>
+                                                                <label class="delete_retweet_by" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </label>
+                                                            </li>
+                                                            <li style="list-style-type: none; margin:0px;"> 
+                                                                <?php if ($tweet['pin_tweet'] == 'pin') { ?>
+                                                                    <label class="unpinRetweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> UnPin to profile</label>
+                                                                <?php } else { ?>
+                                                                    <label class="pinRetweet" data-tweet="<?php echo  $tweet["tweet_id"];?>"  data-user="<?php echo $tweet["retweet_by"];?>" ><i class="fa fa-map-pin" aria-hidden="true"></i> Pin to profile</label>
+                                                                <?php } ?>
+                                                            </li>
+                                                        </ul>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -1580,7 +1648,7 @@ class Hashtag_GetUsers extends Follow
 
                                    <div class="card collapse" id="a<?php echo  $tweet["tweet_id"];?>">
                                       <div class="card-body" style="padding-right:0">
-                                       
+
                                       <?php 
                                         if (!empty($comment)) {  
                                             echo '<h5><i>Comments('.$this->CountsComment($tweet["tweet_id"]).')</i></h5>
@@ -1591,9 +1659,8 @@ class Hashtag_GetUsers extends Follow
                                         <span class="commentsHome" id="commentsHome<?php echo $tweet['tweet_id'];?>">
 
                                         <?php if (!empty($comment)) { ?>
-
+                                        
                                         <?php foreach ($comment as $comments) { 
-
                                                $second_likes= $this->Like_second($user_id,$comments['comment_id']);
                                                $dislikes= $this->dislike($user_id,$comments['comment_id']);
                                                ?>
@@ -1601,8 +1668,8 @@ class Hashtag_GetUsers extends Follow
                                                   <!-- Message. Default to the left -->
                                                     <div class="direct-chat-msg" id="userComment0<?php echo $comments['comment_id']; ?>">
                                                         <div class="direct-chat-info clearfix">
-                                                            <span class="direct-chat-name float-left mr-1"><a href="<?php echo BASE_URL_PUBLIC.$comments["username"];?>"><?php echo $comments["username"] ;?></a> ||</span>
-                                                            <span class="direct-chat-name float-left hidden-xs"><?php echo $comments["workname"] ;?></span>
+                                                            <span class="direct-chat-name float-left mr-1"><a href="<?php echo BASE_URL_PUBLIC.$comments["username"];?>"><?php echo $comments["username"] ;?></a></span>
+                                                            <span class="direct-chat-name float-left hidden-xs"> || <?php echo $comments["workname"] ;?></span>
                                                             <span class="direct-chat-timestamp float-right"><?php echo $this->timeAgo($comments['comment_at']); ?></span>
                                                         </div>
                                                         <!-- /.direct-chat-info -->
@@ -1641,7 +1708,7 @@ class Hashtag_GetUsers extends Follow
                                                         <span style="float:right">
                                                                               
                                                         <li  class=" list-inline-item"><button class="comments-btn text-sm" data-target="#a<?php echo  $comments["comment_id"] ;?>" data-toggle="collapse">
-                                                            <i class="fa fa-comments-o mr-1"></i><span class="hidden-xs">Comments</span> (<?php echo $this->CountsComment_second($comments["comment_id"]); ?>)
+                                                            <i class="fa fa-comments-o mr-1"></i> <span class="hidden-xs">Comments</span>  (<?php echo $this->CountsComment_second($comments["comment_id"]); ?>)
                                                         </button></li>
                                                                      
                                                             <?php if ($comments["comment_by"] == $user_id){ ?>
@@ -1676,7 +1743,7 @@ class Hashtag_GetUsers extends Follow
                                                             </div> <!-- input-group -->
                                                         </div>
                                                         <div class="card-body" style="padding-right:0">
-                                                        <?php 
+                                                            <?php 
                                                              $comment_second= $this->comments_second($comments['comment_id']);
                                                             
                                                             if (!empty($comment_second)) {  
@@ -1694,8 +1761,8 @@ class Hashtag_GetUsers extends Follow
                                                                     <!-- Message. Default to the left -->
                                                                         <div class="direct-chat-msg" id="userComment<?php echo $comments0["comment_id_"]; ?>" >
                                                                             <div class="direct-chat-info clearfix">
-                                                                                <span class="direct-chat-name float-left mr-1"><a href="<?php echo BASE_URL_PUBLIC.$comments0["username"];?>"><?php echo $comments0["username"] ;?></a> ||</span>
-                                                                                <span class="direct-chat-name float-left"><?php echo $comments0["workname"] ;?></span>
+                                                                                <span class="direct-chat-name float-left mr-1"><a href="<?php echo BASE_URL_PUBLIC.$comments0["username"];?>"><?php echo $comments0["username"] ;?></a></span>
+                                                                                <span class="direct-chat-name float-left hidden-xs"> || <?php echo $comments0["workname"] ;?></span>
                                                                                 <span class="direct-chat-timestamp float-right"><?php echo $this->timeAgo($comments0['comment_at_']); ?></span>
                                                                             </div>
                                                                             <!-- /.direct-chat-info -->
@@ -1746,17 +1813,8 @@ class Hashtag_GetUsers extends Follow
 
                                 </div>
                                 <!-- /.post -->
-                            </div>
-                            <!-- card-body -->
-                            </div>
-                            <!-- card-->
-                            <?php 
-       }
-      
-      }else{ ?>
-                <div class="card borders-tops mb-3" id="userComment_<?php echo $tweet["tweet_id"]; ?>"> 
-                    <div class="card-body message-color">
-
+                                <?php }
+       }else{ ?>
                      <div class="post">
                          <div class="user-block">
                              <div class="user-blockImgBorder">
@@ -1768,10 +1826,12 @@ class Hashtag_GetUsers extends Follow
                                   <?php } ?>
                             </div>
                             </div>
-                             <span class="username">
-                                 <a href="<?php echo PROFILE ;?>">Irangiro</a>
+                            <span class="username">
+                                <a href="<?php echo PROFILE ;?>">Irangiro</a>
                                 <span><img src="<?php echo BASE_URL_LINK.'image/img/verified-light.png' ; ?>" width="15px"></span>
-                             </span>
+
+                                <?php echo self::followBtns(1,$user_id,1); ?>
+                            </span>
                              <span class="description">Public Figure | Content Creator</span>
                          </div>
                          <!-- /.user-block -->
@@ -1790,7 +1850,7 @@ class Hashtag_GetUsers extends Follow
                          </div>
                          <!-- /.row -->
 
-                        <p>
+                        <!-- <p>
                             <a href="#" class="link-black text-sm mr-2"><i class="fa fa-share mr-1"></i>
                                 Share</a>
                             <a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up mr-1"></i>
@@ -1810,20 +1870,17 @@ class Hashtag_GetUsers extends Follow
                                     aria-describedby="basic-addon1"><i
                                         class="fa fa-arrow-right text-muted"></i></span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- /.post -->
-                    </div>
-                    <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
         <?php }
 
-
     }
+
+
 }
 
-$Hashtag_GetUsers = New Hashtag_GetUsers();
+$Home_GetUsers = New GetUsers();
 /*
 ===========================================
          Notice
