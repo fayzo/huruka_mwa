@@ -161,8 +161,8 @@ if (isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id'])) {
                                 <hr>
                                 
                                 <div class="text-center mb-3"> <span class="mb-2"> Choose Type Of Payment you want To Donate </span><br>
-                                <hr>
                                 <?php if (isset($_SESSION['key'])) { ?>
+                                <hr>
                                 
                                     <span style="font-size:13px;margin-top:10px">
                                         <i class="fas fa-coins text-warning"></i> You have
